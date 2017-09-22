@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4N0-Gs-7om" customClass="CarTicketView">
+            <rect key="frame" x="0.0" y="0.0" width="330" height="190"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qw_tiyanka" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-wI-YLB">
+                    <rect key="frame" x="0.0" y="0.0" width="330" height="190"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商家洗车自动抵扣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAk-wD-Zx5">
+                    <rect key="frame" x="22" y="21" width="49" height="19.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibe-We-2cf">
+                    <rect key="frame" x="244" y="143" width="69.5" height="19.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7eU-wI-YLB" firstAttribute="leading" secondItem="4N0-Gs-7om" secondAttribute="leading" id="1CB-MS-mjw"/>
+                <constraint firstItem="7eU-wI-YLB" firstAttribute="top" secondItem="4N0-Gs-7om" secondAttribute="top" id="Elb-GF-hT8"/>
+                <constraint firstAttribute="trailing" secondItem="7eU-wI-YLB" secondAttribute="trailing" id="NlE-ce-jJE"/>
+                <constraint firstAttribute="bottom" secondItem="7eU-wI-YLB" secondAttribute="bottom" id="SgR-OE-tgZ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="BackImgV" destination="7eU-wI-YLB" id="0Rx-Fv-dWY"/>
+                <outlet property="CardName" destination="UAk-wD-Zx5" id="8sq-Px-Bl5"/>
+                <outlet property="ScoreLabel" destination="Ibe-We-2cf" id="lSP-l1-fmV"/>
+            </connections>
+            <point key="canvasLocation" x="-18" y="-27"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="qw_tiyanka" width="330" height="190"/>
+    </resources>
+</document>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>您在购买之日起1年内，如轮胎有出现“鼓包”“爆胎”现象您可以在第一时间通过联系保险公司理赔报案。享受您该有的权益。</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>轮胎怎么质保？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>一般汽车生产年份可以在您的爱车铭牌上,铭牌一般是在发动机舱或者车门上。</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何选择生产年份？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>确定轮胎规则请查看车辆轮胎上的型号信息</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何查看轮胎型号？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>获取渠道：蔷薇爱车与合作伙伴共同发起，已获得的卡卷，访问“我的—激活”进入后输入激活码进行激活。</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何使用激活码？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>登录APP点击“购卡-点击购买”完成支付即可,已购买的洗车卡可在“我的卡卷”中查看</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何办理洗车卡？</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopHelpView">
+            <connections>
+                <outlet property="contentLabel" destination="l1G-A4-0cV" id="Zfi-Hw-BlU"/>
+                <outlet property="helpTitleLabel" destination="W0e-aq-6yE" id="pce-dy-ESg"/>
+                <outlet property="helpView" destination="iN0-l3-epB" id="GK4-5J-9zZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PopHelpView">
+            <rect key="frame" x="0.0" y="0.0" width="340" height="246"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一键扫码,快速开启" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0e-aq-6yE">
+                    <rect key="frame" x="21" y="55" width="298" height="32.5"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在蔷薇爱车的自动洗车机上都有对应的二维码，只需用手机扫码，便可以启动机器" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1G-A4-0cV">
+                    <rect key="frame" x="21.5" y="87.5" width="298" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="l1G-A4-0cV" secondAttribute="height" multiplier="303:61" constant="-198.72131147540989" id="ipi-4T-Fr6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W0e-aq-6yE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="9d9-4N-zMZ"/>
+                <constraint firstItem="l1G-A4-0cV" firstAttribute="width" secondItem="W0e-aq-6yE" secondAttribute="width" id="BwS-So-qDb"/>
+                <constraint firstItem="l1G-A4-0cV" firstAttribute="top" secondItem="W0e-aq-6yE" secondAttribute="bottom" id="JaJ-ol-TNL"/>
+                <constraint firstItem="l1G-A4-0cV" firstAttribute="centerX" secondItem="W0e-aq-6yE" secondAttribute="centerX" id="lOX-Of-jbD"/>
+                <constraint firstItem="W0e-aq-6yE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tHh-pq-nCq"/>
+                <constraint firstItem="W0e-aq-6yE" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="149:123" id="to4-He-0zj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="58" y="-158"/>
+        </view>
+    </objects>
+</document>

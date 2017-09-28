@@ -1566,7 +1566,6 @@
 //        
 //        _detaiImgView.frame = CGRectMake(-(imageWidth * f - imageWidth) * 0.5, imageOffsetY, imageWidth * f, totalOffset);
 //    }
-    
     //    //下移
     if (imageOffsetY >= cycleScroll.frame.size.height - 64)
     {

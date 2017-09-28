@@ -18,7 +18,7 @@
 
 @property (nonatomic,strong) UIView *blackLoadingView;
 @property (nonatomic,strong) UIImageView *tipImageView;
-
+//
 @end
 
 @implementation BaseController

@@ -48,13 +48,14 @@
 }
 
 - (void) drawContent {
-    
+    self.statusView.height=0;
     self.statusView.backgroundColor         = [UIColor whiteColor];
     self.navigationView.hidden              = YES;
     self.contentView.backgroundColor        = [UIColor whiteColor];
     self.contentView.top                    = self.statusView.bottom;
     self.contentView.height                 = self.view.height;
     self.view.backgroundColor               = [UIColor whiteColor];
+   
 }
 
 - (void) dealloc
@@ -76,11 +77,11 @@
     NSString   *headerString     = @"登录";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
-    deaderLabel.textColor        = [UIColor blackColor];
+    deaderLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
     deaderLabel.textAlignment    = NSTextAlignmentCenter;
 
     deaderLabel.centerX          = Main_Screen_Width/2;
-    deaderLabel.top              = Main_Screen_Height*20/667;
+    deaderLabel.top              = Main_Screen_Height*40/667;
     
     UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"denglu_icon"];
     logoImageView.layer.masksToBounds = YES;
@@ -95,31 +96,32 @@
     UILabel *titleLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:titleString isCenter:NO];
 //    titleLabel.attributedText   = attributed;
 //    titleLabel.transform        = matrix;
+    titleLabel.textColor=[UIColor colorFromHex:@"#febb02"];
     titleLabel.text             = titleString;
     titleLabel.textAlignment    = NSTextAlignmentCenter;
 
     
     titleLabel.centerX          = Main_Screen_Width/2;
-    titleLabel.top              = logoImageView.bottom +Main_Screen_Height*20/667;
+    titleLabel.top              = logoImageView.bottom +Main_Screen_Height*10/667;
     
-    NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
-    UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-    UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
-    welcomeLabel.textColor        = [UIColor colorFromHex:@"#0161a1"];
-    welcomeLabel.textAlignment    = NSTextAlignmentCenter;
-    welcomeLabel.centerX          = Main_Screen_Width/2;
-    welcomeLabel.top              = titleLabel.bottom +Main_Screen_Height*10/667;
+//    NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
+//    UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+//    UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
+//    welcomeLabel.textColor        = [UIColor colorFromHex:@"#0161a1"];
+//    welcomeLabel.textAlignment    = NSTextAlignmentCenter;
+//    welcomeLabel.centerX          = Main_Screen_Width/2;
+//    welcomeLabel.top              = titleLabel.bottom +Main_Screen_Height*10/667;
     
 
 //    UIImage *backgroundImage            = [UIImage imageNamed:@"dengluditu"];
-    UIImageView  *backgroundImageView   = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width-10, Main_Screen_Height*380/667) imageName:@"dengluditu"];
-    backgroundImageView.top             = welcomeLabel.bottom-20;
+    UIImageView  *backgroundImageView   = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width-10, Main_Screen_Height*150/667) imageName:@"qiangweidenglu-ditu"];
+    backgroundImageView.top             = titleLabel.bottom+10;
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
-    self.tableView.top              = backgroundImageView.top +Main_Screen_Height*100/667;
-    self.tableView.centerX          = backgroundImageView.centerX-Main_Screen_Width*10/375;
+    self.tableView.top              = backgroundImageView.top +Main_Screen_Height*30/667;
+    self.tableView.centerX          = backgroundImageView.centerX;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
@@ -139,15 +141,15 @@
     remindLabel.textColor        = [UIColor colorFromHex:@"#999999"];
     remindLabel.textAlignment    = NSTextAlignmentCenter;
     remindLabel.centerX          = Main_Screen_Width/2;
-    remindLabel.top              = self.tableView.bottom +Main_Screen_Height*20/667;
+    remindLabel.top              = backgroundImageView.bottom +Main_Screen_Height*20/667;
     
     NSString *buttonString        = @"登录";
     UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
-    loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
-    loginButton.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
-    loginButton.tintColor         = [UIColor whiteColor];
+    loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor whiteColor] target:self action:@selector(loginButtonClick:)];
+    [loginButton setBackgroundImage :[UIImage imageNamed:@"ijanbiantiao"] forState:UIControlStateNormal];
+
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
-    loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*75/667;
+    loginButton.top            = backgroundImageView.bottom +Main_Screen_Height*75/667;
     loginButton.centerX           = Main_Screen_Width/2;
     
     _indicatorView = [[KPIndicatorView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Height*35/667, Main_Screen_Height*35/667)];
@@ -155,19 +157,19 @@
     _indicatorView.centerX           = Main_Screen_Width/2;
     [self.contentView addSubview:_indicatorView];
     
-    UIButton * passwordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
-    [passwordBtn setTitle:@"密码登录" forState:UIControlStateNormal];
-    [passwordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
-    passwordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
-    passwordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    passwordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [passwordBtn addTarget:self action:@selector(passwordBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:passwordBtn];
-    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(loginButton.mas_bottom);
-        make.right.equalTo(loginButton.mas_right);
-        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
-    }];
+//    UIButton * passwordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
+//    [passwordBtn setTitle:@"密码登录" forState:UIControlStateNormal];
+//    [passwordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+//    passwordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
+//    passwordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+//    passwordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [passwordBtn addTarget:self action:@selector(passwordBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:passwordBtn];
+//    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(loginButton.mas_bottom);
+//        make.right.equalTo(loginButton.mas_right);
+//        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
+//    }];
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
     [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
@@ -175,7 +177,7 @@
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
-    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#0161a1"] range:NSMakeRange(6, 12)];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#febb02"] range:NSMakeRange(6, 12)];
 
     [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
@@ -362,7 +364,7 @@
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
          self.getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*28/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyByButtonClick:)];
-        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
+        self.getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#febb02"];
         self.getVeriifyStringButton.layer.masksToBounds  = YES;
         self.getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*14/667;
         self.getVeriifyStringButton.right          = self.tableView.width;

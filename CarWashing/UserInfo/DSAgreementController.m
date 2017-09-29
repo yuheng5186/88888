@@ -43,7 +43,7 @@
     
     [self showBlackLoading];
 
-    NSURL * url                     = [NSURL URLWithString: @"http://119.23.53.225:8090/qw/index.html"];
+    NSURL * url                     = [NSURL URLWithString: @"http://120.78.48.105/qw/index.html"];
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
     
     [self.webView loadRequest:request];

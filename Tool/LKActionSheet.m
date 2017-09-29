@@ -60,7 +60,7 @@
                 
                 [UIUtil drawLabelInView:whiteView frame:CGRectMake(0, 0, whiteView.width, 32) font:[UIFont systemFontOfSize:14] text:title isCenter:YES color:[UIColor colorWithRed:170/255.0 green:170/255.0 blue:170/255.0 alpha:1]];
                 
-                button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 32, whiteView.width, 46) text:destructiveButtonTitle font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#0161a1"] target:self action:@selector(clickDestructiveButton)];
+                button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 32, whiteView.width, 46) text:destructiveButtonTitle font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#ffd55e"] target:self action:@selector(clickDestructiveButton)];
 //                [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
                 
                 self.blackButton.alpha = 0;
@@ -88,7 +88,7 @@
                 whiteView.userInteractionEnabled = YES;
                 whiteView.layer.cornerRadius = 10;
 
-                button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 0, whiteView.width, 46) text:destructiveButtonTitle font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#0161a1"] target:self action:@selector(clickDestructiveButton)];
+                button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 0, whiteView.width, 46) text:destructiveButtonTitle font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#ffd55e"] target:self action:@selector(clickDestructiveButton)];
 //                [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
                 
                 self.blackButton.alpha = 0;
@@ -142,7 +142,7 @@
                     if (i != 0) {
                         [UIUtil drawLineInView:whiteView frame:CGRectMake(18, 32+i*46, whiteView.width-18*2, [UIUtil lineWidth]) color:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
                     }
-                    button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 32+i*46, whiteView.width, 46) text:mutableArray[i] font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#0161a1"] target:self action:@selector(clickOtherButton:)];
+                    button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, 32+i*46, whiteView.width, 46) text:mutableArray[i] font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#ffd55e"] target:self action:@selector(clickOtherButton:)];
                     button.tag = i;
 //                    [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
                 }
@@ -178,7 +178,7 @@
                     if (i != 0) {
                         [UIUtil drawLineInView:whiteView frame:CGRectMake(18, i*46, whiteView.width-18*2, [UIUtil lineWidth]) color:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];
                     }
-                    button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, i*46, whiteView.width, 46) text:mutableArray[i] font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#0161a1"] target:self action:@selector(clickOtherButton:)];
+                    button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, i*46, whiteView.width, 46) text:mutableArray[i] font:[UIFont systemFontOfSize:20] color:[UIColor colorFromHex:@"#ffd55e"] target:self action:@selector(clickOtherButton:)];
                     button.tag = i;
 //                    [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
                 }

@@ -25,9 +25,9 @@
     self.UserImgView.layer.masksToBounds = YES;
     self.UserImgView.layer.cornerRadius = 26*Main_Screen_Height/667;
     
-    self.topContainView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
-    
-    self.bottomContainView.backgroundColor = [UIColor colorFromHex:@"#084E7E"];
+//    self.topContainView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+//    
+//    self.bottomContainView.backgroundColor = [UIColor colorFromHex:@"#084E7E"];
     
     //self.increaseButton.backgroundColor = [UIColor colorFromHex:@"ff9041"];
     self.increaseButton.layer.cornerRadius = 10*Main_Screen_Height/667;

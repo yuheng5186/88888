@@ -33,10 +33,10 @@
 #import "AFNetworkingTool.h"
 #import "LCMD5Tool.h"
 
+#import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
 
-
-@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate>
+@interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
 {
     
@@ -56,17 +56,30 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 
+@property (strong,nonatomic)  UITableView * salerListView;
 
 @end
 
 @implementation MySettingViewController
-
+- (UITableView *)salerListView {
+    if (nil == _salerListView) {
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
+        salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _salerListView = salerListView;
+        
+        [self.view addSubview:salerListView];
+        
+    }
+    return _salerListView;
+}
 - (void) drawContent {
 
     self.statusView.hidden      = YES;
+    
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
+
                                                                                                                 
 }
 - (void)viewDidLoad {
@@ -78,7 +91,33 @@
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
-    [self createSubView];
+//    [self createSubView];
+    [self setupUI];
+}
+- (void)setupUI {
+    
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
+    titleView.top                      = 0;
+    
+    NSString *titleName              = @"我的";
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel.textColor         = [UIColor whiteColor];
+    titleNameLabel.centerX           = titleView.centerX;
+    titleNameLabel.centerY           = titleView.centerY +8;
+    
+    //
+    self.salerListView.delegate = self;
+    self.salerListView.dataSource = self;
+    self.salerListView.emptyDataSetSource=self;
+    self.salerListView.emptyDataSetDelegate=self;
+    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    //去掉分割线
+    //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    
+//    [self setupRefresh];
+    
 }
 
 - (void) createSubView {

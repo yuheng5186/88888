@@ -73,7 +73,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
         
         UIButton *activateBtn = [[UIButton alloc] init];
         [activateBtn setTitle:@"激活卡" forState:UIControlStateNormal];
-        activateBtn.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+        activateBtn.backgroundColor = [UIColor colorFromHex:@"#febb02"];
         activateBtn.titleLabel.tintColor = [UIColor colorFromHex:@"#ffffff"];
         activateBtn.titleLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         activateBtn.layer.cornerRadius = Main_Screen_Height*20/667;

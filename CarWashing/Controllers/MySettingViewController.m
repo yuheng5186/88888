@@ -58,14 +58,20 @@
 
 @property (strong,nonatomic)  UITableView * salerListView;
 
+@property (strong,nonatomic)  UIView * headerView;
 @end
 
 @implementation MySettingViewController
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64-49)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        salerListView.backgroundColor = RGBAA(239, 239, 239, 1.0);
         _salerListView = salerListView;
+        
+        _headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
+        _headerView.backgroundColor = RGBAA(239, 239, 239, 1.0);
+        salerListView.tableHeaderView = _headerView;
         
         [self.view addSubview:salerListView];
         
@@ -117,7 +123,65 @@
     
     
 //    [self setupRefresh];
-    
+    //个人信息相关
+    UIView * WhiteView= [[UIView alloc]initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 100)];
+    WhiteView.backgroundColor=[UIColor whiteColor];
+    WhiteView.layer.cornerRadius = 10;
+    WhiteView.layer.masksToBounds=YES;
+    self.editButton = [[UIImageView alloc]initWithFrame:CGRectMake(20, 15, 70, 70)];
+    self.editButton.layer.cornerRadius=35;
+    self.editButton.layer.masksToBounds=YES;
+    self.editButton.image=[UIImage imageNamed:@"duihuanliwu"];
+    self.editButton.userInteractionEnabled = YES;
+    UITapGestureRecognizer * Taprecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(menbershipButtonClick)];
+    [self.editButton addGestureRecognizer:Taprecognizer];
+    [WhiteView addSubview:self.editButton];
+    self.userNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 200, 30)];
+    self.userNameLabel.textColor=[UIColor blackColor];
+    self.userNameLabel.font=[UIFont systemFontOfSize:15.0];
+    self.userNameLabel.text=@"158****1856";
+    [WhiteView addSubview:self.userNameLabel];
+    //个人信息
+    UIButton * inforBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    inforBtn.frame = CGRectMake(100, 50, 80, 25);
+    inforBtn.titleLabel.font=[UIFont systemFontOfSize:15.0];
+    [inforBtn setTitle:@"个人信息" forState:UIControlStateNormal];
+    [inforBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    inforBtn.backgroundColor= [UIColor colorFromHex:@"#FDBB2C"];
+    inforBtn.layer.cornerRadius = inforBtn.height/2;
+    [inforBtn addTarget:self action:@selector(menbershipButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [WhiteView addSubview:inforBtn];
+    //每日签到
+    UIButton * signBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    signBtn.frame = CGRectMake(190, 50, 80, 25);
+    signBtn.titleLabel.font=[UIFont systemFontOfSize:15.0];
+    [signBtn setTitle:@"每日签到" forState:UIControlStateNormal];
+    [signBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    signBtn.backgroundColor= [UIColor colorFromHex:@"#5AB2F1"];
+    signBtn.layer.cornerRadius = inforBtn.height/2;
+    [signBtn addTarget:self action:@selector(signButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [WhiteView addSubview:signBtn];
+    [_headerView addSubview:WhiteView];
+    //按钮相关
+    UIView * ButtonView= [[UIView alloc]initWithFrame:CGRectMake(0, 120, Main_Screen_Width, 80)];
+    ButtonView.backgroundColor=[UIColor whiteColor];
+    [_headerView addSubview:ButtonView];
+    NSArray * arrimage =@[@"dingdan",@"shoucang",@"duihuanliwu"];
+    NSArray * titlearr =@[@"订单",@"收藏",@"激活"];
+    for (int i=0; i<3; i++) {
+        UIButton * imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        imageButton.frame=CGRectMake(10+(i*((Main_Screen_Width-20)/3)), -10, (Main_Screen_Width-20)/3, 90);
+        [imageButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",arrimage[i]]] forState:UIControlStateNormal];
+        imageButton.tag=i+1;
+        [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [ButtonView addSubview:imageButton];
+        UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10+(i*((Main_Screen_Width-20)/3)), 55, (Main_Screen_Width-20)/3, 20)];
+        titleLabel.text=[NSString stringWithFormat:@"%@",titlearr[i]];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.textColor = RGBAA(51, 51, 51, 1.0);
+        titleLabel.font=[UIFont systemFontOfSize:13.0];
+        [ButtonView addSubview:titleLabel];
+    }
 }
 
 - (void) createSubView {
@@ -340,7 +404,7 @@
     [self.navigationController pushViewController:settingVC animated:YES];
 
 }
-- (void) menbershipButtonClick:(id)sender {
+- (void) menbershipButtonClick {
     
 //    DSMemberRightsController *memberRightsVC    = [[DSMemberRightsController alloc]init];
 //    memberRightsVC.hidesBottomBarWhenPushed     = YES;
@@ -477,26 +541,40 @@
 }
 
 #pragma mark -------tapGesture click------
-- (void) tapOrderButtonClick:(id)sender {
-    
-    DSOrderController *orderVC              = [[DSOrderController alloc]init];
-    orderVC.hidesBottomBarWhenPushed        = YES;
-    [self.navigationController pushViewController:orderVC animated:YES];
+-(void)imageButtonClick:(UIButton*)btn
+{
+    if (btn.tag==1) {
+        DSOrderController *orderVC              = [[DSOrderController alloc]init];
+        orderVC.hidesBottomBarWhenPushed        = YES;
+        [self.navigationController pushViewController:orderVC animated:YES];
+    }else if (btn.tag==2){
+        DSFavoritesController *favoritesVC      = [[DSFavoritesController alloc]init];
+        favoritesVC.hidesBottomBarWhenPushed    = YES;
+        [self.navigationController pushViewController:favoritesVC animated:YES];
+    }else if (btn.tag==3){
+        DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
+        exchangeVC.hidesBottomBarWhenPushed     = YES;
+        [self.navigationController pushViewController:exchangeVC animated:YES];
+    }
 }
-
-- (void) tapFavoritesButtonClick:(id)sender {
-    
-    DSFavoritesController *favoritesVC      = [[DSFavoritesController alloc]init];
-    favoritesVC.hidesBottomBarWhenPushed    = YES;
-    [self.navigationController pushViewController:favoritesVC animated:YES];
-}
-
-- (void) tapExchangeButtonClick:(id)sender {
-    
-    DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
-    exchangeVC.hidesBottomBarWhenPushed     = YES;
-    [self.navigationController pushViewController:exchangeVC animated:YES];
-}
+//- (void) tapOrderButtonClick:(id)sender {
+//    
+//    DSOrderController *orderVC              = [[DSOrderController alloc]init];
+//    orderVC.hidesBottomBarWhenPushed        = YES;
+//    [self.navigationController pushViewController:orderVC animated:YES];
+//}
+//
+//- (void) tapFavoritesButtonClick:(id)sender {
+//    
+//    DSFavoritesController *favoritesVC      = [[DSFavoritesController alloc]init];
+//    favoritesVC.hidesBottomBarWhenPushed    = YES;
+//    [self.navigationController pushViewController:favoritesVC animated:YES];
+//}
+//
+//- (void) tapExchangeButtonClick:(id)sender {
+//    
+//   
+//}
 
 - (void) tapServiceButtonClick:(id)sender {
     

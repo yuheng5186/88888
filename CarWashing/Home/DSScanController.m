@@ -373,8 +373,6 @@
                         [weakSelf.navigationController pushViewController:start animated:YES];
                         
                         
-                        
-                        
                     }
                 };
                 

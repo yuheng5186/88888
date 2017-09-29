@@ -87,7 +87,7 @@
     NSMutableAttributedString *title    = [[NSMutableAttributedString alloc] initWithString:@"金顶洗车服务协议"];
     NSRange titleRange = {0,[title length]};
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:titleRange];
-    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"3869ce"] range:NSMakeRange(0, 8)];
+    [title addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#ffd55e"] range:NSMakeRange(0, 8)];
     [updateRuleButton setAttributedTitle:title forState:UIControlStateNormal];
     [updateRuleButton setBackgroundColor:[UIColor clearColor]];
     [updateRuleButton.titleLabel setFont:[UIFont systemFontOfSize:14*Main_Screen_Height/667]];

@@ -2039,7 +2039,7 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = GS9E29E926;
+						DevelopmentTeam = 4JA5JJ5U85;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -2594,7 +2594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GS9E29E926;
+				DEVELOPMENT_TEAM = 4JA5JJ5U85;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
@@ -2612,7 +2612,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GS9E29E926;
+				DEVELOPMENT_TEAM = 4JA5JJ5U85;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;

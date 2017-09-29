@@ -32,7 +32,7 @@
 {
     if (!_statusView) {
         _statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
-        _statusView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+        _statusView.backgroundColor = [UIColor whiteColor];
         UIImageView *imageView  = [[UIImageView alloc]initWithFrame:_statusView.frame];
         imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
         [_statusView addSubview:imageView];

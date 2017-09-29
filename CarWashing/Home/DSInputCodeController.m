@@ -62,7 +62,7 @@
     style.font      = [UIFont systemFontOfSize:18];
     [_inputView setStyle:style forState:(TFGridInputViewCellStateEmpty)];
     
-    _inputView.DIVBorderColor = [UIColor colorFromHex:@"#0161a1"];
+    _inputView.DIVBorderColor = [UIColor colorFromHex:@"#febb02"];
     _inputView.DIVBorderWidth = 0.5;
     
     

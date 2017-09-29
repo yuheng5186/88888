@@ -142,8 +142,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self startLocation];
-
+   
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
@@ -234,7 +233,10 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+//        [self startLocation];
         
+        
+       
         [self setData];
         
     });
@@ -294,35 +296,35 @@
    
     
     
-    NSMutableArray * images = [NSMutableArray array];
-
-    if (self.newrc.adverList.count!=0) {
-        for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
-        {
-            [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
-        }
-        
-        
-        //网络图片加载
-        cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667)];
-        cycleScroll.delegate =self;
-       
-        cycleScroll.imageUrlGroups = images;
-        cycleScroll.autoScrollTimeInterval = 3.0;
-        cycleScroll.dotColor = [UIColor whiteColor];
-        
-          }
-
-    cycleScroll.top  =   0;
-    cycleScroll.width = Main_Screen_Width;
+//    NSMutableArray * images = [NSMutableArray array];
+//
+//    if (self.newrc.adverList.count!=0) {
+//        for (NSInteger i = 0; i<self.newrc.adverList.count; i++)
+//        {
+//            [images addObject:[NSString stringWithFormat:@"%@%@",kHTTPImg,[((NSDictionary *)self.newrc.adverList[i]) objectForKey:@"ImgUrl"]]];
+//        }
+//        
+//        
+//        //网络图片加载
+//        cycleScroll = [[GCCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*150/667)];
+//        cycleScroll.delegate =self;
+//       
+//        cycleScroll.imageUrlGroups = images;
+//        cycleScroll.autoScrollTimeInterval = 3.0;
+//        cycleScroll.dotColor = [UIColor whiteColor];
+//        
+//          }
+//
+//    cycleScroll.top  =   0;
+//    cycleScroll.width = Main_Screen_Width;
 //    [backgroudView addSubview:cycleScroll];
     
-
-    UIView *backView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
+    
+    UIView *backView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
     backView.centerX                   = Main_Screen_Width/2;
     backView.layer.cornerRadius        = 10;
     backView.top                       = self.navigationView.bottom+10;
-    
+    backView.userInteractionEnabled    = YES;
     
     UIView *scanView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
@@ -404,7 +406,7 @@
     backgroudView.height             = scanView.bottom +Main_Screen_Height*0/667;
     
     
-    UIView *downbackView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
+    UIView *downbackView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
     downbackView.centerX                   = Main_Screen_Width/2;
     downbackView.layer.cornerRadius        = 10;
     downbackView.top                       = backView.bottom+10;

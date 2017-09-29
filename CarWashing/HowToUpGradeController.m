@@ -74,12 +74,12 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
 - (void)setupUI {
     
     UIView *headContainView = [[UIView alloc] init];
-    headContainView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    headContainView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:headContainView];
     
     UILabel *gradeLab = [[UILabel alloc] init];
     gradeLab.text = self.currentLevel;
-    gradeLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    gradeLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     gradeLab.font = [UIFont boldSystemFontOfSize:15*Main_Screen_Height/667];
     [self.view addSubview:gradeLab];
     
@@ -114,7 +114,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     [self.view addSubview:slider];
     UILabel *maxLab = [[UILabel alloc] init];
     
-    maxLab.textColor =[UIColor colorFromHex:@"#ffffff"];
+    maxLab.textColor =[UIColor colorFromHex:@"#999999"];
     maxLab.textAlignment=NSTextAlignmentRight;
     maxLab.font = [UIFont systemFontOfSize:10];
     NSLog(@"%d",[self.NextLevelScore intValue]-1);
@@ -126,7 +126,7 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     displayBtn.userInteractionEnabled = NO;
     NSString *string = [NSString stringWithFormat:@"还需获得%ld积分升级为%@",([self.NextLevelScore integerValue]- [self.CurrentScore integerValue]-1),self.nextLevel];
     [displayBtn setTitle:string forState:UIControlStateNormal];
-    [displayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [displayBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
     displayBtn.titleLabel.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [displayBtn setImage:[UIImage imageNamed:@"xiaohuojian"] forState:UIControlStateNormal];
     displayBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);

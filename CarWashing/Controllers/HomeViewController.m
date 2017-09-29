@@ -89,15 +89,21 @@
 
 @implementation HomeViewController
 
+-(void)drawNavigation
+{
+    [self drawTitle:@"金顶洗车"];
+    [self drawRightImageButton:@"xiazai" action:@selector(downloadButtonClick:)];
+    [self drawLeftImageButton:@"jinding" action:nil];
+}
 
 - (void) drawContent {
     
-    self.statusView.hidden      = YES;
+    self.statusView.hidden      = NO;
     
-    self.navigationView.hidden  = YES;
+    self.navigationView.hidden  = NO;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
+//    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
 
@@ -136,7 +142,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    [self startLocation];
+
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
@@ -227,10 +234,7 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [self startLocation];
         
-        
-       
         [self setData];
         
     });
@@ -246,7 +250,7 @@
     UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
     titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
     titleNameLabel.textColor         = [UIColor whiteColor];
-    titleNameLabel.text              = @"";
+//    titleNameLabel.text              = @"金顶洗车";
     titleNameLabel.centerX           = titleView.centerX;
     titleNameLabel.centerY           = titleView.centerY +8;
     
@@ -264,10 +268,10 @@
     logoImageView.centerY           = titleNameLabel.centerY;
     
     
-    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
-    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
-    downloadButton.right             = Main_Screen_Width -Main_Screen_Width*12/375;
-    downloadButton.centerY           = logoImageView.centerY;
+//    UIImage *downloadImage           = [UIImage imageNamed:@"xiazai"];
+//    UIButton  *downloadButton        = [UIUtil drawButtonInView:titleView frame:CGRectMake(0, 0, downloadImage.size.width, downloadImage.size.height) iconName:@"xiazai" target:self action:@selector(downloadButtonClick:)];
+//    downloadButton.right             = Main_Screen_Width -Main_Screen_Width*12/375;
+//    downloadButton.centerY           = logoImageView.centerY;
     
     
 }
@@ -277,13 +281,13 @@
     UIView *headerView = [UIView new];
     headerView.width = [UIScreen mainScreen].bounds.size.width;
     headerView.height   = Main_Screen_Height*240/667;
-    headerView.backgroundColor  = [UIColor whiteColor];
+    headerView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     self.tableView.tableHeaderView  = headerView;
 
     UIView *backgroudView           = [UIView new];
     backgroudView.width             = [UIScreen mainScreen].bounds.size.width;
     backgroudView.height            = Main_Screen_Height*150/667;
-    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
+    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#f6f6f6"];
     backgroudView.top               = 0;
     backgroudView.left              = 0;
     [headerView addSubview:backgroudView];
@@ -311,13 +315,18 @@
 
     cycleScroll.top  =   0;
     cycleScroll.width = Main_Screen_Width;
-    [backgroudView addSubview:cycleScroll];
+//    [backgroudView addSubview:cycleScroll];
     
 
+    UIView *backView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
+    backView.centerX                   = Main_Screen_Width/2;
+    backView.layer.cornerRadius        = 10;
+    backView.top                       = self.navigationView.bottom+10;
     
-    UIView *scanView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
+    
+    UIView *scanView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     scanView.centerX                   = Main_Screen_Width/8;
-    scanView.top                       = Main_Screen_Height*0/667+cycleScroll.bottom;
+    scanView.top                       = 0;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
     [scanView addGestureRecognizer:tapScanGesture];
@@ -328,12 +337,12 @@
     NSString *scanName              = @"扫一扫";
     UIFont *scanNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *scanNameLabel          = [UIUtil drawLabelInView:scanView frame:[UIUtil textRect:scanName font:scanNameFont] font:scanNameFont text:scanName isCenter:NO];
-    scanNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+    scanNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
 //    scanNameLabel.backgroundColor         = [UIColor yellowColor];
     scanNameLabel.centerX           = scanImageView.centerX;
     scanNameLabel.top               = scanImageView.bottom +Main_Screen_Height*6/667;
     
-    UIView *cardBagView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
+    UIView *cardBagView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     cardBagView.centerX                   = Main_Screen_Width*3/8;
     cardBagView.centerY                   = scanView.centerY;
     
@@ -347,31 +356,31 @@
     NSString *cardBagName              = @"卡包";
     UIFont *cardBagNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *cardBagNameLabel          = [UIUtil drawLabelInView:cardBagView frame:[UIUtil textRect:cardBagName font:cardBagNameFont] font:cardBagNameFont text:cardBagName isCenter:NO];
-    cardBagNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+    cardBagNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     cardBagNameLabel.centerX           = cardBagImageView.centerX;
     cardBagNameLabel.top               = cardBagImageView.bottom +Main_Screen_Height*6/667;
     
     
-    UIView *memberRightView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
+    UIView *memberRightView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     memberRightView.centerX                   = Main_Screen_Width*5/8;
     memberRightView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
     [memberRightView addGestureRecognizer:tapMemberRightGesture];
     
-    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"huiyuan"];
+    UIImageView *memberRightImageView      = [UIUtil drawCustomImgViewInView:memberRightView frame:CGRectMake(0, 0, Main_Screen_Width*45/375,Main_Screen_Height*45/667) imageName:@"huiyuan1"];
     memberRightImageView.centerX           = memberRightView.size.width/2;
     memberRightImageView.top               = Main_Screen_Height*10/667;
     
     NSString *rightName              = @"会员特权";
     UIFont *rightNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *rightNameLabel          = [UIUtil drawLabelInView:memberRightView frame:[UIUtil textRect:rightName font:rightNameFont] font:rightNameFont text:rightName isCenter:NO];
-    rightNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+    rightNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     rightNameLabel.centerX           = memberRightImageView.centerX;
     rightNameLabel.top               = memberRightImageView.bottom +Main_Screen_Height*6/667;
     
     
-    UIView *scoreView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
+    UIView *scoreView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
     scoreView.centerX                   = Main_Screen_Width*7/8;
     scoreView.centerY                   = cardBagView.centerY;
     
@@ -385,18 +394,24 @@
     NSString *scoreName              = @"积分";
     UIFont *scoreNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *scoreNameLabel          = [UIUtil drawLabelInView:scoreView frame:[UIUtil textRect:scoreName font:scoreNameFont] font:scoreNameFont text:scoreName isCenter:NO];
-    scoreNameLabel.textColor         = [UIColor colorFromHex:@"#fefefe"];
+    scoreNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     scoreNameLabel.centerX           = scoreImageView.centerX;
     scoreNameLabel.top               = scoreImageView.bottom +Main_Screen_Height*6/667;
 
     
+    backView.height                  = scanView.bottom +Main_Screen_Height*0/667;
     //  背景高度
     backgroudView.height             = scanView.bottom +Main_Screen_Height*0/667;
     
     
-    UIView *payView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *downbackView                   = [UIUtil drawLineInView:backgroudView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
+    downbackView.centerX                   = Main_Screen_Width/2;
+    downbackView.layer.cornerRadius        = 10;
+    downbackView.top                       = backView.bottom+10;
+    
+    UIView *payView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     payView.centerX                   = Main_Screen_Width/8;
-    payView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+    payView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapPayGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapPayButtonClick:)];
     [payView addGestureRecognizer:tapPayGesture];
@@ -412,9 +427,9 @@
     payNameLabel.centerX           = payImageView.centerX;
     payNameLabel.top               = payImageView.bottom +Main_Screen_Height*12/667;
     
-    UIView *signView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *signView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     signView.centerX                   = Main_Screen_Width*3/8;
-    signView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+    signView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapSignGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSignButtonClick:)];
     [signView addGestureRecognizer:tapSignGesture];
@@ -432,9 +447,9 @@
     signNameLabel.top               = signImageView.bottom +Main_Screen_Height*12/667;
     
     
-    UIView *discountView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *discountView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     discountView.centerX                   = Main_Screen_Width*5/8;
-    discountView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+    discountView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
     [discountView addGestureRecognizer:tapDiscountGesture];
@@ -453,9 +468,9 @@
     
     
     
-    UIView *shareView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *shareView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     shareView.centerX                   = Main_Screen_Width*7/8;
-    shareView.top                       = backgroudView.bottom +Main_Screen_Height*10/375;
+    shareView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapShareGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShareButtonClick:)];
     [shareView addGestureRecognizer:tapShareGesture];
@@ -474,7 +489,7 @@
     
     
     
-    UIView *myCarView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *myCarView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     myCarView.centerX                   = Main_Screen_Width/8;
     myCarView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
@@ -533,7 +548,7 @@
 //    discountNameLabel.centerX           = discountImageView.centerX;
 //    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*12/667;
     
-    UIView *shopView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *shopView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     shopView.centerX                   = Main_Screen_Width*5/8;
     shopView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
@@ -554,7 +569,7 @@
     
     
     
-    UIView *carClubView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *carClubView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     carClubView.centerX                   = Main_Screen_Width*3/8;
     carClubView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
@@ -575,7 +590,7 @@
     
     
     
-    UIView *serviceView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
+    UIView *serviceView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     serviceView.centerX                   = Main_Screen_Width*7/8;
     serviceView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
@@ -594,15 +609,16 @@
     serviceNameLabel.centerX           = serviceImageView.centerX;
     serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*12/667;
     
-    newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
-    newManImageView.centerX           = headerView.centerX;
-    newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
-    newManImageView.userInteractionEnabled=YES;
-    newManImageView.contentMode=UIViewContentModeScaleAspectFill;
-    newManImageView.image=[UIImage imageNamed:@"banka_banner"];
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-    [newManImageView addGestureRecognizer:tap];
-    headerView.height   = serviceNameLabel.bottom;
+//    newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
+//    newManImageView.centerX           = headerView.centerX;
+//    newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
+//    newManImageView.userInteractionEnabled=YES;
+//    newManImageView.contentMode=UIViewContentModeScaleAspectFill;
+//    newManImageView.image=[UIImage imageNamed:@"banka_banner"];
+//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+//    [newManImageView addGestureRecognizer:tap];
+//    downbackView.backgroundColor    = [UIColor redColor];
+    downbackView.height   = serviceView.bottom;
     
     
 //    if (self.newrc.recList.count==0) {
@@ -632,7 +648,7 @@
 //    activityImageView.centerX           = headerView.centerX;
 //    activityImageView.top               = newManImageView.bottom+Main_Screen_Height*0/667;
     
-    headerView.height   = carClubView.bottom +Main_Screen_Height*10/667;
+    headerView.height   = downbackView.bottom;
     
 
 
@@ -1549,38 +1565,38 @@
 //    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    //图片高度
-//    CGFloat imageHeight = _detaiview.frame.size.height;
-//    //图片宽度
-//    CGFloat imageWidth = QWScreenWidth;
-    //图片上下偏移量
-    CGFloat imageOffsetY = scrollView.contentOffset.y;
-    //    NSLog(@"图片上下偏移量 imageOffsetY:%f ->",imageOffsetY);
-//    //上移
-//    if (imageOffsetY < 0) {
-//        
-//        CGFloat totalOffset = imageHeight + ABS(imageOffsetY);
-//        CGFloat f = totalOffset / imageHeight;
-//        
-//        _detaiImgView.frame = CGRectMake(-(imageWidth * f - imageWidth) * 0.5, imageOffsetY, imageWidth * f, totalOffset);
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    
+//    //图片高度
+////    CGFloat imageHeight = _detaiview.frame.size.height;
+////    //图片宽度
+////    CGFloat imageWidth = QWScreenWidth;
+//    //图片上下偏移量
+//    CGFloat imageOffsetY = scrollView.contentOffset.y;
+//    //    NSLog(@"图片上下偏移量 imageOffsetY:%f ->",imageOffsetY);
+////    //上移
+////    if (imageOffsetY < 0) {
+////        
+////        CGFloat totalOffset = imageHeight + ABS(imageOffsetY);
+////        CGFloat f = totalOffset / imageHeight;
+////        
+////        _detaiImgView.frame = CGRectMake(-(imageWidth * f - imageWidth) * 0.5, imageOffsetY, imageWidth * f, totalOffset);
+////    }
+//    //    //下移
+//    if (imageOffsetY >= cycleScroll.frame.size.height - 64)
+//    {
+//        titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+//        titleNameLabel.text       = @"金顶洗车";
 //    }
-    //    //下移
-    if (imageOffsetY >= cycleScroll.frame.size.height - 64)
-    {
-        titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
-        titleNameLabel.text       = @"金顶爱车";
-    }
-    else
-    {
-        titleView.backgroundColor = [UIColor clearColor];
-        titleNameLabel.text       = @"";
-
-    }
-    
-    
-}
+//    else
+//    {
+//        titleView.backgroundColor = [UIColor clearColor];
+//        titleNameLabel.text       = @"";
+//
+//    }
+//    
+//    
+//}
 
 
 

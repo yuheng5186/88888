@@ -33,7 +33,7 @@
     webView.dataDetectorTypes = UIDataDetectorTypeNone;
     [self.view addSubview:webView];
     
-    NSURL * url                     = [NSURL URLWithString: @"http://119.23.53.225:8090/qw/dengji.html"];
+    NSURL * url                     = [NSURL URLWithString: @"http://120.78.48.105/qw/dengji.html"];
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
     
     [webView loadRequest:request];

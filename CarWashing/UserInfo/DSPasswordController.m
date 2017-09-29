@@ -209,7 +209,7 @@
         NSString *getVeriifyString      = @"获取验证码";
         UIFont *getVeriifyStringFont          = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         _getVeriifyStringButton      = [UIUtil drawButtonInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*90/375, Main_Screen_Height*30/667) text:getVeriifyString font:getVeriifyStringFont color:[UIColor whiteColor] target:self action:@selector(getVeriifyButtonClick:)];
-        _getVeriifyStringButton.backgroundColor=  [UIColor colorFromHex:@"#0161a1"];
+        _getVeriifyStringButton.backgroundColor=  RGBAA(253, 167, 9, 1.0);
         _getVeriifyStringButton.layer.cornerRadius = Main_Screen_Height*15/667;
         _getVeriifyStringButton.right          = Main_Screen_Width -Main_Screen_Width*10/375;
         _getVeriifyStringButton.top            = Main_Screen_Height*10/667;

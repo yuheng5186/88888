@@ -54,7 +54,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     // Do any additional setup after loading the view.
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-//    [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
+    //    [center addObserver:self selector:@selector(noticeupdateCardNum:) name:@"receivesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"Earnsuccess" object:nil];
     [self createSubView];
     self.area = @"上海市";
@@ -70,7 +70,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) createSubView {
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor colorFromHex:@"#0161a1"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor whiteColor]];
     upView.top                      = 0;
     
     
@@ -110,8 +110,9 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     upView.height       = membershipNameLabel.bottom+Main_Screen_Height*10/667;
     
-
+    
     memberRightsView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    memberRightsView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:memberRightsView];
     
     
@@ -165,17 +166,17 @@ static NSString *id_rightsCell = @"id_rightsCell";
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
                              @"GetCardType":@3,
-                            
+                             
                              };
     NSDictionary *params = @{
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-         NSLog(@"%@",dict);
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-           
+            
             _MembershipprivilegesArray = [[NSMutableArray alloc]init];
             _NextMembershipprivilegesArr = [[NSMutableArray alloc]init];
             _CurrentMembershipprivilegesArr = [[NSMutableArray alloc]init];
@@ -194,7 +195,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
                 }
                 else
                 {
-                     [_NextMembershipprivilegesArr addObject:dic];
+                    [_NextMembershipprivilegesArr addObject:dic];
                 }
             }
             
@@ -211,31 +212,31 @@ static NSString *id_rightsCell = @"id_rightsCell";
         {
             [HUD setHidden:YES];
             [self.view showInfo:@"信息获取失败，请重试" autoHidden:YES interval:2];
-//            [self.navigationController popViewControllerAnimated:YES];
+            //            [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
         [HUD setHidden:YES];
         [self.view showInfo:@"获取失败，请重试" autoHidden:YES interval:2];
-//        [self.navigationController popViewControllerAnimated:YES];
+        //        [self.navigationController popViewControllerAnimated:YES];
         
     }];
-
+    
 }
 
 -(void)UpdateUI
 {
     
-//    NSLog(@"%@",_MembershipprivilegesDic);
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]];
-//        NSURL *url=[NSURL URLWithString:ImageURL];
-//        NSData *data=[NSData dataWithContentsOfURL:url];
-//        UIImage *img=[UIImage imageWithData:data];
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            membershipImageView.image = img;
-//        });
-//    });
+    //    NSLog(@"%@",_MembershipprivilegesDic);
+    //
+    //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]];
+    //        NSURL *url=[NSURL URLWithString:ImageURL];
+    //        NSData *data=[NSData dataWithContentsOfURL:url];
+    //        UIImage *img=[UIImage imageWithData:data];
+    //        dispatch_sync(dispatch_get_main_queue(), ^{
+    //            membershipImageView.image = img;
+    //        });
+    //    });
     
     [membershipImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipprivilegesDic[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
     
@@ -246,22 +247,22 @@ static NSString *id_rightsCell = @"id_rightsCell";
         
     }else if (num == 2){
         signImageView.image = [UIImage imageNamed:@"baiyin"];
-
+        
     }else if (num == 3){
         signImageView.image = [UIImage imageNamed:@"huangjin"];
-
+        
     }else if (num == 4){
         signImageView.image = [UIImage imageNamed:@"bojin"];
         
     }else if (num == 5){
         signImageView.image = [UIImage imageNamed:@"zuanshi"];
-
+        
     }else if (num == 6){
         signImageView.image = [UIImage imageNamed:@"heizuan"];
-
+        
     }else {
         signImageView.image = [UIImage imageNamed:@"putong"];
-
+        
         
     }
     
@@ -343,7 +344,6 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
@@ -351,7 +351,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.imageView.image = [UIImage imageNamed:@"shengjihoukaquan"];
     
-
+    
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
@@ -386,13 +386,13 @@ static NSString *id_rightsCell = @"id_rightsCell";
     }
     UILabel *titleLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20) font:[UIFont systemFontOfSize:Main_Screen_Height*14/667] text:string isCenter:NO];
     titleLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
-//    titleLabel.backgroundColor  = [UIColor redColor];
+    //    titleLabel.backgroundColor  = [UIColor redColor];
     titleLabel.top       = 13;
     titleLabel.left      = 70*Main_Screen_Height/667;
     
     UILabel *detailLabel  = [UIUtil drawLabelInView:cell.contentView frame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 30) font:[UIFont systemFontOfSize:Main_Screen_Height*12/667] text:detailString isCenter:NO];
     detailLabel.textColor = [UIColor colorFromHex:@"#999999"];
-//    detailLabel.backgroundColor  = [UIColor redColor];
+    //    detailLabel.backgroundColor  = [UIColor redColor];
     detailLabel.numberOfLines   = 2;
     detailLabel.top       = titleLabel.bottom;
     detailLabel.left      = 70*Main_Screen_Height/667;
@@ -403,24 +403,64 @@ static NSString *id_rightsCell = @"id_rightsCell";
     return 70;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section==0) {
+        if (_CurrentMembershipprivilegesArr.count==0) {
+            return 70;
+        }else{
+            return 10*Main_Screen_Height/667;
+        }
+    }
     
     return 10*Main_Screen_Height/667;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-
+    
     return 50;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section==0) {
+        
+        
+        UIView * footView= [[UIView alloc]init];
+        footView.backgroundColor=[UIColor whiteColor];
+        //        UIView * lineVIew=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 1)];
+        //        lineVIew.backgroundColor=RGBAA(239, 239, 239, 1.0);
+        //        [footView addSubview:lineVIew];
+        
+        UIImageView * leftImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width*30/667, 20, 30, 30)];
+        leftImage.image=[UIImage imageNamed:@"shengjihoukaquan"];
+        [footView addSubview:leftImage];
+        UILabel * detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300*Main_Screen_Height/667, 20)];
+        detailLabel.top       = footView.bottom+25;
+        detailLabel.left      = 70*Main_Screen_Height/667;
+        detailLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
+        detailLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+        detailLabel.text = @"暂无优惠";
+        [footView addSubview:detailLabel];
+        return footView;
+    }
+    return nil;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *hederview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
     hederview.backgroundColor=[UIColor colorFromHex:@"0xf0f0f0"];
+    
+    
+    
     UIView *hederviews=[[UIView alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 40)];
     hederviews.backgroundColor=[UIColor whiteColor];
+    
+    
     
     
     UILabel *infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, Main_Screen_Width, 40)];
     
     infoLabel.textColor = [UIColor colorFromHex:@"#3a3a3a"];
     infoLabel.font = [UIFont systemFontOfSize:15];
+    UIView * lineView=[[UIView alloc]initWithFrame:CGRectMake(0, 39, Main_Screen_Width, 1)];
+    lineView.backgroundColor=RGBAA(239, 239, 239, 1.0);
+    
     
     if (section == 0) {
         
@@ -432,17 +472,18 @@ static NSString *id_rightsCell = @"id_rightsCell";
     }
     
     [hederviews addSubview:infoLabel];
+    [hederviews addSubview:lineView];
     [hederview addSubview:hederviews];
     
     return hederview;
 }
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    
+//
 //    if (section == 0) {
 //        return @"我的特权";
 //    }else {
-//        
+//
 //        return @"升级后可获得特权";
 //    }
 //}
@@ -468,7 +509,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 
 //-(void)noticeupdateCardNum:(NSNotification *)sender{
-//    
+//
 //}
 
 -(void)noticeupdate:(NSNotification *)sender{
@@ -482,7 +523,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 - (void) updateRuleClick:(id)sender {
-
+    
     DSUpdateRuleController *updateRuleController  = [[DSUpdateRuleController alloc]init];
     updateRuleController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:updateRuleController animated:YES];
@@ -491,22 +532,22 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 //#pragma mark -------tapGesture click------
 //- (void) tapSymbolButtonClick:(id)sender {
-//    
-//    
+//
+//
 //}
 //
 //- (void) tapDiscountButtonClick:(id)sender {
-//    
-//    
+//
+//
 //}
 //- (void) tapMaintainButtonClick:(id)sender {
-//    
-//    
+//
+//
 //}
 //
 //- (void) tapGoodsButtonClick:(id)sender {
-//    
-//    
+//
+//
 //}
 
 - (void)didReceiveMemoryWarning {

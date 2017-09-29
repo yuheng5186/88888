@@ -131,7 +131,7 @@
     
 //    MenuTabBarController *menuTabBarController	= [[MenuTabBarController alloc] init];
 //    self.window.rootViewController				= menuTabBarController;
-        [WXApi registerApp:@"wx36260a82ad0e51bb"];      //公司
+        [WXApi registerApp:@"wx391fd62749c99d3a"];      //公司
 
     
 

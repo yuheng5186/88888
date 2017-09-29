@@ -49,7 +49,7 @@
     BOOL firstRun = [[[NSUserDefaults standardUserDefaults]valueForKey:@"firstRun"] boolValue];
 
     if (!firstRun) {
-        [self addGuideView];
+//        [self addGuideView];
 
         [[NSUserDefaults standardUserDefaults]setValue:@YES forKey:@"firstRun"];
         [[NSUserDefaults standardUserDefaults]synchronize];

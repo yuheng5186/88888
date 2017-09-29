@@ -52,7 +52,7 @@
     [goButton setTitle:@"去完成" forState:UIControlStateNormal];
     [goButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     goButton.titleLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-    goButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    goButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     goButton.layer.cornerRadius = 2*Main_Screen_Height/667;
     [self.contentView addSubview:goButton];
     

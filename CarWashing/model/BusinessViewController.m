@@ -64,14 +64,18 @@ static NSString *id_salerListCell = @"salerListViewCell";
     }
     return _salerListView;
 }
-
+-(void)drawNavigation
+{
+    [self drawTitle:@"商家"];
+}
 - (void) drawContent {
     
-    self.statusView.hidden      = YES;
+    self.statusView.hidden      = NO;
     
-    self.navigationView.hidden  = YES;
+    self.navigationView.hidden  = NO;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
+    
     
 }
 
@@ -153,15 +157,15 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (void)setupUI {
     
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
-    titleView.top                      = 0;
-    
-    NSString *titleName              = @"商家";
-    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
-    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
-    titleNameLabel.textColor         = [UIColor whiteColor];
-    titleNameLabel.centerX           = titleView.centerX;
-    titleNameLabel.centerY           = titleView.centerY +8;
+//    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
+//    titleView.top                      = 0;
+//    
+//    NSString *titleName              = @"商家";
+//    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+//    UILabel *titleNameLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+//    titleNameLabel.textColor         = [UIColor whiteColor];
+//    titleNameLabel.centerX           = titleView.centerX;
+//    titleNameLabel.centerY           = titleView.centerY +8;
     
     //
     self.salerListView.delegate = self;

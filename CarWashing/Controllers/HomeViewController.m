@@ -142,6 +142,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.LocCity=nil;
     [self startLocation];
 
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];

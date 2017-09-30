@@ -147,7 +147,8 @@
     UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor whiteColor] target:self action:@selector(loginButtonClick:)];
     [loginButton setBackgroundImage :[UIImage imageNamed:@"ijanbiantiao"] forState:UIControlStateNormal];
-
+    loginButton.layer.cornerRadius =8;
+    loginButton.layer.masksToBounds=YES;
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
     loginButton.top            = backgroundImageView.bottom +Main_Screen_Height*75/667;
     loginButton.centerX           = Main_Screen_Width/2;

@@ -64,7 +64,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     }
     return _salerListView;
 }
-
 - (void) drawNavigation {
 
     [self drawTitle:@"商家"];
@@ -77,6 +76,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.navigationView.hidden  = NO;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
+    
     
 }
 

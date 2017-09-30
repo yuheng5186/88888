@@ -67,7 +67,7 @@
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
                     urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
                     urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
-                    [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                    [urlMessage setThumbImage:[UIImage imageNamed:@"AppIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
                     WXWebpageObject *webObj = [WXWebpageObject object];
@@ -120,7 +120,7 @@
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
                     urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
                     urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
-                    [urlMessage setThumbImage:[UIImage imageNamed:@"loginIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                    [urlMessage setThumbImage:[UIImage imageNamed:@"AppIcon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
                     WXWebpageObject *webObj = [WXWebpageObject object];

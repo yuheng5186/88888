@@ -323,10 +323,10 @@ else if(order.PayState == 4){
         }else{
             [successCell.stateButton setTitle:@"去评价" forState:UIControlStateNormal];
             [successCell.stateButton setEnabled:YES];
-            [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#0161a1"] forState:UIControlStateNormal];
+            [successCell.stateButton setTitleColor:[UIColor colorFromHex:@"#febb02"] forState:UIControlStateNormal];
             successCell.stateButton.layer.cornerRadius = 12.5*Main_Screen_Height/667;
             successCell.stateButton.layer.borderWidth = 1;
-            successCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#0161a1"].CGColor;
+            successCell.stateButton.layer.borderColor = [UIColor colorFromHex:@"#febb02"].CGColor;
             
             
         }

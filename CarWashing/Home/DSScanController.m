@@ -72,7 +72,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
 
-    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
+    UIView *titleView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#febb02"]];
     titleView.top                      = 0;
     
     UIImageView *imageView  = [[UIImageView alloc]initWithFrame:titleView.frame];

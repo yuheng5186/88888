@@ -62,20 +62,24 @@
     
     
     UIImageView *backgroundImageView;
+//    bg_card
     
-    if([_dic[@"CardType"] intValue] == 1)
-    {
-        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_tiyanka"];
-    }else if([_dic[@"CardType"] intValue] == 2)
-    {
-        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_yueka"];
-    }else if([_dic[@"CardType"] intValue] == 3)
-    {
-        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_cika"];
-    }else if([_dic[@"CardType"] intValue] == 4)
-    {
-        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_nianka"];
-    }
+    backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"bg_card"];
+    
+    
+//    if([_dic[@"CardType"] intValue] == 1)
+//    {
+//        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_tiyanka"];
+//    }else if([_dic[@"CardType"] intValue] == 2)
+//    {
+//        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_yueka"];
+//    }else if([_dic[@"CardType"] intValue] == 3)
+//    {
+//        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_cika"];
+//    }else if([_dic[@"CardType"] intValue] == 4)
+//    {
+//        backgroundImageView      = [UIUtil drawCustomImgViewInView:upView frame:CGRectMake(22.5*Main_Screen_Height/667, 0, Main_Screen_Width-45*Main_Screen_Height/667, 190*Main_Screen_Height/667) imageName:@"qw_nianka"];
+//    }
     
     backgroundImageView.top               = Main_Screen_Height*25/667;
     backgroundImageView.centerX           = upView.centerX;
@@ -101,24 +105,39 @@
 //    showlabel2.left     = showlabel.right +Main_Screen_Width*10/375;
 //    [backgroundImageView addSubview:showlabel2];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *datenow = [NSDate date];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    NSDate *datenow = [NSDate date];
     
     NSString *showString3             =  [NSString stringWithFormat:@"有效期至: %@",[self DateZhuan:_dic[@"ExpiredTimes"]]];
     
-    UIFont    *showFont3              = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    UIFont    *showFont3              = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     UILabel     *showlabel3           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString3 font:showFont3] font:showFont3 text:showString3 isCenter:NO];
-    showlabel3.textColor =               [UIColor colorFromHex:@"#ffffff"];
-    showlabel3.right                   =  backgroundImageView.width + Main_Screen_Width*-12/375;
-    showlabel3.bottom                    = backgroundImageView.height - Main_Screen_Height*18/667;
+    showlabel3.textColor              = [UIColor colorFromHex:@"#999999"];
+    showlabel3.left                   = Main_Screen_Width*25/375;
+    showlabel3.bottom                 = backgroundImageView.height - Main_Screen_Height*18/667;
     
-    NSString *showString33             = [NSString stringWithFormat:@"持卡洗车次数%@次",_dic[@"CardCount"]];;
-    UIFont    *showFont33             = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    NSString *showString33             = [NSString stringWithFormat:@"%@",_dic[@"CardName"]];
+    UIFont    *showFont33             = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     UILabel     *showlabel33           = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:showString33 font:showFont33] font:showFont33 text:showString33 isCenter:NO];
-    showlabel33.textColor =               [UIColor colorFromHex:@"#ffffff"];
-    showlabel33.right                   =  backgroundImageView.width + Main_Screen_Width*-12/375;
-    showlabel33.top                    = showlabel3.top - showlabel3.height;
+    showlabel33.textColor =               [UIColor colorFromHex:@"#4a4a4a"];
+    showlabel33.left                   = Main_Screen_Width*25/375;
+    showlabel33.top                    = Main_Screen_Height*20/667;
+    
+    NSString *jindingString            = @"金顶洗车";
+    UIFont    *jindingFont             = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
+    UILabel     *jindingLabel          = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:jindingString font:jindingFont] font:jindingFont text:jindingString isCenter:NO];
+    jindingLabel.textColor             = [UIColor colorFromHex:@"#4a4a4a"];
+    jindingLabel.left                   = showlabel33.right +Main_Screen_Width*5/375;
+    jindingLabel.bottom                 = showlabel33.bottom;
+    
+    NSString *saomaString            = @"扫码洗车服务中使用";
+    UIFont    *saomaFont             = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+    UILabel     *saomaLabel          = [UIUtil drawLabelInView:backgroundImageView frame:[UIUtil textRect:saomaString font:saomaFont] font:saomaFont text:saomaString isCenter:NO];
+    saomaLabel.textColor             = [UIColor colorFromHex:@"#4a4a4a"];
+    saomaLabel.left                  = showlabel33.left;
+    saomaLabel.top                   = showlabel33.bottom +Main_Screen_Height*5/667;
+    
     
     NSString *string;
     if([_dic[@"IsReceive"] intValue] == 1)

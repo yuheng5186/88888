@@ -106,7 +106,7 @@
     NSString   *welcomeString     = @"欢迎登录金顶洗车APP";
     UIFont     *welcomeFont       = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
     UILabel *welcomeLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*200/375, Main_Screen_Height*30/667) font:welcomeFont text:welcomeString isCenter:NO];
-    welcomeLabel.textColor        = [UIColor colorFromHex:@"#0161a1"];
+    welcomeLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
     welcomeLabel.textAlignment    = NSTextAlignmentCenter;
     welcomeLabel.centerX          = Main_Screen_Width/2;
     welcomeLabel.top              = titleLabel.bottom +Main_Screen_Height*10/667;
@@ -145,7 +145,7 @@
     NSString *buttonString        = @"登录";
     UIFont   *buttonFont          = [UIFont systemFontOfSize:Main_Screen_Height*16/667];
     loginButton        = [UIUtil drawButtonInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*280/375, Main_Screen_Height*45/667) text:buttonString font:buttonFont color:[UIColor colorFromHex:@"#ffffff"] target:self action:@selector(loginButtonClick:)];
-    loginButton.backgroundColor   = [UIColor colorFromHex:@"#0161a1"];
+    loginButton.backgroundColor   = [UIColor colorFromHex:@"#febb02"];
     loginButton.tintColor         = [UIColor whiteColor];
     loginButton.layer.cornerRadius  = Main_Screen_Height*5/667;
     loginButton.bottom            = backgroundImageView.bottom -Main_Screen_Height*75/667;

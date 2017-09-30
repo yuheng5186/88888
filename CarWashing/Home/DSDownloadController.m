@@ -187,7 +187,7 @@
     titleLabel.centerX          = logoImageView.centerX;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*12/667;
     
-    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"downloadAPP"];
+    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"1506759148"];
     self.bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
     self.bigImageView.centerX        = titleView.size.width/2;
     self.bigImageView.userInteractionEnabled    = YES;
@@ -231,13 +231,13 @@
             
             
         }else{
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
-//                                                            message:@"不是二维码图片"
-//                                                           delegate:self
-//                                                  cancelButtonTitle:nil
-//                                                  otherButtonTitles:@"确定", nil];
-//            [self.view addSubview:alert];
-//            [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"扫描结果"
+                                                            message:@"不是二维码图片"
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [self.view addSubview:alert];
+            [alert show];
         }
     }
     //获取选中的照片
@@ -258,7 +258,7 @@
         
     }else{
         
-        NSString * str = @"http://api.qiangweilovecar.com/appshow/appdown.html";
+        NSString * str = @"http://feriniya.com/appshow/appdown.html";
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
     }

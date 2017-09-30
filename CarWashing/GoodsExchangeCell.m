@@ -54,7 +54,7 @@
     jindingLabel.left              = titleNameLabel.right+Main_Screen_Width*5/375;
     
     
-    NSString *priceString        = @"商家洗车自动抵扣";
+    NSString *priceString        = @"扫码洗车自动抵扣";
     UIFont *priceFont            = [UIFont systemFontOfSize:14];
     UILabel *priceLabel          = [UIUtil drawLabelInView:backImgV frame:[UIUtil textRect:priceString font:priceFont] font:priceFont text:priceString isCenter:NO];
     priceLabel.textColor         = [UIColor blackColor];
@@ -72,7 +72,7 @@
     UILabel *introLab = [[UILabel alloc] init];
 //    _introLab = introLab;
     //introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    introLab.text = @"商家洗车自动抵扣";
+    introLab.text = @"扫码洗车自动抵扣";
     introLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     introLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [backImgV addSubview:introLab];

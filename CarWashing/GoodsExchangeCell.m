@@ -48,14 +48,14 @@
     _introLab = introLab;
     //introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
     introLab.text = @"免费扫码洗车次";
-    introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    introLab.textColor = [UIColor colorFromHex:@"#999999"];
     introLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [backImgV addSubview:introLab];
     
     UILabel *scoreLab = [[UILabel alloc] init];
     _scoreLab = scoreLab;
     scoreLab.text = @"1000积分";
-    scoreLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    scoreLab.textColor = [UIColor colorFromHex:@"#999999"];
     scoreLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [backImgV addSubview:scoreLab];
     

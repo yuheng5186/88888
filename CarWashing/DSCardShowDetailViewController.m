@@ -47,24 +47,48 @@
     
 //    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#fefefe"];
     
-    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667) imageName:@"qw_tiyanka"];
+    UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667) imageName:@"bg_card"];
     appImageView.top               = Main_Screen_Height*20/667;
     appImageView.centerX           = Main_Screen_Width/2;
     
     
-    NSString *dicountString              = [NSString stringWithFormat:@"有效期%ld天",self.choosecard.ExpiredDay];
-    UIFont *dicountFont            = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
+    NSString *dicountString        = [NSString stringWithFormat:@"有效期%ld天",self.choosecard.ExpiredDay];
+    UIFont *dicountFont            = [UIFont systemFontOfSize:14];
     UILabel *dicountLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:dicountString font:dicountFont] font:dicountFont text:dicountString isCenter:NO];
-    dicountLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
+    dicountLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     dicountLabel.bottom            = appImageView.bottom -Main_Screen_Height*40/667;
-    dicountLabel.right             = appImageView.width -Main_Screen_Width*10/375;
+    dicountLabel.left              = Main_Screen_Width*25/375;
     
-    NSString *dateString        = [NSString stringWithFormat:@"免费扫码洗车%ld次",self.choosecard.CardCount];
-    UIFont *dateFont            = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
-    UILabel *dateLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:dateString font:dateFont] font:dateFont text:dateString isCenter:NO];
-    dateLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
-    dateLabel.bottom            = dicountLabel.top -Main_Screen_Height*0/667;
-    dateLabel.right             = dicountLabel.right;
+//    NSString *dateString        = [NSString stringWithFormat:@"免费扫码洗车%ld次",self.choosecard.CardCount];
+//    UIFont *dateFont            = [UIFont systemFontOfSize:Main_Screen_Height*15/667];
+//    UILabel *dateLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:dateString font:dateFont] font:dateFont text:dateString isCenter:NO];
+//    dateLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
+//    dateLabel.bottom            = dicountLabel.top -Main_Screen_Height*0/667;
+//    dateLabel.right             = dicountLabel.right;
+    
+    NSString *titleName              = self.choosecard.CardName;
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UILabel *titleNameLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.top               = Main_Screen_Height*20/667;
+    titleNameLabel.left              = Main_Screen_Width*25/375;
+    
+    
+    NSString *jindingString        = @"金顶洗车";
+    UIFont *jindingFont            = [UIFont systemFontOfSize:10];
+    UILabel *jindingLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:jindingString font:jindingFont] font:jindingFont text:jindingString isCenter:NO];
+    jindingLabel.textColor         = [UIColor blackColor];
+    jindingLabel.bottom            = titleNameLabel.bottom;;
+    jindingLabel.left              = titleNameLabel.right+Main_Screen_Width*5/375;
+    
+    
+    NSString *saomaString        = @"扫码洗车服务中使用";
+    UIFont *saomaFont            = [UIFont systemFontOfSize:14];
+    UILabel *saomaLabel          = [UIUtil drawLabelInView:appImageView frame:[UIUtil textRect:saomaString font:saomaFont] font:saomaFont text:saomaString isCenter:NO];
+    saomaLabel.textColor         = [UIColor blackColor];
+    saomaLabel.top               = titleNameLabel.bottom +Main_Screen_Height*10/667;
+    saomaLabel.left              = titleNameLabel.left;
+    
     
     
     UIView *upView                  = [UIUtil drawLineInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*200/667) color:[UIColor colorFromHex:@"#e5e5e5"]];

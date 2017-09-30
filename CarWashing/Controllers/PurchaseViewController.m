@@ -433,96 +433,129 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     
     
-    UILabel *cardNameLab = [[UILabel alloc] init];
-    cardNameLab.text = card.CardName;
-    cardNameLab.font = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
-    [bannerView addSubview:cardNameLab];
-    cardNameLab.hidden = YES;
+    NSString *titleName              = card.CardName;
+    UIFont *titleNameFont            = [UIFont boldSystemFontOfSize:18];
+    UILabel *titleNameLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:titleName font:titleNameFont] font:titleNameFont text:titleName isCenter:NO];
+    titleNameLabel.textColor         = [UIColor blackColor];
+    titleNameLabel.top               = Main_Screen_Height*20/667;
+    titleNameLabel.left              = Main_Screen_Width*25/375;
     
-    UILabel *cardtagLab = [[UILabel alloc] init];
-    cardtagLab.text = @"金顶洗车";
-    cardtagLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    [bannerView addSubview:cardtagLab];
     
-    UILabel *timesLab = [[UILabel alloc] init];
-    timesLab.text = [NSString stringWithFormat:@"免费扫码洗车%ld次",card.CardCount];
-    timesLab.textColor = [UIColor colorFromHex:@"#999999"];
-    timesLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    [bannerView addSubview:timesLab];
+    NSString *jindingString        = @"金顶洗车";
+    UIFont *jindingFont            = [UIFont systemFontOfSize:10];
+    UILabel *jindingLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:jindingString font:jindingFont] font:jindingFont text:jindingString isCenter:NO];
+    jindingLabel.textColor         = [UIColor blackColor];
+    jindingLabel.bottom            = titleNameLabel.bottom;;
+    jindingLabel.left              = titleNameLabel.right+Main_Screen_Width*5/375;
     
-    UILabel *scoreLab = [[UILabel alloc] init];
-    scoreLab.text = [NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
-    scoreLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
-    [bannerView addSubview:scoreLab];
     
-    UILabel *invalidLab = [[UILabel alloc] init];
-    invalidLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
-    invalidLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
-    [bannerView addSubview:invalidLab];
+    NSString *priceString        = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+    UIFont *priceFont            = [UIFont systemFontOfSize:14];
+    UILabel *priceLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:priceString font:priceFont] font:priceFont text:priceString isCenter:NO];
+    priceLabel.textColor         = [UIColor blackColor];
+    priceLabel.top               = titleNameLabel.bottom +Main_Screen_Height*10/667;
+    priceLabel.left              = titleNameLabel.left;
     
-    UILabel *introValueLab = [[UILabel alloc] init];
-    introValueLab.text = @"尊享超值价";
-    introValueLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    introValueLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
-//    [bannerView addSubview:introValueLab];
     
-    UILabel *priceLab = [[UILabel alloc] init];
-    priceLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
-    priceLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    [bannerView addSubview:priceLab];
-    priceLab.hidden = YES;
     
-    UILabel *invalidLab2 = [[UILabel alloc] init];
-    invalidLab2.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
-    invalidLab2.textColor = [UIColor colorFromHex:@"#ffffff"];
-    invalidLab2.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
-    [bannerView addSubview:invalidLab2];
+    NSString *dateString        = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
+    UIFont *dateFont            = [UIFont systemFontOfSize:14];
+    UILabel *dateLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:dateString font:dateFont] font:dateFont text:dateString isCenter:NO];
+    dateLabel.textColor         = [UIColor colorFromHex:@"#999999"];
+    dateLabel.bottom            = containImageView.bottom -Main_Screen_Height*20/667;
+    dateLabel.left              = titleNameLabel.left;
     
-    //约束
-    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(containImageView).mas_offset(20*Main_Screen_Height/667);
-        make.right.equalTo(containImageView).mas_offset(12*Main_Screen_Height/667);
-    }];
     
-    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(10*Main_Screen_Height/667);
-        make.bottom.equalTo(cardNameLab);
-    }];
-    
-    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(cardNameLab.mas_bottom).mas_offset(16*Main_Screen_Height/667);
-        make.leading.equalTo(cardNameLab);
-    }];
-//
-//    [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(timesLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+//    UILabel *cardNameLab = [[UILabel alloc] init];
+//    cardNameLab.text = card.CardName;
+//    cardNameLab.font = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
+////    [bannerView addSubview:cardNameLab];
+////    cardNameLab.hidden = YES;
+//    
+//    UILabel *cardtagLab = [[UILabel alloc] init];
+//    cardtagLab.text = @"金顶洗车";
+//    cardtagLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+////    [bannerView addSubview:cardtagLab];
+//    
+//    UILabel *timesLab = [[UILabel alloc] init];
+//    timesLab.text = [NSString stringWithFormat:@"免费扫码洗车%ld次",card.CardCount];
+//    timesLab.textColor = [UIColor colorFromHex:@"#999999"];
+//    timesLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+//    [bannerView addSubview:timesLab];
+//    
+//    UILabel *scoreLab = [[UILabel alloc] init];
+//    scoreLab.text = [NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
+//    scoreLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
+//    [bannerView addSubview:scoreLab];
+//    
+//    UILabel *invalidLab = [[UILabel alloc] init];
+//    invalidLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+//    invalidLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
+//    [bannerView addSubview:invalidLab];
+//    
+//    UILabel *introValueLab = [[UILabel alloc] init];
+//    introValueLab.text = @"尊享超值价";
+//    introValueLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+//    introValueLab.font = [UIFont systemFontOfSize:10*Main_Screen_Height/667];
+////    [bannerView addSubview:introValueLab];
+//    
+//    UILabel *priceLab = [[UILabel alloc] init];
+//    priceLab.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+//    priceLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+//    [bannerView addSubview:priceLab];
+//    priceLab.hidden = YES;
+//    
+//    UILabel *invalidLab2 = [[UILabel alloc] init];
+//    invalidLab2.text = [NSString stringWithFormat:@"有效期%ld天",card.ExpiredDay];
+//    invalidLab2.textColor = [UIColor colorFromHex:@"#ffffff"];
+//    invalidLab2.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+//    [bannerView addSubview:invalidLab2];
+//    
+//    //约束
+//    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(containImageView).mas_offset(20*Main_Screen_Height/667);
+//        make.right.equalTo(containImageView).mas_offset(12*Main_Screen_Height/667);
+//    }];
+//    
+//    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(10*Main_Screen_Height/667);
+//        make.bottom.equalTo(cardNameLab);
+//    }];
+//    
+//    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(cardNameLab.mas_bottom).mas_offset(16*Main_Screen_Height/667);
+//        make.leading.equalTo(cardNameLab);
+//    }];
+////
+////    [scoreLab mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.top.equalTo(timesLab.mas_bottom).mas_offset(12*Main_Screen_Height/667);
+////        make.leading.equalTo(cardNameLab);
+////    }];
+////    
+////    [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.top.equalTo(scoreLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
+////        make.leading.equalTo(cardNameLab);
+////    }];
+//    
+////    [introValueLab mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.top.equalTo(invalidLab.mas_bottom).mas_offset(25*Main_Screen_Height/667);
+////        make.leading.equalTo(cardNameLab);
+////    }];
+////    
+//    [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
 //        make.leading.equalTo(cardNameLab);
 //    }];
 //    
-//    [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(scoreLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
-//        make.leading.equalTo(cardNameLab);
-//    }];
-    
-//    [introValueLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(invalidLab.mas_bottom).mas_offset(25*Main_Screen_Height/667);
-//        make.leading.equalTo(cardNameLab);
+//    [invalidLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
+//        make.bottom.equalTo(containImageView).mas_offset(-18*Main_Screen_Height/667);
 //    }];
 //    
-    [priceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(8*Main_Screen_Height/667);
-        make.leading.equalTo(cardNameLab);
-    }];
-    
-    [invalidLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
-        make.bottom.equalTo(containImageView).mas_offset(-18*Main_Screen_Height/667);
-    }];
-    
-    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(invalidLab2.mas_top).mas_offset(0*Main_Screen_Height/667);
-        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
-    }];
+//    [timesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(invalidLab2.mas_top).mas_offset(0*Main_Screen_Height/667);
+//        make.right.equalTo(containImageView.mas_right).mas_offset(-12*Main_Screen_Height/667);
+//    }];
     
     return bannerView;
 }

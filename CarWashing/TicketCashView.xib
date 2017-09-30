@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,7 +60,7 @@
                         <constraint firstAttribute="height" constant="21" id="3Mr-GY-iVm"/>
                         <constraint firstAttribute="width" constant="21" id="NEQ-0t-jKS"/>
                     </constraints>
-                    <state key="normal" image="xaunzhong"/>
+                    <state key="normal" image="xfjlxaunzhong"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8v7-WI-2dV">
                     <rect key="frame" x="0.0" y="107.5" width="375" height="0.5"/>
@@ -132,6 +132,6 @@
     </objects>
     <resources>
         <image name="weixuanzhong" width="21" height="21"/>
-        <image name="xaunzhong" width="21" height="21"/>
+        <image name="xfjlxaunzhong" width="16" height="16"/>
     </resources>
 </document>

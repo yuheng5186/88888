@@ -46,7 +46,7 @@
     
     if (sender.selected) {
         
-        [sender setImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateSelected];
+        [sender setImage:[UIImage imageNamed:@"xfjlxaunzhong"] forState:UIControlStateSelected];
     }
     
     sender.selected = !sender.selected;

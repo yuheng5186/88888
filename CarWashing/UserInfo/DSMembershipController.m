@@ -355,19 +355,22 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
     
-    if(newcard.CardType == 1)
-    {
-        changeCell.backImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if(newcard.CardType == 2)
-    {
-        changeCell.backImgV.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if(newcard.CardType == 3)
-    {
-        changeCell.backImgV.image = [UIImage imageNamed:@"qw_cika"];
-    }else if(newcard.CardType == 4)
-    {
-        changeCell.backImgV.image = [UIImage imageNamed:@"qw_nianka"];
-    }
+    
+    changeCell.backImgV.image = [UIImage imageNamed:@"bg_card"];
+
+//    if(newcard.CardType == 1)
+//    {
+//        changeCell.backImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+//    }else if(newcard.CardType == 2)
+//    {
+//        changeCell.backImgV.image = [UIImage imageNamed:@"qw_yueka"];
+//    }else if(newcard.CardType == 3)
+//    {
+//        changeCell.backImgV.image = [UIImage imageNamed:@"qw_cika"];
+//    }else if(newcard.CardType == 4)
+//    {
+//        changeCell.backImgV.image = [UIImage imageNamed:@"qw_nianka"];
+//    }
     changeCell.introLab.text=[NSString stringWithFormat:@"免费扫码洗车%ld次",newcard.CardCount];
     changeCell.nameLab.text = newcard.CardName;
     changeCell.scoreLab.text = [NSString stringWithFormat:@"%ld积分",newcard.Integralnum];

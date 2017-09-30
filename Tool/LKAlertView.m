@@ -98,12 +98,9 @@
         [UIView animateWithDuration:0.2 animations:^{
             button.alpha = 0.3;
         }];
-        
         float alertViewWidth = self.width*0.76;
-        
         UILabel *messageLabel = [UIUtil getLabelMutiLineWithFrame:CGRectMake(0, 0, alertViewWidth-18*2, 0) font:[UIFont systemFontOfSize:18] text:textAlignmentLeftmessage isCenter:NO color:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]];
         float height = 26*2+messageLabel.height+46;
-        
         UILabel *titleLabel;
         if (title.length > 0) {
             titleLabel = [UIUtil getLabelMutiLineWithFrame:CGRectMake(0, 0, alertViewWidth-18*2, 0) font:[UIFont boldSystemFontOfSize:20] text:title isCenter:YES color:[UIColor blackColor]];

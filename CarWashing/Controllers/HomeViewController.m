@@ -870,7 +870,6 @@
             return backView;
         }else{
             return [UILabel new];
-            
         }
         
     }

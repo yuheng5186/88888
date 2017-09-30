@@ -269,7 +269,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     UIButton *buyButton = [[UIButton alloc] init];
     [buyButton setTitle:@"现在购买" forState:UIControlStateNormal];
     [buyButton setTintColor:[UIColor colorFromHex:@"#ffffff"]];
-    buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    buyButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 20*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didCickBuyButton) forControlEvents:UIControlEventTouchUpInside];

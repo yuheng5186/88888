@@ -84,7 +84,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     self.navigationController.navigationBar.hidden = YES;
     self.areastr=@" ";
-   self.citystr=@" ";
+    self.citystr=@" ";
     [self setSearchMenu];
     
     

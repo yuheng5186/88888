@@ -187,7 +187,7 @@
     titleLabel.centerX          = logoImageView.centerX;
     titleLabel.top              = logoImageView.bottom +Main_Screen_Height*12/667;
     
-    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"1506759148"];
+    self.bigImageView   = [UIUtil drawCustomImgViewInView:titleView frame:CGRectMake(0, 0, Main_Screen_Width*160/375, Main_Screen_Height*160/667) imageName:@"jindingerweima"];
     self.bigImageView.top            = titleLabel.bottom +Main_Screen_Height*28/667;
     self.bigImageView.centerX        = titleView.size.width/2;
     self.bigImageView.userInteractionEnabled    = YES;
@@ -258,7 +258,7 @@
         
     }else{
         
-        NSString * str = @"http://feriniya.com/appshow/appdown.html";
+        NSString * str = @"http://120.78.48.105/appshow/appdown.html";
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
     }

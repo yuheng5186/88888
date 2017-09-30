@@ -510,7 +510,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
-    [PhoneHelper dial: @"4006979558"];
+    [PhoneHelper dial: @"0532-58698831"];
 //    NSString *message = @"是否拨打商家电话";
 //    NSString *title = @"";
 //    [self showAlertWithTitle:title message:message];
@@ -600,7 +600,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         NSInteger oldRow = [self.lastPath row];
         
         if (row == oldRow && self.lastPath != nil) {
-            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xfjlxaunzhong"] forState:UIControlStateNormal];
         }else{
             
             [businessDetailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];
@@ -687,7 +687,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
         if (newRow != oldRow) {
             self.detailCell = [tableView cellForRowAtIndexPath:indexPath];
             
-            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            [self.detailCell.stateButton setBackgroundImage:[UIImage imageNamed:@"xfjlxaunzhong"] forState:UIControlStateNormal];
             
             self.detailCell = [tableView cellForRowAtIndexPath:self.lastPath];
             

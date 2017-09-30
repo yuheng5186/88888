@@ -482,7 +482,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
         if (newRow != oldRow) {
             self.seleCell = [tableView cellForRowAtIndexPath:indexPath];
             
-            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            [self.seleCell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xfjlxaunzhong"] forState:UIControlStateNormal];
             
             self.seleCell = [tableView cellForRowAtIndexPath:self.lastPath];
             

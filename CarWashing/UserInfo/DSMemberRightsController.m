@@ -104,7 +104,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     NSString *membershipName              = @"普通会员";
     UIFont *membershipNameFont            = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     membershipNameLabel          = [UIUtil drawLabelInView:upView frame:[UIUtil textRect:membershipName font:membershipNameFont] font:membershipNameFont text:membershipName isCenter:NO];
-    membershipNameLabel.textColor         = [UIColor colorFromHex:@"#ffffff"];
+    membershipNameLabel.textColor         = [UIColor colorFromHex:@"#999999"];
     membershipNameLabel.top               = membershipImageView.bottom +Main_Screen_Height*10/667;
     membershipNameLabel.centerX           = membershipImageView.centerX;
     

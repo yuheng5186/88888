@@ -648,7 +648,7 @@
         }else if (indexPath.row == 1){
         
             cell.imageView.image        = [UIImage imageNamed:@"wwode-kaquan"];
-            cell.textLabel.text         = @"我的卡券";
+            cell.textLabel.text         = @"我的卡包";
             
         }else{
 

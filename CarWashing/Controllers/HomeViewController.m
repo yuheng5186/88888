@@ -204,7 +204,7 @@
      [self setupRefresh];
     [self createHeaderView];
     
-    [self createNavTitleView];
+//    [self createNavTitleView];
     
     
    

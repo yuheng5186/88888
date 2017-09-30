@@ -122,7 +122,7 @@
 //        default:
 //            break;
 //    }
-    return 3;
+    return 2;
     
 }
 
@@ -144,16 +144,19 @@
     cell.textLabel.font         = [UIFont systemFontOfSize:15];
     
     if (indexPath.row == 0) {
-        cell.textLabel.text     = @"密码管理";
+//        cell.textLabel.text     = @"密码管理";
+        cell.textLabel.text     = @"关于金顶";
 
 
     }else if (indexPath.row == 1){
     
-        cell.textLabel.text     = @"关于金顶";
+//        cell.textLabel.text     = @"关于金顶";
+        cell.textLabel.text     = @"给我评分";
+
 
     }else {
     
-        cell.textLabel.text     = @"给我评分";
+//        cell.textLabel.text     = @"给我评分";
     }
     
 //    if (indexPath.section == 0) {
@@ -187,21 +190,21 @@
     
     if (indexPath.row == 0) {
         
-        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
-        passwordController.hidesBottomBarWhenPushed      = YES;
-        [self.navigationController pushViewController:passwordController animated:YES];
-
-        
-    }else if (indexPath.row == 1){
+//        DSPasswordController *passwordController        = [[DSPasswordController alloc]init];
+//        passwordController.hidesBottomBarWhenPushed      = YES;
+//        [self.navigationController pushViewController:passwordController animated:YES];
         DSAboutController *aboutController             = [[DSAboutController alloc]init];
         aboutController.hidesBottomBarWhenPushed        = YES;
         [self.navigationController pushViewController:aboutController animated:YES];
+        
+    }else if (indexPath.row == 1){
 
+        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1291609168&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
     }else {
     
-        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1291609168&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
 
     }
     

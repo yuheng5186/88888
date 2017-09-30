@@ -41,24 +41,25 @@
     
 //    ticketView.CardName.text = self.card.CardName;
     
-    if(self.card.CardType == 1)
-    {
-        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if(self.card.CardType == 2)
-    {
-        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if(self.card.CardType == 3)
-    {
-        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_cika"];
-    }else if(self.card.CardType == 4)
-    {
-        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_nianka"];
-    }
-    
+    ticketView.BackImgV.image = [UIImage imageNamed:@"bg_card"];
+
+//    if(self.card.CardType == 1)
+//    {
+//        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+//    }else if(self.card.CardType == 2)
+//    {
+//        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_yueka"];
+//    }else if(self.card.CardType == 3)
+//    {
+//        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_cika"];
+//    }else if(self.card.CardType == 4)
+//    {
+//        ticketView.BackImgV.image = [UIImage imageNamed:@"qw_nianka"];
+//    }
     
     
     ticketView.ScoreLabel.text = [NSString stringWithFormat:@"%ld积分",self.card.Integralnum];
-    
+
     [upView addSubview:ticketView];
     
     UIButton *exchangeButton = [UIUtil drawDefaultButton:upView title:[NSString stringWithFormat:@"%ld积分兑换",self.card.Integralnum] target:self action:@selector(didClickExhangeButton:)];

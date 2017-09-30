@@ -339,11 +339,12 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
 #pragma mark - 点击购买
 - (void)didCickBuyButton {
 
-    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
-    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
-    payCardVC.hidesBottomBarWhenPushed = YES;
-    payCardVC.choosecard = card;
-    [self.navigationController pushViewController:payCardVC animated:YES];
+    
+//    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
+//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+//    payCardVC.hidesBottomBarWhenPushed = YES;
+//    payCardVC.choosecard = card;
+//    [self.navigationController pushViewController:payCardVC animated:YES];
 }
 
 

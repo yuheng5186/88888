@@ -807,7 +807,7 @@
 //    }
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
-            return Main_Screen_Height*110/667;
+            return Main_Screen_Height*150/667;
         }else{
             return 0.01;
             
@@ -816,7 +816,10 @@
        
             if (section==0) {
                 return Main_Screen_Height*110/667;
-            }else{
+            }else if (section==self.newrc.recList.count-1){
+                return 40;
+            }
+            else{
                 return 0.01;
                 
             }
@@ -844,30 +847,54 @@
 //         return [UILabel new];
 //     
 //     }
-    UIView * backView=[[UIView alloc]init];
-    UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
-    lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
-    [backView addSubview:lineview];
-    UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
-    imageview.userInteractionEnabled=YES;
-    imageview.contentMode=UIViewContentModeScaleAspectFill;
-    imageview.image=[UIImage imageNamed:@"banka_banner"];
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-    [imageview addGestureRecognizer:tap];
-    [backView addSubview:imageview];
+    
+   
     
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
+            UIView * backView=[[UIView alloc]init];
+            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
+            lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
+            [backView addSubview:lineview];
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+            imageview.userInteractionEnabled=YES;
+            imageview.contentMode=UIViewContentModeScaleAspectFill;
+            imageview.image=[UIImage imageNamed:@"banka_banner"];
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+            [imageview addGestureRecognizer:tap];
             
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+            footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+            footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+            footerview.textAlignment=NSTextAlignmentCenter;
+            footerview.text=@"没有更多啦";
+            [backView addSubview:footerview];
+            [backView addSubview:imageview];
             return backView;
         }else{
             return [UILabel new];
-            
         }
     }else{
-        
         if (section==0) {
+            UIView * backView=[[UIView alloc]init];
+            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
+            lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
+            [backView addSubview:lineview];
+            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+            imageview.userInteractionEnabled=YES;
+            imageview.contentMode=UIViewContentModeScaleAspectFill;
+            imageview.image=[UIImage imageNamed:@"banka_banner"];
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+            [imageview addGestureRecognizer:tap];
+            [backView addSubview:imageview];
             return backView;
+        }else if (section==self.newrc.recList.count-1){
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+            footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+            footerview.textColor         = [UIColor colorFromHex:@"#999999"];
+            footerview.textAlignment=NSTextAlignmentCenter;
+            footerview.text=@"没有更多啦";
+            return footerview;
         }else{
             return [UILabel new];
         }

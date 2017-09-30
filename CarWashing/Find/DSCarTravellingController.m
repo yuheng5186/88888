@@ -53,7 +53,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ActivityListCell" bundle:nil] forCellReuseIdentifier:@"ActivityListCell"];
     
     self.tableView.rowHeight        = Main_Screen_Height*205/667;
-   
+    
     [self.contentView addSubview:self.tableView];
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -122,7 +122,7 @@
     [cell.goodButton addTarget:self action:@selector(addSupport:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -237,9 +237,9 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-            self.page++;
-            _otherArray = [NSMutableArray new];
-            [self requesetCarClubNewsmore];
+        self.page++;
+        _otherArray = [NSMutableArray new];
+        [self requesetCarClubNewsmore];
         // 刷新表格
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     });
@@ -263,9 +263,14 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
+            
+            if (arr.count == 0) {
+                [self.view showInfo:@"当前暂无更新内容" autoHidden:YES interval:3];
+            }
+            
             for(NSDictionary *dic in arr)
             {
                 CarClubNews *news = [[CarClubNews alloc]init];
@@ -349,7 +354,7 @@
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
-         self.page--;
+        self.page--;
     }];
     
 }
@@ -368,13 +373,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

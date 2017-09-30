@@ -208,7 +208,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     }];
     
     UIButton *bottomPayButton = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width - 136*Main_Screen_Height/667, 0, 136*Main_Screen_Height/667, 60*Main_Screen_Height/667)];
-    bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    bottomPayButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     [bottomPayButton setTitle:@"立即支付" forState:UIControlStateNormal];
     [bottomPayButton addTarget:self action:@selector(lijizhifu) forControlEvents:UIControlEventTouchUpInside];
     bottomPayButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
@@ -288,7 +288,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         cell.textLabel.text  = @"卡名称";
         cell.detailTextLabel.text = self.choosecard.CardName;
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -319,7 +319,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         NSDate *newDate = [datenow dateByAddingTimeInterval:60 * 60 * 24 * self.choosecard.ExpiredDay];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"即日起至%@",[formatter stringFromDate:newDate]];
         
-        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#0161a1"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#febb02"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         
         return cell;
@@ -372,7 +372,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         NSInteger oldRow = [self.lastPath row];
         
         if (row == oldRow && self.lastPath != nil) {
-            [paycell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xaunzhong"] forState:UIControlStateNormal];
+            [paycell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"xfjlxaunzhong"] forState:UIControlStateNormal];
         }else{
             
             [paycell.payWayBtn setBackgroundImage:[UIImage imageNamed:@"weixuanzhong"] forState:UIControlStateNormal];

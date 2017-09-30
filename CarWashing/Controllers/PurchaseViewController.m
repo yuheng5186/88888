@@ -91,7 +91,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.navigationView.hidden  = YES;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-
+    self.contentView.backgroundColor    = [UIColor whiteColor];
 
 }
 
@@ -105,7 +105,11 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     
     self.area = [UdStorage getObjectforKey:@"locationCity"]==nil?@"青岛市":[UdStorage getObjectforKey:@"locationCity"];
-    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#0161a1"]];
+    UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#febb02"]];
+    UIImageView *imageView  = [[UIImageView alloc]initWithFrame:upView.frame];
+    imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+    [upView addSubview:imageView];
+    
     upView.top                      = 0;
     
     NSString *titleName              = @"购卡";
@@ -263,13 +267,13 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
     introLabelThree.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     introLabelThree.textAlignment = NSTextAlignmentCenter;
-    introLabelThree.textColor = [UIColor colorFromHex:@"#0161a1"];
+    introLabelThree.textColor = [UIColor colorFromHex:@"#febb02"];
     [_middleview addSubview:introLabelThree];
     
     UIButton *buyButton = [[UIButton alloc] init];
     [buyButton setTitle:@"现在购买" forState:UIControlStateNormal];
     [buyButton setTintColor:[UIColor colorFromHex:@"#ffffff"]];
-    buyButton.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
+    buyButton.backgroundColor = [UIColor colorFromHex:@"#febb02"];
     buyButton.titleLabel.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     buyButton.layer.cornerRadius = 20*Main_Screen_Height/667;
     [buyButton addTarget:self action:@selector(didCickBuyButton) forControlEvents:UIControlEventTouchUpInside];
@@ -411,6 +415,9 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     }else if(card.CardType == 4)
     {
         containImageView.image = [UIImage imageNamed:@"qw_nianka"];
+    }else {
+    
+        containImageView.image  = [UIImage imageNamed:@"bg_card"];
     }
     
     

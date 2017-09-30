@@ -72,7 +72,7 @@
     
     if([_NewsArray count] == 0)
     {
-       return 0;
+        return 0;
     }
     else
         return [_NewsArray count];
@@ -105,17 +105,17 @@
     CarClubNews *news = [[CarClubNews alloc]init];
     
     news = [_NewsArray objectAtIndex:indexPath.section];
-     NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
+    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
     [cell.activityImageView sd_setImageWithURL:[NSURL URLWithString:ImageURL] placeholderImage:[UIImage imageNamed:@""]];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
-//        NSURL *url=[NSURL URLWithString:ImageURL];
-//        NSData *data=[NSData dataWithContentsOfURL:url];
-//        UIImage *img=[UIImage imageWithData:data];
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            [cell.activityImageView setImage:img];
-//        });
-//    });
+    //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    //        NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,news.IndexImg];
+    //        NSURL *url=[NSURL URLWithString:ImageURL];
+    //        NSData *data=[NSData dataWithContentsOfURL:url];
+    //        UIImage *img=[UIImage imageWithData:data];
+    //        dispatch_sync(dispatch_get_main_queue(), ^{
+    //            [cell.activityImageView setImage:img];
+    //        });
+    //    });
     cell.activityTitleLabel.text    = news.ActivityName;
     cell.activityTimeLabel.text     = news.ActDate;
     cell.sayNumberLabel.text        = [NSString stringWithFormat:@"%ld",news.CommentCount];
@@ -136,7 +136,7 @@
     
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,20 +157,20 @@
 -(void)addSupport:(UIButton *)button
 {
     CarClubNews *model=(CarClubNews *)_NewsArray[button.tag];
-//    UIButton *button = (UIButton *)sender;
+    //    UIButton *button = (UIButton *)sender;
     if (button.selected == NO) {
         [button setImage:[UIImage imageNamed:@"xiaohongshou"] forState:UIControlStateNormal];
-    //        self.goodNumberLabel.text                     = @"1289";
-    //        [self.view showInfo:@"点赞成功!" autoHidden:YES];
+        //        self.goodNumberLabel.text                     = @"1289";
+        //        [self.view showInfo:@"点赞成功!" autoHidden:YES];
         [self addNewsSupportTypeid:[NSString stringWithFormat:@"%ld",model.ActivityCode] andSupType:@"1"];
     }else {
         [button setImage:[UIImage imageNamed:@"huodongxiangqingzan"] forState:UIControlStateNormal];
-    //        self.goodNumberLabel.text                     = @"1288";
-    //        [self.view showInfo:@"取消点赞!" autoHidden:YES];
+        //        self.goodNumberLabel.text                     = @"1288";
+        //        [self.view showInfo:@"取消点赞!" autoHidden:YES];
         [self addNewsSupportTypeid:[NSString stringWithFormat:@"%ld",model.ActivityCode] andSupType:@"1"];
-    
+        
     }
-        button.selected = !button.selected;
+    button.selected = !button.selected;
 }
 
 -(void)addNewsSupportTypeid:(NSString *)SupTypeCodestr andSupType:(NSString *)SupTypestr{
@@ -262,7 +262,7 @@
             self.page++;
             _otherArray = [NSMutableArray new];
             [self requesetCarClubNewsmore];
-    
+            
         }
         
         
@@ -294,9 +294,13 @@
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             _NewsArray = [[NSMutableArray alloc]init];
-//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
+            if (arr.count == 0) {
+                [self.view showInfo:@"当前暂无更新内容" autoHidden:YES interval:3];
+            }
+            
             for(NSDictionary *dic in arr)
             {
                 CarClubNews *news = [[CarClubNews alloc]init];
@@ -319,7 +323,7 @@
         [self.tableView.mj_header endRefreshing];
         [_tableView reloadData];
     }];
-
+    
 }
 
 -(void)requesetCarClubNewsmore
@@ -338,7 +342,7 @@
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-//            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
+            //            [self.view showInfo:@"获取数据成功" autoHidden:YES interval:2];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             for(NSDictionary *dic in arr)
@@ -382,7 +386,7 @@
     } fail:^(NSError *error) {
         [self.view showInfo:@"获取数据失败" autoHidden:YES interval:2];
         [self.tableView.mj_header endRefreshing];
-         self.page--;
+        self.page--;
     }];
     
 }
@@ -401,13 +405,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

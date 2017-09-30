@@ -824,19 +824,13 @@
         self.tabBarController.tabBar.hidden = YES;
 
         [self.activityView show];
-        
     }
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    
-    NSLog(@"%ld",APPDELEGATE.currentUser.UserScore);
-    NSLog(@"%ld",(long)APPDELEGATE.currentUser.Level_id);
-
-    [self.tableView reloadData];
+    [super viewWillAppear:animated];
+    [self.salerListView reloadData];
     
 }
 

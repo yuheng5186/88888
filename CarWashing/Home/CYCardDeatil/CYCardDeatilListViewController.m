@@ -232,7 +232,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)setupUI {
     
     [self.rechargeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).mas_offset(Main_Screen_Height*64/667);
+        make.top.equalTo(self.view.mas_top).mas_offset(64);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
         make.height.mas_equalTo(self.view.height-Main_Screen_Height*64/667);

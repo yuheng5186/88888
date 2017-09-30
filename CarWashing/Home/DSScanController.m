@@ -20,7 +20,9 @@
 #import "AFNetworkingTool.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
+#import "Record.h"
 #import "ScanCode.h"
+#import "CYModel.h"
 
 #import "DSStartWashingController.h"
 
@@ -465,31 +467,18 @@
 #pragma mark-> 获取扫描区域的比例关系
 -(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
 {
-    
     CGFloat x,y,width,height;
-    
     x = (CGRectGetHeight(readerViewBounds)-CGRectGetHeight(rect))/2/CGRectGetHeight(readerViewBounds);
     y = (CGRectGetWidth(readerViewBounds)-CGRectGetWidth(rect))/2/CGRectGetWidth(readerViewBounds);
     width = CGRectGetHeight(rect)/CGRectGetHeight(readerViewBounds);
     height = CGRectGetWidth(rect)/CGRectGetWidth(readerViewBounds);
-    
     return CGRectMake(x, y, width, height);
+}
+- (void)didReceiveMemoryWarning {
+    
+    [super didReceiveMemoryWarning];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -181,6 +181,7 @@
 		18B803851F1DA2A300B52432 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18B803831F1DA2A300B52432 /* LaunchScreen.storyboard */; };
 		18B803901F1DA2A300B52432 /* CarWashingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8038F1F1DA2A300B52432 /* CarWashingTests.m */; };
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
+		18D0EFF11F7F936100D9D37A /* CYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D0EFF01F7F936100D9D37A /* CYModel.m */; };
 		18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */; };
 		18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */; };
 		18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */; };
@@ -644,6 +645,8 @@
 		18B803961F1DA2A300B52432 /* CarWashingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarWashingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarWashingUITests.m; sourceTree = "<group>"; };
 		18B8039C1F1DA2A300B52432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D0EFEF1F7F936100D9D37A /* CYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYModel.h; sourceTree = "<group>"; };
+		18D0EFF01F7F936100D9D37A /* CYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYModel.m; sourceTree = "<group>"; };
 		18D815811F79ECA800A1FA04 /* CYCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCardTableViewCell.h; sourceTree = "<group>"; };
 		18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCardTableViewCell.m; sourceTree = "<group>"; };
 		18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -1264,6 +1267,8 @@
 		18322AAC1F4AD181003ABB7B /* model */ = {
 			isa = PBXGroup;
 			children = (
+				18D0EFEF1F7F936100D9D37A /* CYModel.h */,
+				18D0EFF01F7F936100D9D37A /* CYModel.m */,
 				18322AAD1F4AD1C7003ABB7B /* Carcircle.h */,
 				18322AAE1F4AD1C7003ABB7B /* Carcircle.m */,
 				18322AC11F4EC157003ABB7B /* CardBag.h */,
@@ -2324,6 +2329,7 @@
 				5016723B1F29809200384186 /* UIView+HQCategory.m in Sources */,
 				5016720C1F297A3500384186 /* ShopCategoryView.m in Sources */,
 				50E2EE831F1F4D3C00FAF130 /* UIView+YZCategory.m in Sources */,
+				18D0EFF11F7F936100D9D37A /* CYModel.m in Sources */,
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				0401E9021F4ED6E900F0CA79 /* EAIntroView.m in Sources */,

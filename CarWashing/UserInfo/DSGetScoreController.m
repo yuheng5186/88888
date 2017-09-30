@@ -34,9 +34,9 @@
 //    [self openAppWithIdentifier:@"id940489630"];
 //    [self openAppWithIdentifier:@"1284053624"];
 
-//    [self  gotoAppStorePageRaisal:@"1284053624"];
+//    [self  gotoAppStorePageRaisal:@"1291609168"];
     
-    NSString *str = [NSString stringWithFormat:  @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d",1284053624];
+    NSString *str = [NSString stringWithFormat:  @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d",1291609168];
 //    NSString *str =@"https://itunes.apple.com/cn/app/id1284053624?mt=8";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
                      

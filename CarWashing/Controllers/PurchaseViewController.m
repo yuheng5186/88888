@@ -403,22 +403,26 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     UIImageView *containImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 330*Main_Screen_Height/667, 190*Main_Screen_Height/667)];
 //    containImageView.contentMode = UIViewContentModeScaleAspectFit;
     Card *card = (Card *)[_CardArray objectAtIndex:index];
-    if(card.CardType == 1)
-    {
-       containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if(card.CardType == 2)
-    {
-        containImageView.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if(card.CardType == 3)
-    {
-        containImageView.image = [UIImage imageNamed:@"qw_cika"];
-    }else if(card.CardType == 4)
-    {
-        containImageView.image = [UIImage imageNamed:@"qw_nianka"];
-    }else {
     
-        containImageView.image  = [UIImage imageNamed:@"bg_card"];
-    }
+    containImageView.image  = [UIImage imageNamed:@"bg_card"];
+
+    
+//    if(card.CardType == 1)
+//    {
+//       containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
+//    }else if(card.CardType == 2)
+//    {
+//        containImageView.image = [UIImage imageNamed:@"qw_yueka"];
+//    }else if(card.CardType == 3)
+//    {
+//        containImageView.image = [UIImage imageNamed:@"qw_cika"];
+//    }else if(card.CardType == 4)
+//    {
+//        containImageView.image = [UIImage imageNamed:@"qw_nianka"];
+//    }else {
+//    
+//        containImageView.image  = [UIImage imageNamed:@"bg_card"];
+//    }
     
     
 //    [containImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
@@ -442,7 +446,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     UILabel *timesLab = [[UILabel alloc] init];
     timesLab.text = [NSString stringWithFormat:@"免费扫码洗车%ld次",card.CardCount];
-    timesLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    timesLab.textColor = [UIColor colorFromHex:@"#999999"];
     timesLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [bannerView addSubview:timesLab];
     

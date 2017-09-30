@@ -200,7 +200,7 @@
 
     }else {
     
-        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1284053624&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
+        NSString *str = [NSString stringWithFormat:  @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1291609168&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
     }

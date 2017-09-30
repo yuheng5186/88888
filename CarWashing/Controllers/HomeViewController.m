@@ -115,7 +115,7 @@
 
 -(void)hsUpdateApp{
     __weak __typeof(&*self)weakSelf = self;
-    [HSUpdateApp hs_updateWithAPPID:@"1284053624" block:^(NSString *currentVersion, NSString *storeVersion, NSString *openUrl, BOOL isUpdate) {
+    [HSUpdateApp hs_updateWithAPPID:@"1291609168" block:^(NSString *currentVersion, NSString *storeVersion, NSString *openUrl, BOOL isUpdate) {
         if (isUpdate == YES) {
             [weakSelf showStoreVersion:storeVersion openUrl:openUrl];
         }
@@ -143,7 +143,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.LocCity=nil;
-    [self startLocation];
+//    [self startLocation];
 
    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];

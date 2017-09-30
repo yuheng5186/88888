@@ -16,14 +16,14 @@
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"我的卡包" Color:[UIColor blackColor]];
+    [self drawTitle:@"我的卡包"];
     
 }
 
 - (void) drawContent
 {
-    self.statusView.backgroundColor     = [UIColor grayColor];
-    self.navigationView.backgroundColor = [UIColor grayColor];
+//    self.statusView.backgroundColor     = [UIColor grayColor];
+//    self.navigationView.backgroundColor = [UIColor grayColor];
     
 }
 

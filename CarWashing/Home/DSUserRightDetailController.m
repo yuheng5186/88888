@@ -172,7 +172,7 @@
     
     
     UILabel *noticeLabel1 = [[UILabel alloc] init];
-    noticeLabel1.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+    noticeLabel1.text = @"1. 下载金顶洗车APP，通过扫码可直接启动洗车机；";
     noticeLabel1.textColor = [UIColor colorFromHex:@"#999999"];
     noticeLabel1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabel1.numberOfLines = 0;
@@ -180,7 +180,7 @@
     
     
     UILabel *noticeLabel2 = [[UILabel alloc] init];
-    noticeLabel2.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+    noticeLabel2.text = @"2. 整个洗车过程请遵照洗车提示和工作人员引导；";
     noticeLabel2.textColor = [UIColor colorFromHex:@"#999999"];
     noticeLabel2.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabel2.numberOfLines = 0;
@@ -188,7 +188,7 @@
     
     
     UILabel *noticeLabel3 = [[UILabel alloc] init];
-    noticeLabel3.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+    noticeLabel3.text = @"3. 此卡请在有效期内使用，不退卡、不转让、不挂失；";
     noticeLabel3.textColor = [UIColor colorFromHex:@"#999999"];
     noticeLabel3.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabel3.numberOfLines = 0;
@@ -196,7 +196,7 @@
     
     
     UILabel *noticeLabel4 = [[UILabel alloc] init];
-    noticeLabel4.text = @"4、此卡可在金顶服务点享受会员优惠待遇，不得与其它优惠同时使用";
+    noticeLabel4.text = @"4. 启动前请确保外置天线、反光镜已经收起，车窗等处于关闭、全车处于隔水状态，自行改装外饰确保不妨碍洗车；";
     noticeLabel4.textColor = [UIColor colorFromHex:@"#999999"];
     noticeLabel4.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabel4.numberOfLines = 0;
@@ -204,7 +204,7 @@
     
     
     UILabel *noticeLabel5 = [[UILabel alloc] init];
-    noticeLabel5.text = @"5、由青岛金顶汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+    noticeLabel5.text = @"5. 请不要在洗车过程中随意上下车，若出现问题或者故障可咨询工作人员或拨打客服电话进行咨询";
     noticeLabel5.textColor = [UIColor colorFromHex:@"#999999"];
     noticeLabel5.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
     noticeLabel5.numberOfLines = 0;

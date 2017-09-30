@@ -409,7 +409,7 @@
         
 
         UILabel *noticeLabelOne = [[UILabel alloc] init];
-        noticeLabelOne.text = @"1、此卡仅限清洗汽车外观，不得购买其它服务项目";
+        noticeLabelOne.text = @"1. 下载金顶洗车APP，通过扫码可直接启动洗车机；";
         noticeLabelOne.numberOfLines = 0;
         noticeLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelOne.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
@@ -430,27 +430,27 @@
         }];
         
         UILabel *noticeLabelTwo = [[UILabel alloc] init];
-        noticeLabelTwo.text = @"2、洗车卡不能兑换现金和转赠与其他人使用";
+        noticeLabelTwo.text = @"2. 整个洗车过程请遵照洗车提示和工作人员引导；";
         noticeLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelTwo.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         self.noticeLabeTwo = noticeLabelTwo;
         [cell.contentView addSubview:self.noticeLabeTwo];
         UILabel *noticeLabelThree = [[UILabel alloc] init];
-        noticeLabelThree.text = @"3、此卡一经售出，概不兑现。不记名，不挂失，不退卡，不补办";
+        noticeLabelThree.text = @"3. 此卡请在有效期内使用，不退卡、不转让、不挂失；";
         noticeLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelThree.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelThree.numberOfLines = 0;
         self.noticeLabelThree = noticeLabelThree;
         [cell.contentView addSubview:self.noticeLabelThree];
         UILabel *noticeLabelFour = [[UILabel alloc] init];
-        noticeLabelFour.text = @"4、此卡可在金顶洗车服务点享受会员优惠待遇，不得与其它优惠同时使用";
+        noticeLabelFour.text = @"4. 启动前请确保外置天线、反光镜已经收起，车窗等处于关闭、全车处于隔水状态，自行改装外饰确保不妨碍洗车；";
         noticeLabelFour.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelFour.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelFour.numberOfLines = 0;
         self.noticeLabelFour = noticeLabelFour;
         [cell.contentView addSubview:self.noticeLabelFour];
         UILabel *noticeLabelFive = [[UILabel alloc] init];
-        noticeLabelFive.text = @"5、由青岛金顶汽车服务有限公司保留此卡法律范围内的最终解释权。VIP热线：4006979558";
+        noticeLabelFive.text = @"5. 请不要在洗车过程中随意上下车，若出现问题或者故障可咨询工作人员或拨打客服电话进行咨询";
         noticeLabelFive.textColor = [UIColor colorFromHex:@"#999999"];
         noticeLabelFive.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
         noticeLabelFive.numberOfLines = 0;

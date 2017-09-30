@@ -285,42 +285,82 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 
     cell.backgroundColor=RGBAA(242, 242, 242, 1.0);
     CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
-        if ([card.CardName isEqualToString:@"年卡"]) {
+    
+//    bg_yiguoqi
+//    bg_yishiyong
+    
+
+        if ([card.CardName isEqualToString:@"体验卡"]) {
             if (card.CardUseState ==1) {//使用中
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_nianka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
             }else  if (card.CardUseState ==2) {//已使用
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_nianka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
             }else  if (card.CardUseState ==3) {//已过期
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_nianka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
             }
-        }else if ([card.CardName isEqualToString:@"次卡"]){
+        }else if ([card.CardName isEqualToString:@"月清洁"]){
             if (card.CardUseState ==1) {//使用中
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_cika"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
             }else  if (card.CardUseState ==2) {//已使用
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_cika"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
             }else  if (card.CardUseState ==3) {//已过期
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_cika"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
             }
-        }else if ([card.CardName isEqualToString:@"体验卡"]){
+        }else if ([card.CardName isEqualToString:@"季无忧"]){
             if (card.CardUseState ==1) {//使用中
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
             }else  if (card.CardUseState ==2) {//已使用
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_tiyanka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
             }else  if (card.CardUseState ==3) {//已过期
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_tiyanka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
             }
-        }else if ([card.CardName isEqualToString:@"月卡"]){
+        }else if ([card.CardName isEqualToString:@"半年洗"]){
             if (card.CardUseState ==1) {//使用中
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yueka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
             }else  if (card.CardUseState ==2) {//已使用
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_yishiyong_yueka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
             }else  if (card.CardUseState ==3) {//已过期
-                cell.backgroundImgV.image = [UIImage imageNamed:@"qw_guoqi_yueka"];
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+            }
+        }else if ([card.CardName isEqualToString:@"年欢洗"]){
+            if (card.CardUseState ==1) {//使用中
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
+            }else  if (card.CardUseState ==2) {//已使用
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+            }else  if (card.CardUseState ==3) {//已过期
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+            }
+        }else if ([card.CardName isEqualToString:@"随意行"]){
+            if (card.CardUseState ==1) {//使用中
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
+            }else  if (card.CardUseState ==2) {//已使用
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+            }else  if (card.CardUseState ==3) {//已过期
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+            }
+        }else if ([card.CardName isEqualToString:@"52洗车"]){
+            if (card.CardUseState ==1) {//使用中
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
+            }else  if (card.CardUseState ==2) {//已使用
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+            }else  if (card.CardUseState ==3) {//已过期
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
+            }
+        }else if ([card.CardName isEqualToString:@"百洗无忧"]){
+            if (card.CardUseState ==1) {//使用中
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_card"];
+            }else  if (card.CardUseState ==2) {//已使用
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yishiyong"];
+            }else  if (card.CardUseState ==3) {//已过期
+                cell.backgroundImgV.image = [UIImage imageNamed:@"bg_yiguoqi"];
             }
         }
-        cell.CardnameLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
     
-        cell.CardTimeLabel.text = [NSString stringWithFormat:@"截止日期: %@",[self DateZhuan:card.ExpEndDates]];
+    
+    
+        cell.CarddesLabel.text = [NSString stringWithFormat:@"免费洗车%ld次",card.CardCount];
+        cell.CardnameLabel.text = card.CardName;
+        cell.CardTimeLabel.text = [NSString stringWithFormat:@"有效期: %@",[self DateZhuan:card.ExpEndDates]];
     
 //        if(card.CardUseState == 2)
 //        {

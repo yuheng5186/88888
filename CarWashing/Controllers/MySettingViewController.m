@@ -69,7 +69,7 @@
         salerListView.backgroundColor = RGBAA(239, 239, 239, 1.0);
         _salerListView = salerListView;
         
-        _headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
+        _headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 210)];
         _headerView.backgroundColor = RGBAA(239, 239, 239, 1.0);
         salerListView.tableHeaderView = _headerView;
         

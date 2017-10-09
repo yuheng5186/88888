@@ -1410,7 +1410,6 @@
 		1853BA311F28A01600B98C7F /* JFCityViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1853BA4C1F28A04C00B98C7F /* JFLocation.h */,
 				1853BA4D1F28A04C00B98C7F /* JFLocation.m */,
 				1853BA371F28A04100B98C7F /* JFButton.h */,
 				1853BA381F28A04100B98C7F /* JFButton.m */,
@@ -1424,6 +1423,7 @@
 				1853BA401F28A04100B98C7F /* JFCityTableViewCell.m */,
 				1853BA411F28A04100B98C7F /* JFCityViewController.h */,
 				1853BA421F28A04100B98C7F /* JFCityViewController.m */,
+				1853BA4C1F28A04C00B98C7F /* JFLocation.h */,
 				1853BA431F28A04100B98C7F /* JFSearchView.h */,
 				1853BA441F28A04100B98C7F /* JFSearchView.m */,
 				1853BA351F28A03500B98C7F /* shop_area.sqlite */,
@@ -2634,6 +2634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = CarWashingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashingTests;
@@ -2646,6 +2647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = CarWashingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashingTests;
@@ -2657,6 +2659,7 @@
 		18B803A61F1DA2A300B52432 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = CarWashingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashingUITests;
@@ -2668,6 +2671,7 @@
 		18B803A71F1DA2A300B52432 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = CarWashingUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiangwai.CarWashingUITests;

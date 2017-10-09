@@ -119,7 +119,7 @@
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStylePlain];
     self.tableView.top              = backgroundImageView.top +Main_Screen_Height*30/667;
     self.tableView.centerX          = backgroundImageView.centerX;
     self.tableView.delegate         = self;

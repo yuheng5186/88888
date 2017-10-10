@@ -4,7 +4,7 @@
 //
 //  Created by Wuxinglin on 2017/7/19.
 //  Copyright © 2017年 DS. All rights reserved.
-//
+
 
 #import "HomeViewController.h"
 #import "SXScrPageView.h"
@@ -125,7 +125,8 @@
 
 
 
--(void)showStoreVersion:(NSString *)storeVersion openUrl:(NSString *)openUrl{
+-(void)showStoreVersion:(NSString *)storeVersion openUrl:(NSString *)openUrl
+{
     UIAlertController *alercConteoller = [UIAlertController alertControllerWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",storeVersion] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionYes = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSURL *url = [NSURL URLWithString:openUrl];
@@ -192,12 +193,16 @@
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO ;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     //    self.tableView.scrollEnabled    = NO;
 //    self.tableView.tableFooterView  = [UIView new];
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0 ;
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     

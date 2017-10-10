@@ -127,6 +127,9 @@
     self.tableView.scrollEnabled    = NO;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor whiteColor];
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     

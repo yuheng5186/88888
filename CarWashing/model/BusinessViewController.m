@@ -27,7 +27,7 @@
 
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
-    
+    //
 }
 
 @property (nonatomic, weak) UITableView *salerListView;

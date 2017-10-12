@@ -74,6 +74,9 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     
     self.earnWayView.delegate = self;
     self.earnWayView.dataSource = self;
+    self.earnWayView.estimatedSectionHeaderHeight = 0;
+    self.earnWayView.estimatedSectionFooterHeight = 0;
+    self.earnWayView.rowHeight = UITableViewAutomaticDimension;
     self.earnWayView.rowHeight = 90*Main_Screen_Height/667;
     [self.earnWayView registerClass:[WayToUpGradeCell class] forCellReuseIdentifier:id_earnViewCell];
     

@@ -70,6 +70,7 @@
     }
     else
     {
+        NSLog(@"---%@",self.nextdic);
         self.GradeDetailDic = [[NSMutableDictionary alloc]initWithDictionary:self.nextdic];
         [self UpdateUI];
     }
@@ -84,36 +85,37 @@
     [self.view addSubview:containView];
     
     cardImgV = [[UIImageView alloc] init];
-    cardImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
+    cardImgV.image = [UIImage imageNamed:@"bg_card"];
     [containView addSubview:cardImgV];
     
     cardNameLab = [[UILabel alloc] init];
     cardNameLab.text = @"体验卡";
-    cardNameLab.textColor = [UIColor colorFromHex:@"#ffffff"];
-    cardNameLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    cardNameLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
+    cardNameLab.font = [UIFont boldSystemFontOfSize:18*Main_Screen_Height/667];
     [cardImgV addSubview:cardNameLab];
     
     UILabel *cardtagLab = [[UILabel alloc] init];
     cardtagLab.text = @"金顶洗车";
+    cardtagLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     cardtagLab.font = [UIFont systemFontOfSize:12*Main_Screen_Height/667];
     [cardImgV addSubview:cardtagLab];
     
     UILabel *introLab = [[UILabel alloc] init];
     introLab.text = @"扫码洗车服务中使用";
-    introLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    introLab.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     introLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [cardImgV addSubview:introLab];
     
     invalidLab = [[UILabel alloc] init];
-    invalidLab.text = @"截止日期：2017-8-10";
-    invalidLab.textColor = [UIColor colorFromHex:@"#ffffff"];
+    invalidLab.text = @"有效期：2017-8-10";
+    invalidLab.textColor = [UIColor colorFromHex:@"#999999"];
     invalidLab.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
     [cardImgV addSubview:invalidLab];
     
-//    UILabel *brandLab = [[UILabel alloc] init];
-//    brandLab.text = @"金顶洗车";
-//    brandLab.font = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
-//    [cardImgV addSubview:brandLab];
+    //    UILabel *brandLab = [[UILabel alloc] init];
+    //    brandLab.text = @"金顶洗车";
+    //    brandLab.font = [UIFont systemFontOfSize:11*Main_Screen_Height/667];
+    //    [cardImgV addSubview:brandLab];
     
     self.getBtn = [UIUtil drawDefaultButton:containView title:@"立即领取" target:self action:@selector(didClickGetBtn)];
     
@@ -137,31 +139,35 @@
         make.height.mas_equalTo(190*Main_Screen_Height/667);
     }];
     
-//    [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
-//        make.left.equalTo(cardImgV).mas_offset(20*Main_Screen_Height/667);
-//    }];
-//    
-//    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(10*Main_Screen_Height/667);
-//        make.bottom.equalTo(cardNameLab);
-//    }];
     
-//    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(cardNameLab);
-//        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
-//    }];
     
+    //    [brandLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.bottom.equalTo(cardNameLab);
+    //        make.leading.equalTo(cardNameLab.mas_trailing).mas_offset(5*Main_Screen_Height/667);
+    //    }];
+    //invalidLab有效期
     [invalidLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(cardImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.left.equalTo(cardImgV.mas_left).mas_offset(20*Main_Screen_Height/667);
         make.bottom.equalTo(cardImgV).mas_offset(-20*Main_Screen_Height/667);
     }];
     
     [cardNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(invalidLab.mas_top).mas_offset(-1*Main_Screen_Height/667);
-        make.right.equalTo(cardImgV.mas_right).mas_offset(-12*Main_Screen_Height/667);
+        make.top.equalTo(cardImgV.mas_top).mas_offset(20*Main_Screen_Height/667);
+        make.left.equalTo(cardImgV.mas_left).mas_offset(20*Main_Screen_Height/667);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
     }];
-    
+    //金顶洗车
+    [cardtagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardImgV.mas_top).mas_offset(25*Main_Screen_Height/667);
+        make.left.equalTo(cardNameLab.mas_right).mas_offset(-20*Main_Screen_Height/667);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    //扫码洗车服务中使用
+    [introLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardNameLab.mas_bottom).mas_offset(5*Main_Screen_Height/667);
+        make.left.equalTo(cardNameLab.mas_left);
+        make.size.mas_equalTo(CGSizeMake(200, 30));
+    }];
     [self.getBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardImgV.mas_bottom).mas_offset(15*Main_Screen_Height/667);
         make.centerX.equalTo(containView);
@@ -180,16 +186,18 @@
     //noticeView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.noticeView];
     
-//    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(checkCardBtn.mas_bottom);
-//        make.bottom.equalTo(self.view);
-//        make.width.mas_equalTo(Main_Screen_Width);
-//    }];
+    //    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(checkCardBtn.mas_bottom);
+    //        make.bottom.equalTo(self.view);
+    //        make.width.mas_equalTo(Main_Screen_Width);
+    //    }];
     self.noticeView.delegate = self;
     self.noticeView.dataSource = self;
     self.noticeView.estimatedRowHeight = 80;
     self.noticeView.rowHeight = UITableViewAutomaticDimension;
-    
+    self.noticeView.estimatedSectionHeaderHeight = 0;
+    self.noticeView.estimatedSectionFooterHeight = 0;
+    self.noticeView.rowHeight = UITableViewAutomaticDimension;
     self.noticeView.tableHeaderView = containView;
 }
 
@@ -205,7 +213,7 @@
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/CardConfigGradeDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"--%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             
@@ -215,7 +223,7 @@
             self.GradeDetailDic = [dict objectForKey:@"JsonData"];
             
             [card setValuesForKeysWithDictionary:self.GradeDetailDic];
-    
+            
             [self UpdateUI];
             
             [HUD setHidden:YES];
@@ -231,33 +239,37 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     }];
-
+    
 }
 
 -(void)UpdateUI
 {
     
-    
-    
+    cardImgV.image = [UIImage imageNamed:@"bg_card"];
     if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 1)
     {
-        cardImgV.image = [UIImage imageNamed:@"qw_tiyanka"];
-    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 2)
-    {
-        cardImgV.image = [UIImage imageNamed:@"qw_yueka"];
-    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 3)
-    {
-        cardImgV.image = [UIImage imageNamed:@"qw_cika"];
-    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 4)
-    {
-        cardImgV.image = [UIImage imageNamed:@"qw_nianka"];
+        cardNameLab.text = @"体验卡";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 2){
+        cardNameLab.text = @"月清洁";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 3){
+        cardNameLab.text = @"季无忧";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 4){
+        cardNameLab.text = @"半年洗";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 5){
+        cardNameLab.text = @"年欢洗";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 6){
+        cardNameLab.text = @"随意行";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 7){
+        cardNameLab.text = @"52洗车";
+    }else if([[_GradeDetailDic objectForKey:@"CardType"] intValue] == 8){
+        cardNameLab.text = @"百洗无忧";
     }
     
     
     
     
     
-    cardNameLab.text = [NSString stringWithFormat:@"本月免费洗车%@次",[_GradeDetailDic objectForKey:@"CardCount"]];
+    //    cardNameLab.text = [NSString stringWithFormat:@"本月免费洗车%@次",[_GradeDetailDic objectForKey:@"CardCount"]];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -283,16 +295,16 @@
         {
             [_getBtn setTitle:@"该卡已领取完毕" forState:UIControlStateNormal];
             [_getBtn setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
-
+            
             _getBtn.enabled = NO;
         }
     }
     
     
     
-
+    
     [_noticeView reloadData];
-  
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -407,7 +419,7 @@
         self.noticeLabel = noticeLabel;
         [cell.contentView addSubview:self.noticeLabel];
         
-
+        
         UILabel *noticeLabelOne = [[UILabel alloc] init];
         noticeLabelOne.text = @"1. 下载金顶洗车APP，通过扫码可直接启动洗车机；";
         noticeLabelOne.numberOfLines = 0;
@@ -456,7 +468,7 @@
         noticeLabelFive.numberOfLines = 0;
         self.noticeLabelFive = noticeLabelFive;
         [cell.contentView addSubview:self.noticeLabelFive];
-
+        
         
         [self.noticeLabeTwo mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.noticeLabelOne.mas_bottom).mas_offset(12*Main_Screen_Height/667);
@@ -468,13 +480,13 @@
             make.top.equalTo(self.noticeLabeTwo.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(self.noticeLabeTwo);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-
+            
         }];
         [self.noticeLabelFour mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.noticeLabelThree.mas_bottom).mas_offset(12*Main_Screen_Height/667);
             make.leading.equalTo(self.noticeLabelThree);
             make.right.equalTo(cell.contentView).mas_offset(-12*Main_Screen_Height/667);
-           
+            
         }];
         [self.noticeLabelFive mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.noticeLabelFour.mas_bottom).mas_offset(12*Main_Screen_Height/667);
@@ -486,7 +498,7 @@
         
         
     }
-
+    
     return cell;
 }
 
@@ -543,13 +555,13 @@
             
             
             int num = [[_GradeDetailDic objectForKey:@"CardQuantity"] intValue];
-        
+            
             [_GradeDetailDic setObject:[NSString stringWithFormat:@"%d",num-1] forKey:@"CardQuantity"];
             
-//            NSNotification * notice = [NSNotification notificationWithName:@"receivesuccess" object:nil userInfo:nil];
-//            [[NSNotificationCenter defaultCenter]postNotification:notice];
-        
-//            self.GradeDetailDic = [dict objectForKey:@"JsonData"];
+            //            NSNotification * notice = [NSNotification notificationWithName:@"receivesuccess" object:nil userInfo:nil];
+            //            [[NSNotificationCenter defaultCenter]postNotification:notice];
+            
+            //            self.GradeDetailDic = [dict objectForKey:@"JsonData"];
             if([[_GradeDetailDic objectForKey:@"CardQuantity"] intValue] != 0)
             {
                 
@@ -559,7 +571,7 @@
                 [_getBtn setTitle:@"该卡已领取完毕" forState:UIControlStateNormal];
                 _getBtn.enabled = NO;
             }
-
+            
             
         }
         else
@@ -570,7 +582,7 @@
         [self.view showInfo:@"领取失败" autoHidden:YES interval:2];
         
     }];
-
+    
 }
 
 - (void)didClickCheckCardBtn {
@@ -585,13 +597,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

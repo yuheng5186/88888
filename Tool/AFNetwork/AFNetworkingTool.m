@@ -1,0 +1,528 @@
+//
+//  AFNetworkingTool.m
+//  AlgorithmicTrading
+//
+//  Created by tenly11 on 16/12/21.
+//  Copyright © 2016年 tenly11. All rights reserved.
+//
+
+#import "AFNetworkingTool.h"
+#import "AppDelegate.h"
+#import "AFNetworkingTool+GetToken.h"
+@implementation AFNetworkingTool
+#pragma mark - 创建请求者
++(AFHTTPSessionManager *)manager
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 超时时间
+    manager.requestSerializer.timeoutInterval = 15;
+    // 声明上传的是json格式的参数，需要你和后台约定好，不然会出现后台无法获取到你上传的参数问题
+    //serializer:序列化程序
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer]; // 上传普通格式
+    //    manager.requestSerializer = [AFJSONRequestSerializer serializer]; // 上传JSON格式
+    // 声明获取到的数据格式
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer]; // AFN不会解析,数据是data，需要自己解析
+    //    manager.responseSerializer = [AFJSONResponseSerializer serializer]; // AFN会JSON解析返回的数据
+    // 个人建议还是自己解析的比较好，有时接口返回的数据不合格会报3840错误，大致是AFN无法解析返回来的数据
+    
+    return manager;
+}
+#pragma mark - GET请求
++ (void)getUserCarShopAndSalesDataForSalesWithUserId:(NSString *)userId date:(NSString *)date selectAreaType:(NSString *)areaType andurl:(NSString *)url Success:(SuccessBlock)success fail:(AFNErrorBlock)fail
+{
+//      [MBProgressHUD showMsg:@"加载中" duration:1 imgName:@"load"];
+   
+    // get请求也可以直接将参数放在字典里，AFN会自己讲参数拼接在url的后面，不需要自己凭借
+    NSDictionary *param = @{@"keyword":userId,@"page":date};
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager GET:url parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
+      
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            success(dict,YES);
+        } else {
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        
+        fail(error);
+    }];
+}
+#pragma mark - GETyou参数请求
++ (void)getUserCarShopAndSalesDataForSalesWithDictionaryParam:(NSDictionary *)param andurl:(NSString *)url Success:(SuccessBlock)success fail:(AFNErrorBlock)fail{
+    
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager GET:url parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
+        // 这里可以获取到目前数据请求的进度
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+             NSString *result  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            
+            NSString *tempStr1=[[result description] stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+            NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+            NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+            NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *str =[NSPropertyListSerialization propertyListFromData:tempData
+                                                            mutabilityOption:NSPropertyListImmutable
+                                                                      format:NULL
+                                                            errorDescription:NULL];
+            NSLog(@"%@==",result);
+            NSError *errorstr;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
+            if (!errorstr) {
+                 success(dict,YES);
+            }else{
+                NSLog(@"错误信息：%@",errorstr);
+
+            }
+            
+           
+            
+        } else {
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        fail(error);
+    }];
+}
+#pragma mark - GETyou参数请求token
++ (void)getUserCarShopAndSalesDataForSalesWithDictionaryTwoParam:(NSDictionary *)param andurl:(NSString *)url Success:(SuccessBlock)success fail:(AFNErrorBlock)fail{
+    //在此设置要改的变量
+    __block NSMutableDictionary *muparam = [[NSMutableDictionary alloc]initWithDictionary:param];
+    // 获取token
+    [self getTokenRequestSuccess:^(NSString *token) {
+        //将token放入请求参数中
+        
+        [muparam setValue:token forKey:@"token"];
+        // 创建请求类
+        AFHTTPSessionManager *manager = [self manager];
+        [manager GET:url parameters:muparam progress:^(NSProgress * _Nonnull downloadProgress) {
+            // 这里可以获取到目前数据请求的进度
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            // 请求成功
+            if(responseObject){
+                NSString *result  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                
+                NSString *tempStr1=[[result description] stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+                NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+                NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+                NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *str =[NSPropertyListSerialization propertyListFromData:tempData
+                                                                mutabilityOption:NSPropertyListImmutable
+                                                                          format:NULL
+                                                                errorDescription:NULL];
+                NSLog(@"%@==",result);
+                NSError *errorstr;
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
+                if (!errorstr) {
+                    success(dict,YES);
+                }else{
+                    NSLog(@"错误信息：%@",errorstr);
+                    
+                }
+                
+                
+                
+            } else {
+                success(@{@"msg":@"暂无数据"}, NO);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // 请求失败
+            fail(error);
+        }];
+    }];
+}
++ (void)loginWithUserImageAccount:(NSDictionary *)param andurl:(NSString *)url success:(SuccessImageBlock)success  fail:(AFNErrorBlock)fail;
+{
+//    [MBProgressHUD showMsg:@"加载中" duration:1 imgName:@"load"];
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        // 这里可以获取到目前数据请求的进度
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+
+                        UIImage * img=[UIImage imageWithData:responseObject];
+                        NSLog(@"%@",img);
+                        success(img,YES);
+        } else {
+            
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        fail(error);
+    }];
+}
+//
+#pragma mark - POST请求
++ (void)loginWithUserAccount:(NSDictionary *)param andurl:(NSString *)url success:(SuccessBlock)success  fail:(AFNErrorBlock)fail
+{
+ 
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        // 这里可以获取到目前数据请求的进度
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+        NSString *result  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSString *tempStr1=[[result description] stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+            NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+            NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+            NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *str =[NSPropertyListSerialization propertyListFromData:tempData
+                                             mutabilityOption:NSPropertyListImmutable
+                                                       format:NULL
+                                             errorDescription:NULL];
+               NSLog(@"%@",str);
+            
+            NSError *errorstr;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
+            
+            if (!errorstr) {
+                if (dict==nil) {
+    
+//                    [MBProgressHUD showMsg:str duration:1 imgName:@""];
+                }
+                 success(dict,YES);
+               
+            }else{
+                NSMutableDictionary *dicts=[NSMutableDictionary dictionaryWithObject:str forKey:@"status"];
+              
+                NSLog(@"%@",dicts);
+                success(dicts,YES);
+                NSLog(@"错误信息：%@",errorstr);
+                
+            }
+            
+            
+        } else {
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        fail(error);
+    }];
+   
+    
+}
+
++ (void)post:(NSDictionary *)param andurl:(NSString *)url success:(SuccessBlock)success  fail:(AFNErrorBlock)fail
+{
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        // 这里可以获取到目前数据请求的进度
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+            NSString *result  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSString *tempStr1=[[result description] stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+            NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+            NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+            NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *str =[NSPropertyListSerialization propertyListFromData:tempData
+                                                            mutabilityOption:NSPropertyListImmutable
+                                                                      format:NULL
+                                                            errorDescription:NULL];
+//            NSLog(@"%@",str);
+            
+            NSError *errorstr;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
+            
+            if (!errorstr) {
+                if (dict==nil) {
+                    
+                    //                    [MBProgressHUD showMsg:str duration:1 imgName:@""];
+                }
+                success(dict,YES);
+                
+            }else{
+                NSMutableDictionary *dicts=[NSMutableDictionary dictionaryWithObject:str forKey:@"status"];
+                
+                NSLog(@"%@",dicts);
+                success(dicts,YES);
+                NSLog(@"错误信息：%@",errorstr);
+                
+            }
+            
+            
+        } else {
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        fail(error);
+    }];
+
+}
+
+#pragma mark - POST请求
++ (void)loginWithUserAccountTWO:(NSDictionary *)param andurl:(NSString *)url success:(SuccessBlock)success  fail:(AFNErrorBlock)fail
+{
+    //在此设置要改的变量
+    __block NSMutableDictionary *muparam = [[NSMutableDictionary alloc]initWithDictionary:param];
+
+    // 获取token
+    [self getTokenRequestSuccess:^(NSString *token) {
+        //将token放入请求参数中
+        [muparam setValue:token forKey:@"token"];
+        NSLog(@"%@",muparam);
+    // 创建请求类
+    AFHTTPSessionManager *manager = [self manager];
+    [manager POST:url parameters:muparam progress:^(NSProgress * _Nonnull uploadProgress) {
+        // 这里可以获取到目前数据请求的进度
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 请求成功
+        if(responseObject){
+            NSString *result  =[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSString *tempStr1=[[result description] stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+            NSString *tempStr2 =[tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+            NSString *tempStr3 =[[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+            NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *str =[NSPropertyListSerialization propertyListFromData:tempData
+                                                            mutabilityOption:NSPropertyListImmutable
+                                                                      format:NULL
+                                                            errorDescription:NULL];
+            NSLog(@"%@",str);
+            
+            NSError *errorstr;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&errorstr];
+            
+            if (!errorstr) {
+                if (dict==nil) {
+                    
+//                    [MBProgressHUD showMsg:str duration:1 imgName:@""];
+                }
+                success(dict,YES);
+                
+            }else{
+                NSMutableDictionary *dicts=[NSMutableDictionary dictionaryWithObject:str forKey:@"status"];
+                
+               
+                success(dicts,YES);
+                           }
+            
+            
+        } else {
+            success(@{@"msg":@"暂无数据"}, NO);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 请求失败
+        fail(error);
+    }];
+    
+    }];
+
+}
+
+#pragma mark-json格式字符串转字典：
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    
+    if (jsonString == nil) {
+        
+        return nil;
+        
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                         
+                                                        options:NSJSONReadingMutableContainers
+                         
+                                                          error:&err];
+    
+    if(err) {
+        
+        NSLog(@"json解析失败：%@",err);
+        
+        return nil;
+        
+    }
+    
+    return dic;
+    
+}
+
++(NSString *)convertToJsonData:(NSDictionary *)dict
+
+{
+    NSError *error;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *jsonString;
+    
+    if (!jsonData) {
+        
+        NSLog(@"%@",error);
+        
+    }else{
+        
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+    }
+    
+    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
+    
+    //    NSRange range = {0,jsonString.length};
+    
+    
+    
+    NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"[]（#%*+=）\\|~(＜＞$%^&*)+ "];
+    NSRange range = {0,mutStr.length};
+    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range];
+    
+    NSString * hmutStr = [[mutStr componentsSeparatedByCharactersInSet: doNotWant]componentsJoinedByString: @""];
+    
+//    NSLog(@"%@",hmutStr);
+    
+    
+    
+    return hmutStr;
+    
+}
+
++(NSString *)base64convertToJsonData:(NSDictionary *)dict
+{
+    NSError *error;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *jsonString;
+    
+    if (!jsonData) {
+        
+        NSLog(@"%@",error);
+        
+    }else{
+        
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+    }
+    
+    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
+    
+    NSRange range = {0,jsonString.length};
+    
+    //去掉字符串中的空格
+    
+    [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
+    
+    NSRange range2 = {0,mutStr.length};
+    
+    //去掉字符串中的换行符
+    
+    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
+    
+    
+    return mutStr;
+    
+}
+
+#pragma mark - 下载
+- (void)downLoadWithUrlString:(NSString *)urlString
+{
+    // 1.创建管理者对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 2.设置请求的URL地址
+    NSURL *url = [NSURL URLWithString:urlString];
+    // 3.创建请求对象
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // 4.下载任务
+    NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        // 下载进度
+        NSLog(@"当前下载进度为:%lf", 1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        // 下载地址
+        
+        NSLog(@"默认下载地址%@",targetPath);
+        // 设置下载路径,通过沙盒获取缓存地址,最后返回NSURL对象
+        NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+        return [NSURL fileURLWithPath:filePath]; // 返回的是文件存放在本地沙盒的地址
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        // 下载完成调用的方法
+        NSLog(@"%@---%@", response, filePath);
+    }];
+    // 5.启动下载任务
+    [task resume];
+}
+#pragma mark - 上传
+- (void)uploadWithUser:(NSString *)userId UrlString:(NSString *)urlString upImg:(UIImage *)upImg
+{
+    // 创建管理者对象
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 参数
+    NSDictionary *param = @{@"user_id":userId};
+    [manager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        /******** 1.上传已经获取到的img *******/
+        // 把图片转换成data
+        NSData *data = UIImagePNGRepresentation(upImg);
+        // 拼接数据到请求题中
+        [formData appendPartWithFileData:data name:@"file" fileName:@"123.png" mimeType:@"image/png"];
+        /******** 2.通过路径上传沙盒或系统相册里的图片 *****/
+        //[formData appendPartWithFileURL:[NSURL fileURLWithPath:@"文件地址"] name:@"file" fileName:@"1234.png" mimeType:@"application/octet-stream" error:nil];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        // 打印上传进度
+        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //请求成功
+        NSLog(@"请求成功：%@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //请求失败
+        NSLog(@"请求失败：%@",error);
+    }];
+}
+#pragma mark-网络监听
+- (void)AFNetworkStatus{
+    
+    //1.创建网络监测者
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    
+    /*枚举里面四个状态  分别对应 未知 无网络 数据 WiFi
+     typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
+     AFNetworkReachabilityStatusUnknown          = -1,      未知
+     AFNetworkReachabilityStatusNotReachable     = 0,       无网络
+     AFNetworkReachabilityStatusReachableViaWWAN = 1,       蜂窝数据网络
+     AFNetworkReachabilityStatusReachableViaWiFi = 2,       WiFi
+     };
+     */
+    
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        //这里是监测到网络改变的block  可以写成switch方便
+        //在里面可以随便写事件
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"未知网络状态");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"无网络");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"蜂窝数据网");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"WiFi网络");
+                
+                break;
+                
+            default:
+                break;
+        }
+        
+    }] ;
+}
+@end

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>通常汽车生产年份可以在您爱车的铭牌上看到，铭牌一般是在发动机舱或者门框上</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何选择生产年份？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>确定轮胎规则请查看车辆轮胎上的型号信息。</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何查看轮胎型号？</string>
+	</dict>
+	<dict>
+		<key>infor</key>
+		<array>
+			<dict>
+				<key>answer</key>
+				<string>确定发动机型号请查看车辆铭牌上的发动机型号信息，铭牌一般在发动机舱或者右前车门框上。</string>
+			</dict>
+		</array>
+		<key>title</key>
+		<string>如何查看发动机排量？</string>
+	</dict>
+</array>
+</plist>

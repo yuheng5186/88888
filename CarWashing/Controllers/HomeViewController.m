@@ -198,6 +198,9 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     
@@ -206,10 +209,7 @@
     
 //    [self createNavTitleView];
     
-    
-   
-    
-    
+
     
 }
 -(void)goBack{
@@ -330,7 +330,7 @@
     backView.userInteractionEnabled    = YES;
     
     UIView *scanView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
-    scanView.centerX                   = Main_Screen_Width/8;
+    scanView.centerX                   = backView.width/8;
     scanView.top                       = 0;
     
     UITapGestureRecognizer  *tapScanGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScanButtonClick:)];
@@ -348,7 +348,7 @@
     scanNameLabel.top               = scanImageView.bottom +Main_Screen_Height*6/667;
     
     UIView *cardBagView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
-    cardBagView.centerX                   = Main_Screen_Width*3/8;
+    cardBagView.centerX                   = backView.width*3/8;
     cardBagView.centerY                   = scanView.centerY;
     
     UITapGestureRecognizer  *tapCardBagGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCardBagButtonClick:)];
@@ -367,7 +367,7 @@
     
     
     UIView *memberRightView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
-    memberRightView.centerX                   = Main_Screen_Width*5/8;
+    memberRightView.centerX                   = backView.width*5/8;
     memberRightView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapMemberRightGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMemberRightButtonClick:)];
@@ -386,7 +386,7 @@
     
     
     UIView *scoreView                   = [UIUtil drawLineInView:backView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*90/667) color:[UIColor clearColor]];
-    scoreView.centerX                   = Main_Screen_Width*7/8;
+    scoreView.centerX                   = backView.width*7/8;
     scoreView.centerY                   = cardBagView.centerY;
     
     UITapGestureRecognizer  *tapScoreGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScoreButtonClick:)];
@@ -415,7 +415,7 @@
     downbackView.top                       = backView.bottom+10;
     
     UIView *payView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    payView.centerX                   = Main_Screen_Width/8;
+    payView.centerX                   = downbackView.width/8;
     payView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapPayGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapPayButtonClick:)];
@@ -433,7 +433,7 @@
     payNameLabel.top               = payImageView.bottom +Main_Screen_Height*12/667;
     
     UIView *signView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    signView.centerX                   = Main_Screen_Width*3/8;
+    signView.centerX                   = downbackView.width*3/8;
     signView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapSignGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSignButtonClick:)];
@@ -453,7 +453,7 @@
     
     
     UIView *discountView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    discountView.centerX                   = Main_Screen_Width*5/8;
+    discountView.centerX                   = downbackView.width*5/8;
     discountView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapDiscountGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapDiscountButtonClick:)];
@@ -474,7 +474,7 @@
     
     
     UIView *shareView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    shareView.centerX                   = Main_Screen_Width*7/8;
+    shareView.centerX                   = downbackView.width*7/8;
     shareView.top                       = Main_Screen_Height*10/375;
     
     UITapGestureRecognizer  *tapShareGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShareButtonClick:)];
@@ -495,7 +495,7 @@
     
     
     UIView *myCarView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    myCarView.centerX                   = Main_Screen_Width/8;
+    myCarView.centerX                   = downbackView.width/8;
     myCarView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
     UITapGestureRecognizer  *tapMyCarGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapMyCarButtonClick:)];
@@ -554,7 +554,7 @@
 //    discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*12/667;
     
     UIView *shopView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    shopView.centerX                   = Main_Screen_Width*5/8;
+    shopView.centerX                   = downbackView.width*5/8;
     shopView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
     UITapGestureRecognizer  *tapShopGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapShopButtonClick:)];
@@ -575,7 +575,7 @@
     
     
     UIView *carClubView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    carClubView.centerX                   = Main_Screen_Width*3/8;
+    carClubView.centerX                   = downbackView.width*3/8;
     carClubView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
     UITapGestureRecognizer  *tapCarClubGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCarClubButtonClick:)];
@@ -596,7 +596,7 @@
     
     
     UIView *serviceView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
-    serviceView.centerX                   = Main_Screen_Width*7/8;
+    serviceView.centerX                   = downbackView.width*7/8;
     serviceView.top                       = payView.bottom +Main_Screen_Height*0/375;
     
     UITapGestureRecognizer  *tapServiceGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapServiceButtonClick:)];

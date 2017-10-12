@@ -111,9 +111,6 @@
     self.salerListView.dataSource = self;
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
-    self.salerListView.estimatedRowHeight = 0;
-    self.salerListView.estimatedSectionFooterHeight = 0;
-    self.salerListView.estimatedSectionHeaderHeight = 0;
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
     //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -169,12 +166,12 @@
     NSArray * titlearr =@[@"订单",@"收藏",@"激活"];
     for (int i=0; i<3; i++) {
         UIButton * imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        imageButton.frame=CGRectMake(10+(i*((Main_Screen_Width-20)/3)), -15, (Main_Screen_Width-20)/3, 90);
+        imageButton.frame=CGRectMake(10+(i*((Main_Screen_Width-20)/3)), -10, (Main_Screen_Width-20)/3, 90);
         [imageButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",arrimage[i]]] forState:UIControlStateNormal];
         imageButton.tag=i+1;
         [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [ButtonView addSubview:imageButton];
-        UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10+(i*((Main_Screen_Width-20)/3)), 50, (Main_Screen_Width-20)/3, 20)];
+        UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10+(i*((Main_Screen_Width-20)/3)), 55, (Main_Screen_Width-20)/3, 20)];
         titleLabel.text=[NSString stringWithFormat:@"%@",titlearr[i]];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.textColor = RGBAA(51, 51, 51, 1.0);

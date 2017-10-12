@@ -64,6 +64,9 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     self.view.backgroundColor = [UIColor whiteColor];
     
     UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 400*Main_Screen_Height/667) style:UITableViewStyleGrouped];
+    carInfoView.estimatedSectionHeaderHeight = 0;
+    carInfoView.estimatedSectionFooterHeight = 0;
+    carInfoView.rowHeight = UITableViewAutomaticDimension;
     _carInfoView = carInfoView;
     [self.view addSubview:carInfoView];
     

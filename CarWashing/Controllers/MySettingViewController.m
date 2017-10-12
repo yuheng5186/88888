@@ -111,6 +111,9 @@
     self.salerListView.dataSource = self;
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
+    self.salerListView.estimatedSectionHeaderHeight = 0;
+    self.salerListView.estimatedSectionFooterHeight = 0;
+    self.salerListView.rowHeight = UITableViewAutomaticDimension;
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
     //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -210,7 +210,6 @@
 //    [self createNavTitleView];
     
 
-    
 }
 -(void)goBack{
     [self setupRefresh];

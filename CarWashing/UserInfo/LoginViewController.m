@@ -119,7 +119,7 @@
     backgroundImageView.centerX         = Main_Screen_Width/2;
     
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStylePlain];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width*280/375,Main_Screen_Height*95/667) style:UITableViewStyleGrouped];
     self.tableView.top              = backgroundImageView.top +Main_Screen_Height*30/667;
     self.tableView.centerX          = backgroundImageView.centerX;
     self.tableView.delegate         = self;
@@ -127,9 +127,6 @@
     self.tableView.scrollEnabled    = NO;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor whiteColor];
-    self.tableView.estimatedRowHeight = 0;
-    self.tableView.estimatedSectionFooterHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.tableFooterView  = [UIView new];
     [self.contentView addSubview:self.tableView];
     

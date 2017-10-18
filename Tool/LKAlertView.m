@@ -70,7 +70,7 @@
             button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(0, line.bottom, whiteView.width/2, 46) text:cancelButtonTitle font:[UIFont systemFontOfSize:18] color:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1] target:self action:@selector(clickCancelButton)];
 //            [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             
-            button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(whiteView.width/2, line.bottom, whiteView.width/2, 46) text:otherButtonTitles font:[UIFont systemFontOfSize:18] color:[UIColor colorWithHex:0x115D91 alpha:1.0] target:self action:@selector(clickOtherButton)];
+            button = [UIUtil drawButtonInView:whiteView frame:CGRectMake(whiteView.width/2, line.bottom, whiteView.width/2, 46) text:otherButtonTitles font:[UIFont systemFontOfSize:18] color:[UIColor colorWithHex:0xFFB500 alpha:1.0] target:self action:@selector(clickOtherButton)];
 //            [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             
             [UIUtil drawLineInView:whiteView frame:CGRectMake(whiteView.width/2, line.bottom+(46-30)/2, [UIUtil lineWidth], 30) color:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1]];

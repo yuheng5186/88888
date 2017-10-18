@@ -43,7 +43,7 @@
         /**
          * 电信号段正则表达式
          */
-        NSString *CT_NUM = @"^((133)|(153)|(177)|(18[0,1,9]))\\d{8}$";
+        NSString *CT_NUM = @"(^1(33|53|73|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
         NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
         BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
         NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];

@@ -407,7 +407,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     containImageView.image  = [UIImage imageNamed:@"bg_card"];
 
-    
 //    if(card.CardType == 1)
 //    {
 //       containImageView.image = [UIImage imageNamed:@"qw_tiyanka"];
@@ -611,36 +610,27 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
         {
             self.area = [NSString stringWithFormat:@"%@市",cityName];
         }
-        
-        
-        
     }];
-    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }
-
 #pragma mark - JFLocationDelegate
 //定位中...
 - (void)locating {
     NSLog(@"定位中...");
 }
-
 //定位成功
 - (void)currentLocation:(NSDictionary *)locationDictionary {
     NSString *city = [locationDictionary valueForKey:@"City"];
     if (![_resultLabel.text isEqualToString:city]) {
         
-        
         _resultLabel.text = city;
-        
         
         [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
         [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
         [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
             [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
         }];
-        
 //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
 //        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
 //        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

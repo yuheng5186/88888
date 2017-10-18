@@ -26,7 +26,9 @@
         NSLog(@"hsUpdateAppError:%@",error);
         return;
     }
-    //    NSLog(@"%@",appInfoDic);
+//        NSLog(@"%@",appInfoDic);
+    [[NSUserDefaults standardUserDefaults]setValue:[NSString stringWithFormat:@"%@",appInfoDic[@"results"][0][@"releaseNotes"]] forKey:@"releaseNotes"];
+    
     NSArray *array = appInfoDic[@"results"];
     
     if (array.count < 1) {

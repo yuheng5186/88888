@@ -5,7 +5,6 @@
 //  Created by Wuxinglin on 2017/7/19.
 //  Copyright © 2017年 DS. All rights reserved.
 //
-
 #import "HomeViewController.h"
 #import "SXScrPageView.h"
 #import "DSAdDetailController.h"
@@ -110,12 +109,15 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //一句代码实现检测更新,很简单哦 （需要在viewDidAppear完成时，再调用改方法。不然在网速飞快的时候，会出现一个bug，就是当前控制器viewDidLoad调用的话，可能当前视图还没加载完毕就需要推出UIAlertAction）
-    [self hsUpdateApp];
+    
 }
 
 -(void)hsUpdateApp{
     __weak __typeof(&*self)weakSelf = self;
     [HSUpdateApp hs_updateWithAPPID:@"1291609168" block:^(NSString *currentVersion, NSString *storeVersion, NSString *openUrl, BOOL isUpdate) {
+        NSLog(@"--%@",storeVersion);
+        //版本内容
+        NSLog(@"---%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"releaseNotes"]);
         if (isUpdate == YES) {
             [weakSelf showStoreVersion:storeVersion openUrl:openUrl];
         }
@@ -172,6 +174,7 @@
     
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
+    [self hsUpdateApp];
     
 }
 //- (JFAreaDataManager *)manager {
@@ -191,13 +194,14 @@
     self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
-    //    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     //    self.tableView.scrollEnabled    = NO;
 //    self.tableView.tableFooterView  = [UIView new];
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
+    self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -218,17 +222,11 @@
 {
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        
         [self headerRereshing];
-        
     }];
-    
     // 设置自动切换透明度(在导航栏下面自动隐藏)
     self.tableView.mj_header.automaticallyChangeAlpha = YES;
-    
     [self.tableView.mj_header beginRefreshing];
-    
-   
 }
 
 - (void)headerRereshing
@@ -1630,14 +1628,6 @@
 
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 
 @end

@@ -93,7 +93,6 @@
 - (void)loadWithData:(id)data {
     
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

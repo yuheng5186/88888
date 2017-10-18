@@ -74,14 +74,14 @@
 
 - (void) createSubView {
 
-    NSString   *headerString     = @"登录";
+    NSString   *headerString     = @"";
     UIFont     *headerFont       = [UIFont systemFontOfSize:Main_Screen_Height*20/667];
     UILabel *deaderLabel         = [UIUtil drawLabelInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:headerFont text:headerString isCenter:NO];
     deaderLabel.textColor        = [UIColor colorFromHex:@"#febb02"];
     deaderLabel.textAlignment    = NSTextAlignmentCenter;
 
     deaderLabel.centerX          = Main_Screen_Width/2;
-    deaderLabel.top              = Main_Screen_Height*40/667;
+    deaderLabel.top              = Main_Screen_Height/667;
     
     UIImageView *logoImageView  = [UIUtil drawCustomImgViewInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*100/667) imageName:@"denglu_icon"];
     logoImageView.layer.masksToBounds = YES;
@@ -161,19 +161,19 @@
     _indicatorView.centerX           = Main_Screen_Width/2;
     [self.contentView addSubview:_indicatorView];
     
-//    UIButton * passwordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
-//    [passwordBtn setTitle:@"密码登录" forState:UIControlStateNormal];
-//    [passwordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
-//    passwordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
-//    passwordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-//    passwordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//    [passwordBtn addTarget:self action:@selector(passwordBtnClick) forControlEvents:UIControlEventTouchUpInside];
-//    [self.contentView addSubview:passwordBtn];
-//    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(loginButton.mas_bottom);
-//        make.right.equalTo(loginButton.mas_right);
-//        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
-//    }];
+    UIButton * passwordBtn = [UIButton buttonWithType: UIButtonTypeSystem];
+    [passwordBtn setTitle:@"密码登录" forState:UIControlStateNormal];
+    [passwordBtn setTitleColor:[UIColor colorFromHex:@"#999999"] forState:UIControlStateNormal];
+    passwordBtn.titleLabel.font=[UIFont systemFontOfSize:Main_Screen_Height*12/667];
+    passwordBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    passwordBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [passwordBtn addTarget:self action:@selector(passwordBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:passwordBtn];
+    [passwordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(loginButton.mas_bottom);
+        make.right.equalTo(loginButton.mas_right);
+        make.size.mas_equalTo(CGSizeMake(100, Main_Screen_Height*40/667));
+    }];
     
     UIButton *updateRuleButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*320/375, Main_Screen_Height*30/667)];
     [updateRuleButton setTitleColor:[UIColor colorFromHex:@"#febb02"] forState:UIControlStateNormal];

@@ -389,7 +389,6 @@
 
 #pragma mark -------button click------
 - (void) editButtonClick:(id)sender {
-    
     DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
     userInfoController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoController animated:YES];

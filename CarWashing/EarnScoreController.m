@@ -12,6 +12,7 @@
 #import "ScoreDetailController.h"
 #import "DSMyCarController.h"
 #import "DSUserInfoController.h"
+#import "DSAdDetailController.h"
 
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
@@ -43,6 +44,9 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         
         UIImageView *adverView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 100*Main_Screen_Height/667)];
         _adverView = adverView;
+        adverView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(adverViewClick:)];
+        [adverView addGestureRecognizer:tap];
         [self.view addSubview:adverView];
     }
     return _adverView;
@@ -66,7 +70,10 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     [self drawTitle:@"赚积分"];
     [self drawRightTextButton:@"我的积分" action:@selector(clickMyScoreButton)];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self requestGetScore];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -89,7 +96,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self requestGetScore];
+//    [self requestGetScore];
     
     
     
@@ -106,7 +113,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
                              };
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Integral/EarnIntegral",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        
+        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.ScoreData = [[NSMutableArray alloc]init];
@@ -192,7 +199,6 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         [earnScoreCell.goButton addTarget:self action:@selector(gotoearnScore:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    
     earnScoreCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return earnScoreCell;
@@ -234,7 +240,18 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
         [self.navigationController pushViewController:userInfoController animated:YES];
     }
 }
-
+#pragma mark ----banner点击-----
+//banner点击
+-(void)adverViewClick:(UITapGestureRecognizer*)recognizer
+{
+    NSLog(@"hah");
+//    DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+//    viewVC.urlstr=HOMEURL;
+//    viewVC.shareurlstr=HOMEINTURL;
+//    viewVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:viewVC animated:YES];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

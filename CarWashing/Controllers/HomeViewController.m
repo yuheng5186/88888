@@ -739,7 +739,7 @@
 //                for(NSDictionary *dic in arr)
 //                {
                     self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
-                    
+               
 //                    [self.GetUserRecordData addObject:newrc];
 //                }
                  [self createHeaderView];

@@ -12,6 +12,7 @@
 
 @property (copy, nonatomic)NSString *Account_Id;
 @property (copy, nonatomic)NSString *CarBrand;//车辆品牌
+@property (copy, nonatomic)NSString *CarType;//车系
 @property NSInteger CarCode;
 @property (copy, nonatomic)NSString *ChassisNum;//车架号
 @property NSInteger IsDefaultFav;//是否默认

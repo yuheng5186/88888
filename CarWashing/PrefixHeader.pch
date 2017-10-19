@@ -32,7 +32,7 @@
 
 #import "MBProgressHUD.h"
 #import "DSNavigationViewController.h"
-
+#import "MJExtension.h"
 
 #import "GCCycleScrollView.h"//广告无限滚动
 //NSUserDefaults 保存数据
@@ -45,7 +45,8 @@
 #define UserHead         @"Headimg"              //用户头像
 #define UserSex          @"Sex"              //用户性别
 #define UserAge          @"Age"              //用户年龄
-
+#define HOMEURL [[NSUserDefaults standardUserDefaults]objectForKey:@"homeUrl"]
+#define HOMEINTURL [[NSUserDefaults standardUserDefaults]objectForKey:@"homeInviteUrl"]
 //空值判断
 #define IsNullIsNull(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])
 #define IsNull(__Text) [__Text isKindOfClass:[NSNull class]]

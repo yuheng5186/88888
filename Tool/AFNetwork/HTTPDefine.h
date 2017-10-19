@@ -13,16 +13,16 @@
 #pragma mark-本地
 //安卓上线服务器
 
-//第七版
-#define Khttp     @"http://120.78.48.105/api/"
-#define kHTTPImg  @"http://120.78.48.105"
+////金顶线上第七版
+//#define Khttp     @"http://120.78.48.105/api/"
+//#define kHTTPImg  @"http://120.78.48.105"
 
 // iOS测试服务器
 
-//第四版
-//#define Khttp @"http://192.168.2.152:8091/api/"
-//
-//#define kHTTPImg @"http://192.168.2.152:8091"
+//金顶本地第四版
+#define Khttp @"http://192.168.2.152:8091/api/"
+
+#define kHTTPImg @"http://192.168.2.152:8091"
 
 //第三版
 //#define Khttp @"http://192.168.2.152:8090/api/"

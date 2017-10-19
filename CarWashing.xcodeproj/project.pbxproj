@@ -91,6 +91,10 @@
 		18218FEB1F2B0C3C00F7207F /* DSCarClubDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18218FEA1F2B0C3C00F7207F /* DSCarClubDetailController.m */; };
 		182190061F301BA400F7207F /* DSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190051F301BA400F7207F /* DSUserModel.m */; };
 		182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182190081F301BF600F7207F /* DSActivityDetailCell.m */; };
+		1826E9AD1F98372E0057B7AE /* CYCarInsertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9AC1F98372E0057B7AE /* CYCarInsertViewController.m */; };
+		1826E9B01F9837470057B7AE /* CYSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9AF1F9837470057B7AE /* CYSlideViewController.m */; };
+		1826E9B31F9837620057B7AE /* CYCarRMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9B21F9837620057B7AE /* CYCarRMListModel.m */; };
+		1826E9B61F9837750057B7AE /* CYChooseCarTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9B51F9837750057B7AE /* CYChooseCarTypeViewController.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -474,6 +478,14 @@
 		182190051F301BA400F7207F /* DSUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSUserModel.m; path = Find/CustomCell/DSUserModel.m; sourceTree = "<group>"; };
 		182190071F301BF600F7207F /* DSActivityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSActivityDetailCell.h; path = Find/CustomCell/DSActivityDetailCell.h; sourceTree = "<group>"; };
 		182190081F301BF600F7207F /* DSActivityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSActivityDetailCell.m; path = Find/CustomCell/DSActivityDetailCell.m; sourceTree = "<group>"; };
+		1826E9AB1F98372E0057B7AE /* CYCarInsertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCarInsertViewController.h; sourceTree = "<group>"; };
+		1826E9AC1F98372E0057B7AE /* CYCarInsertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCarInsertViewController.m; sourceTree = "<group>"; };
+		1826E9AE1F9837470057B7AE /* CYSlideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYSlideViewController.h; sourceTree = "<group>"; };
+		1826E9AF1F9837470057B7AE /* CYSlideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYSlideViewController.m; sourceTree = "<group>"; };
+		1826E9B11F9837620057B7AE /* CYCarRMListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYCarRMListModel.h; sourceTree = "<group>"; };
+		1826E9B21F9837620057B7AE /* CYCarRMListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCarRMListModel.m; sourceTree = "<group>"; };
+		1826E9B41F9837750057B7AE /* CYChooseCarTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYChooseCarTypeViewController.h; sourceTree = "<group>"; };
+		1826E9B51F9837750057B7AE /* CYChooseCarTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYChooseCarTypeViewController.m; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -1091,6 +1103,7 @@
 		181E92E01F20532B0006511E /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				1826E9A71F9836DD0057B7AE /* CYCarView(新增页面) */,
 				18322AB01F4AD6A8003ABB7B /* Model */,
 				181E92E11F2054C50006511E /* DSUserInfoController.h */,
 				181E92E21F2054C50006511E /* DSUserInfoController.m */,
@@ -1262,6 +1275,45 @@
 				04443F4F1F5944450032BA5E /* DSScanPayController.m */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		1826E9A71F9836DD0057B7AE /* CYCarView(新增页面) */ = {
+			isa = PBXGroup;
+			children = (
+				1826E9A81F9836EE0057B7AE /* CYChooseCarType(选择车系) */,
+				1826E9A91F9836FA0057B7AE /* CYModelAndCell */,
+				1826E9AA1F9837060057B7AE /* CYController */,
+			);
+			path = "CYCarView(新增页面)";
+			sourceTree = "<group>";
+		};
+		1826E9A81F9836EE0057B7AE /* CYChooseCarType(选择车系) */ = {
+			isa = PBXGroup;
+			children = (
+				1826E9B41F9837750057B7AE /* CYChooseCarTypeViewController.h */,
+				1826E9B51F9837750057B7AE /* CYChooseCarTypeViewController.m */,
+			);
+			path = "CYChooseCarType(选择车系)";
+			sourceTree = "<group>";
+		};
+		1826E9A91F9836FA0057B7AE /* CYModelAndCell */ = {
+			isa = PBXGroup;
+			children = (
+				1826E9B11F9837620057B7AE /* CYCarRMListModel.h */,
+				1826E9B21F9837620057B7AE /* CYCarRMListModel.m */,
+			);
+			path = CYModelAndCell;
+			sourceTree = "<group>";
+		};
+		1826E9AA1F9837060057B7AE /* CYController */ = {
+			isa = PBXGroup;
+			children = (
+				1826E9AB1F98372E0057B7AE /* CYCarInsertViewController.h */,
+				1826E9AC1F98372E0057B7AE /* CYCarInsertViewController.m */,
+				1826E9AE1F9837470057B7AE /* CYSlideViewController.h */,
+				1826E9AF1F9837470057B7AE /* CYSlideViewController.m */,
+			);
+			path = CYController;
 			sourceTree = "<group>";
 		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
@@ -2320,6 +2372,7 @@
 				18B69E9C1F32CA71007DA0E4 /* ScanController.m in Sources */,
 				1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */,
 				18A4B2291F4D6CAB00C64978 /* UIView+AutoSizeToDevice.m in Sources */,
+				1826E9B01F9837470057B7AE /* CYSlideViewController.m in Sources */,
 				5016724F1F2A023600384186 /* ScoreGetController.m in Sources */,
 				180E42DB1F39B97A00013D2D /* DSCarWashingActivityController.m in Sources */,
 				185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */,
@@ -2341,6 +2394,7 @@
 				18A4B23A1F4E9F2200C64978 /* CLLocation+YCLocation.m in Sources */,
 				18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
+				1826E9B31F9837620057B7AE /* CYCarRMListModel.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
 				18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */,
@@ -2363,6 +2417,7 @@
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
+				1826E9AD1F98372E0057B7AE /* CYCarInsertViewController.m in Sources */,
 				0401E9011F4ED6E900F0CA79 /* EAIntroPage.m in Sources */,
 				5016721B1F297DA500384186 /* payCardDetailCell.m in Sources */,
 				5061A43E1F3AAECE003939A4 /* SCBaseViewController.m in Sources */,
@@ -2439,6 +2494,7 @@
 				18A4B2301F4D832300C64978 /* ShareWechatView.m in Sources */,
 				180E42D51F39B88900013D2D /* DSConsumerDetailController.m in Sources */,
 				5071B4811F381366009FFF67 /* OrderCommentController.m in Sources */,
+				1826E9B61F9837750057B7AE /* CYChooseCarTypeViewController.m in Sources */,
 				181E93291F20B0510006511E /* SXScrPageView.m in Sources */,
 				5016724C1F2A020600384186 /* ScoreIntroController.m in Sources */,
 				18B69EA21F32CB48007DA0E4 /* UIColor+Zirkfied.m in Sources */,

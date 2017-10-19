@@ -12,4 +12,5 @@ target 'CarWashing' do
   pod 'DZNEmptyDataSet'
   pod 'MJRefresh'
   pod "GCCycleScrollView"
+  pod 'MJExtension', '~> 3.0.13'
 end

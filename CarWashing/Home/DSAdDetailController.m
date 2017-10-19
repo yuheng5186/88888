@@ -27,6 +27,7 @@
     
 //    [self drawTitle:@"广告详情"];
     [self drawRightImageButton:@"fenxiang" action:@selector(shareButtonClick:)];
+   
 }
 
 - (void) shareButtonClick:(id)sender {
@@ -174,17 +175,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64)];
     webView.opaque = NO;
     webView.delegate = self;
-    
+
     [webView sizeToFit];
-    
+
     [self.view addSubview:webView];
     NSLog(@"%@",self.urlstr);
     NSURL * url                     = [NSURL URLWithString:self.urlstr];
     NSURLRequest* request           = [NSURLRequest requestWithURL: url];
-    
+
     [webView loadRequest:request];
     webView.backgroundColor         = [UIColor clearColor];
     webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);

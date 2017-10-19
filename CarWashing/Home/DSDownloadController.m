@@ -196,7 +196,7 @@
     tapNewGesture.minimumPressDuration              = 1.0;
     [self.bigImageView addGestureRecognizer:tapNewGesture];
     
-    NSString *showString              = @"长按识别二维码,下载金顶洗车APP";
+    NSString *showString              = @"扫一扫上面二维码,下载金顶洗车APP";
     UIFont *showStringFont            = [UIFont systemFontOfSize:14];
     UILabel *showLabel          = [UIUtil drawLabelInView:titleView frame:[UIUtil textRect:showString font:showStringFont] font:showStringFont text:showString isCenter:NO];
     showLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];

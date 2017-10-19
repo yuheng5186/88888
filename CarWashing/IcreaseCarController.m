@@ -24,10 +24,20 @@
 
 #import "WSDatePickerView.h"
 
-
+//选择车系
+#import "CYChooseCarTypeViewController.h"
+#import "CYCarInsertViewController.h"
 @interface IcreaseCarController ()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate,UITextFieldDelegate>
 {
     MBProgressHUD *HUD;
+    NSString * CYTYpe;
+    NSString * a;
+    //编辑车系信息
+    NSString * editType;
+    NSString * editCarName;
+    NSString * editCayType;
+    NSString * replaceStr;
+    NSString * replaceType;
 }
 
 @property (nonatomic, weak) UITableView *carInfoView;
@@ -36,6 +46,7 @@
 @property (nonatomic, weak) UILabel *lbl2;
 @property (nonatomic, weak) UITextField *numTF;
 @property (nonatomic, weak) UITextField *brandTF;
+@property (nonatomic, weak) UITextField *brandTypeTF;
 @property (nonatomic, weak) UITextField *text1;
 @property (nonatomic, weak) UITextField *text2;
 @property (nonatomic, weak) UIButton *provinceBtn;
@@ -63,10 +74,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 400*Main_Screen_Height/667) style:UITableViewStyleGrouped];
-    carInfoView.estimatedSectionHeaderHeight = 0;
-    carInfoView.estimatedSectionFooterHeight = 0;
-    carInfoView.rowHeight = UITableViewAutomaticDimension;
+    UITableView *carInfoView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 500*Main_Screen_Height/667) style:UITableViewStyleGrouped];
     _carInfoView = carInfoView;
     [self.view addSubview:carInfoView];
     
@@ -82,13 +90,34 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         make.height.mas_equalTo(48*Main_Screen_Height/667);
     }];
     
-    
     //手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEditing)];
     tap.delegate = self;
     [self.view addGestureRecognizer:tap];
+    //通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(hh:) name:@"CYBack" object:nil];
+    //通知
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
 }
-
+-(void)editCarInformation:(NSNotification *)notification{
+    CYTYpe=@"2";
+    replaceType = @"2";
+    replaceStr = notification.userInfo[@"CYCarname"];
+    editType    = notification.userInfo[@"CYType"];
+    editCarName = notification.userInfo[@"CYCarname"];
+    editCayType = notification.userInfo[@"CYCarType"];
+    [self.carInfoView reloadData];
+}
+- (void)hh:(NSNotification *)notification{
+    
+    // 如果是传多个数据，那么需要哪个数据，就对应取出对应的数据即可
+    CYTYpe=@"1";
+    editCarName = self.mycar.CarBrand;
+    a  = notification.userInfo[@"color"];
+    editType = notification.userInfo[@"CYType"];
+    [self.carInfoView reloadData];
+    
+}
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
@@ -103,7 +132,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 3;
     }
     
     return 4;
@@ -130,10 +159,12 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             else
             {
-                
                 NSString *first = self.mycar.PlateNumber;
-                
-                [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+                if (first==nil) {
+                    [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
+                }else{
+                    [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+                }
             }
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
             provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
@@ -144,11 +175,11 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             provinceImgV.image = [UIImage imageNamed:@"xuanshengfen"];
             [provinceBtn addSubview:provinceImgV];
             
-//            UILabel *provinceLabel = [[UILabel alloc] init];
-//            provinceLabel.text = @"沪";
-//            provinceLabel.textColor = [UIColor colorFromHex:@"#868686"];
-//            provinceLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
-//            [carCell.contentView addSubview:provinceLabel];
+            //            UILabel *provinceLabel = [[UILabel alloc] init];
+            //            provinceLabel.text = @"沪";
+            //            provinceLabel.textColor = [UIColor colorFromHex:@"#868686"];
+            //            provinceLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            //            [carCell.contentView addSubview:provinceLabel];
             
             
             
@@ -162,15 +193,16 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             else
             {
-                
                 NSString *first = self.mycar.PlateNumber;
                 numTF1.text = [first substringFromIndex:1];
+                if (first ==nil) {
+                    numTF1.placeholder = @"请输入车牌号";
+                }
             }
-            
             numTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             [carCell.contentView addSubview:numTF1];
-
+            
             
             
             [provinceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -189,22 +221,34 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 make.leading.equalTo(provinceBtn.mas_trailing).mas_offset(16*Main_Screen_Height/667);
                 make.width.mas_equalTo(200*Main_Screen_Height/667);
             }];
-        }else{
-            carCell.textLabel.text = @"品牌车系";
+        }else if(indexPath.row==1){
+            carCell.textLabel.text = @"品牌";
             carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
             carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             
             UITextField *brandTF1 = [[UITextField alloc] init];
+            brandTF1.enabled=NO;
             _brandTF = brandTF1;
             
             if(self.mycar == nil)
             {
                 brandTF1.placeholder = @"请填写";
             }
-            else
-            {
-                brandTF1.text = self.mycar.CarBrand;
+            else{
+                if ([replaceType isEqualToString:@"2"]) {
+                    brandTF1.text= replaceStr;
+                }else{
+                    if ([editType isEqualToString:@"1"]) {
+                        brandTF1.text = editCarName;
+                    }else{
+                        brandTF1.text = self.mycar.CarBrand;
+                    }
+                }
+                
+                
             }
+            
+            
             
             
             brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
@@ -213,7 +257,42 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             
             [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
-
+                
+                make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
+            }];
+        }else if(indexPath.row==2){
+            carCell.textLabel.text = @"车系";
+            carCell.textLabel.textColor = [UIColor colorFromHex:@"#868686"];
+            carCell.textLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            
+            UITextField *brandTF1 = [[UITextField alloc] init];
+            brandTF1.enabled =NO;
+            _brandTypeTF = brandTF1;
+            
+            if(self.mycar == nil)
+            {
+                brandTF1.placeholder = @"请填写";
+            }
+            else{
+                if ([editType isEqualToString:@"1"]) {
+                    if ([CYTYpe isEqualToString:@"1"]) {
+                        brandTF1.text = a;
+                    }else{
+                        brandTF1.text = editCayType;
+                    }
+                }else{
+                    brandTF1.text = self.mycar.CarType;
+                }
+                //
+            }
+            brandTF1.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            brandTF1.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
+            [carCell.contentView addSubview:brandTF1];
+            
+            [brandTF1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+                
                 make.centerY.equalTo(carCell);
                 make.right.equalTo(carCell.contentView).mas_offset(-12*Main_Screen_Height/667);
             }];
@@ -253,47 +332,54 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }];
         }
         else if (indexPath.row == 3) {
-                UITextField *textTF2 = [[UITextField alloc] init];
+            UITextField *textTF2 = [[UITextField alloc] init];
             textTF2.keyboardType = UIKeyboardTypeDecimalPad;
             textTF2.delegate=self;
-                _text2 = textTF2;
-                textTF2.placeholder = @"请填写";
+            _text2 = textTF2;
+            textTF2.placeholder = @"请填写";
             
-                if(self.mycar == nil)
-                {
-                    textTF2.placeholder = @"请填写";
-                }
-                else
-                {
+            if(self.mycar == nil)
+            {
+                textTF2.placeholder = @"请填写";
+            }
+            else
+            {
+                if (self.mycar.Mileage==0) {
+                    textTF2.text = @"";
+                }else{
                     textTF2.text = [NSString stringWithFormat:@"%ld",self.mycar.Mileage];
                 }
-            
-                textTF2.textColor = [UIColor colorFromHex:@"#b4b4b4"];
-                textTF2.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
-                [carCell.contentView addSubview:textTF2];
                 
-                [textTF2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
-                    make.centerY.equalTo(carCell);
-                    make.right.equalTo(carCell.contentView).mas_offset(-12);
-                }];
+            }
+            
+            textTF2.textColor = [UIColor colorFromHex:@"#b4b4b4"];
+            textTF2.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
+            [carCell.contentView addSubview:textTF2];
+            
+            [textTF2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
+                make.centerY.equalTo(carCell);
+                make.right.equalTo(carCell.contentView).mas_offset(-12);
+            }];
         }else {
             
             
             carCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 1) {
                 UILabel *lbl = [[UILabel alloc] init];
-                _lbl = lbl;
-                
-                
                 if(self.mycar == nil)
                 {
-                    lbl.text = @"请选择";
+                    lbl.text = @"请选择生产年份";
                     self.lblYear=@"";
                 }
                 else
                 {
-                    lbl.text = [NSString stringWithFormat:@"%ld",self.mycar.Manufacture];
+                    if (self.mycar.Manufacture ==0) {
+                        lbl.text = @"";
+                    }else{
+                        lbl.text = [NSString stringWithFormat:@"%ld",self.mycar.Manufacture];
+                    }
+                    
                 }
                 
                 lbl.textColor = [UIColor colorFromHex:@"#868686"];
@@ -304,42 +390,44 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     make.left.equalTo(carCell.contentView).mas_offset(110*Main_Screen_Height/667);
                     make.centerY.equalTo(carCell);
                 }];
+                
+                _lbl = lbl;
+                self.lblYear = lbl.text;
             }else {
                 UILabel *lbl2 = [[UILabel alloc] init];
-                _lbl2 = lbl2;
-                
                 if(self.mycar == nil)
                 {
-                     self.lblData=@" ";
-                    lbl2.text = @"请选择";
+                    self.lblData=@" ";
+                    lbl2.text = @"请选择上路日期";
                 }
                 else
                 {
-//                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-//                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-//                    [inputFormatter setDateFormat:@"yyyyMM"];
-//                    NSDate* inputDate = [inputFormatter dateFromString:self.mycar.DepartureTime];
-//                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-//                    [outputFormatter setLocale:[NSLocale currentLocale]];
-//                    [outputFormatter setDateFormat:@"yyyy-MM"];
-//                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-//                    lbl2.text  = targetTime;
-//                    
-//                    if(targetTime == 0)
-//                    {
-//                        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-//                        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-//                        [inputFormatter setDateFormat:@"yyyyM"];
-//                        NSDate* inputDate = [inputFormatter dateFromString:self.mycar.DepartureTime];
-//                        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-//                        [outputFormatter setLocale:[NSLocale currentLocale]];
-//                        [outputFormatter setDateFormat:@"yyyy-M"];
-//                        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
-                        lbl2.text  = self.mycar.DepartureTime;
-//                    }
-//
+                    //                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                    //                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                    //                    [inputFormatter setDateFormat:@"yyyyMM"];
+                    //                    NSDate* inputDate = [inputFormatter dateFromString:self.mycar.DepartureTime];
+                    //                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                    //                    [outputFormatter setLocale:[NSLocale currentLocale]];
+                    //                    [outputFormatter setDateFormat:@"yyyy-MM"];
+                    //                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    //                    lbl2.text  = targetTime;
+                    //
+                    //                    if(targetTime == 0)
+                    //                    {
+                    //                        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                    //                        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                    //                        [inputFormatter setDateFormat:@"yyyyM"];
+                    //                        NSDate* inputDate = [inputFormatter dateFromString:self.mycar.DepartureTime];
+                    //                        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                    //                        [outputFormatter setLocale:[NSLocale currentLocale]];
+                    //                        [outputFormatter setDateFormat:@"yyyy-M"];
+                    //                        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    lbl2.text  = self.mycar.DepartureTime;
+                    //                    }
+                    _lbl2 = lbl2;
+                    self.lblData = lbl2.text;
                 }
-
+                
                 
                 
                 lbl2.textColor = [UIColor colorFromHex:@"#868686"];
@@ -357,6 +445,16 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     
     return carCell;
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == _text1)
+    {
+        textField.text=nil;
+    }else if(textField == _text2){
+        textField.text=nil;
+    }
+    
+}
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if (textField == _numTF) {
@@ -367,7 +465,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         //so easy
         else if (_numTF.text.length >= 6) {
             _numTF.text = [textField.text substringToIndex:6];
-                       return NO;
+            return NO;
         }
     }
     if (textField==_text2) {
@@ -377,7 +475,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         }
         //so easy
         else if (_text2.text.length>=6) {
-           
+            
             _text2.text = [textField.text substringToIndex:6];
             
             return NO;
@@ -402,7 +500,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50*Main_Screen_Height/667;
-
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 1;
@@ -443,13 +541,11 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1)
     {
-        
         if (indexPath.row == 1) {
             [_numTF resignFirstResponder];
             [_text1 resignFirstResponder];
             [_text2 resignFirstResponder];
             [_brandTF resignFirstResponder];
-
             WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDay CompleteBlock:^(NSDate *selectDate) {
                 
                 NSString *date = [selectDate stringWithFormat:@"yyyy-MM"];
@@ -458,9 +554,9 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 self.lbl.text = date;
                 
             }];
-            datepicker.dateLabelColor = [UIColor colorFromHex:@"#febb02"];//年-月-日-时-分 颜色
+            datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
             datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
-            datepicker.doneButtonColor = [UIColor colorFromHex:@"#febb02"];//确定按钮的颜色
+            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
             [datepicker show];
             
         }
@@ -480,16 +576,34 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 self.lbl2.text = date;
                 
             }];
-            datepicker.dateLabelColor = [UIColor colorFromHex:@"#febb02"];//年-月-日-时-分 颜色
+            datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
             datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
-            datepicker.doneButtonColor = [UIColor colorFromHex:@"#febb02"];//确定按钮的颜色
+            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
             [datepicker show];
             
-//            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
-//                self.lblData=str;
-//                self.lbl2.text = str;
-//            }];
-//            [datePickerView show];
+            //            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
+            //                self.lblData=str;
+            //                self.lbl2.text = str;
+            //            }];
+            //            [datePickerView show];
+        }
+        
+    }else if (indexPath.section==0){
+        if (indexPath.row==2) {
+            CYChooseCarTypeViewController * chooseTypeVc=[[CYChooseCarTypeViewController alloc]init];
+            if ([editType isEqualToString:@"1"]) {
+                chooseTypeVc.CarNameString = editCarName;
+            }else{
+                chooseTypeVc.CarNameString = self.mycar.CarBrand;
+            }
+            
+            chooseTypeVc.hidesBottomBarWhenPushed =YES;
+            [self.navigationController pushViewController:chooseTypeVc animated:YES];
+        }else if (indexPath.row==1){
+            CYCarInsertViewController * chooseTypeVc=[[CYCarInsertViewController alloc]init];
+            chooseTypeVc.CyTYpe = @"编辑车辆信息";
+            chooseTypeVc.hidesBottomBarWhenPushed =YES;
+            [self.navigationController pushViewController:chooseTypeVc animated:YES];
         }
     }
     
@@ -511,7 +625,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
     HUD.removeFromSuperViewOnHide =YES;
     HUD.mode = MBProgressHUDModeIndeterminate;
     HUD.minSize = CGSizeMake(132.f, 108.0f);
-
+    
     
     
     if(self.mycar == nil)
@@ -521,26 +635,28 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         {
             [HUD hide:YES];
             [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
+            return;
         }
         
         else
         {
             NSString *lblstr=@"";
             if (self.lblYear.length>=4) {
-               lblstr=[self.lblYear substringWithRange:NSMakeRange(0,4)];
+                lblstr=[self.lblYear substringWithRange:NSMakeRange(0,4)];
             }
-//            lblstr= [lblstr isEqualToString:@" "]?0:lblstr;
+            //            lblstr= [lblstr isEqualToString:@" "]?0:lblstr;
             if(lblstr.length==0){
                 lblstr=@"0";
             }
             if(_text2.text.length==0 ){
                 _text2.text=@"0";
             }
-//            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;
+            //            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;
             NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
-         
+            
             NSDictionary *mulDic = @{
                                      @"CarBrand":_brandTF.text,
+                                     @"CarType":_brandTypeTF.text,
                                      @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
                                      @"ChassisNum":_text1.text,
                                      @"EngineNum":@"",
@@ -549,7 +665,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                      @"Mileage":_text2.text,
                                      @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                      };
-             NSLog(@"%@",mulDic);
+            NSLog(@"00000--%@",mulDic);
             NSMutableArray *ad = [NSMutableArray array];
             
             for (NSString *key in mulDic.allKeys) {
@@ -574,15 +690,15 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                         
                         NSNotification * notice = [NSNotification notificationWithName:@"increasemycarsuccess" object:nil userInfo:nil];
                         [[NSNotificationCenter defaultCenter]postNotification:notice];
-
+                        
                         __weak typeof (self) weakSelf = self;
-
+                        
                         
                         HUD.completionBlock = ^(){
                             NSArray *vcsArray = [NSArray array];
                             vcsArray= [self.navigationController viewControllers];
                             NSInteger vcCount = vcsArray.count;
-
+                            
                             if(vcCount <5)
                             {
                                 
@@ -591,42 +707,42 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                             }
                             else
                             {
-//                                UIViewController *lastVC = vcsArray[vcCount-4];
-//                                UIViewController *lasttwoVC = vcsArray[vcCount-5];
-//                                
-//                                int index=[[weakSelf.navigationController viewControllers]indexOfObject:weakSelf];
-//                                
-//                                if([lastVC isKindOfClass:[HowToUpGradeController class]])
-//                                {
+                                //                                UIViewController *lastVC = vcsArray[vcCount-4];
+                                //                                UIViewController *lasttwoVC = vcsArray[vcCount-5];
+                                //
+                                //                                int index=[[weakSelf.navigationController viewControllers]indexOfObject:weakSelf];
+                                //
+                                //                                if([lastVC isKindOfClass:[HowToUpGradeController class]])
+                                //                                {
                                 
-//                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-//                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
-//
-//                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                //                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                //                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                //
+                                //                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
                                 
                                 NSInteger m = 0;
                                 
                                 NSInteger n = 0;
                                 
-                                    
-                                    for (UIViewController *controller in weakSelf.navigationController.viewControllers) {
-                                        if ([controller isKindOfClass:[DSMembershipController class]]) {
-                                            DSMembershipController *memberVC =(DSMembershipController *)controller;
-                                            [weakSelf.navigationController popToViewController:memberVC animated:YES];
-                                            m++;
-                                        }
-                                        else if ([controller isKindOfClass:[DSMemberRightsController class]]) {
-                                            DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
-                                            [weakSelf.navigationController popToViewController:memberVC animated:YES];
-                                            n++;
-                                        }
+                                
+                                for (UIViewController *controller in weakSelf.navigationController.viewControllers) {
+                                    if ([controller isKindOfClass:[DSMembershipController class]]) {
+                                        DSMembershipController *memberVC =(DSMembershipController *)controller;
+                                        [weakSelf.navigationController popToViewController:memberVC animated:YES];
+                                        m++;
                                     }
+                                    else if ([controller isKindOfClass:[DSMemberRightsController class]]) {
+                                        DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
+                                        [weakSelf.navigationController popToViewController:memberVC animated:YES];
+                                        n++;
+                                    }
+                                }
                                 if(m != 0)
                                 {
                                     NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
                                     [[NSNotificationCenter defaultCenter]postNotification:notice];
                                     UIViewController *controller;
-                                    //金顶洗车
+                                    //蔷薇会员
                                     DSMembershipController *memberVC =(DSMembershipController *)controller;
                                     [weakSelf.navigationController popToViewController:memberVC animated:YES];
                                 }
@@ -639,33 +755,33 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                                     DSMemberRightsController *memberVC =(DSMemberRightsController *)controller;
                                     [weakSelf.navigationController popToViewController:memberVC animated:YES];
                                 }
-                                    
-                                    
-                                    
-                                    
-//                                }
-//                                else if([lastVC isKindOfClass:[EarnScoreController class]])
-//                                {
-//                                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
-//                                    {
-//                                        NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-//                                        [[NSNotificationCenter defaultCenter]postNotification:notice];
-//                                        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
-//                                    }
-//                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
-//                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
-//                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
-//                                }
-//
+                                
+                                
+                                
+                                
+                                //                                }
+                                //                                else if([lastVC isKindOfClass:[EarnScoreController class]])
+                                //                                {
+                                //                                    if([lasttwoVC isKindOfClass:[DSMembershipController class]])
+                                //                                    {
+                                //                                        NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                //                                        [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                //                                        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-4]animated:YES];
+                                //                                    }
+                                //                                    NSNotification * notice = [NSNotification notificationWithName:@"Earnsuccess" object:nil userInfo:nil];
+                                //                                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                                //                                    [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:index-5]animated:YES];
+                                //                                }
+                                //
                             }
-
+                            
                         };
-//
-//
-//        
+                        //
+                        //
+                        //
                         [HUD hide:YES afterDelay:1];
-//
-//                    
+                        //
+                        //
                     }
                     
                     else
@@ -673,22 +789,20 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                         [HUD setHidden:YES];
                         [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                     }
-                    
                 } fail:^(NSError *error) {
                     [HUD setHidden:YES];
                     [self.view showInfo:@"新增失败" autoHidden:YES interval:2];
                 }];
-                
             }
             else
             {
                 [HUD setHidden:YES];
                 [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
             }
-
+            
         }
         
-
+        
         
     }
     else
@@ -696,14 +810,19 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         if(_brandTF.text.length == 0 || _numTF.text.length == 0 )
         {
             [HUD hide:YES];
-            [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:2];
+            [self.view showInfo:@"请将信息填写完整" autoHidden:YES interval:1];
+            return;
         }
-
+        
         else
         {
-            
+            if (_numTF.text.length<6) {//判断是否是6位
+                [HUD hide:YES];
+                [self.view showInfo:@"请输入正确的车牌号" autoHidden:YES interval:1];
+                return;
+            }
             NSString *lblstr=@"";
-            if (_lbl.text.length>=4) {
+            if (self.lblYear.length>=4) {
                 lblstr=[self.lblYear substringWithRange:NSMakeRange(0,4)];
             }
             //            lblstr= [lblstr isEqualToString:@" "]?0:lblstr;
@@ -713,38 +832,28 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             if(_text2.text.length==0 ){
                 _text2.text=@"0";
             }
-            //            _text2.text=[_text2.text isEqualToString:@" "]?0:_text2.text;
             NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
-            
-//            NSDictionary *mulDic = @{
-//                                     @"CarBrand":_brandTF.text,
-//                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
-//                                     @"ChassisNum":_text1.text,
-//                                     @"EngineNum":@"",
-//                                     @"Manufacture":lblstr,
-//                                     @"DepartureTime":self.lblData,
-//                                     @"Mileage":_text2.text,
-//                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
-//                                     };
-//            
-            
-            
-            NSDictionary *mulDic = @{
-                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                     @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
-                                     @"ModifyType":@1,
-                                     @"CarBrand":_brandTF.text,
-                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
-                                     @"ChassisNum":_text1.text,
-                                     @"EngineNum":@"",
-                                     @"Manufacture":lblstr,
-                                     @"DepartureTime":_lbl2.text,
-                                     @"Mileage":_text2.text
-                                     };
+            NSLog(@"%@===%@==%@===%@",_brandTypeTF.text,_brandTF.text,self.lblData,_text2.text);
+            NSDictionary *mulDic = [[NSDictionary alloc]initWithObjectsAndKeys:[UdStorage getObjectforKey:@"Account_Id"],@"Account_Id",_brandTypeTF.text,@"CarType",[NSString stringWithFormat:@"%ld",self.mycar.CarCode],@"CarCode",@1,@"ModifyType",_brandTF.text,@"CarBrand",[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],@"PlateNumber",_text1.text,@"ChassisNum",@"",@"EngineNum",lblstr,@"Manufacture",self.lblData,@"DepartureTime",_text2.text,@"Mileage",nil];
+            //            NSDictionary *mulDic = @{
+            //                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+            //                                     @"CarType":_brandTypeTF.text,
+            //                                     @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
+            //                                     @"ModifyType":@1,
+            //                                     @"CarBrand":_brandTF.text,
+            //                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
+            //                                     @"ChassisNum":_text1.text,
+            //                                     @"EngineNum":@"",
+            //                                     @"Manufacture":lblstr,
+            //                                     @"DepartureTime":self.lblData,
+            //                                     @"Mileage":_text2.text
+            //
+            //                                     };
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                      };
+            NSLog(@"---%@",params);
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
@@ -770,10 +879,6 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                     
                     [HUD hide:YES afterDelay:1.f];
                     
-                    
-                    
-                    
-                    
                 }
                 else
                 {
@@ -790,7 +895,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
         
         
         
-
+        
     }
     
     
@@ -807,18 +912,22 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
 
 #pragma mark - 弹出省份简称
 - (void)didClickProvinceBtn {
-
+    
     ProvinceShortController *provinceVC = [[ProvinceShortController alloc] init];
-
     typeof(self) weakSelf = self;
-
+    
     provinceVC.provinceBlock = ^(NSString *nameText) {
-
+        
         [weakSelf.provinceBtn setTitle:nameText forState:UIControlStateNormal];
     };
-
+    
     provinceVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:provinceVC animated:NO completion:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

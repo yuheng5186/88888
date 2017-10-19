@@ -19,6 +19,7 @@
 #import "UdStorage.h"
 #import "MBProgressHUD.h"
 
+#import "CYCarInsertViewController.h"
 @interface MyCarPortController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -54,9 +55,9 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 //- (UIView *)increaseView {
-//    
+//
 //    if (_increaseView == nil) {
-//        
+//
 //        UIView *increaseView = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height - 60, Main_Screen_Width, 60)];
 //        _increaseView = increaseView;
 //        [self.view addSubview:_increaseView];
@@ -71,7 +72,11 @@ static NSString *id_carListCell = @"id_carListCell";
     
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getMyCarData];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -81,8 +86,8 @@ static NSString *id_carListCell = @"id_carListCell";
     [self setupUI];
     
     
-
-   
+    
+    
 }
 
 -(void)getMyCarData
@@ -107,13 +112,13 @@ static NSString *id_carListCell = @"id_carListCell";
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
-           
+            
             for(NSDictionary *dic in arr)
             {
-//                MyCar *newcar = [[MyCar alloc]init];
+                //                MyCar *newcar = [[MyCar alloc]init];
                 if([dic[@"IsDefaultFav"] intValue] == 1)
                 {
-//                    [newcar setValuesForKeysWithDictionary:dic];
+                    //                    [newcar setValuesForKeysWithDictionary:dic];
                     [_myDefaultcararray addObject:dic];
                 }
                 else
@@ -123,9 +128,9 @@ static NSString *id_carListCell = @"id_carListCell";
                 
             }
 #pragma mark-当只有一辆车时设置为默认
-           
+            
             if (arr.count!=0) {
-                 NSLog(@"%@===%ld===%@",arr,arr.count,[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"]);
+                NSLog(@"%@===%ld===%@",arr,arr.count,[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"]);
                 int isdefault=  [[(NSDictionary *)arr[0] objectForKey:@"IsDefaultFav"] intValue];
                 if (arr.count==1&&isdefault==0) {
                     [self SetCarDefaultDataAndIndex:0];
@@ -133,13 +138,13 @@ static NSString *id_carListCell = @"id_carListCell";
             }
             
             __block __weak typeof (self)weakSelf = self;
-
+            
             HUD.completionBlock = ^()
             {
                 [weakSelf.carListView reloadData];
                 
             };
-
+            
             [HUD hide:YES afterDelay:1];
             
         }
@@ -147,13 +152,13 @@ static NSString *id_carListCell = @"id_carListCell";
         {
             [HUD setHidden:YES];
             [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
-//            [self setupUI];
+            //            [self setupUI];
         }
         
     } fail:^(NSError *error) {
         [HUD setHidden:YES];
         [self.view showInfo:@"网络异常" autoHidden:YES interval:2];
-//        [self setupUI];
+        //        [self setupUI];
     }];
     
 }
@@ -187,7 +192,6 @@ static NSString *id_carListCell = @"id_carListCell";
     HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self getMyCarData];
     
     
     
@@ -197,58 +201,65 @@ static NSString *id_carListCell = @"id_carListCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 130*Main_Screen_Height/667;
+    return 160;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    if([_myDefaultcararray count] == 0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 2;
-    }
+    NSInteger a = self.myDefaultcararray.count;
+    NSInteger b = self.self.mycararray.count;
+    //    if([_myDefaultcararray count] == 0)
+    //    {
+    //        return 1;
+    //    }
+    //    else
+    //    {
+    //        return self.mycararray.count;
+    //    }
+    return a+b;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if([_myDefaultcararray count] != 0)
-    {
-        if(section == 1)
-        {
-            return [self.mycararray count];
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-    {
-        return [self.mycararray count];
-    }
-
-//    return 0;
+    //    if([_myDefaultcararray count] != 0)
+    //    {
+    //        if(section == 1)
+    //        {
+    //            return [self.mycararray count];
+    //        }
+    //        else
+    //        {
+    //            return 1;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        return [self.mycararray count];
+    //    }
+    return 1;
+    //    return 0;
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if([_myDefaultcararray count] != 0)
-    {
-        if(section == 1)
-        {
-            return 10*Main_Screen_Height/667;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
+    //    if([_myDefaultcararray count] != 0)
+    //    {
+    //        if(section == 1)
+    //        {
+    //            return 10*Main_Screen_Height/667;
+    //        }
+    //        else
+    //        {
+    //            return 0;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        return 0;
+    //    }
+    if (section==0) {
         return 0;
+    }else{
+        return 10*Main_Screen_Height/667;
     }
     
 }
@@ -256,29 +267,36 @@ static NSString *id_carListCell = @"id_carListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MyCarViewCell *carCell = [tableView dequeueReusableCellWithIdentifier:id_carListCell];
-    
-    
     if([_myDefaultcararray count] != 0)
     {
         if(indexPath.section == 0)
         {
-            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-            carCell.brandLabel.text = [[_myDefaultcararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            if ([[[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"] isKindOfClass:[NSNull class]]) {
+                carCell.manuLabel.hidden=YES;
+            }else{
+                carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"]];
+            }
+            
+            carCell.brandLabel.text = [[_myDefaultcararray objectAtIndex:indexPath.section] objectForKey:@"CarBrand"];
             carCell.defaultButton.selected = YES;
             carCell.defaultButton.enabled = NO;
-            carCell.deleteButton.tag = indexPath.row+10000;
+            carCell.deleteButton.tag = indexPath.section+10000;
             [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
             
             [carCell.defaultButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
-             carCell.defaulLabel.hidden = NO;
+            carCell.defaulLabel.hidden = NO;
         }
         else
         {
-            carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-            carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+            if ([[[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"Manufacture"] isKindOfClass:[NSNull class]]) {
+                carCell.manuLabel.hidden=YES;
+            }else{
+                carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"Manufacture"]];
+            }
+            carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.section-1] objectForKey:@"CarBrand"];
             carCell.defaultButton.selected = NO;
-            carCell.defaultButton.tag = indexPath.row;
-            carCell.deleteButton.tag = indexPath.row;
+            carCell.defaultButton.tag = indexPath.section-1;
+            carCell.deleteButton.tag = indexPath.section-1;
             [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
             
             carCell.defaulLabel.hidden = YES;
@@ -286,29 +304,30 @@ static NSString *id_carListCell = @"id_carListCell";
     }
     else
     {
-        carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.row] objectForKey:@"Manufacture"]];
-        carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.row] objectForKey:@"CarBrand"];
+        carCell.manuLabel.text = [NSString stringWithFormat:@"%@年产",[[_mycararray objectAtIndex:indexPath.section] objectForKey:@"Manufacture"]];
+        carCell.brandLabel.text = [[_mycararray objectAtIndex:indexPath.section] objectForKey:@"CarBrand"];
         carCell.defaultButton.selected = NO;
-        carCell.defaultButton.tag = indexPath.row;
-        carCell.deleteButton.tag = indexPath.row;
+        carCell.defaultButton.tag = indexPath.section;
+        carCell.deleteButton.tag = indexPath.section;
         [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+        
         
         carCell.defaulLabel.hidden = YES;
     }
     
     
     
-//    if (indexPath.section == self.nowPath.section) {
-//        
-//        carCell.defaultButton.selected = YES;
-//        [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
-//        
-//    }else {
-//        
-//        carCell.defaultButton.selected = NO;
-//        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
-//        
-//    }
+    //    if (indexPath.section == self.nowPath.section) {
+    //
+    //        carCell.defaultButton.selected = YES;
+    //        [carCell.defaultButton setTitle:@"已默认" forState:UIControlStateNormal];
+    //
+    //    }else {
+    //
+    //        carCell.defaultButton.selected = NO;
+    //        [carCell.defaultButton setTitle:@"设置默认" forState:UIControlStateNormal];
+    //
+    //    }
     
     
     return carCell;
@@ -336,15 +355,15 @@ static NSString *id_carListCell = @"id_carListCell";
     
     
     
-//    UITableViewCell *cell = (UITableViewCell *) [[button superview] superview];
+    //    UITableViewCell *cell = (UITableViewCell *) [[button superview] superview];
     
-//    NSIndexPath *path = [self.carListView indexPathForCell:cell];
+    //    NSIndexPath *path = [self.carListView indexPathForCell:cell];
     
     //记录当下的indexpath
-//    self.nowPath = path;
+    //    self.nowPath = path;
     [self SetCarDefaultDataAndIndex:button.tag];
     
-
+    
     
     
     
@@ -429,124 +448,129 @@ static NSString *id_carListCell = @"id_carListCell";
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"删除车辆后，车辆数据将不再保存，您确认删除吗？" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"我再想想" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
+    [cancelAction setValue:[UIColor lightGrayColor] forKey:@"titleTextColor"];
     [alertController addAction:cancelAction];
     
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         
         MBProgressHUD *HUD1 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD1.removeFromSuperViewOnHide =YES;
         HUD1.mode = MBProgressHUDModeIndeterminate;
         HUD1.minSize = CGSizeMake(132.f, 108.0f);
-       
-//        [HUD show:YES];
         
-            if(sender.tag >= 10000)
-            {
-                NSDictionary *mulDic = @{
-                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                         @"CarCode":[[_myDefaultcararray objectAtIndex:sender.tag - 10000] objectForKey:@"CarCode"],
-                                         @"ModifyType":@3,
-                                         };
-                NSDictionary *params = @{
-                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                         };
-                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        //        [HUD show:YES];
+        
+        if(sender.tag >= 10000)
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"CarCode":[[_myDefaultcararray objectAtIndex:sender.tag - 10000] objectForKey:@"CarCode"],
+                                     @"ModifyType":@3,
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
                     
-                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-                    {
-                        
-                        NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
-                        [[NSNotificationCenter defaultCenter]postNotification:notice];
-                        __weak typeof (self)weakSelf = self;
-                        
-                        HUD1.completionBlock = ^(){
-                            [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
-                            
-                            
-                            
-                            [weakSelf.myDefaultcararray removeAllObjects];
-                            
-                            
-                            
-                            [weakSelf.carListView reloadData];
-                            
-                            
-                            
-                        };
-                        
-                        [HUD1 hide:YES afterDelay:1];
-                        
-                    }
-                    else
-                    {
-                        [HUD1 hide:YES];
-                        [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
-                    }
+                    NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    __weak typeof (self)weakSelf = self;
                     
-                } fail:^(NSError *error) {
+                    HUD1.completionBlock = ^(){
+                        [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
+                        
+                        
+                        
+                        [weakSelf.myDefaultcararray removeAllObjects];
+                        
+                        
+                        
+                        [weakSelf.carListView reloadData];
+                        
+                        
+                        
+                    };
+                    
+                    [HUD1 hide:YES afterDelay:1];
+                    
+                }
+                else
+                {
                     [HUD1 hide:YES];
                     [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
-                }];
-            }
-            else
-            {
-                NSDictionary *mulDic = @{
-                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                                         @"CarCode":[[_mycararray objectAtIndex:sender.tag] objectForKey:@"CarCode"],
-                                         @"ModifyType":@3,
-                                         };
-                NSDictionary *params = @{
-                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                                         };
-                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                }
+                
+            } fail:^(NSError *error) {
+                [HUD1 hide:YES];
+                [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
+            }];
+        }
+        else
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                     @"CarCode":[[_mycararray objectAtIndex:sender.tag] objectForKey:@"CarCode"],
+                                     @"ModifyType":@3,
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MyCar/ModifyCarInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter]postNotification:notice];
                     
-                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-                    {
-                        NSNotification * notice = [NSNotification notificationWithName:@"updatemycarsuccess" object:nil userInfo:nil];
-                        [[NSNotificationCenter defaultCenter]postNotification:notice];
-                        
-                        __weak typeof (self)weakSelf = self;
-                        
-                        HUD1.completionBlock = ^(){
-                            [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
-                         
-                            
-                            
-                            [weakSelf.mycararray removeObjectAtIndex:sender.tag];
-                            
-                            
-                            
-                            [weakSelf.carListView reloadData];
-                            
-                            
-                            
-                        };
-                        
-                        [HUD1 hide:YES afterDelay:1];
-                    }
-                    else
-                    {
-                        [HUD1 hide:YES];
-                        [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
-                    }
+                    __weak typeof (self)weakSelf = self;
                     
-                } fail:^(NSError *error) {
+                    HUD1.completionBlock = ^(){
+                        [weakSelf.view showInfo:@"删除成功" autoHidden:YES interval:2];
+                        
+                        
+                        
+                        [weakSelf.mycararray removeObjectAtIndex:sender.tag];
+                        
+                        
+                        
+                        [weakSelf.carListView reloadData];
+                        
+                        
+                        
+                    };
+                    
+                    [HUD1 hide:YES afterDelay:1];
+                }
+                else
+                {
                     [HUD1 hide:YES];
                     [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
-                }];
-            }
-
+                }
+                
+            } fail:^(NSError *error) {
+                [HUD1 hide:YES];
+                [self.view showInfo:@"删除失败" autoHidden:YES interval:2];
+            }];
+        }
+        
     }];
     [alertController addAction:OKAction];
+//    NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"删除车辆后，车辆数据将不再保存，您确认删除吗？"];
+//    [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, 23)];
+//    [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 23)];
+//    [alertController setValue:alertControllerMessageStr forKey:@"attributedMessage"];
     
+    [OKAction setValue:[UIColor lightGrayColor] forKey:@"titleTextColor"];
     [self presentViewController:alertController animated:YES completion:nil];
-    
 }
 
 
@@ -554,11 +578,15 @@ static NSString *id_carListCell = @"id_carListCell";
 #pragma mark - 新增车辆
 - (void)didClickIncreaseButton {
     
-    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+    //    IcreaseCarController *increaseVC = [[IcreaseCarController alloc] init];
+    //    increaseVC.hidesBottomBarWhenPushed = YES;
+    //    increaseVC.titlename = @"新增车辆";
+    //    [self.navigationController pushViewController:increaseVC animated:YES];
+    CYCarInsertViewController * increaseVC = [[CYCarInsertViewController alloc]init];
     increaseVC.hidesBottomBarWhenPushed = YES;
-    increaseVC.titlename = @"新增车辆";
+    increaseVC.open=1;
     [self.navigationController pushViewController:increaseVC animated:YES];
-    
+    //
 }
 
 -(void)noticeincreaseMyCar:(NSNotification *)sender{
@@ -639,19 +667,6 @@ static NSString *id_carListCell = @"id_carListCell";
 {
     return 0;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

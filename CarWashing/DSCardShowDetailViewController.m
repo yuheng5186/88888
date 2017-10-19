@@ -285,13 +285,13 @@
 }
 - (void) buyButtonClick:(id)sender {
 
-    [self.view showInfo:@"暂时不提供购买服务" autoHidden:YES];
+//    [self.view showInfo:@"暂时不提供购买服务" autoHidden:YES];
 
 //    Card *card = (Card *)[_CardArray objectAtIndex:_Xuhao];
-//    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
-//    payCardVC.hidesBottomBarWhenPushed = YES;
-//    payCardVC.choosecard = self.choosecard;
-//    [self.navigationController pushViewController:payCardVC animated:YES];
+    PayPurchaseCardController *payCardVC = [[PayPurchaseCardController alloc] init];
+    payCardVC.hidesBottomBarWhenPushed = YES;
+    payCardVC.choosecard = self.choosecard;
+    [self.navigationController pushViewController:payCardVC animated:YES];
 
 }
 - (void)didReceiveMemoryWarning {

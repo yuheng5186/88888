@@ -13,7 +13,7 @@
 #pragma mark-本地
 //安卓上线服务器
 
-////金顶线上第七版
+//////金顶线上第七版
 //#define Khttp     @"http://120.78.48.105/api/"
 //#define kHTTPImg  @"http://120.78.48.105"
 

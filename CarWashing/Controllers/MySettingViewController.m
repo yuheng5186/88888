@@ -712,7 +712,7 @@
             
             ButtonView *bv ;
             
-            bv = [[ButtonView alloc]initWithText:@"微信" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+            bv = [[ButtonView alloc]initWithText:@"微信好友" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
                 NSLog(@"点击微信");
                 NSDictionary *mulDic = @{
                                          @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
@@ -760,7 +760,6 @@
                     [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
                     
                 }];
-
                 
                 self.tabBarController.tabBar.hidden = NO;
 

@@ -61,9 +61,9 @@
         if (self.RMListArray.count<=6) {
             headerView.frame= CGRectMake(0, 0, Main_Screen_Width, 135);
             blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 105);
-        }else if (self.RMListArray.count<=12){
+        }else if (self.RMListArray.count>6&&self.RMListArray.count<=12){
             headerView.frame= CGRectMake(0, 0, Main_Screen_Width, 225);
-            blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 165);
+            blakView.frame = CGRectMake(0, 30, Main_Screen_Width, 195);
         }
         CGFloat w = (Main_Screen_Width-30)/3;
         for (int i = 0; i < self.RMListArray.count; i++) {
@@ -80,6 +80,15 @@
             btn.backgroundColor = [UIColor colorFromHex:@"#e6e6e6"];
             [blakView addSubview:btn];
         }
+        UIButton * RMBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        RMBtn.frame=CGRectMake(Main_Screen_Width-30, (Main_Screen_Height-340)/2, 30, 20);
+        [RMBtn setTitle:@"热门" forState:UIControlStateNormal];
+        RMBtn.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        [RMBtn setTitleColor:RGBAA(102, 102, 102, 1.0) forState:UIControlStateNormal];
+        [RMBtn addTarget:self action:@selector(rmClick) forControlEvents:UIControlEventTouchUpInside];
+        RMBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        RMBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        [self.view addSubview:RMBtn];
         for (int i=0; i<self.RMListArraySection.count; i++) {
             CYCarRMListModel * model = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][@"ZMList"]][i];
             UIButton * indexBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -216,6 +225,10 @@
 {
     NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:Indexbtn.tag];
     [_tableview  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+-(void)rmClick
+{
+    [self.tableview setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 #pragma mark =----tableViewDelegate
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

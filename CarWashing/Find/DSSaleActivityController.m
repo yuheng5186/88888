@@ -44,11 +44,11 @@ static NSString *cellStatic = @"cellStatic";
     
 }
 
-- (void) drawContent {
-    
-    self.contentView.top                = self.statusView.bottom;
-    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
-}
+//- (void) drawContent {
+//
+//    self.contentView.top                = self.statusView.bottom;
+//    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#111112"];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,101 +56,105 @@ static NSString *cellStatic = @"cellStatic";
     [self createSubView];
 }
 - (void) createSubView {
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
-    self.tableView.top              = 0;
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width,Main_Screen_Height-64) style:UITableViewStyleGrouped];
+//    self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.emptyDataSetDelegate=self;
     self.tableView.emptyDataSetSource=self;
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.tableFooterView = [UIView new];
+    self.tableView.estimatedRowHeight =0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.showsVerticalScrollIndicator =YES;
+//    self.tableView.tableFooterView = [UIView new];
+//    self.tableView.tableFooterView = [UIView new];
 //    self.tableView.scrollEnabled    = NO;
-    self.tableView.tableFooterView  = [UIView new];
-    self.tableView.tableHeaderView  = [UIView new];
+//    self.tableView.tableFooterView  = [UIView new];
+//    self.tableView.tableHeaderView  = [UIView new];
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
 
     [self.tableView registerClass:[DSSalaActivityCell class] forCellReuseIdentifier:cellStatic];
     
-    [self.contentView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     _CouponListData = [[NSMutableArray alloc]init];
-     self.area = @"上海市";
+     self.area = @"青岛市";
     
     
-    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    HUD.removeFromSuperViewOnHide =YES;
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    HUD.labelText = @"加载中";
-    HUD.minSize = CGSizeMake(132.f, 108.0f);
+//    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    HUD.removeFromSuperViewOnHide =YES;
+//    HUD.mode = MBProgressHUDModeIndeterminate;
+//    HUD.labelText = @"加载中";
+//    HUD.minSize = CGSizeMake(132.f, 108.0f);
     
     
-    [self GetCouponList];
-//    [self setupRefresh];
+//   [self GetCouponList];
+    [self setupRefresh];
     
-//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-//    }
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
-//-(void)setupRefresh
-//{
-//    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-//        
-//        [self headerRereshing];
-//        
-//    }];
-//    
-//    // 设置自动切换透明度(在导航栏下面自动隐藏)
-//    self.tableView.mj_header.automaticallyChangeAlpha = YES;
-//    
-//    [self.tableView.mj_header beginRefreshing];
-//    
+-(void)setupRefresh
+{
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        
+        [self headerRereshing];
+        
+    }];
+    
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    self.tableView.mj_header.automaticallyChangeAlpha = YES;
+    
+    [self.tableView.mj_header beginRefreshing];
+    
 //    // 上拉刷新
 //    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
 //        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-//        
+//
 //        [self footerRereshing];
-//        
+//
 //    }];
-//}
+}
 
-//- (void)headerRereshing
-//{
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        _CouponListData = [NSMutableArray new];
-//        
-//        self.page = 0 ;
-//        
-//        [self GetCouponList];
-//        
-//    });
-//}
+- (void)headerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _CouponListData = [NSMutableArray new];
+        
+        self.page = 0 ;
+        
+        [self GetCouponList];
+        
+    });
+}
 
 
-//- (void)footerRereshing
-//{
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
-//        if(_CouponListData.count == 0)
-//        {
-//            [self GetCouponList];
-//        }
-//        else
-//        {
-//            self.page++;
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if(_CouponListData.count == 0)
+        {
+            [self GetCouponList];
+        }
+        else
+        {
+            self.page++;
 //            [self GetCouponListmore];
-//            
-//        }
-//        
-//        
-//        
-//        
-//        // 刷新表格
-//        
-//        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-//        
-//    });
-//}
+            
+        }
+        
+        
+        
+        
+        // 刷新表格
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        
+    });
+}
 
 -(void)GetCouponList
 {
@@ -165,7 +169,9 @@ static NSString *cellStatic = @"cellStatic";
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            
         {
+            [self.tableView.mj_header endRefreshing];
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             [_CouponListData addObjectsFromArray:arr];
@@ -174,10 +180,12 @@ static NSString *cellStatic = @"cellStatic";
         }
         else
         {
+            [self.tableView.mj_header endRefreshing];
             [self.view showInfo:@"信息获取失败" autoHidden:YES interval:2];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } fail:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
         [self.view showInfo:@"获取失败" autoHidden:YES interval:2];
         [self.navigationController popViewControllerAnimated:YES];
         
@@ -202,10 +210,10 @@ static NSString *cellStatic = @"cellStatic";
     return 90*Main_Screen_Height/667;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    return 10.0f*Main_Screen_Height/667;
-}
+//- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//
+//    return 10.0f*Main_Screen_Height/667;
+//}
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 40.01f*Main_Screen_Height/667;
@@ -217,7 +225,7 @@ static NSString *cellStatic = @"cellStatic";
     NSString *title     = [[_CouponListData objectAtIndex:section] objectForKey:@"CreateTime"];
     UIFont *titleFont   = [UIFont systemFontOfSize:14];
     
-    UILabel *titleLabel     = [UIUtil drawLabelInView:view frame:CGRectMake(0, 0, Main_Screen_Width*150/375, Main_Screen_Height*30/667) font:titleFont text:title isCenter:YES];
+    UILabel *titleLabel     = [UIUtil drawLabelInView:view frame:CGRectMake(0, 0, Main_Screen_Width*150/375, 40.01f*Main_Screen_Height/667) font:titleFont text:title isCenter:YES];
     titleLabel.centerX  = Main_Screen_Width/2;
     titleLabel.textColor    = [UIColor colorFromHex:@"#999999"];
     [view addSubview:titleLabel];

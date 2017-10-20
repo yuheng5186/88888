@@ -46,10 +46,13 @@
 - (void) createSubView {
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*150/667) style:UITableViewStylePlain];
-    self.tableView.top              = -10;
+    self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.scrollEnabled    = NO;
+    self.tableView.estimatedRowHeight =0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.tableHeaderView  = [UIView new];
     self.tableView.backgroundColor  = [UIColor clearColor];
     [self.contentView addSubview:self.tableView];

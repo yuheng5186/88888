@@ -165,7 +165,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 {
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"GetCardType":@(self.GetCardType),
+                            @"GetCardType":@(self.GetCardType),
                              @"PageIndex":[NSString stringWithFormat:@"%ld",self.page],
                              @"PageSize":@10
                              };
@@ -235,15 +235,15 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
         make.top.equalTo(self.view.mas_top).mas_offset(64);
         make.left.equalTo(self.view).mas_offset(Main_Screen_Width*22.5/375);
         make.right.equalTo(self.view).mas_offset(-Main_Screen_Width*22.5/375);
-        make.height.mas_equalTo(self.view.height-Main_Screen_Height*64/667);
+        make.height.mas_equalTo(Main_Screen_Height-64);
     }];
     //    self.rechargeView.top   =titleView.bottom+Main_Screen_Height*10/667;
     self.rechargeView.delegate = self;
     self.rechargeView.dataSource = self;
-    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
+//    self.rechargeView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
     
     [self.rechargeView registerNib:[UINib nibWithNibName:@"RechargeCell" bundle:nil] forCellReuseIdentifier:id_rechargeCell];
-    self.rechargeView.rowHeight = Main_Screen_Height*190/667;
+    self.rechargeView.rowHeight = 190;
     self.rechargeView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.rechargeView.backgroundColor = [UIColor clearColor];
     self.rechargeView.showsVerticalScrollIndicator = NO;
@@ -384,14 +384,22 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return Main_Screen_Height*22.5/667;
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
+    if (section==_CardbagData.count-1) {
+        return 20;
+    }
     return Main_Screen_Height*0/667;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view = [[UIView alloc]init];
+    view.backgroundColor=[UIColor clearColor];
+    return view;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
     UIView * view = [[UIView alloc]init];
     view.backgroundColor=[UIColor clearColor];
     return view;

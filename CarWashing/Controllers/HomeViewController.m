@@ -1084,6 +1084,7 @@
         Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
+        detaleController.titlename = @"活动赠送";
         detaleController.record                         = record;
         [self.navigationController pushViewController:detaleController animated:YES];
     }

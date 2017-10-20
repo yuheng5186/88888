@@ -145,6 +145,7 @@
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
 		185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185833DC1F6E0D71004EA905 /* BusinessViewController.m */; };
+		186E9C591F99D5ED00898016 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E9C581F99D5ED00898016 /* Helper.m */; };
 		1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2211F66E0870042B062 /* QWMerComListModel.m */; };
 		1887A2251F66E0870042B062 /* QWMerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2231F66E0870042B062 /* QWMerchantModel.m */; };
 		1888214C1F6BD336002618F7 /* b1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 188821461F6BD336002618F7 /* b1.gif */; };
@@ -583,6 +584,8 @@
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
 		185833DB1F6E0D71004EA905 /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = model/BusinessViewController.h; sourceTree = "<group>"; };
 		185833DC1F6E0D71004EA905 /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = model/BusinessViewController.m; sourceTree = "<group>"; };
+		186E9C571F99D5ED00898016 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		186E9C581F99D5ED00898016 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		1887A2201F66E0870042B062 /* QWMerComListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerComListModel.h; sourceTree = "<group>"; };
 		1887A2211F66E0870042B062 /* QWMerComListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QWMerComListModel.m; sourceTree = "<group>"; };
 		1887A2221F66E0870042B062 /* QWMerchantModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerchantModel.h; sourceTree = "<group>"; };
@@ -1076,6 +1079,8 @@
 				180E432E1F41921E00013D2D /* PhoneHelper.m */,
 				1850901A1F43F19B00795E0A /* LCMD5Tool.h */,
 				1850901B1F43F19B00795E0A /* LCMD5Tool.m */,
+				186E9C571F99D5ED00898016 /* Helper.h */,
+				186E9C581F99D5ED00898016 /* Helper.m */,
 			);
 			name = Tool;
 			path = ..;
@@ -2332,6 +2337,7 @@
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
 				18B8037A1F1DA2A300B52432 /* AppDelegate.m in Sources */,
 				181E92CE1F1F39CC0006511E /* UIUtil.m in Sources */,
+				186E9C591F99D5ED00898016 /* Helper.m in Sources */,
 				18A4B1B71F4BF9C800C64978 /* MemberRightsDetailController.m in Sources */,
 				501672161F297D8200384186 /* PurchaseCardViewCell.m in Sources */,
 				50B26EA91F315EB8009B3B9F /* PayOrderController.m in Sources */,

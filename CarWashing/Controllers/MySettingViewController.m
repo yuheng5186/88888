@@ -49,7 +49,6 @@
 }
 @property (nonatomic, strong) HYActivityView *activityView;
 
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UIImageView  *editButton;
 @property (nonatomic, strong) UIButton  *signButton;
@@ -457,7 +456,7 @@
                     PopupView *view = [PopupView defaultPopupView];
                     view.parentVC = self;
                     
-                    [self.tableView reloadData];
+                    [self.salerListView reloadData];
                     
                     [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
                         
@@ -511,7 +510,7 @@
                 
                 [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
                 
-                [self.tableView reloadData];
+                [self.salerListView reloadData];
                 
                 PopupView *view = [PopupView defaultPopupView];
                 view.parentVC = self;

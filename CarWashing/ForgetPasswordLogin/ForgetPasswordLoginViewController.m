@@ -400,7 +400,7 @@
         lineView.left                   = cell.imageView.left +Main_Screen_Width*20/375;
         
     }else if (indexPath.row == 2) {
-        cell.imageView.image                = [UIImage imageNamed:@"mimayanzheng"];
+        cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
         self.passwordFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-150, Main_Screen_Height*40/667)];
         self.passwordFieldText.placeholder    = @"至少输入6位新密码";

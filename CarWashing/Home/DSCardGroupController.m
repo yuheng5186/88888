@@ -571,7 +571,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
         [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
-            
+            NSLog(@"----%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {
                 if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 3)
@@ -582,6 +582,15 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
                 {
                     [self.view showInfo:@"激活成功" autoHidden:YES interval:2];
                     [self GetCardbagList];
+//                    NSArray *arr = [NSArray array];
+//                    arr = [dict objectForKey:@"JsonData"];
+//                    for(NSDictionary *dic in arr)
+//                    {
+//                        CardBag *model = [CardBag new];
+//                        [model setValuesForKeysWithDictionary:dic];
+//                        [_CardbagData addObject:model];
+//                    }
+//                    [self.rechargeView reloadData];
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
                 {

@@ -18,8 +18,12 @@
 @implementation DSConsumerDetailController
 
 - (void) drawNavigation {
+    if ([self.titlename isEqualToString:@"活动赠送"]) {
+         [self drawTitle:@"活动赠送"];
+    }else{
+         [self drawTitle:@"消费记录"];
+    }
     
-    [self drawTitle:@"消费记录"];
 }
 - (void) drawContent
 {
@@ -69,20 +73,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+     if ([self.titlename isEqualToString:@"活动赠送"]) {
+         return 1;
+     }
+     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return 1;
-            break;
-            
-        default:
-            break;
+    if ([self.titlename isEqualToString:@"活动赠送"]) {
+        return 5;
+    }else{
+        switch (section) {
+            case 0:
+                return 1;
+                break;
+                
+            default:
+                break;
+        }
+        return 5;
     }
-    return 5;
+   
 }
 
 
@@ -95,7 +107,41 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if ([self.titlename isEqualToString:@"活动赠送"]) {
+        static NSString *cellStatic = @"cellStaticSport";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+        }
+        cell.backgroundColor    = [UIColor whiteColor];
+        cell.textLabel.textColor    = [UIColor colorFromHex:@"#4a4a4a"];
+        cell.detailTextLabel.textColor = [UIColor colorFromHex:@"#999999"];
+        cell.detailTextLabel.font   = [UIFont systemFontOfSize:13];
+        if (indexPath.row == 0) {
+            
+            cell.textLabel.text     = @"获得途径";
+            cell.detailTextLabel.text   = self.record.ConsumerDescrip;
+            
+        }else if (indexPath.row == 1){
+            cell.textLabel.text     = @"赠送时间";
+            cell.detailTextLabel.text   = self.record.CreateDate;
+            
+        }else if (indexPath.row == 2){
+            cell.textLabel.text     = @"卡类型";
+            cell.detailTextLabel.text   = [NSString stringWithFormat:@"洗车%@",self.record.MiddleDes];
+            
+        }else if (indexPath.row == 3){
+            cell.textLabel.text     = @"洗车次数";
+            cell.detailTextLabel.text   =  [NSString stringWithFormat:@"免费洗车%@次",self.record.BottomDes];
+            
+        }else {
+            cell.textLabel.text     = @"活动编号";
+            cell.detailTextLabel.text   = self.record.UniqueNumber;
+            
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     static NSString *cellStatic = @"cellStatic";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
     if (!cell) {

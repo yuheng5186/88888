@@ -12,6 +12,6 @@
 @interface DSConsumerDetailController : BaseController
 
 @property(nonatomic,copy)Recordinfo *record;
-
+@property(nonatomic,copy)NSString *titlename;
 
 @end

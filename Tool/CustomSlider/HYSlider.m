@@ -140,7 +140,7 @@
     /** 浮标image*/
     _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(-10*Main_Screen_Width/667, -3*Main_Screen_Height/667,46*Main_Screen_Width/375,25*Main_Screen_Height/667)];
 //    _imageView.contentMode=UIViewContentModeScaleAspectFill;
-    _imageView.image = [UIImage imageNamed:@"huiyuanfenshukuang"];
+    _imageView.image = [UIImage imageNamed:@"huiyuanfenshukuang-1"];
 //    _imageView.backgroundColor=[UIColor blueColor];
     [_scrollShowTextView addSubview:_imageView];
     

@@ -15,12 +15,13 @@
 #import "DSAdDetailController.h"
 
 #import "LCMD5Tool.h"
+#import "HYActivityView.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
 
-@interface EarnScoreController ()<UITableViewDelegate, UITableViewDataSource>
+@interface EarnScoreController ()<UITableViewDelegate,SetTabBarDelegate, UITableViewDataSource>
 {
      MBProgressHUD *HUD;
 }
@@ -30,6 +31,7 @@
 @property (nonatomic, weak) UITableView *earnWayView;
 
 @property (nonatomic, strong) NSMutableArray *ScoreData;
+@property (nonatomic, strong) HYActivityView *activityView;
 
 @end
 
@@ -72,6 +74,7 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    self.tabBarController.tabBar.hidden = YES;
     [self requestGetScore];
 }
 - (void)viewDidLoad {
@@ -224,8 +227,130 @@ static NSString *id_earnViewCell = @"id_earnViewCell";
 {
     if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 2)
     {
-        self.tabBarController.selectedIndex = 4;
-        [self.navigationController popToRootViewControllerAnimated:YES];
+//        self.tabBarController.selectedIndex = 4;
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (!self.activityView)
+        {
+            self.activityView = [[HYActivityView alloc]initWithTitle:@"" referView:self.view];
+            self.activityView.delegate = self;
+            //横屏会变成一行6个, 竖屏无法一行同时显示6个, 会自动使用默认一行4个的设置.
+            self.activityView.numberOfButtonPerLine = 6;
+            
+            ButtonView *bv ;
+            
+            bv = [[ButtonView alloc]initWithText:@"微信好友" image:[UIImage imageNamed:@"btn_share_weixin"] handler:^(ButtonView *buttonView){
+                NSLog(@"点击微信");
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"ShareType":@3
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    NSLog(@"%@",dict);
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        //创建发送对象实例
+                        SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+                        sendReq.bText = NO;//不使用文本信息
+                        sendReq.scene = 0;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+                        
+                        //创建分享内容对象
+                        WXMediaMessage *urlMessage = [WXMediaMessage message];
+                        urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];//分享标题
+                        urlMessage.description = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];//分享描述
+                        [urlMessage setThumbImage:[UIImage imageNamed:@"denglu_icon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                        
+                        //创建多媒体对象
+                        WXWebpageObject *webObj = [WXWebpageObject object];
+                        webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
+                        
+                        //完成发送对象实例
+                        urlMessage.mediaObject = webObj;
+                        sendReq.message = urlMessage;
+                        
+                        //发送分享信息
+                        [WXApi sendReq:sendReq];
+                        
+                    }
+                    else
+                    {
+                        [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                        
+                    }
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                    
+                }];
+                
+                self.tabBarController.tabBar.hidden = NO;
+                
+            }];
+            [self.activityView addButtonView:bv];
+            
+            bv = [[ButtonView alloc]initWithText:@"微信朋友圈" image:[UIImage imageNamed:@"btn_share_pengyouquan"] handler:^(ButtonView *buttonView){
+                NSLog(@"点击微信朋友圈");
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                         @"ShareType":@3
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        //创建发送对象实例
+                        SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
+                        sendReq.bText = NO;//不使用文本信息
+                        sendReq.scene = 1;//0 = 好友列表 1 = 朋友圈 2 = 收藏
+                        
+                        //创建分享内容对象
+                        WXMediaMessage *urlMessage = [WXMediaMessage message];
+                        urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];//分享标题
+                        urlMessage.description = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];//分享描述
+                        [urlMessage setThumbImage:[UIImage imageNamed:@"denglu_icon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
+                        
+                        //创建多媒体对象
+                        WXWebpageObject *webObj = [WXWebpageObject object];
+                        webObj.webpageUrl = [NSString stringWithFormat:@"%@",[[dict objectForKey:@"JsonData"] objectForKey:@"InviteShareUrl"]];//分享链接
+                        
+                        //完成发送对象实例
+                        urlMessage.mediaObject = webObj;
+                        sendReq.message = urlMessage;
+                        
+                        //发送分享信息
+                        [WXApi sendReq:sendReq];
+                        
+                    }
+                    else
+                    {
+                        [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                        
+                    }
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
+                    
+                }];
+                
+                self.tabBarController.tabBar.hidden = NO;
+                
+            }];
+            [self.activityView addButtonView:bv];
+            
+            
+        }
+        self.tabBarController.tabBar.hidden = YES;
+        
+        [self.activityView show];
     }
     else if([[[self.ScoreData objectAtIndex:btn.tag] objectForKey:@"IntegType"] intValue] == 3)
     {

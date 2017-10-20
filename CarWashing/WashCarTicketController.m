@@ -63,6 +63,11 @@
     [upView addSubview:ticketView];
     
     UIButton *exchangeButton = [UIUtil drawDefaultButton:upView title:[NSString stringWithFormat:@"%ld积分兑换",self.card.Integralnum] target:self action:@selector(didClickExhangeButton:)];
+     if(self.card.Integralnum > [self.CurrentScore integerValue])
+     {
+         [exchangeButton setBackgroundImage:[UIImage createImageWithColor:[UIColor colorFromHex:@"#e6e6e6"]] forState:UIControlStateNormal];
+         exchangeButton.enabled=NO;
+     }
     
     [ticketView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(upView).mas_offset(25*Main_Screen_Height/667);
@@ -214,7 +219,6 @@
             
             
             NSLog(@"%@",mulDic);
-            
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
@@ -223,8 +227,7 @@
                 
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
-                    
-                                    [self.view showInfo:@"兑换成功" autoHidden:YES interval:2];
+                    [self.view showInfo:@"兑换成功" autoHidden:YES interval:2];
                     
                     APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore - self.card.Integralnum;
                     

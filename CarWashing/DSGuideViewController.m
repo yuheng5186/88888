@@ -56,7 +56,7 @@
     page3.customView.frame   = self.contentView.bounds;
     
     EAIntroPage *page4       = [EAIntroPage page];
-    page4.customView         = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"introducePage_4"]];
+    page4.customView         = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"640_960_4"]];
     page4.customView.frame   = self.contentView.bounds;
     
     EAIntroView *intro          = [[EAIntroView alloc] initWithFrame:self.contentView.bounds andPages:@[page1,page2,page3,page4]];

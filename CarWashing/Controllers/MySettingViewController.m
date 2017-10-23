@@ -80,7 +80,7 @@
 -(void)drawNavigation
 {
     [self drawTitle:@"我的"];
-    [self drawRightImageButton:@"shezhi" action:@selector(settingButtonClick:)];
+    [self drawRightImageButton:@"setting" action:@selector(settingButtonClick:)];
 }
 - (void) drawContent {
 

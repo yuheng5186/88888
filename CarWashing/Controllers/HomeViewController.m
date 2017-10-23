@@ -102,7 +102,6 @@
     self.navigationView.hidden  = NO;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
-//    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#0161a1"];
     
 }
 
@@ -175,20 +174,19 @@
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
     [self hsUpdateApp];
+    [self headerRereshing];
+    self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        [self headerRereshing];
+    }];
     
 }
-//- (JFAreaDataManager *)manager {
-//    if (!_manager) {
-//        _manager = [JFAreaDataManager shareManager];
-//        [_manager areaSqliteDBData];
-//    }
-//    return _manager;
-//}
+
 
 - (void) createSubView {
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
-    [self createNavTitleView];
+//    [self createNavTitleView];
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
     self.tableView.top              = 0;
@@ -208,7 +206,7 @@
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
     [self.contentView addSubview:self.tableView];
     
-     [self setupRefresh];
+//     [self setupRefresh];
     [self createHeaderView];
     
 //    [self createNavTitleView];

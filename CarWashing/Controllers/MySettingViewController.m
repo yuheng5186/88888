@@ -34,7 +34,7 @@
 #import "LCMD5Tool.h"
 
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
-
+#import "RemindViewController.h"
 
 @interface MySettingViewController ()<UITableViewDelegate,UITableViewDataSource,SetTabBarDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
@@ -605,7 +605,7 @@
             return 1;
             break;
         case 1:
-            return 3;
+            return 4;
             break;
         case 2:
             return 1;
@@ -651,10 +651,12 @@
             cell.imageView.image        = [UIImage imageNamed:@"wwode-kaquan"];
             cell.textLabel.text         = @"我的卡包";
             
-        }else{
-
+        }else if(indexPath.row == 2){
             cell.imageView.image        = [UIImage imageNamed:@"kefu_wode"];
             cell.textLabel.text         = @"客服咨询";
+        }else{
+            cell.imageView.image        = [UIImage imageNamed:@"cheliagtixing"];
+            cell.textLabel.text         = @"车辆提醒";
         }
     }else{
         cell.imageView.image            = [UIImage imageNamed:@"tuijianjinding"];
@@ -688,12 +690,16 @@
             cardGroupController.hidesBottomBarWhenPushed    = YES;
             [self.navigationController pushViewController:cardGroupController animated:YES];
         }
-        else{
+        else if(indexPath.row == 2){
             
             DSServiceController *serviceVC          = [[DSServiceController alloc]init];
             serviceVC.hidesBottomBarWhenPushed      = YES;
             [self.navigationController pushViewController:serviceVC animated:YES];
 
+        }else{
+            RemindViewController *new = [[RemindViewController alloc]init];
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
         }
     }else{
 //        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];

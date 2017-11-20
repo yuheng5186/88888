@@ -149,12 +149,17 @@
 }
 //返回按钮动作
 -(void)backAction{
-//    [self.navigationController popViewControllerAnimated:YES];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[RemindViewController class]]) {
-            [self.navigationController popToViewController:controller animated:YES];
+    
+    if([self.wayGetHere isEqualToString:@"1"]){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[RemindViewController class]]) {
+                [self.navigationController popToViewController:controller animated:YES];
+            }
         }
-    }
+    }//@end else
+    
 }
 
 -(void)editingAction{

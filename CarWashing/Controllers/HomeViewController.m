@@ -53,6 +53,11 @@
 
 #import "HSUpdateApp.h"
 
+//车辆提醒
+#import "CareRemindViewController.h"
+#import "DriverLicenseViewController.h"
+#import "YearTestViewController.h"
+#import "InsurenceViewController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
@@ -999,6 +1004,13 @@
         remindShowString    = record.BottomDes;
         getString           = @"立即领取";
 //        vipString   = @"huiyuanzhuanxiang";
+    }else if (record.ShowType == 4){
+        imageString         = @"xiaoxitongzhi";
+        titleString         = @"消息提醒";
+        vipString           = @"zhuanxiang";
+        contentShowString   = record.MiddleDes;
+        remindShowString    = record.BottomDes;
+        getString           = @"立即查看";
     }
     
     
@@ -1085,7 +1097,42 @@
         detaleController.titlename = @"活动赠送";
         detaleController.record                         = record;
         [self.navigationController pushViewController:detaleController animated:YES];
-    }
+    }else if (record.ShowType == 4){
+        if (record.ConsumptionType == 1) {
+            //保养
+            CareRemindViewController *new = [[CareRemindViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 2){
+            //驾驶证
+            DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 3){
+            //年检
+            YearTestViewController *new = [[YearTestViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else if (record.ConsumptionType == 4){
+            //车险
+            InsurenceViewController *new = [[InsurenceViewController alloc]init];
+            new.getRemindType = @"1";
+            new.wayGetHere = @"1";
+            new.getID = record.UniqueNumber;
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }
+    }//@end     车辆提醒
+    
     
 }
 

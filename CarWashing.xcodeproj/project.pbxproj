@@ -109,6 +109,25 @@
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
 		183997A21F25F00700702071 /* DSAboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997A11F25F00700702071 /* DSAboutController.m */; };
+		1840E9EF1FC2AD9E001B2407 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9EE1FC2AD9E001B2407 /* RemindViewController.m */; };
+		1840E9FB1FC2ADE9001B2407 /* InsureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9F11FC2ADE8001B2407 /* InsureModel.m */; };
+		1840E9FC1FC2ADE9001B2407 /* LicenseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9F41FC2ADE8001B2407 /* LicenseModel.m */; };
+		1840E9FD1FC2ADE9001B2407 /* CareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9F51FC2ADE9001B2407 /* CareModel.m */; };
+		1840E9FE1FC2ADE9001B2407 /* RemindMoel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9F71FC2ADE9001B2407 /* RemindMoel.m */; };
+		1840E9FF1FC2ADE9001B2407 /* YearModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840E9F91FC2ADE9001B2407 /* YearModel.m */; };
+		1840EA051FC2AE1A001B2407 /* RemindViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA021FC2AE1A001B2407 /* RemindViewTableViewCell.m */; };
+		1840EA061FC2AE1A001B2407 /* AddCareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA031FC2AE1A001B2407 /* AddCareTableViewCell.m */; };
+		1840EA0E1FC2AE54001B2407 /* AddInSurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA091FC2AE54001B2407 /* AddInSurenceViewController.m */; };
+		1840EA0F1FC2AE54001B2407 /* ChooseInsurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA0B1FC2AE54001B2407 /* ChooseInsurenceViewController.m */; };
+		1840EA101FC2AE54001B2407 /* InsurenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA0D1FC2AE54001B2407 /* InsurenceViewController.m */; };
+		1840EA161FC2AE7C001B2407 /* YearTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA131FC2AE7C001B2407 /* YearTestViewController.m */; };
+		1840EA171FC2AE7C001B2407 /* AddYearTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA141FC2AE7C001B2407 /* AddYearTestViewController.m */; };
+		1840EA1F1FC2AEA0001B2407 /* ChooseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA191FC2AEA0001B2407 /* ChooseTableViewController.m */; };
+		1840EA201FC2AEA0001B2407 /* AddDriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA1B1FC2AEA0001B2407 /* AddDriverLicenseViewController.m */; };
+		1840EA211FC2AEA0001B2407 /* DriverLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA1E1FC2AEA0001B2407 /* DriverLicenseViewController.m */; };
+		1840EA291FC2AEC6001B2407 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA241FC2AEC6001B2407 /* AddCareRemindViewController.m */; };
+		1840EA2A1FC2AEC6001B2407 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA261FC2AEC6001B2407 /* CareRemindViewController.m */; };
+		1840EA2B1FC2AEC6001B2407 /* OldDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */; };
 		1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901B1F43F19B00795E0A /* LCMD5Tool.m */; };
 		185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */; };
 		185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090211F441AF500795E0A /* AFNetworkingTool.m */; };
@@ -514,6 +533,44 @@
 		1839979E1F25E69100702071 /* DSPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPasswordController.m; path = UserInfo/DSPasswordController.m; sourceTree = "<group>"; };
 		183997A01F25F00700702071 /* DSAboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSAboutController.h; path = UserInfo/DSAboutController.h; sourceTree = "<group>"; };
 		183997A11F25F00700702071 /* DSAboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSAboutController.m; path = UserInfo/DSAboutController.m; sourceTree = "<group>"; };
+		1840E9ED1FC2AD9E001B2407 /* RemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindViewController.h; sourceTree = "<group>"; };
+		1840E9EE1FC2AD9E001B2407 /* RemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindViewController.m; sourceTree = "<group>"; };
+		1840E9F11FC2ADE8001B2407 /* InsureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsureModel.m; sourceTree = "<group>"; };
+		1840E9F21FC2ADE8001B2407 /* YearModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearModel.h; sourceTree = "<group>"; };
+		1840E9F31FC2ADE8001B2407 /* CareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareModel.h; sourceTree = "<group>"; };
+		1840E9F41FC2ADE8001B2407 /* LicenseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseModel.m; sourceTree = "<group>"; };
+		1840E9F51FC2ADE9001B2407 /* CareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareModel.m; sourceTree = "<group>"; };
+		1840E9F61FC2ADE9001B2407 /* LicenseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseModel.h; sourceTree = "<group>"; };
+		1840E9F71FC2ADE9001B2407 /* RemindMoel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindMoel.m; sourceTree = "<group>"; };
+		1840E9F81FC2ADE9001B2407 /* InsureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsureModel.h; sourceTree = "<group>"; };
+		1840E9F91FC2ADE9001B2407 /* YearModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearModel.m; sourceTree = "<group>"; };
+		1840E9FA1FC2ADE9001B2407 /* RemindMoel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindMoel.h; sourceTree = "<group>"; };
+		1840EA011FC2AE1A001B2407 /* AddCareTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCareTableViewCell.h; sourceTree = "<group>"; };
+		1840EA021FC2AE1A001B2407 /* RemindViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindViewTableViewCell.m; sourceTree = "<group>"; };
+		1840EA031FC2AE1A001B2407 /* AddCareTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCareTableViewCell.m; sourceTree = "<group>"; };
+		1840EA041FC2AE1A001B2407 /* RemindViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindViewTableViewCell.h; sourceTree = "<group>"; };
+		1840EA081FC2AE54001B2407 /* AddInSurenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInSurenceViewController.h; sourceTree = "<group>"; };
+		1840EA091FC2AE54001B2407 /* AddInSurenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInSurenceViewController.m; sourceTree = "<group>"; };
+		1840EA0A1FC2AE54001B2407 /* InsurenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsurenceViewController.h; sourceTree = "<group>"; };
+		1840EA0B1FC2AE54001B2407 /* ChooseInsurenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseInsurenceViewController.m; sourceTree = "<group>"; };
+		1840EA0C1FC2AE54001B2407 /* ChooseInsurenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseInsurenceViewController.h; sourceTree = "<group>"; };
+		1840EA0D1FC2AE54001B2407 /* InsurenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsurenceViewController.m; sourceTree = "<group>"; };
+		1840EA121FC2AE7C001B2407 /* AddYearTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddYearTestViewController.h; sourceTree = "<group>"; };
+		1840EA131FC2AE7C001B2407 /* YearTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YearTestViewController.m; sourceTree = "<group>"; };
+		1840EA141FC2AE7C001B2407 /* AddYearTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddYearTestViewController.m; sourceTree = "<group>"; };
+		1840EA151FC2AE7C001B2407 /* YearTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YearTestViewController.h; sourceTree = "<group>"; };
+		1840EA191FC2AEA0001B2407 /* ChooseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTableViewController.m; sourceTree = "<group>"; };
+		1840EA1A1FC2AEA0001B2407 /* AddDriverLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDriverLicenseViewController.h; sourceTree = "<group>"; };
+		1840EA1B1FC2AEA0001B2407 /* AddDriverLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDriverLicenseViewController.m; sourceTree = "<group>"; };
+		1840EA1C1FC2AEA0001B2407 /* DriverLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverLicenseViewController.h; sourceTree = "<group>"; };
+		1840EA1D1FC2AEA0001B2407 /* ChooseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTableViewController.h; sourceTree = "<group>"; };
+		1840EA1E1FC2AEA0001B2407 /* DriverLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverLicenseViewController.m; sourceTree = "<group>"; };
+		1840EA231FC2AEC6001B2407 /* AddCareRemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCareRemindViewController.h; sourceTree = "<group>"; };
+		1840EA241FC2AEC6001B2407 /* AddCareRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCareRemindViewController.m; sourceTree = "<group>"; };
+		1840EA251FC2AEC6001B2407 /* CareRemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareRemindViewController.h; sourceTree = "<group>"; };
+		1840EA261FC2AEC6001B2407 /* CareRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
+		1840EA271FC2AEC6001B2407 /* OldDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldDriverViewController.h; sourceTree = "<group>"; };
+		1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldDriverViewController.m; sourceTree = "<group>"; };
 		1850901A1F43F19B00795E0A /* LCMD5Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMD5Tool.h; sourceTree = "<group>"; };
 		1850901B1F43F19B00795E0A /* LCMD5Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMD5Tool.m; sourceTree = "<group>"; };
 		1850901E1F441AF500795E0A /* AFNetworkingTool+GetToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworkingTool+GetToken.h"; sourceTree = "<group>"; };
@@ -1220,6 +1277,7 @@
 		181E93081F2094420006511E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1840E9EB1FC2ACC6001B2407 /* Xue */,
 				18D815871F79FFA300A1FA04 /* CYCardDeatil */,
 				18D815801F79EC3000A1FA04 /* CYView */,
 				18322AAC1F4AD181003ABB7B /* model */,
@@ -1379,6 +1437,107 @@
 				182190081F301BF600F7207F /* DSActivityDetailCell.m */,
 			);
 			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		1840E9EB1FC2ACC6001B2407 /* Xue */ = {
+			isa = PBXGroup;
+			children = (
+				1840E9EC1FC2AD4C001B2407 /* Remind */,
+			);
+			path = Xue;
+			sourceTree = "<group>";
+		};
+		1840E9EC1FC2AD4C001B2407 /* Remind */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA221FC2AEA7001B2407 /* Care */,
+				1840EA181FC2AE85001B2407 /* Driver */,
+				1840EA111FC2AE59001B2407 /* YearCheck */,
+				1840EA071FC2AE31001B2407 /* Insure */,
+				1840EA001FC2AE03001B2407 /* Cell */,
+				1840E9F01FC2ADC2001B2407 /* Model */,
+				1840E9ED1FC2AD9E001B2407 /* RemindViewController.h */,
+				1840E9EE1FC2AD9E001B2407 /* RemindViewController.m */,
+			);
+			path = Remind;
+			sourceTree = "<group>";
+		};
+		1840E9F01FC2ADC2001B2407 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1840E9F31FC2ADE8001B2407 /* CareModel.h */,
+				1840E9F51FC2ADE9001B2407 /* CareModel.m */,
+				1840E9F81FC2ADE9001B2407 /* InsureModel.h */,
+				1840E9F11FC2ADE8001B2407 /* InsureModel.m */,
+				1840E9F61FC2ADE9001B2407 /* LicenseModel.h */,
+				1840E9F41FC2ADE8001B2407 /* LicenseModel.m */,
+				1840E9FA1FC2ADE9001B2407 /* RemindMoel.h */,
+				1840E9F71FC2ADE9001B2407 /* RemindMoel.m */,
+				1840E9F21FC2ADE8001B2407 /* YearModel.h */,
+				1840E9F91FC2ADE9001B2407 /* YearModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1840EA001FC2AE03001B2407 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA011FC2AE1A001B2407 /* AddCareTableViewCell.h */,
+				1840EA031FC2AE1A001B2407 /* AddCareTableViewCell.m */,
+				1840EA041FC2AE1A001B2407 /* RemindViewTableViewCell.h */,
+				1840EA021FC2AE1A001B2407 /* RemindViewTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		1840EA071FC2AE31001B2407 /* Insure */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA081FC2AE54001B2407 /* AddInSurenceViewController.h */,
+				1840EA091FC2AE54001B2407 /* AddInSurenceViewController.m */,
+				1840EA0C1FC2AE54001B2407 /* ChooseInsurenceViewController.h */,
+				1840EA0B1FC2AE54001B2407 /* ChooseInsurenceViewController.m */,
+				1840EA0A1FC2AE54001B2407 /* InsurenceViewController.h */,
+				1840EA0D1FC2AE54001B2407 /* InsurenceViewController.m */,
+			);
+			path = Insure;
+			sourceTree = "<group>";
+		};
+		1840EA111FC2AE59001B2407 /* YearCheck */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA121FC2AE7C001B2407 /* AddYearTestViewController.h */,
+				1840EA141FC2AE7C001B2407 /* AddYearTestViewController.m */,
+				1840EA151FC2AE7C001B2407 /* YearTestViewController.h */,
+				1840EA131FC2AE7C001B2407 /* YearTestViewController.m */,
+			);
+			path = YearCheck;
+			sourceTree = "<group>";
+		};
+		1840EA181FC2AE85001B2407 /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA1A1FC2AEA0001B2407 /* AddDriverLicenseViewController.h */,
+				1840EA1B1FC2AEA0001B2407 /* AddDriverLicenseViewController.m */,
+				1840EA1D1FC2AEA0001B2407 /* ChooseTableViewController.h */,
+				1840EA191FC2AEA0001B2407 /* ChooseTableViewController.m */,
+				1840EA1C1FC2AEA0001B2407 /* DriverLicenseViewController.h */,
+				1840EA1E1FC2AEA0001B2407 /* DriverLicenseViewController.m */,
+			);
+			path = Driver;
+			sourceTree = "<group>";
+		};
+		1840EA221FC2AEA7001B2407 /* Care */ = {
+			isa = PBXGroup;
+			children = (
+				1840EA231FC2AEC6001B2407 /* AddCareRemindViewController.h */,
+				1840EA241FC2AEC6001B2407 /* AddCareRemindViewController.m */,
+				1840EA251FC2AEC6001B2407 /* CareRemindViewController.h */,
+				1840EA261FC2AEC6001B2407 /* CareRemindViewController.m */,
+				1840EA271FC2AEC6001B2407 /* OldDriverViewController.h */,
+				1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */,
+			);
+			path = Care;
 			sourceTree = "<group>";
 		};
 		1850901D1F441AF500795E0A /* AFNetwork */ = {
@@ -2282,6 +2441,7 @@
 				185090571F4586B200795E0A /* User.m in Sources */,
 				183997651F2586D300702071 /* ActivityListCell.m in Sources */,
 				181E92FE1F2088E80006511E /* DSMyCarController.m in Sources */,
+				1840EA0E1FC2AE54001B2407 /* AddInSurenceViewController.m in Sources */,
 				181E92CC1F1F39CC0006511E /* UIColor+HexColor.m in Sources */,
 				18B69EC01F346A3F007DA0E4 /* DSScanQRCodeController.m in Sources */,
 				50CAA6A11F41AB0300138CEF /* EarnScoreController.m in Sources */,
@@ -2297,11 +2457,14 @@
 				181E92F21F20848D0006511E /* DSOrderController.m in Sources */,
 				18322ABA1F4D7A5D003ABB7B /* QWMclistTableViewCell.m in Sources */,
 				185090481F4557E100795E0A /* TYAlertView.m in Sources */,
+				1840EA1F1FC2AEA0001B2407 /* ChooseTableViewController.m in Sources */,
 				18B697B51F21DBCE009FF73A /* DSWheelGroupController.m in Sources */,
 				185090491F4557E100795E0A /* TYBaseAnimation.m in Sources */,
 				5097FE1A1F2F4335002EF8F8 /* MyCarViewCell.m in Sources */,
+				1840EA161FC2AE7C001B2407 /* YearTestViewController.m in Sources */,
 				188907121F2730F4009E20B0 /* DSUpdateRuleController.m in Sources */,
 				181E92CB1F1F39CC0006511E /* UIColor+Additions.m in Sources */,
+				1840EA291FC2AEC6001B2407 /* AddCareRemindViewController.m in Sources */,
 				18E702781F5503BC007A9777 /* RoundView.m in Sources */,
 				0415739C1F53C4E9004514E3 /* DSInputCodeController.m in Sources */,
 				0401E8CD1F4E67AE00F0CA79 /* DSCompleteWashingController.m in Sources */,
@@ -2345,12 +2508,14 @@
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
 				50B26EC11F319D7F009B3B9F /* WashCarTicketController.m in Sources */,
 				1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */,
+				1840E9FB1FC2ADE9001B2407 /* InsureModel.m in Sources */,
 				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
 				50B26E851F306E0A009B3B9F /* DiscountDetailController.m in Sources */,
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
 				180E43031F3B471100013D2D /* MBProgressHUD.m in Sources */,
+				1840E9FC1FC2ADE9001B2407 /* LicenseModel.m in Sources */,
 				04443F501F5944450032BA5E /* DSScanPayController.m in Sources */,
 				181E92CD1F1F39CC0006511E /* UIImage+BFS.m in Sources */,
 				1805AC831F38090D00FD0844 /* LoginViewController.m in Sources */,
@@ -2401,6 +2566,7 @@
 				18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */,
 				1805AC861F385C8600FD0844 /* DSAgreementController.m in Sources */,
 				1826E9B31F9837620057B7AE /* CYCarRMListModel.m in Sources */,
+				1840EA2A1FC2AEC6001B2407 /* CareRemindViewController.m in Sources */,
 				50E2EE591F1F4A9000FAF130 /* SalerListViewCell.m in Sources */,
 				1850904A1F4557E100795E0A /* TYShowAlertView.m in Sources */,
 				18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */,
@@ -2408,18 +2574,24 @@
 				5094A62F1F346E4200407808 /* SuccessPayCell.m in Sources */,
 				185090451F4557E100795E0A /* TYAlertDropDownAnimation.m in Sources */,
 				1853BA481F28A04100B98C7F /* JFCityHeaderView.m in Sources */,
+				1840EA0F1FC2AE54001B2407 /* ChooseInsurenceViewController.m in Sources */,
 				50769F4F1F3C549300DDFCC7 /* BusinessPayCell.m in Sources */,
+				1840E9FF1FC2ADE9001B2407 /* YearModel.m in Sources */,
+				1840EA051FC2AE1A001B2407 /* RemindViewTableViewCell.m in Sources */,
 				18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */,
 				50E2EE801F1F4D3C00FAF130 /* YZMoreMenuViewController.m in Sources */,
+				1840EA201FC2AEA0001B2407 /* AddDriverLicenseViewController.m in Sources */,
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
+				1840EA2B1FC2AEC6001B2407 /* OldDriverViewController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,
 				18A4B23D1F4E9F3600C64978 /* JXMapNavigationView.m in Sources */,
 				041573A61F53C522004514E3 /* TFGridInputViewCellStyle.m in Sources */,
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,
+				1840E9FE1FC2ADE9001B2407 /* RemindMoel.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
@@ -2434,6 +2606,7 @@
 				188907161F283184009E20B0 /* DSGetScoreController.m in Sources */,
 				1853BA471F28A04100B98C7F /* JFCityCollectionViewCell.m in Sources */,
 				180E432C1F417E3500013D2D /* DSAddShopController.m in Sources */,
+				1840EA171FC2AE7C001B2407 /* AddYearTestViewController.m in Sources */,
 				501672021F29797600384186 /* BusinessDetailViewController.m in Sources */,
 				181E93011F208AF20006511E /* DSMemberRightsController.m in Sources */,
 				5094A63D1F34850300407808 /* ShopInfoHeadView.m in Sources */,
@@ -2458,8 +2631,11 @@
 				1853BA451F28A04100B98C7F /* JFButton.m in Sources */,
 				041573A51F53C522004514E3 /* TFGridInputViewCell.m in Sources */,
 				50B26EC91F31AFA7009B3B9F /* IcreaseCarController.m in Sources */,
+				1840E9EF1FC2AD9E001B2407 /* RemindViewController.m in Sources */,
+				1840EA061FC2AE1A001B2407 /* AddCareTableViewCell.m in Sources */,
 				18B69EA31F32CB48007DA0E4 /* UIImage+Zirkfied.m in Sources */,
 				18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */,
+				1840EA211FC2AEA0001B2407 /* DriverLicenseViewController.m in Sources */,
 				181E92D21F1F3B180006511E /* HomeViewController.m in Sources */,
 				18E702761F5503BC007A9777 /* KPIndicatorView.m in Sources */,
 				5071B47C1F380987009FFF67 /* OrderDetailView.m in Sources */,
@@ -2481,9 +2657,11 @@
 				185090471F4557E100795E0A /* TYAlertScaleFadeAnimation.m in Sources */,
 				04DB28E41F6E184F009B4D9C /* NSDate+Extension.m in Sources */,
 				04BA75741F7C99250048541E /* DSNavigationViewController.m in Sources */,
+				1840E9FD1FC2ADE9001B2407 /* CareModel.m in Sources */,
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
+				1840EA101FC2AE54001B2407 /* InsurenceViewController.m in Sources */,
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,
 				18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */,

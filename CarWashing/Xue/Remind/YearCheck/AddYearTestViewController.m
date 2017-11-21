@@ -147,10 +147,11 @@
 }
 
 #pragma mark - 懒加载fakeNavigation
--(UIView *)fakeNavigation{
+-(UIImageView *)fakeNavigation{
     if (!_fakeNavigation) {
-        _fakeNavigation = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
-        _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+        _fakeNavigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
+        _fakeNavigation.image = [UIImage imageNamed:@"ijanbiantiao"];
+        _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
         fakeTitle.text = @"添加年检提醒";
@@ -173,9 +174,13 @@
 
 -(void)setUI{
     
+    UIImageView *buttonImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 250+66, Main_Screen_Width-24, 50)];
+    buttonImageView.image = [UIImage imageNamed:@"ijanbiantiao"];
+    [self.view addSubview:buttonImageView];
+    
     //保存按钮
     UIButton *saveButton = [[UIButton alloc]initWithFrame:CGRectMake(12, 250+66, Main_Screen_Width-24, 50)];
-    saveButton.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+    saveButton.backgroundColor = [UIColor clearColor];
     [saveButton setTitle:@"保存" forState:(UIControlStateNormal)];
     saveButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
     saveButton.clipsToBounds = YES;
@@ -287,7 +292,8 @@
             self.dateMuSting = date;
             [tableView reloadData];
         }];
-        datePicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];
+        datePicker.maxLimitDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        datePicker.doneButtonColor = [UIColor orangeColor];
         [datePicker show];
     }   //@end “if”
 }
@@ -355,7 +361,7 @@
 -(void)cancleAction{
     if ([self.whereString isEqualToString:@"1"]) {
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
+    }else if([self.whereString isEqualToString:@"2"]){
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

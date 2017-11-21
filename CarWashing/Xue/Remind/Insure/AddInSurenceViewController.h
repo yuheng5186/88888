@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AddInSurenceViewController : UIViewController
-@property(strong,nonatomic)UIView * fakeNavigation;
+@property(strong,nonatomic)UIImageView * fakeNavigation;
 @property(copy,nonatomic)NSString *webTypeString;           //修改或者新加入
 @property(copy,nonatomic)NSString *getID;
 

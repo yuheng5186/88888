@@ -9,7 +9,7 @@
 #import "ChooseTableViewController.h"
 
 @interface ChooseTableViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property(strong,nonatomic)UIView *fakeNavigation;
+@property(strong,nonatomic)UIImageView *fakeNavigation;
 @property(strong,nonatomic)UITableView *licenseTypeTableView;
 @property(strong,nonatomic)NSArray *licenseTypeArray;
 @end
@@ -41,10 +41,11 @@
 
 
 #pragma mark - 懒加载
--(UIView *)fakeNavigation{
+-(UIImageView *)fakeNavigation{
     if (!_fakeNavigation) {
-        _fakeNavigation = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
-        _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+        _fakeNavigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
+        _fakeNavigation.image = [UIImage imageNamed:@"ijanbiantiao"];
+        _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
         fakeTitle.text = @"选择驾照类型";

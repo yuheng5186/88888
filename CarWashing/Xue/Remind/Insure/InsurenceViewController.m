@@ -57,11 +57,12 @@
 
 
 #pragma mark - 懒加载fakeNavigation
--(UIView *)fakeNavigation{
+-(UIImageView *)fakeNavigation{
     
     if (!_fakeNavigation) {
-        _fakeNavigation = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 66)];
-        _fakeNavigation.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
+        _fakeNavigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 186)];
+        _fakeNavigation.image = [UIImage imageNamed:@"cheliangtixingtu"];
+        _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
         fakeTitle.text = @"车险提醒";
@@ -88,7 +89,27 @@
         [editButton addTarget:self action:@selector(editingAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_fakeNavigation addSubview:editButton];
         
+        //afterView中的属性
+        _carNoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 76, Main_Screen_Width, 35)];
+        _carNoLabel.textColor = [UIColor whiteColor];
+        _carNoLabel.font = [UIFont systemFontOfSize:15];
+        _carNoLabel.text = self.mainPlateText;
+        _carNoLabel.textAlignment = NSTextAlignmentCenter;
+        [_fakeNavigation addSubview:_carNoLabel];
         
+        _carCareTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 106, Main_Screen_Width, 40)];
+        _carCareTimeLabel.textColor = [UIColor whiteColor];
+        _carCareTimeLabel.font = [UIFont systemFontOfSize:20];
+        _carCareTimeLabel.text = self.timeString;
+        _carCareTimeLabel.textAlignment = NSTextAlignmentCenter;
+        [_fakeNavigation addSubview:_carCareTimeLabel];
+        
+        UILabel *day60Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 141, Main_Screen_Width, 35)];
+        day60Label.textColor = [UIColor whiteColor];
+        day60Label.font = [UIFont systemFontOfSize:15];
+        day60Label.text = @"到期前60请重新购买";
+        day60Label.textAlignment = NSTextAlignmentCenter;
+        [_fakeNavigation addSubview:day60Label];
     }
     return _fakeNavigation;
 }
@@ -114,36 +135,10 @@
 //添加成功后的View
 -(UIView *)afterView{
     if (!_afterView) {
-        _afterView = [[UIView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height-66)];
+        _afterView = [[UIView alloc]initWithFrame:CGRectMake(0, 186, Main_Screen_Width, Main_Screen_Height-66)];
         _afterView.backgroundColor = [UIColor whiteColor];
         
-        UIView *blueBase = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 120)];
-        blueBase.backgroundColor = [UIColor colorWithRed:13/255.0 green:98/255.0 blue:159/255.0 alpha:1];
-        [_afterView addSubview:blueBase];
-        
-        //afterView中的属性
-        _carNoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 35)];
-        _carNoLabel.textColor = [UIColor whiteColor];
-        _carNoLabel.font = [UIFont systemFontOfSize:15];
-        _carNoLabel.text = self.mainPlateText;
-        _carNoLabel.textAlignment = NSTextAlignmentCenter;
-        [_afterView addSubview:_carNoLabel];
-        
-        _carCareTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 40)];
-        _carCareTimeLabel.textColor = [UIColor whiteColor];
-        _carCareTimeLabel.font = [UIFont systemFontOfSize:20];
-        _carCareTimeLabel.text = self.timeString;
-        _carCareTimeLabel.textAlignment = NSTextAlignmentCenter;
-        [_afterView addSubview:_carCareTimeLabel];
-        
-        UILabel *day60Label = [[UILabel alloc]initWithFrame:CGRectMake(0, 75, Main_Screen_Width, 35)];
-        day60Label.textColor = [UIColor whiteColor];
-        day60Label.font = [UIFont systemFontOfSize:15];
-        day60Label.text = @"到期前60请重新购买";
-        day60Label.textAlignment = NSTextAlignmentCenter;
-        [_afterView addSubview:day60Label];
-        
-        UIImageView *imageViewHere = [[UIImageView alloc]initWithFrame:CGRectMake(0, 120, Main_Screen_Width, 432*Main_Screen_Height/667)];
+        UIImageView *imageViewHere = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 432*Main_Screen_Height/667)];
         imageViewHere.image = [UIImage imageNamed:@"车险须知"];
         imageViewHere.contentMode = UIViewContentModeScaleAspectFit;
         [_afterView addSubview:imageViewHere];
@@ -169,6 +164,7 @@
     new.getID = self.sendIDString;
     new.companyNameMuString = self.sendComString;
     new.dateMuSting = self.timeString;
+    new.whereString = @"2";
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:new];
     [self presentViewController:nav animated:YES completion:nil];
 }

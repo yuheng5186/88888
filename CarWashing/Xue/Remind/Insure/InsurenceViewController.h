@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface InsurenceViewController : UIViewController
-@property(strong,nonatomic)UIView *fakeNavigation;
+@property(strong,nonatomic)UIImageView *fakeNavigation;
 @property(strong,nonatomic)UIView *addView;
 @property(strong,nonatomic)UIView *afterView;
 //afterView中的属性

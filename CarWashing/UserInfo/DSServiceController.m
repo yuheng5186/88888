@@ -108,7 +108,6 @@
     UIButton *phoneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     phoneBtn.backgroundColor = [UIColor whiteColor];
     [phoneBtn setTitle:@"电话客服" forState:UIControlStateNormal];
-    //[phoneBtn setTintColor:[UIColor blackColor]];
     [phoneBtn setTitleColor:[UIColor colorFromHex:@"#4a4a4a"] forState:UIControlStateNormal];
    
     phoneBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
@@ -148,7 +147,7 @@
 
 - (void)showAlertWithMessage:(NSString *)message{
     
-    [PhoneHelper dial: @"4006979558"];
+    [PhoneHelper dial: @"053258698831"];
 }
 
 

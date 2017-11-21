@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AddCareRemindViewController : UIViewController
-@property(strong,nonatomic)UIView * fakeNavigation;
+@property(strong,nonatomic)UIImageView * fakeNavigation;
 @property(copy,nonatomic)NSString *typeString;
 @property(copy,nonatomic)NSString *getID;
 

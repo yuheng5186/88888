@@ -59,6 +59,9 @@
 #import "YearTestViewController.h"
 #import "InsurenceViewController.h"
 
+//车友圈
+#import "RemindViewController.h"
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
     UIImageView     *logoImageView;
@@ -582,11 +585,11 @@
     [carClubView addGestureRecognizer:tapCarClubGesture];
     
     UIImage *carClubImage              = [UIImage imageNamed:@"cheyouquan"];
-    UIImageView *carClubImageView      = [UIUtil drawCustomImgViewInView:carClubView frame:CGRectMake(0, 0, carClubImage.size.width,carClubImage.size.height) imageName:@"cheyouquan"];
+    UIImageView *carClubImageView      = [UIUtil drawCustomImgViewInView:carClubView frame:CGRectMake(0, 0, carClubImage.size.width,carClubImage.size.height) imageName:@"tixing"];
     carClubImageView.left              = Main_Screen_Width*15/375;
     carClubImageView.top               = Main_Screen_Height*10/667;
     
-    NSString *carClubName              = @"车友圈";
+    NSString *carClubName              = @"车辆提醒";
     UIFont *carClubNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
     UILabel *CarClubNameLabel          = [UIUtil drawLabelInView:carClubView frame:[UIUtil textRect:carClubName font:carClubNameFont] font:carClubNameFont text:carClubName isCenter:NO];
     CarClubNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
@@ -1454,9 +1457,18 @@
 }
 - (void) tapCarClubButtonClick:(id)sender {
     
-    FindViewController *findController      = [[FindViewController alloc]init];
-    findController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:findController animated:YES];
+//    XueCarFirendViewController *new = [[XueCarFirendViewController alloc]init];
+//    new.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:new animated:YES];
+    
+//    FindViewController *findController      = [[FindViewController alloc]init];
+//    findController.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:findController animated:YES];
+    
+    RemindViewController *new = [[RemindViewController alloc]init];
+    new.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:new animated:YES];
+    
 }
 
 - (void) tapNewButtonClick:(id)sender {

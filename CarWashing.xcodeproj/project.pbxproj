@@ -128,11 +128,6 @@
 		1840EA291FC2AEC6001B2407 /* AddCareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA241FC2AEC6001B2407 /* AddCareRemindViewController.m */; };
 		1840EA2A1FC2AEC6001B2407 /* CareRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA261FC2AEC6001B2407 /* CareRemindViewController.m */; };
 		1840EA2B1FC2AEC6001B2407 /* OldDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */; };
-		1840EA2F1FC2C305001B2407 /* XueCarFirendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA2E1FC2C305001B2407 /* XueCarFirendViewController.m */; };
-		1840EA321FC2C468001B2407 /* HotTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA311FC2C468001B2407 /* HotTopicViewController.m */; };
-		1840EA351FC2C475001B2407 /* UsedCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA341FC2C475001B2407 /* UsedCarViewController.m */; };
-		1840EA381FC2C482001B2407 /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA371FC2C482001B2407 /* QuestionsViewController.m */; };
-		1840EA3B1FC2C491001B2407 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840EA3A1FC2C491001B2407 /* InfoViewController.m */; };
 		1850901C1F43F19B00795E0A /* LCMD5Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901B1F43F19B00795E0A /* LCMD5Tool.m */; };
 		185090221F441AF500795E0A /* AFNetworkingTool+GetToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 1850901F1F441AF500795E0A /* AFNetworkingTool+GetToken.m */; };
 		185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185090211F441AF500795E0A /* AFNetworkingTool.m */; };
@@ -576,16 +571,6 @@
 		1840EA261FC2AEC6001B2407 /* CareRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareRemindViewController.m; sourceTree = "<group>"; };
 		1840EA271FC2AEC6001B2407 /* OldDriverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldDriverViewController.h; sourceTree = "<group>"; };
 		1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldDriverViewController.m; sourceTree = "<group>"; };
-		1840EA2D1FC2C305001B2407 /* XueCarFirendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XueCarFirendViewController.h; sourceTree = "<group>"; };
-		1840EA2E1FC2C305001B2407 /* XueCarFirendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XueCarFirendViewController.m; sourceTree = "<group>"; };
-		1840EA301FC2C468001B2407 /* HotTopicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotTopicViewController.h; sourceTree = "<group>"; };
-		1840EA311FC2C468001B2407 /* HotTopicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotTopicViewController.m; sourceTree = "<group>"; };
-		1840EA331FC2C475001B2407 /* UsedCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsedCarViewController.h; sourceTree = "<group>"; };
-		1840EA341FC2C475001B2407 /* UsedCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsedCarViewController.m; sourceTree = "<group>"; };
-		1840EA361FC2C482001B2407 /* QuestionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionsViewController.h; sourceTree = "<group>"; };
-		1840EA371FC2C482001B2407 /* QuestionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
-		1840EA391FC2C491001B2407 /* InfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
-		1840EA3A1FC2C491001B2407 /* InfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		1850901A1F43F19B00795E0A /* LCMD5Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMD5Tool.h; sourceTree = "<group>"; };
 		1850901B1F43F19B00795E0A /* LCMD5Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMD5Tool.m; sourceTree = "<group>"; };
 		1850901E1F441AF500795E0A /* AFNetworkingTool+GetToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworkingTool+GetToken.h"; sourceTree = "<group>"; };
@@ -1457,7 +1442,6 @@
 		1840E9EB1FC2ACC6001B2407 /* Xue */ = {
 			isa = PBXGroup;
 			children = (
-				1840EA2C1FC2C155001B2407 /* CarFind */,
 				1840E9EC1FC2AD4C001B2407 /* Remind */,
 			);
 			path = Xue;
@@ -1554,31 +1538,6 @@
 				1840EA281FC2AEC6001B2407 /* OldDriverViewController.m */,
 			);
 			path = Care;
-			sourceTree = "<group>";
-		};
-		1840EA2C1FC2C155001B2407 /* CarFind */ = {
-			isa = PBXGroup;
-			children = (
-				1840EA3C1FC2C755001B2407 /* Controller */,
-			);
-			path = CarFind;
-			sourceTree = "<group>";
-		};
-		1840EA3C1FC2C755001B2407 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1840EA2D1FC2C305001B2407 /* XueCarFirendViewController.h */,
-				1840EA2E1FC2C305001B2407 /* XueCarFirendViewController.m */,
-				1840EA361FC2C482001B2407 /* QuestionsViewController.h */,
-				1840EA371FC2C482001B2407 /* QuestionsViewController.m */,
-				1840EA301FC2C468001B2407 /* HotTopicViewController.h */,
-				1840EA311FC2C468001B2407 /* HotTopicViewController.m */,
-				1840EA331FC2C475001B2407 /* UsedCarViewController.h */,
-				1840EA341FC2C475001B2407 /* UsedCarViewController.m */,
-				1840EA391FC2C491001B2407 /* InfoViewController.h */,
-				1840EA3A1FC2C491001B2407 /* InfoViewController.m */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		1850901D1F441AF500795E0A /* AFNetwork */ = {
@@ -2471,7 +2430,6 @@
 				180E42FD1F3B0AA900013D2D /* DSActivityModel.m in Sources */,
 				1853BA031F28444000B98C7F /* DSFeedbackController.m in Sources */,
 				501672201F297F3100384186 /* HQSliderView.m in Sources */,
-				1840EA321FC2C468001B2407 /* HotTopicViewController.m in Sources */,
 				0401E9031F4ED6E900F0CA79 /* EARestrictedScrollView.m in Sources */,
 				18A6033A1F4FC06000CFA328 /* TggStarEvaluationView.m in Sources */,
 				0452AC9F1F790D7900506306 /* DSCardShowDetailViewController.m in Sources */,
@@ -2525,7 +2483,6 @@
 				18322AC31F4EC157003ABB7B /* CardBag.m in Sources */,
 				50B26E961F307B76009B3B9F /* RechargeController.m in Sources */,
 				18B697A21F21A44F009FF73A /* DSMessageDetailController.m in Sources */,
-				1840EA381FC2C482001B2407 /* QuestionsViewController.m in Sources */,
 				180E43271F414A5E00013D2D /* PopHelpView.m in Sources */,
 				1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */,
 				185090231F441AF500795E0A /* AFNetworkingTool.m in Sources */,
@@ -2600,9 +2557,7 @@
 				18218FE81F2ADA8A00F7207F /* DSSegmentView.m in Sources */,
 				501672521F2A091000384186 /* ScoreCategoryView.m in Sources */,
 				0401E9021F4ED6E900F0CA79 /* EAIntroView.m in Sources */,
-				1840EA2F1FC2C305001B2407 /* XueCarFirendViewController.m in Sources */,
 				185090431F4557E100795E0A /* TYAlertController+TransitionAnimate.m in Sources */,
-				1840EA351FC2C475001B2407 /* UsedCarViewController.m in Sources */,
 				500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */,
 				182190091F301BF600F7207F /* DSActivityDetailCell.m in Sources */,
 				180E43221F3D836F00013D2D /* WeixinActivity.m in Sources */,
@@ -2706,7 +2661,6 @@
 				50B26EAC1F315EF0009B3B9F /* CommentOrderController.m in Sources */,
 				183997A21F25F00700702071 /* DSAboutController.m in Sources */,
 				1853BA491F28A04100B98C7F /* JFCityTableViewCell.m in Sources */,
-				1840EA3B1FC2C491001B2407 /* InfoViewController.m in Sources */,
 				1840EA101FC2AE54001B2407 /* InsurenceViewController.m in Sources */,
 				180E42D81F39B8C200013D2D /* DSUserRightDetailController.m in Sources */,
 				185090531F4558AC00795E0A /* UIImage+ImageEffects.m in Sources */,

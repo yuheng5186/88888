@@ -156,7 +156,9 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
                              };
     NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
+        NSArray *tempArray = dict[@"JsonData"];
+        
+        NSLog(@"卡数量%lu",(unsigned long)tempArray.count);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];

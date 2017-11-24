@@ -36,8 +36,8 @@
 
 - (void) backButtonClick:(id)sender {
     
-    
-    self.tabBarController.selectedIndex = 0;
+    [self.navigationController popViewControllerAnimated:YES];
+//    self.tabBarController.selectedIndex = 0;
     
     NSArray     *array  = self.navigationController.viewControllers;
     NSArray *a = [NSArray arrayWithObject:array[0]];

@@ -23,6 +23,9 @@
 
 
 #import "CYCarRMListModel.h"
+
+//首页进来添加破车
+#import "DSMyCarController.h"
 @interface CYCarInsertViewController ()<UITableViewDataSource, UITableViewDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     NSMutableArray *_indexArr;//索引数组
@@ -336,7 +339,15 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"editCarIndorMation" object:nil userInfo:dict];
     }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.fromHome isEqualToString: @"1"]) {
+        DSMyCarController *new = [[DSMyCarController alloc]init];
+        new.homeString = @"1";
+        [self.navigationController pushViewController:new animated:YES];
+        self.fromHome = @"0";
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 -(void)dealloc
 {

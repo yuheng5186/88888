@@ -9,5 +9,5 @@
 #import "BaseController.h"
 
 @interface DSMyCarController : BaseController
-
+@property(copy,nonatomic)NSString *homeString;
 @end

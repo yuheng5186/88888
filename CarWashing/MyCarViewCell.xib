@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtm-jl-KXx">
-                        <rect key="frame" x="188" y="115" width="187" height="44.5"/>
+                        <rect key="frame" x="188" y="115" width="187" height="34.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <state key="normal" title="删除">
                             <color key="titleColor" red="0.91246356870000001" green="0.1665160175" blue="0.18796944800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -63,7 +63,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9u7-aa-Lyn">
-                        <rect key="frame" x="0.0" y="115" width="187" height="44.5"/>
+                        <rect key="frame" x="0.0" y="115" width="187" height="34.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal" title="已默认">
@@ -84,11 +84,19 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9h-0F-WJE">
+                        <rect key="frame" x="0.0" y="149" width="375" height="10"/>
+                        <color key="backgroundColor" red="0.93715304136276245" green="0.93731355667114258" blue="0.93714290857315063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="jFf-rY-xRx"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="g9h-0F-WJE" secondAttribute="trailing" id="00f-Lh-YWU"/>
                     <constraint firstItem="Lt1-Fs-Nhu" firstAttribute="top" secondItem="sBa-TA-6JE" secondAttribute="bottom" constant="24" id="12k-IH-ciU"/>
                     <constraint firstItem="95i-3f-e9Q" firstAttribute="centerY" secondItem="sBa-TA-6JE" secondAttribute="centerY" id="1pJ-Xa-iKv"/>
-                    <constraint firstAttribute="bottom" secondItem="9u7-aa-Lyn" secondAttribute="bottom" id="2Bm-Kw-ttv"/>
+                    <constraint firstAttribute="bottom" secondItem="9u7-aa-Lyn" secondAttribute="bottom" constant="10" id="2Bm-Kw-ttv"/>
                     <constraint firstItem="QxK-Iz-pZp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="3aN-EH-xmQ"/>
                     <constraint firstAttribute="trailing" secondItem="XpY-61-pOv" secondAttribute="trailing" id="423-WM-rWJ"/>
                     <constraint firstItem="95i-3f-e9Q" firstAttribute="leading" secondItem="sBa-TA-6JE" secondAttribute="trailing" constant="16" id="929-DD-nxI"/>
@@ -97,16 +105,18 @@
                     <constraint firstItem="z11-eH-yQl" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="LdQ-TO-J56"/>
                     <constraint firstItem="Lt1-Fs-Nhu" firstAttribute="leading" secondItem="sBa-TA-6JE" secondAttribute="leading" id="OOU-Cn-5V3"/>
                     <constraint firstItem="9u7-aa-Lyn" firstAttribute="top" secondItem="XpY-61-pOv" secondAttribute="bottom" id="Q46-xW-6Xo"/>
+                    <constraint firstItem="g9h-0F-WJE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QKQ-KJ-90r"/>
                     <constraint firstItem="z11-eH-yQl" firstAttribute="leading" secondItem="9u7-aa-Lyn" secondAttribute="trailing" id="RsP-Wf-2q7"/>
                     <constraint firstItem="z11-eH-yQl" firstAttribute="top" secondItem="XpY-61-pOv" secondAttribute="bottom" constant="7" id="W8a-FI-h5o"/>
                     <constraint firstItem="sBa-TA-6JE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Yxt-pe-Pq0"/>
-                    <constraint firstAttribute="bottom" secondItem="wtm-jl-KXx" secondAttribute="bottom" id="Z5y-fM-GWG"/>
+                    <constraint firstAttribute="bottom" secondItem="wtm-jl-KXx" secondAttribute="bottom" constant="10" id="Z5y-fM-GWG"/>
                     <constraint firstAttribute="bottom" secondItem="z11-eH-yQl" secondAttribute="bottom" constant="7.5" id="cMM-CN-zdB"/>
                     <constraint firstAttribute="trailing" secondItem="wtm-jl-KXx" secondAttribute="trailing" id="gkZ-0c-DPO"/>
                     <constraint firstItem="XpY-61-pOv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jkC-2I-6hY"/>
                     <constraint firstItem="wtm-jl-KXx" firstAttribute="leading" secondItem="z11-eH-yQl" secondAttribute="trailing" id="me9-op-DvD"/>
                     <constraint firstItem="9u7-aa-Lyn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ruV-r2-I3R"/>
                     <constraint firstItem="sBa-TA-6JE" firstAttribute="leading" secondItem="QxK-Iz-pZp" secondAttribute="trailing" constant="16" id="sRB-9o-cfH"/>
+                    <constraint firstAttribute="bottom" secondItem="g9h-0F-WJE" secondAttribute="bottom" id="sy0-qG-Qbb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -117,7 +127,7 @@
                 <outlet property="deleteButton" destination="wtm-jl-KXx" id="TTM-Co-2bU"/>
                 <outlet property="manuLabel" destination="Lt1-Fs-Nhu" id="Wmm-Ln-wtO"/>
             </connections>
-            <point key="canvasLocation" x="24" y="3"/>
+            <point key="canvasLocation" x="23.5" y="3"/>
         </tableViewCell>
     </objects>
     <resources>

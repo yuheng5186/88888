@@ -729,7 +729,7 @@
                                          };
                 
                 [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                    NSLog(@"%@",dict);
+                    NSLog(@"微信朋友分享%@",dict);
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
                         //创建发送对象实例
@@ -753,6 +753,8 @@
                         
                         //发送分享信息
                         [WXApi sendReq:sendReq];
+                        
+                        
                         
                     }
                     else

@@ -36,6 +36,8 @@
 
 @property(nonatomic ,strong)NSMutableArray *myDefaultcararray;
 
+@property(nonatomic)NSInteger defaultCarTag;
+
 @end
 
 static NSString *id_carListCell = @"id_carListCell";
@@ -47,6 +49,7 @@ static NSString *id_carListCell = @"id_carListCell";
     if (_carListView == nil) {
         
         UITableView *carListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height - 64 - (48+25+25)*Main_Screen_Height/667)];
+//        _carListView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _carListView = carListView;
         [self.view addSubview:_carListView];
     }
@@ -73,27 +76,24 @@ static NSString *id_carListCell = @"id_carListCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     [self getMyCarData];
     
 }
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeincreaseMyCar:) name:@"increasemycarsuccess" object:nil];
     
     [self setupUI];
-    
-    
-    
-    
+ 
 }
 
 -(void)getMyCarData
 {
-    
-    
     
     NSDictionary *mulDic = @{
                              @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
@@ -172,6 +172,7 @@ static NSString *id_carListCell = @"id_carListCell";
 #pragma maek-空白页
     self.carListView.emptyDataSetSource = self;
     self.carListView.emptyDataSetDelegate = self;
+    self.carListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.carListView registerNib:[UINib nibWithNibName:@"MyCarViewCell" bundle:nil] forCellReuseIdentifier:id_carListCell];
     
     
@@ -361,6 +362,7 @@ static NSString *id_carListCell = @"id_carListCell";
     
     //记录当下的indexpath
     //    self.nowPath = path;
+//    self.defaultCarTag = button.tag;
     [self SetCarDefaultDataAndIndex:button.tag];
     
     

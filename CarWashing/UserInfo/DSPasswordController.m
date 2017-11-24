@@ -220,6 +220,7 @@
         cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
         self.passwordNewFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10, 45, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
+        self.passwordNewFieldText.secureTextEntry = YES;
         self.passwordNewFieldText.placeholder    = @"请输入新密码";
         self.passwordNewFieldText.delegate       = self;
         self.passwordNewFieldText.returnKeyType  = UIReturnKeyDone;
@@ -236,6 +237,7 @@
         cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
         self.passwordAgainFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(10*Main_Screen_Height/667, 45*Main_Screen_Height/667, Main_Screen_Width-Main_Screen_Width*70/375, Main_Screen_Height*40/667)];
+        self.passwordAgainFieldText.secureTextEntry = YES;
         self.passwordAgainFieldText.placeholder    = @"再次输入密码";
         self.passwordAgainFieldText.delegate       = self;
         self.passwordAgainFieldText.returnKeyType  = UIReturnKeyDone;

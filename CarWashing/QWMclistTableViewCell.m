@@ -9,7 +9,7 @@
 #import "QWMclistTableViewCell.h"
 #import "AppDelegate.h"
 #import "HTTPDefine.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation QWMclistTableViewCell
 {
@@ -171,15 +171,20 @@
 
 -(void)setUpCellWithDic:(NSDictionary *)dic
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[dic objectForKey:@"Img"]];
-                NSURL *url=[NSURL URLWithString:ImageURL];
-                NSData *data=[NSData dataWithContentsOfURL:url];
-                UIImage *img=[UIImage imageWithData:data];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.McImageView.image = img;
-                });
-            });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[dic objectForKey:@"Img"]];
+//                NSURL *url=[NSURL URLWithString:ImageURL];
+//                NSData *data=[NSData dataWithContentsOfURL:url];
+//                UIImage *img=[UIImage imageWithData:data];
+//                dispatch_sync(dispatch_get_main_queue(), ^{
+//                    self.McImageView.image = img;
+//                });
+//            });
+    
+    NSString *ImageURL=[NSString stringWithFormat:@"%@%@",kHTTPImg,[dic objectForKey:@"Img"]];
+    NSURL *url=[NSURL URLWithString:ImageURL];
+    [self.McImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"aiche1"]];
+    
             self.Mcname.text = [dic objectForKey:@"MerName"];
     
             self.Mcaddress.text = [dic objectForKey:@"MerAddress"];

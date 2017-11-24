@@ -356,6 +356,7 @@
         cell.imageView.image                = [UIImage imageNamed:@"mimasuo"];
         
         self.verifyFieldText                = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*260/375, Main_Screen_Height*40/667)];
+        self.verifyFieldText.secureTextEntry = YES;
         self.verifyFieldText.placeholder    = @"请输入密码";
         self.verifyFieldText.delegate       = self;
         self.verifyFieldText.returnKeyType  = UIReturnKeyDone;

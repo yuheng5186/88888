@@ -27,6 +27,7 @@
 
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 #import "CYCarInsertViewController.h"
+#import "MySettingViewController.h"
 @interface DSMyCarController ()<UITableViewDelegate, UITableViewDataSource, NewPagedFlowViewDelegate, NewPagedFlowViewDataSource, UITextFieldDelegate,UIGestureRecognizerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     MBProgressHUD *HUD;
@@ -96,7 +97,18 @@ static NSString * HeaderId = @"header";
     
     [self drawTitle:@"我的爱车"];
     [self drawRightTextButton:@"我的车库" action:@selector(clickMycarPort)];
-    
+    [self drawLeftImageButton:@"" action:@selector(jackBackAction)];
+}
+
+-(void)jackBackAction{
+    if ([self.homeString isEqualToString:@"1"]) {
+        
+        self.tabBarController.selectedIndex = 4;
+        self.homeString = @"0";
+
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -243,6 +255,7 @@ static NSString * HeaderId = @"header";
     return CGSizeMake(Main_Screen_Width - 84*Main_Screen_Height/667, (Main_Screen_Width - 84*Main_Screen_Height/667) / 2);
 }
 
+//横着的车
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     //    NSLog(@"%ld",subIndex);
     _Xuhao = subIndex;

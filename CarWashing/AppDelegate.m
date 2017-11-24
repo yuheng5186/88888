@@ -17,7 +17,7 @@
 
 #import "WXApi.h"
 
-@interface AppDelegate ()<UITabBarDelegate>
+@interface AppDelegate ()<UITabBarDelegate,WXApiDelegate>
 {
     AppDelegate *myDelegate;
 }
@@ -27,9 +27,11 @@
 @implementation AppDelegate
 
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
@@ -192,6 +194,7 @@
         }
         
     }
+    
     
     else if([resp isKindOfClass:[SendMessageToWXResp class]]){
         

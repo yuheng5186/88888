@@ -25,6 +25,7 @@
 #import "CoreLocation/CoreLocation.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
     
@@ -55,6 +56,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
+        
         UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _salerListView = salerListView;

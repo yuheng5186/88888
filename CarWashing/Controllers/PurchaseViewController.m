@@ -154,7 +154,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    NSLog(@"%@",params);
+//    NSLog(@"%@",params);
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSArray *tempArray = dict[@"JsonData"];
         

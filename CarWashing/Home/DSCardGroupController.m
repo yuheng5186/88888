@@ -548,6 +548,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
     CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.row];
     CYCardDeatilListViewController *rechargeDetailVC = [[CYCardDeatilListViewController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
+    NSLog(@"类型列表查看%ld",(long)card.Type);
     rechargeDetailVC.GetCardType = card.Type;
     [self.navigationController pushViewController:rechargeDetailVC animated:YES];
     

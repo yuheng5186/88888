@@ -62,6 +62,10 @@
 //车友圈
 #import "RemindViewController.h"
 
+#import "CYCarInsertViewController.h"
+
+#import "UselessViewController.h"
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
     UIImageView     *logoImageView;
@@ -160,7 +164,7 @@
     
     
     // Do any additional setup after loading the view.
-    self.title = @"首页";
+//    self.title = @"首页";
     self.navigationController.navigationBar.hidden = YES;
     
     [UdStorage storageObject:@"青岛市" forKey:@"City"];
@@ -184,7 +188,6 @@
     [self hsUpdateApp];
     [self headerRereshing];
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
         [self headerRereshing];
     }];
     
@@ -196,8 +199,8 @@
     [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
 //    [self createNavTitleView];
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height) style:UITableViewStyleGrouped];
-    self.tableView.top              = 0;
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, Main_Screen_Width,Main_Screen_Height-60) style:UITableViewStyleGrouped];
+//    self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
@@ -207,15 +210,18 @@
 //    self.tableView.tableHeaderView  = [UIView new];
     
 //    self.tableView.bounces  = NO;
+    /*
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
+     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
+     */
     [self.contentView addSubview:self.tableView];
     
 //     [self setupRefresh];
-    [self createHeaderView];
+//    [self createHeaderView];
     
 //    [self createNavTitleView];
     
@@ -284,6 +290,8 @@
     
 }
 
+
+
 - (void) createHeaderView {
     
     UIView *headerView = [UIView new];
@@ -292,13 +300,13 @@
     headerView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     self.tableView.tableHeaderView  = headerView;
 
-    UIView *backgroudView           = [UIView new];
-    backgroudView.width             = [UIScreen mainScreen].bounds.size.width;
-    backgroudView.height            = Main_Screen_Height*150/667;
-    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#f6f6f6"];
-    backgroudView.top               = 0;
-    backgroudView.left              = 0;
-    [headerView addSubview:backgroudView];
+//    UIView *backgroudView           = [UIView new];
+//    backgroudView.width             = [UIScreen mainScreen].bounds.size.width;
+//    backgroudView.height            = Main_Screen_Height*150/667;
+//    backgroudView.backgroundColor   = [UIColor colorFromHex:@"#f6f6f6"];
+//    backgroudView.top               = 0;
+//    backgroudView.left              = 0;
+//    [headerView addSubview:backgroudView];
    
     
     
@@ -409,7 +417,7 @@
     
     backView.height                  = scanView.bottom +Main_Screen_Height*0/667;
     //  背景高度
-    backgroudView.height             = scanView.bottom +Main_Screen_Height*0/667;
+//    backgroudView.height             = scanView.bottom +Main_Screen_Height*0/667;
     
     
     UIView *downbackView                   = [UIUtil drawLineInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*20/375, Main_Screen_Height*110/667) color:[UIColor whiteColor]];
@@ -427,6 +435,7 @@
     UIImageView *payImageView      = [UIUtil drawCustomImgViewInView:payView frame:CGRectMake(0, 0, payImage.size.width,payImage.size.height) imageName:@"jihuokaquan"];
     payImageView.left              = Main_Screen_Width*15/375;
     payImageView.top               = Main_Screen_Height*10/667;
+    
     
     NSString *payName              = @"激活卡券";
     UIFont *payNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
@@ -748,7 +757,8 @@
                
 //                    [self.GetUserRecordData addObject:newrc];
 //                }
-                 [self createHeaderView];
+//                 [self createHeaderView];
+                [self creatJackHeaderView];
                 
                 if (self.newrc.recList.count==0) {
                     newManImageView.hidden=NO;
@@ -1651,38 +1661,316 @@
 //    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
 }
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    
-//    //图片高度
-////    CGFloat imageHeight = _detaiview.frame.size.height;
-////    //图片宽度
-////    CGFloat imageWidth = QWScreenWidth;
-//    //图片上下偏移量
-//    CGFloat imageOffsetY = scrollView.contentOffset.y;
-//    //    NSLog(@"图片上下偏移量 imageOffsetY:%f ->",imageOffsetY);
-////    //上移
-////    if (imageOffsetY < 0) {
-////        
-////        CGFloat totalOffset = imageHeight + ABS(imageOffsetY);
-////        CGFloat f = totalOffset / imageHeight;
-////        
-////        _detaiImgView.frame = CGRectMake(-(imageWidth * f - imageWidth) * 0.5, imageOffsetY, imageWidth * f, totalOffset);
-////    }
-//    //    //下移
-//    if (imageOffsetY >= cycleScroll.frame.size.height - 64)
-//    {
-//        titleView.backgroundColor = [UIColor colorFromHex:@"#0161a1"];
-//        titleNameLabel.text       = @"金顶洗车";
-//    }
-//    else
-//    {
-//        titleView.backgroundColor = [UIColor clearColor];
-//        titleNameLabel.text       = @"";
-//
-//    }
-//    
-//    
-//}
+#pragma mark - 11.23Jack修改首页布局
+//11.23Jack修改首页布局
+-(void)creatJackHeaderView{
+    
+    //整个headerView
+    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 600)];
+    jackHeaderView.backgroundColor = [UIColor blueColor];
+    self.tableView.tableHeaderView = jackHeaderView;
+    
+    //第一部分(金色背景)
+    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
+    goldenView.backgroundColor = [UIColor orangeColor];
+    [jackHeaderView addSubview:goldenView];
+    NSArray *fourTitleArray = @[@"扫一扫",@"卡包",@"会员特权",@"积分"];
+    for (int i = 0; i < fourTitleArray.count; i++) {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 200)];
+        button.tag = i + 100;
+        [button addTarget:self action:@selector(fourButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [button setTitle:fourTitleArray[i] forState:(UIControlStateNormal)];
+        [goldenView addSubview:button];
+    }
+    
+    //添加爱车按钮
+    CGFloat addButtonHeight = 50;
+    UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, Main_Screen_Width, addButtonHeight)];
+    addCarButton.backgroundColor = [UIColor redColor];
+    [addCarButton setTitle:@"添加爱车享免费洗车" forState:(UIControlStateNormal)];
+    [addCarButton addTarget:self action:@selector(addCarAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [jackHeaderView addSubview:addCarButton];
+    
+    //车辆提醒等4个按钮
+    NSArray *minTitleArray = @[@"车辆提醒",@"激活卡券",@"优惠活动",@"每日签到"];
+    for (int n = 0; n < minTitleArray.count; n ++) {
+        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 200+addButtonHeight, Main_Screen_Width/4, 100)];
+        minButton.tag = n + 200;
+        [minButton addTarget:self action:@selector(carReminFourAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [minButton setTitle:minTitleArray[n] forState:(UIControlStateNormal)];
+        [jackHeaderView addSubview:minButton];
+    }//@end for
+    
+    //我是屌丝我要买卡
+    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300+addButtonHeight, Main_Screen_Width, 100)];
+    buyCardButton.backgroundColor = [UIColor greenColor];
+    [buyCardButton setTitle:@"洗车卡购买入口" forState:(UIControlStateNormal)];
+    [buyCardButton addTarget:self action:@selector(toBuyCard) forControlEvents:(UIControlEventTouchUpInside)];
+    [jackHeaderView addSubview:buyCardButton];
+    
+    //8个模块
+    NSArray *carShitArray = @[@"汽车改装",@"汽车美容",@"汽车保险",@"二手车",@"汽车维修",@"汽车清洁",@"车品商城",@"汽车品牌"];
+    for (int m = 0; m < carShitArray.count; m ++) {
+        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,400+addButtonHeight+ m/4*Main_Screen_Width/4, Main_Screen_Width/4, Main_Screen_Width/4)];
+        shitButton.tag = 300 + m;
+        [shitButton addTarget:self action:@selector(eightButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [shitButton setTitle:carShitArray[m] forState:(UIControlStateNormal)];
+        [jackHeaderView addSubview:shitButton];
+    }
+    
+    
+}
+
+//11.23Jack修改首页布局动作
+-(void)fourButtonAction:(UIButton *)sender{
+    if (sender.tag == 100) {
+        //扫一扫
+//        NSLog(@"1");
+        NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+        NSString    *stringTime     = [defaults objectForKey:@"setTime"];
+        
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *overdate = [dateFormatter dateFromString:stringTime];
+        NSTimeZone *zone1 = [NSTimeZone systemTimeZone];
+        NSInteger interva1 = [zone1 secondsFromGMTForDate: overdate];
+        NSDate*endDate = [overdate dateByAddingTimeInterval: interva1];
+        
+        //获取当前时间
+        NSDate*date = [NSDate date];
+        NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
+        NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
+        NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
+        
+        NSInteger intString;
+        NSTimeInterval interval =[endDate timeIntervalSinceDate:currentDate];
+        NSInteger gotime = round(interval);
+        NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        intString = [str2 intValue];
+        
+        if (intString > 0 && intString < 240) {
+            
+            DSStartWashingController *start = [[DSStartWashingController alloc]init];
+            //        [UdStorage storageObject:dateString forKey:@"setTime"];
+            
+            start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+            start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+            start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+            start.CardType = [UdStorage getObjectforKey:@"CardType"];
+            start.CardName =[UdStorage getObjectforKey:@"CardName"];
+            //        start.second        = 240;
+            start.hidesBottomBarWhenPushed            = YES;
+            start.second                    = 240-intString;
+            
+            [self.navigationController pushViewController:start animated:YES];
+            //        [_session stopRunning];
+            
+        }else {
+            self.tabBarController.selectedIndex = 2;
+            //
+            //
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            
+        }
+    }else if (sender.tag == 101){
+        //卡包
+//        NSLog(@"2");
+        DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
+        cardGroupController.hidesBottomBarWhenPushed    = YES;
+        [self.navigationController pushViewController:cardGroupController animated:YES];
+    }else if (sender.tag == 102){
+        //会员特权
+//        NSLog(@"3");
+        DSMemberRightsController *memberRightsVC    = [[DSMemberRightsController alloc]init];
+        memberRightsVC.hidesBottomBarWhenPushed     = YES;
+        [self.navigationController pushViewController:memberRightsVC animated:YES];
+    }else if (sender.tag == 103){
+        //积分
+//        NSLog(@"4");
+        DSMembershipController *membershipController        = [[DSMembershipController alloc]init];
+        membershipController.hidesBottomBarWhenPushed       = YES;
+        [self.navigationController pushViewController: membershipController animated: YES];
+    }
+}
+
+//添加爱车获得洗车卡
+-(void)addCarAction{
+    
+    CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
+    new.open=1;
+    new.fromHome = @"1";
+    new.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:new animated:YES];
+    
+}
+
+//车辆提醒等四个
+-(void)carReminFourAction:(UIButton *)sender{
+    if (sender.tag == 200) {
+        //车辆提醒
+        RemindViewController *new = [[RemindViewController alloc]init];
+        new.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:new animated:YES];
+    }else if (sender.tag == 201){
+        //激活卡券
+        DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
+        exchangeVC.hidesBottomBarWhenPushed     = YES;
+        [self.navigationController pushViewController:exchangeVC animated:YES];
+    }else if (sender.tag == 202){
+        //优惠活动
+        DSSaleActivityController *saleController    = [[DSSaleActivityController alloc]init];
+        saleController.hidesBottomBarWhenPushed     = YES;
+        [self.navigationController pushViewController:saleController animated:YES];
+    }else if (sender.tag == 203){
+        //每日签到
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYYMMdd"];
+        NSDate *datenow = [NSDate date];
+        NSString *currentTimeString = [formatter stringFromDate:datenow];
+        
+        if([UdStorage getObjectforKey:@"SignTime"])
+        {
+            if([[UdStorage getObjectforKey:@"SignTime"] intValue]<[currentTimeString intValue])
+            {
+                NSDictionary *mulDic = @{
+                                         @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                         };
+                NSDictionary *params = @{
+                                         @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                         @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                         };
+                
+                [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                    
+                    if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                    {
+                        
+                        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                        [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                        NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                        NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                        [outputFormatter setLocale:[NSLocale currentLocale]];
+                        [outputFormatter setDateFormat:@"yyyyMMdd"];
+                        NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                        
+                        [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                        
+                        
+                        APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                        
+                        [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                        
+                        
+                        
+                        PopupView *view = [PopupView defaultPopupView];
+                        view.parentVC = self;
+                        
+                        [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                            
+                        }];
+                    }
+                    
+                    else
+                    {
+                        [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+                    }
+                    
+                    
+                    
+                } fail:^(NSError *error) {
+                    [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+                }];
+                
+            }
+            else
+            {
+                [self.view showInfo:@"今天已经签过到了" autoHidden:YES interval:2];
+            }
+        }
+        else
+        {
+            NSDictionary *mulDic = @{
+                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
+                                     };
+            NSDictionary *params = @{
+                                     @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                     @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                     };
+            
+            [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserSign",Khttp] success:^(NSDictionary *dict, BOOL success) {
+                
+                if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+                {
+                    
+                    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+                    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+                    [inputFormatter setDateFormat:@"yyyy/MM/dd"];
+                    NSDate* inputDate = [inputFormatter dateFromString:[[dict objectForKey:@"JsonData"] objectForKey:@"SignTime"]];
+                    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+                    [outputFormatter setLocale:[NSLocale currentLocale]];
+                    [outputFormatter setDateFormat:@"yyyyMMdd"];
+                    NSString *targetTime = [outputFormatter stringFromDate:inputDate];
+                    
+                    [UdStorage storageObject:targetTime forKey:@"SignTime"];
+                    
+                    APPDELEGATE.currentUser.UserScore = APPDELEGATE.currentUser.UserScore + 10;
+                    
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
+                    
+                    PopupView *view = [PopupView defaultPopupView];
+                    view.parentVC = self;
+                    
+                    [self lew_presentPopupView:view animation:[LewPopupViewAnimationDrop new] dismissed:^{
+                        
+                    }];
+                }
+                
+                else
+                {
+                    [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+                }
+                
+                
+                
+            } fail:^(NSError *error) {
+                [self.view showInfo:@"签到失败" autoHidden:YES interval:2];
+            }];
+            
+        }
+    }
+}
+
+//滚去购买洗车卡
+-(void)toBuyCard{
+    self.tabBarController.selectedIndex = 3;
+}
+
+//底部八个按钮动作
+-(void)eightButtonAction:(UIButton*)sender{
+    if (sender.tag == 300) {
+        NSLog(@"汽车改装");
+    }else if (sender.tag == 301){
+        NSLog(@"汽车美容");
+    }else if (sender.tag == 302){
+        NSLog(@"汽车保险");
+    }else if (sender.tag == 303){
+        NSLog(@"二手车");
+    }else if (sender.tag == 304){
+        NSLog(@"汽车维修");
+    }else if (sender.tag == 305){
+        NSLog(@"汽车情节");
+    }else if (sender.tag == 306){
+        NSLog(@"车品商城");
+    }else if (sender.tag == 307){
+        NSLog(@"汽车品牌");
+    }
+    UselessViewController *new = [[UselessViewController alloc]init];
+    new.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:new animated:YES];
+}
 
 
 

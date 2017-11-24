@@ -10,5 +10,6 @@
 
 @interface CYCarInsertViewController : BaseController
 @property (nonatomic,assign)  NSInteger open;
+@property(nonatomic,copy)NSString *fromHome;
 @property (nonatomic,copy) NSString * CyTYpe;
 @end

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface QWMclistTableViewCell : UITableViewCell
 
 @property(nonatomic,weak)UIImageView *McImageView;

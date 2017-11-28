@@ -35,6 +35,53 @@
     [self.view addSubview:self.mainView];
     [self.view addSubview:self.commitButton];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)                                                name:@"UITextFieldTextDidChangeNotification" object:self.plateNumField];
+    
+}
+
+-(void)textFieldEditChanged:(NSNotification *)obj
+{
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *toBeString = textField.text;
+    NSString *lang = [textField.textInputMode primaryLanguage];
+    if ([lang isEqualToString:@"zh-Hans"])// 简体中文输入
+    {
+        //获取高亮部分
+        UITextRange *selectedRange = [textField markedTextRange];
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position)
+        {
+            if (toBeString.length > 7)
+            {
+                textField.text = [toBeString substringToIndex:7];
+            }
+        }
+        
+    }
+    // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
+    else
+    {
+        if (toBeString.length > 7)
+        {
+            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:7];
+            if (rangeIndex.length == 1)
+            {
+                textField.text = [toBeString substringToIndex:7];
+            }
+            else
+            {
+                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 7)];
+                textField.text = [toBeString substringWithRange:rangeRange];
+            }
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:@"UITextFieldTextDidChangeNotification"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +91,7 @@
 
 -(UIView *)mainView{
     if (!_mainView) {
-        _mainView = [[UIView alloc]initWithFrame:CGRectMake(0, 135, Main_Screen_Width, 400)];
+        _mainView = [[UIView alloc]initWithFrame:CGRectMake(0, 95, Main_Screen_Width, 400)];
         
         //顶部提示
         UILabel *toplabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
@@ -109,28 +156,37 @@
     [self.nameField resignFirstResponder];
     [self.plateNumField resignFirstResponder];
     
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"Name":self.nameField.text,
-                             @"PlateNumber":self.plateNumField.text
-                             };
+    if ([self.nameField.text isEqualToString:@""]||[self.plateNumField.text isEqualToString:@""]) {
+        UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:nil message:@"请补全信息" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [alertCon addAction:sureAction];
+        [self presentViewController:alertCon animated:YES completion:nil];
+    }else{
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                 @"Name":self.nameField.text,
+                                 @"PlateNumber":self.plateNumField.text
+                                 };
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            //af成功
+            if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+                //后台成功
+                NSLog(@"首次添加信息--后台成功");
+                MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+                [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+            }
+        } fail:^(NSError *error) {
+            //af失败
+            NSLog(@"首次添加信息--AF失败%@",error);
+        }];
+    }
+    
 
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/AddUserInfo",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        //af成功
-        if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
-            //后台成功
-            NSLog(@"首次添加信息--后台成功");
-            MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-            [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
-        }
-    } fail:^(NSError *error) {
-        //af失败
-        NSLog(@"首次添加信息--AF失败%@",error);
-    }];
     
     
     

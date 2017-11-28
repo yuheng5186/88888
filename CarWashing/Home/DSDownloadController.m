@@ -22,6 +22,7 @@
 }
 @property (nonatomic, strong) HYActivityView *activityView;
 @property (nonatomic, strong) UIImageView *bigImageView;
+@property(copy,nonatomic)NSString*sendCode;
 @end
 
 @implementation DSDownloadController
@@ -55,10 +56,11 @@
             
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
                 
-                NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
-                    
+                    //成功后回调给后台的参数
+                    NSDictionary *getDict = dict[@"JsonData"];
+                    self.sendCode = getDict[@"InvitationCcode"];
                     
                     
                     //创建发送对象实例
@@ -83,9 +85,7 @@
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
-                    //发送通知给appdelegate
-                    NSDictionary *sendDict = @{@"shareType":@"1"};
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
+                    
                 }
                 else
                 {
@@ -114,9 +114,12 @@
                                      };
             
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
-//                NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
+                    //成功后回调给后台的参数
+                    NSDictionary *getDict = dict[@"JsonData"];
+                    self.sendCode = getDict[@"InvitationCcode"];
+                    
                     //创建发送对象实例
                     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                     sendReq.bText = NO;//不使用文本信息
@@ -139,13 +142,7 @@
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
-                    //发送通知给appdelegate
-                    
-//                    NSDictionary *getDict = dict[@"JsonData"];
-//                    NSString *codeString = getDict[@"InvitationCcode"];
-//                    
-//                    NSDictionary *sendDict = @{@"shareType":@"1",@"sendCode":codeString};
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
+
                     
                 }
                 else
@@ -179,6 +176,40 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createSubView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationAction:) name:@"wxShareSuccess" object:nil];
+}
+
+-(void)notificationAction:(NSNotification*)notice{
+    UIAlertController*alertView = [UIAlertController alertControllerWithTitle:nil message:@"分享成功" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"ShareType":@3,
+                                 @"InvitationCcode":[NSString stringWithFormat:@"%@",self.sendCode]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShareSuccess",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+                NSLog(@"服务器成功");
+            }
+        } fail:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+        
+    }];
+    [alertView addAction:sureAction];
+    [self presentViewController:alertView animated:YES completion:^{
+        
+    }];
+}
+- (void)dealloc{
+    //移除观察者
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wxShareSuccess" object:nil];
 }
 
 - (void) createSubView {

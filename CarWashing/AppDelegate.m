@@ -213,12 +213,8 @@
         if([payResoult isEqualToString:@"0"])
         {
             
-//            UIAlertController *alartView = [UIAlertController alertControllerWithTitle:nil message:@"成功" preferredStyle:(UIAlertControllerStyleAlert)];
-//            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-//                
-//            }];
-//            [alartView addAction:sureAction];
-            
+            //开始发送通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"wxShareSuccess" object:nil];
             
 //            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
 //            [alertview show];
@@ -240,7 +236,7 @@
         else
         {
             
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功1" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             
         }

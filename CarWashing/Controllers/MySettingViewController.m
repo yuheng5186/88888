@@ -58,6 +58,7 @@
 @property (strong,nonatomic)  UITableView * salerListView;
 
 @property (strong,nonatomic)  UIView * headerView;
+@property(copy,nonatomic)NSString *sendCode;
 @end
 
 @implementation MySettingViewController
@@ -101,9 +102,46 @@
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationAction) name:@"wxShareSuccess" object:nil];
+    
 //    [self createSubView];
     [self setupUI];
 }
+
+-(void)notificationAction{
+    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:nil message:@"分享成功" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"ShareType":@3,
+                                 @"InvitationCcode":[NSString stringWithFormat:@"%@",self.sendCode]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShareSuccess",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
+                NSLog(@"服务器成功");
+            }
+        } fail:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+        
+    }];
+    [alertView addAction:sureAction];
+    [self presentViewController:alertView animated:YES completion:nil];
+}
+
+- (void)dealloc{
+    //移除观察者
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"wxShareSuccess" object:nil];
+}
+
+
 - (void)setupUI {
     //
     self.salerListView.delegate = self;
@@ -733,6 +771,11 @@
                     NSLog(@"微信朋友分享%@",dict);
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
+                        
+                        //成功后回调给后台的参数
+                        NSDictionary *getDict = dict[@"JsonData"];
+                        self.sendCode = getDict[@"InvitationCcode"];
+                        
                         //创建发送对象实例
                         SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                         sendReq.bText = NO;//不使用文本信息
@@ -755,9 +798,7 @@
                         //发送分享信息
                         [WXApi sendReq:sendReq];
                         
-                        //发送通知给appdelegate
-                        NSDictionary *sendDict = @{@"shareType":@"1"};
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
+
                         
                     }
                     else
@@ -791,6 +832,11 @@
                     
                     if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                     {
+                        
+                        //成功后回调给后台的参数
+                        NSDictionary *getDict = dict[@"JsonData"];
+                        self.sendCode = getDict[@"InvitationCcode"];
+                        
                         //创建发送对象实例
                         SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                         sendReq.bText = NO;//不使用文本信息
@@ -813,9 +859,7 @@
                         //发送分享信息
                         [WXApi sendReq:sendReq];
                         
-//                        //发送通知给appdelegate
-//                        NSDictionary *sendDict = @{@"shareType":@"1"};
-//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
+
                         
                     }
                     else

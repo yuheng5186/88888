@@ -12,5 +12,7 @@ target 'CarWashing' do
   pod 'DZNEmptyDataSet'
   pod 'MJRefresh'
   pod "GCCycleScrollView"
+  pod 'AliPay_SDK', '~> 3.0.0'
   pod 'MJExtension', '~> 3.0.13'
+
 end

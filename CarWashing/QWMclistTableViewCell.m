@@ -40,13 +40,18 @@
     [self.contentView addSubview:imageV];
     self.McImageView = imageV;
     
-    UIImageView *imageV1 =[[UIImageView alloc]initWithFrame:CGRectMake1(0,0,30,30)];
-    imageV1.opaque = YES;
-    imageV1.image = [UIImage imageNamed:@"renzheng"];
-    [self.McImageView addSubview:imageV1];
-    self.McImagecheckView = imageV1;
+//    UIImageView *imageV1 =[[UIImageView alloc]initWithFrame:CGRectMake1(0,0,30,30)];
+//    imageV1.opaque = YES;
+//    imageV1.image = [UIImage imageNamed:@"renzheng"];
+//    [self.McImageView addSubview:imageV1];
+//    self.McImagecheckView = imageV1;
     
-    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(112,12, 100, 10)];
+    UIImageView *assStoreImage = [[UIImageView alloc]initWithFrame:CGRectMake(112, 12, 38, 17)];
+    assStoreImage.image = [UIImage imageNamed:@"vrenzheng"];
+    assStoreImage.contentMode = UIViewContentModeScaleAspectFill;
+    [self.contentView addSubview:assStoreImage];
+    
+    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(150,10, 100, 10)];
     [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:16 * myDelegate.autoSizeScaleX]];
     namelabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     namelabel.text = @"金雷快修店";
@@ -81,16 +86,20 @@
     [self.contentView addSubview:addlabel];
     
     self.Mcaddress = addlabel;
+    
+    
+    //在这里添加洗车次数
+    
    
     
     CGSize sizeaddlabel = [addlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     addlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(290 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
-    imageV3.opaque = YES;
-    imageV3.image = [UIImage imageNamed:@"juli"];
-    [self.contentView addSubview:imageV3];
-    self.McImagelubiaoView = imageV3;
+//    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(290 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
+//    imageV3.opaque = YES;
+//    imageV3.image = [UIImage imageNamed:@"juli"];
+//    [self.contentView addSubview:imageV3];
+//    self.McImagelubiaoView = imageV3;
     
     self.Mcrange.left=10*Main_Screen_Width/375;
     
@@ -108,15 +117,22 @@
     lineImg.image = [self drawLineByImageView:lineImg];
     [self.contentView addSubview:lineImg];
     
-    UIImageView *imageV2 =[[UIImageView alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height+5*myDelegate.autoSizeScaleY, 62* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
-    imageV2.opaque = YES;
-    imageV2.image = [UIImage imageNamed:@"shangjia3xing"];
-    [self.contentView addSubview:imageV2];
-    self.Mcxingji = imageV2;
+    self.washTimeNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height+5*myDelegate.autoSizeScaleY, 80* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
+    self.washTimeNumLabel.text = @"洗车1000次";
+    self.washTimeNumLabel.font = [UIFont systemFontOfSize:13 * myDelegate.autoSizeScaleX];
+    self.washTimeNumLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    [self.contentView addSubview: self.washTimeNumLabel];
     
-    UILabel *scorelabel = [[UILabel alloc]initWithFrame:CGRectMake(178 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height, 50* myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY)];
-    [scorelabel setFont:[UIFont fontWithName:@"Helvetica" size:15 * myDelegate.autoSizeScaleX]];
-    scorelabel.textColor = [UIColor colorFromHex:@"#dfdfdf"];
+    //原来的商家✨
+//    UIImageView *imageV2 =[[UIImageView alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height+5*myDelegate.autoSizeScaleY, 62* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
+//    imageV2.opaque = YES;
+//    imageV2.image = [UIImage imageNamed:@"shangjia3xing"];
+//    [self.contentView addSubview:imageV2];
+//    self.Mcxingji = imageV2;
+    
+    UILabel *scorelabel = [[UILabel alloc]initWithFrame:CGRectMake(200 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height, 50* myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY)];
+    [scorelabel setFont:[UIFont fontWithName:@"Helvetica" size:13 * myDelegate.autoSizeScaleX]];
+    scorelabel.textColor = [UIColor colorFromHex:@"#999999"];
     scorelabel.text = @"4.0分";
     [self.contentView addSubview:scorelabel];
     self.Mcscore = scorelabel;
@@ -185,9 +201,12 @@
     NSURL *url=[NSURL URLWithString:ImageURL];
     [self.McImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"aiche1"]];
     
-            self.Mcname.text = [dic objectForKey:@"MerName"];
+    self.washTimeString = dic[@"ServiceCount"];
+    self.washTimeNumLabel.text = [NSString stringWithFormat:@"洗车%@次",self.washTimeString];
     
-            self.Mcaddress.text = [dic objectForKey:@"MerAddress"];
+    self.Mcname.text = [dic objectForKey:@"MerName"];
+    
+    self.Mcaddress.text = [dic objectForKey:@"MerAddress"];
     
         //    self.freeTestLabel.text = [dicobjectForKey:@"MerName"];
         //    self.qualityLabel.text = [dicobjectForKey:@"MerName"];
@@ -201,9 +220,10 @@
         
         
             self.Mcscore.text = [NSString stringWithFormat:@"%@分",[dic objectForKey:@"Score"]];
-        
-            [self.Mcxingji setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[dic objectForKey:@"Score"]] substringToIndex:1]]]];
-        
+    
+    //原来的商家✨
+//            [self.Mcxingji setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[dic objectForKey:@"Score"]] substringToIndex:1]]]];
+//
             NSArray *lab = [[dic objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
         
             UILabel *MerflagsLabel = [UILabel new];
@@ -223,8 +243,8 @@
             }
     
     //替换某一位置的字符
-    if (self.Mcaddress.text.length>10) {
-        NSString *str4 = [self.Mcaddress.text  stringByReplacingCharactersInRange:NSMakeRange(10, self.Mcaddress.text.length-10) withString:@"..."];
+    if (self.Mcaddress.text.length>=14) {
+        NSString *str4 = [self.Mcaddress.text  stringByReplacingCharactersInRange:NSMakeRange(14, self.Mcaddress.text.length-14) withString:@"..."];
         self.Mcaddress.text=str4;
     }
 }

@@ -34,7 +34,8 @@
         _statusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
         _statusView.backgroundColor = [UIColor whiteColor];
         UIImageView *imageView  = [[UIImageView alloc]initWithFrame:_statusView.frame];
-        imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+        imageView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
+//        imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
         [_statusView addSubview:imageView];
     }
     return _statusView;
@@ -47,7 +48,8 @@
         _navigationView.backgroundColor = self.statusView.backgroundColor;
         _navigationView.userInteractionEnabled = YES;
         UIImageView *imageView  = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 44)];
-        imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+//        imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+        imageView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
         [_navigationView addSubview:imageView];
         
         if (self.navigationController.viewControllers.count > 1)

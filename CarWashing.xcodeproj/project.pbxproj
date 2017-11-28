@@ -217,6 +217,7 @@
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
 		18EA1E941FC7AF5900FBCEC1 /* UselessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EA1E931FC7AF5900FBCEC1 /* UselessViewController.m */; };
+		18EA1ED01FCBB71A00FBCEC1 /* MoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EA1ECF1FCBB71A00FBCEC1 /* MoreInfoViewController.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
 		374B966A10F9B5E6D74241BF /* libPods-CarWashing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06148821B880ADE3D3F3C15B /* libPods-CarWashing.a */; };
 		500C6BA41F3AE619007D34A1 /* QFDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 500C6BA31F3AE619007D34A1 /* QFDatePickerView.m */; };
@@ -740,6 +741,8 @@
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
 		18EA1E921FC7AF5900FBCEC1 /* UselessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UselessViewController.h; sourceTree = "<group>"; };
 		18EA1E931FC7AF5900FBCEC1 /* UselessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UselessViewController.m; sourceTree = "<group>"; };
+		18EA1ECE1FCBB71A00FBCEC1 /* MoreInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreInfoViewController.h; sourceTree = "<group>"; };
+		18EA1ECF1FCBB71A00FBCEC1 /* MoreInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreInfoViewController.m; sourceTree = "<group>"; };
 		18EDACC51F7B50C6008D59D7 /* ForgetPasswordLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordLoginViewController.h; sourceTree = "<group>"; };
 		18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordLoginViewController.m; sourceTree = "<group>"; };
 		1AA3A012DADBD486F0DAC212 /* Pods-CarWashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarWashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarWashing/Pods-CarWashing.release.xcconfig"; sourceTree = "<group>"; };
@@ -1445,6 +1448,7 @@
 		1840E9EB1FC2ACC6001B2407 /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				18EA1ECD1FCBB6F500FBCEC1 /* UserInfo */,
 				1840E9EC1FC2AD4C001B2407 /* Remind */,
 				18EA1E921FC7AF5900FBCEC1 /* UselessViewController.h */,
 				18EA1E931FC7AF5900FBCEC1 /* UselessViewController.m */,
@@ -1871,6 +1875,15 @@
 			path = Tool/KPIndicatorView;
 			sourceTree = "<group>";
 		};
+		18EA1ECD1FCBB6F500FBCEC1 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				18EA1ECE1FCBB71A00FBCEC1 /* MoreInfoViewController.h */,
+				18EA1ECF1FCBB71A00FBCEC1 /* MoreInfoViewController.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		18EDACC41F7B50C6008D59D7 /* ForgetPasswordLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -2265,7 +2278,7 @@
 				TargetAttributes = {
 					18B803711F1DA2A300B52432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = GS9E29E926;
+						DevelopmentTeam = 4JA5JJ5U85;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -2406,7 +2419,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D0829C3A5D43AD6BB1B48444 /* [CP] Embed Pods Frameworks */ = {
@@ -2520,6 +2533,7 @@
 				181E92DE1F1F3BE40006511E /* MySettingViewController.m in Sources */,
 				5061A43F1F3AAECE003939A4 /* UIView+Uitls.m in Sources */,
 				181E92E31F2054C50006511E /* DSUserInfoController.m in Sources */,
+				18EA1ED01FCBB71A00FBCEC1 /* MoreInfoViewController.m in Sources */,
 				180E43031F3B471100013D2D /* MBProgressHUD.m in Sources */,
 				1840E9FC1FC2ADE9001B2407 /* LicenseModel.m in Sources */,
 				04443F501F5944450032BA5E /* DSScanPayController.m in Sources */,
@@ -2846,7 +2860,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GS9E29E926;
+				DEVELOPMENT_TEAM = 4JA5JJ5U85;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;
@@ -2864,7 +2878,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = GS9E29E926;
+				DEVELOPMENT_TEAM = 4JA5JJ5U85;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CarWashing/PrefixHeader.pch";
 				INFOPLIST_FILE = CarWashing/Info.plist;

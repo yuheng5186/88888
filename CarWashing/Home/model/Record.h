@@ -11,12 +11,12 @@
 @interface adverListModel : JSONModel
 @property(nonatomic,strong)NSString<Optional> *ImgUrl,*Url;
 @end
-@interface Record : JSONModel
 
+@interface Record : JSONModel
 @property (nonatomic,copy) NSArray <adverListModel *>*adverList;
 @property (nonatomic,copy) NSArray <Record *>*recList;
-
 @end
+
 @interface Recordinfo : JSONModel
 @property (nonatomic,copy) NSString *Account_Id;
 @property (nonatomic,copy) NSString *Area;
@@ -32,3 +32,6 @@
 @property(nonatomic)NSInteger IntegralNumber;
 @property(nonatomic)NSInteger PayMathod; //1.微信支付;2支付宝支付;3.洗车卡抵扣
 @end
+
+
+

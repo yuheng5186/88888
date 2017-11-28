@@ -702,6 +702,7 @@
             [self.navigationController pushViewController:new animated:YES];
         }
     }else{
+        //分享
 //        ShareWeChatController *shareVC = [[ShareWeChatController alloc] init];
 //        shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 //        shareVC.delegate = self;
@@ -754,7 +755,9 @@
                         //发送分享信息
                         [WXApi sendReq:sendReq];
                         
-                        
+                        //发送通知给appdelegate
+                        NSDictionary *sendDict = @{@"shareType":@"1"};
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
                         
                     }
                     else
@@ -809,6 +812,10 @@
                         
                         //发送分享信息
                         [WXApi sendReq:sendReq];
+                        
+//                        //发送通知给appdelegate
+//                        NSDictionary *sendDict = @{@"shareType":@"1"};
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
                         
                     }
                     else

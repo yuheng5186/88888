@@ -817,6 +817,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
                     
                     //发送分享信息
                     [WXApi sendReq:sendReq];
+                    
+                    //发送通知给appdelegate
+                    NSDictionary *sendDict = @{@"shareType":@"0"};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
 
                 }
                 else
@@ -880,6 +884,10 @@ static NSString *businessCommentCell = @"businessCommentCell";
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
+//                    //发送通知给appdelegate
+//                    NSDictionary *sendDict = @{@"shareType":@"0"};
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
+//
                 }
                 else
                 {

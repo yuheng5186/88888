@@ -21,6 +21,8 @@
 
 #import "IQKeyboardManager.h"
 #import "ForgetPasswordLoginViewController.h"
+
+#import "MoreInfoViewController.h"
 @interface PassWordLoginViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     KPIndicatorView *_indicatorView;
@@ -246,6 +248,10 @@
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
                     
+                    //进入到完善个人信息的页面中
+                    MoreInfoViewController *moreInfo = [[MoreInfoViewController alloc]init];
+                    [self.navigationController pushViewController:moreInfo animated:YES];
+                    
                     
                     APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
                     
@@ -264,8 +270,8 @@
                     [UdStorage storageObject:APPDELEGATE.currentUser.usermemo forKey:@"Memo"];
                     [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
                     
-                    MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+//                    MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+//                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
                 }
                 else
                 {

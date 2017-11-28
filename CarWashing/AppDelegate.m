@@ -16,6 +16,16 @@
 //
 
 #import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+
+//分享反馈
+#import "UdStorage.h"
+#import "HTTPDefine.h"
+#import "AFNetworkingTool.h"
+#import "AFNetworkingTool+GetToken.h"
+#import "LCMD5Tool.h"
+
+
 
 @interface AppDelegate ()<UITabBarDelegate,WXApiDelegate>
 {
@@ -203,8 +213,25 @@
         if([payResoult isEqualToString:@"0"])
         {
             
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
-            [alertview show];
+//            UIAlertController *alartView = [UIAlertController alertControllerWithTitle:nil message:@"成功" preferredStyle:(UIAlertControllerStyleAlert)];
+//            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//                
+//            }];
+//            [alartView addAction:sureAction];
+            
+            
+//            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+//            [alertview show];
+            
+            //分享成功给后台反馈
+            //目前等回台的接口
+//            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(downLoadNotice:) name:@"sendShare" object:nil];
+            
+            
+            
+            
+            
+            
         }else if([payResoult isEqualToString:@"-2"])
         {
             UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享已取消" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
@@ -213,13 +240,44 @@
         else
         {
             
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:@"分享成功1" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil];
             [alertview show];
             
         }
         
     }
 }
+
+//-(void)downLoadNotice:(NSNotification*)notice{
+//    NSString *typeString = notice.userInfo[@"shareType"];
+//    NSLog(@"通知%@",typeString);
+//    if ([typeString isEqualToString:@"1"]) {
+//        //分享客户端
+//        NSLog(@"客户端");
+//        NSString *sendCode = notice.userInfo[@"sendCode"];
+//        NSDictionary *mulDic = @{
+//                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+//                                 @"ShareType":@3,
+//                                 @"InvitationCcode":sendCode
+//                                 };
+//        NSDictionary *params = @{
+//                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+//                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+//                                 };
+//        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShareSuccess",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//            NSLog(@"~~~~~~~~~~~%@",dict);
+//        } fail:^(NSError *error) {
+//            NSLog(@"%@",error);
+//        }];
+//        //清楚通知
+//        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"sendShare" object:nil];
+//    }else{
+//        //分享小积分
+//        NSLog(@"小积分");
+//        //清楚通知
+//        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"sendShare" object:nil];
+//    }
+//}
 
 
 

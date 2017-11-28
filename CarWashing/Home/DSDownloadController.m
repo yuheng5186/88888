@@ -58,6 +58,9 @@
                 NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
+                    
+                    
+                    
                     //创建发送对象实例
                     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                     sendReq.bText = NO;//不使用文本信息
@@ -80,11 +83,14 @@
                     //发送分享信息
                     [WXApi sendReq:sendReq];
                     
+                    //发送通知给appdelegate
+                    NSDictionary *sendDict = @{@"shareType":@"1"};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
                 }
                 else
                 {
                     [self.view showInfo:@"分享失败，请重试" autoHidden:YES interval:2];
-                    
+                    //后台返回参数错误！
                 }
                 
             } fail:^(NSError *error) {
@@ -108,7 +114,7 @@
                                      };
             
             [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@InviteShare/UserShare",Khttp] success:^(NSDictionary *dict, BOOL success) {
-                
+//                NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
                     //创建发送对象实例
@@ -132,6 +138,14 @@
                     
                     //发送分享信息
                     [WXApi sendReq:sendReq];
+                    
+                    //发送通知给appdelegate
+                    
+//                    NSDictionary *getDict = dict[@"JsonData"];
+//                    NSString *codeString = getDict[@"InvitationCcode"];
+//                    
+//                    NSDictionary *sendDict = @{@"shareType":@"1",@"sendCode":codeString};
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"sendShare" object:nil userInfo:sendDict];
                     
                 }
                 else

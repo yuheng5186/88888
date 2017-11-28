@@ -96,6 +96,10 @@
 @property (strong, nonatomic)NSString *LocCity;
 @property (strong, nonatomic)Record *newrc;
 
+@property(copy,nonatomic)NSString *getCarCode;
+@property(strong,nonatomic)UILabel*addCarInfoLabel;
+@property(strong,nonatomic)UILabel*subAddCarLabel;
+@property(copy,nonatomic)NSString *PlateNumber;
 @end
 
 @implementation HomeViewController
@@ -103,6 +107,7 @@
 -(void)drawNavigation
 {
     [self drawTitle:@"金顶洗车"];
+    
     [self drawRightImageButton:@"xiazai" action:@selector(downloadButtonClick:)];
     [self drawLeftImageButton:@"jinding" action:nil];
 }
@@ -731,9 +736,11 @@
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-    
+    /*
+     [NSString stringWithFormat:@"%@User/GetUserRecord",Khttp]
+     @"http:192.168.2.152:8090/api/User/GetUserRecord"
+     */
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
              self.GetUserRecordData = [[NSMutableArray alloc]init];
@@ -742,23 +749,32 @@
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
             {
-                //                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:1.5];
                 [self.tableView.mj_header endRefreshing];
             }
             else
             {
 
-                NSLog(@"%@",[dict objectForKey:@"JsonData"]);
-//                NSArray *arr = [NSArray array];
-//                arr = [dict objectForKey:@"JsonData"];
-//                for(NSDictionary *dic in arr)
-//                {
-                    self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
-               
-//                    [self.GetUserRecordData addObject:newrc];
-//                }
-//                 [self createHeaderView];
+                NSLog(@"首页数据%@",[dict objectForKey:@"JsonData"]);
+                self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                 [self creatJackHeaderView];
+    //为header上的购卡判断
+                NSDictionary *getDict = [dict objectForKey:@"JsonData"];
+                NSDictionary *carModelDict = getDict[@"carModel"];
+                self.getCarCode = [NSString stringWithFormat:@"%@",carModelDict[@"CarCode"]];
+                self.PlateNumber = [NSString stringWithFormat:@"%@",carModelDict[@"PlateNumber"]];
+                if ([self.getCarCode isEqualToString:@"0"]) {
+                    //第一次什么都不用管
+                    self.addCarInfoLabel.text = @"第一次";
+                    self.subAddCarLabel.text = @"第一次";
+                }else{
+                    self.addCarInfoLabel.text = @"点击进一步添加信息";
+                    self.subAddCarLabel.text = [NSString stringWithFormat:@"%@",self.PlateNumber];
+                }
+                
+                
+//                 [self createHeaderView];
+                
                 
                 if (self.newrc.recList.count==0) {
                     newManImageView.hidden=NO;
@@ -1661,60 +1677,146 @@
 //    [logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,[UdStorage getObjectforKey:UserHead]]] placeholderImage:[UIImage imageNamed:@"xichebaidi"]];
 }
 
-#pragma mark - 11.23Jack修改首页布局
+#pragma mark - 11.23Jack修改首页布局，tableViewHeader
 //11.23Jack修改首页布局
 -(void)creatJackHeaderView{
     
     //整个headerView
-    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 600)];
-    jackHeaderView.backgroundColor = [UIColor blueColor];
+    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 655)];
+    jackHeaderView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
     self.tableView.tableHeaderView = jackHeaderView;
     
     //第一部分(金色背景)
-    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
-    goldenView.backgroundColor = [UIColor orangeColor];
+    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140)];
+    goldenView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [jackHeaderView addSubview:goldenView];
+    
+//    UIImageView*goldImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140)];
+//    goldImageView.image = [UIImage imageNamed:@"2627"];
+//    goldImageView.contentMode = UIViewContentModeScaleAspectFit;
+//    [goldenView addSubview:goldImageView];
+    
     NSArray *fourTitleArray = @[@"扫一扫",@"卡包",@"会员特权",@"积分"];
+    NSArray *fourTopImageArray = @[@"saoyisaoJ",@"kabaoJ",@"huiyuanJ",@"jifenJ"];
     for (int i = 0; i < fourTitleArray.count; i++) {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 200)];
+        
+//        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(30+90.0/375*Main_Screen_Width*i, 42, 45.0/375*Main_Screen_Width, 45.0/667*Main_Screen_Height)];
+//        imageView.image = [UIImage imageNamed:fourTopImageArray[i]];
+//        [goldenView addSubview:imageView];
+        
+        UIView *topFourView = [[UIView alloc]initWithFrame:CGRectMake(30+90.0/375*Main_Screen_Width*i, 42, 60.0/375*Main_Screen_Width, 70.0/667*Main_Screen_Height)];
+        topFourView.backgroundColor = [UIColor clearColor];
+        [goldenView addSubview:topFourView];
+        
+        UIImageView *topImageView = [[UIImageView alloc]initWithFrame:CGRectMake(7, 0, 45, 45)];
+        topImageView.image = [UIImage imageNamed:fourTopImageArray[i]];
+        [topFourView addSubview:topImageView];
+        
+        UILabel *topLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 65, 60, 20)];
+        topLabel.font = [UIFont systemFontOfSize:15];
+        topLabel.text = fourTitleArray[i];
+        topLabel.textColor = [UIColor whiteColor];
+        
+        topLabel.textAlignment = NSTextAlignmentCenter;
+        [topFourView addSubview:topLabel];
+        
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 140)];
         button.tag = i + 100;
         [button addTarget:self action:@selector(fourButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        [button setTitle:fourTitleArray[i] forState:(UIControlStateNormal)];
         [goldenView addSubview:button];
     }
     
     //添加爱车按钮
-    CGFloat addButtonHeight = 50;
-    UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 200, Main_Screen_Width, addButtonHeight)];
-    addCarButton.backgroundColor = [UIColor redColor];
-    [addCarButton setTitle:@"添加爱车享免费洗车" forState:(UIControlStateNormal)];
+    CGFloat addButtonHeight = 90;
+    
+    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, 155, Main_Screen_Width-30, 60)];
+    whiteView.backgroundColor = [UIColor whiteColor];
+    whiteView.clipsToBounds = YES;
+    whiteView.layer.cornerRadius = 10;
+    [jackHeaderView addSubview:whiteView];
+    
+    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 30, 30)];
+    addImageView.clipsToBounds = YES;
+    addImageView.layer.cornerRadius = 15;
+    addImageView.image = [UIImage imageNamed:@"tianjiaaiche"];
+    [whiteView addSubview:addImageView];
+    
+    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 200, 20)];
+    _addCarInfoLabel.text = @"添加爱车享免费洗车";
+    _addCarInfoLabel.font = [UIFont systemFontOfSize:15];
+    [whiteView addSubview:_addCarInfoLabel];
+    
+    _subAddCarLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 32, 200, 20)];
+    _subAddCarLabel.text = @"洗车、保养、换轮胎";
+    _subAddCarLabel.textColor = [UIColor colorFromHex:@"#909090"];
+    _subAddCarLabel.font = [UIFont systemFontOfSize:12];
+    [whiteView addSubview:_subAddCarLabel];
+    
+    
+    
+    UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, Main_Screen_Width, addButtonHeight)];
+    addCarButton.backgroundColor = [UIColor clearColor];
     [addCarButton addTarget:self action:@selector(addCarAction) forControlEvents:(UIControlEventTouchUpInside)];
     [jackHeaderView addSubview:addCarButton];
     
     //车辆提醒等4个按钮
-    NSArray *minTitleArray = @[@"车辆提醒",@"激活卡券",@"优惠活动",@"每日签到"];
+    
+    
+    UIImageView *minBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 140+addButtonHeight, Main_Screen_Width, 110)];
+    minBackImageView.image = [UIImage imageNamed:@"fourImage"];
+    minBackImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [jackHeaderView addSubview:minBackImageView];
+    NSArray *minTitleArray = @[@"shouye_cheliangtixing",@"jihuo",@"youhuihuodong",@"qiandao"];
+//    NSArray *titleArray = @[@"车辆提醒",@"激活卡券",@"优惠活动",@"每日签到"];
     for (int n = 0; n < minTitleArray.count; n ++) {
-        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 200+addButtonHeight, Main_Screen_Width/4, 100)];
+        
+//        UIImageView *minImageView = [[UIImageView alloc]initWithFrame:CGRectMake(50+82 * n, 170+addButtonHeight, 25, 25)];
+//        minImageView.image = [UIImage imageNamed:minTitleArray[n]];
+//        minImageView.contentMode = UIViewContentModeScaleAspectFit;
+//        [jackHeaderView addSubview:minImageView];
+//
+//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(25+n*(Main_Screen_Width-50)/4, 210+addButtonHeight, (Main_Screen_Width-50)/4, 30)];
+//        label.textAlignment = NSTextAlignmentCenter;
+//        label.textColor = [UIColor colorFromHex:@"#909090"];
+//        label.font = [UIFont systemFontOfSize:13];
+//        label.text = titleArray[n];
+//        [jackHeaderView addSubview:label];
+        
+        
+        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 140+addButtonHeight, Main_Screen_Width/4, 110)];
         minButton.tag = n + 200;
+        minButton.backgroundColor = [UIColor clearColor];
         [minButton addTarget:self action:@selector(carReminFourAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        [minButton setTitle:minTitleArray[n] forState:(UIControlStateNormal)];
         [jackHeaderView addSubview:minButton];
     }//@end for
     
     //我是屌丝我要买卡
-    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 300+addButtonHeight, Main_Screen_Width, 100)];
-    buyCardButton.backgroundColor = [UIColor greenColor];
-    [buyCardButton setTitle:@"洗车卡购买入口" forState:(UIControlStateNormal)];
+    
+    UIImageView *buyCardImageViwe = [[UIImageView alloc]initWithFrame:CGRectMake(15, 260+addButtonHeight, Main_Screen_Width-30, 70)];
+    buyCardImageViwe.image = [UIImage imageNamed:@"qugouka"];
+    buyCardImageViwe.contentMode = UIViewContentModeScaleAspectFit;
+    [jackHeaderView addSubview:buyCardImageViwe];
+    
+    
+    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 250+addButtonHeight, Main_Screen_Width, 100)];
+    buyCardButton.backgroundColor = [UIColor clearColor];
+//    [buyCardButton setTitle:@"洗车卡购买入口" forState:(UIControlStateNormal)];
     [buyCardButton addTarget:self action:@selector(toBuyCard) forControlEvents:(UIControlEventTouchUpInside)];
     [jackHeaderView addSubview:buyCardButton];
     
     //8个模块
+    UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350+addButtonHeight, Main_Screen_Width, 200)];
+    eightBackImageView.image = [UIImage imageNamed:@"2627eight"];
+    eightBackImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [jackHeaderView addSubview:eightBackImageView];
     NSArray *carShitArray = @[@"汽车改装",@"汽车美容",@"汽车保险",@"二手车",@"汽车维修",@"汽车清洁",@"车品商城",@"汽车品牌"];
     for (int m = 0; m < carShitArray.count; m ++) {
-        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,400+addButtonHeight+ m/4*Main_Screen_Width/4, Main_Screen_Width/4, Main_Screen_Width/4)];
+        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,350+addButtonHeight+ m/4*100, Main_Screen_Width/4, 100)];
+//        NSLog(@"aaaaaaaaaaaa%d",m/4);
         shitButton.tag = 300 + m;
+        shitButton.backgroundColor = [UIColor clearColor];
         [shitButton addTarget:self action:@selector(eightButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        [shitButton setTitle:carShitArray[m] forState:(UIControlStateNormal)];
+//        [shitButton setTitle:carShitArray[m] forState:(UIControlStateNormal)];
         [jackHeaderView addSubview:shitButton];
     }
     
@@ -1798,11 +1900,20 @@
 //添加爱车获得洗车卡
 -(void)addCarAction{
     
-    CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
-    new.open=1;
-    new.fromHome = @"1";
-    new.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:new animated:YES];
+    if ([self.getCarCode isEqualToString:@"0"]) {
+        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
+        new.open=1;
+        new.fromHome = @"1";
+        new.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:new animated:YES];
+    }else{
+        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
+        new.open=1;
+        new.fromHome = @"1";
+        new.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:new animated:YES];
+    }
+    
     
 }
 

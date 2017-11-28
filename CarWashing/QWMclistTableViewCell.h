@@ -22,6 +22,10 @@
 @property(nonatomic,weak)UILabel *Mctag1;
 @property(nonatomic,weak)UILabel *Mctag2;
 
+//洗车次数相关
+@property(strong,nonatomic)UILabel *washTimeNumLabel;
+@property(copy,nonatomic)NSString *washTimeString;
+
 -(void)setlayoutCell;
 
 -(void)setUpCellWithDic:(NSDictionary *)dic;

@@ -571,7 +571,7 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
                                  @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                  @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                                  };
-        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCard",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/ActivationCardOne",Khttp] success:^(NSDictionary *dict, BOOL success) {
             NSLog(@"----%@",dict);
             if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
             {

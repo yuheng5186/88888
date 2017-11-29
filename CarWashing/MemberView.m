@@ -31,12 +31,12 @@
     
     //self.increaseButton.backgroundColor = [UIColor colorFromHex:@"ff9041"];
     self.increaseButton.layer.cornerRadius = 10*Main_Screen_Height/667;
-    self.increaseButton.layer.borderWidth = 1;
+//    self.increaseButton.layer.borderWidth = 1;
     self.increaseButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
     //self.ernScoreButton.backgroundColor = [UIColor colorFromHex:@"ff9041"];
     self.ernScoreButton.layer.cornerRadius = 10*Main_Screen_Height/667;
-    self.ernScoreButton.layer.borderWidth = 1;
+//    self.ernScoreButton.layer.borderWidth = 1;
     self.ernScoreButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
     if (Main_Screen_Height == 736) {

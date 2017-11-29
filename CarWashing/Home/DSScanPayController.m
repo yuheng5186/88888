@@ -82,15 +82,11 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 }
 -(void)resultClickSuccess{
 //    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
-    UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"购卡成功" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"支付成功" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *pushAction = [UIAlertAction actionWithTitle:@"查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        DSCardGroupController *new = [[DSCardGroupController alloc]init];
-        new.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:new animated:YES];
+        [self goBack];
     }];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
     [successController addAction:pushAction];
-    [successController addAction:cancleAction];
     [self presentViewController:successController animated:YES completion:nil];
 }
 -(void)resultClickfail{

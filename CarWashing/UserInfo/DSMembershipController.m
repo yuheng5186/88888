@@ -64,7 +64,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     if (!_containView) {
         
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 173*Main_Screen_Height/667)];
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 216*Main_Screen_Height/667)];
         _containView = containView;
         [self.view addSubview:_containView];
     }
@@ -111,7 +111,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.containView.backgroundColor = [UIColor whiteColor];
     
     memberShipView = [MemberView memberView];
-   // memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
+    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
     
     
     [self.containView addSubview:memberShipView];
@@ -154,7 +154,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView);
         make.left.right.equalTo(self.containView);
-        make.height.mas_equalTo(123*Main_Screen_Height/667);
+        make.height.mas_equalTo(160*Main_Screen_Height/667);
     }];
     
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -224,7 +224,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
             [memberShipView.UserImgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,_MembershipUserScore[@"Headimg"]]] placeholderImage:[UIImage imageNamed:@"huiyuantou"]];
             
             memberShipView.phoneLabel.text = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"Name"]];
-            [memberShipView.ScoreBtn setTitle:[NSString stringWithFormat:@"%@分",_MembershipUserScore[@"UserScore"]] forState:UIControlStateNormal];
+//            [memberShipView.ScoreBtn setTitle:[NSString stringWithFormat:@"%@分",_MembershipUserScore[@"UserScore"]] forState:UIControlStateNormal];
             
              NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
             
@@ -253,7 +253,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
                 
             }
             
-            [memberShipView.LevelBtn setTitle:[arr2 objectAtIndex:num] forState:UIControlStateNormal];
+//            [memberShipView.LevelBtn setTitle:[arr2 objectAtIndex:num] forState:UIControlStateNormal];
             
             [_exchangListView reloadData];
             

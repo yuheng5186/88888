@@ -62,7 +62,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [self setupUI];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goBack) name:@"alipayresultSuccess" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
 
 }
@@ -71,19 +71,21 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 -(void)resultClickCancel{
     [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
 }
--(void)resultClickSuccess{
-//    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
-    UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"购卡成功" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *pushAction = [UIAlertAction actionWithTitle:@"查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        DSCardGroupController *new = [[DSCardGroupController alloc]init];
-        new.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:new animated:YES];
-    }];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
-    [successController addAction:pushAction];
-    [successController addAction:cancleAction];
-    [self presentViewController:successController animated:YES completion:nil];
-}
+
+//-(void)resultClickSuccess{
+////    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
+//    UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"购卡成功" preferredStyle:(UIAlertControllerStyleAlert)];
+//    UIAlertAction *pushAction = [UIAlertAction actionWithTitle:@"查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+//        DSCardGroupController *new = [[DSCardGroupController alloc]init];
+//        new.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:new animated:YES];
+//    }];
+//    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+//    [successController addAction:pushAction];
+//    [successController addAction:cancleAction];
+//    [self presentViewController:successController animated:YES completion:nil];
+//}
+
 -(void)resultClickfail{
     [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
 }

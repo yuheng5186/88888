@@ -33,6 +33,9 @@
 #import "DSCarWashingActivityController.h"
 
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
+#define mainW [UIScreen mainScreen].bounds.size.width
+#define mainH [UIScreen mainScreen].bounds.size.height
+
 
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
@@ -1694,12 +1697,12 @@
 -(void)creatJackHeaderView{
     
     //整个headerView
-    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 655)];
+    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 655.0/667*mainH)];
     jackHeaderView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
     self.tableView.tableHeaderView = jackHeaderView;
     
     //第一部分(金色背景)
-    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140)];
+    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140.0/667*mainH)];
     goldenView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [jackHeaderView addSubview:goldenView];
     
@@ -1712,52 +1715,51 @@
     NSArray *fourTopImageArray = @[@"saoyisaoJ",@"kabaoJ",@"huiyuanJ",@"jifenJ"];
     for (int i = 0; i < fourTitleArray.count; i++) {
         
-//        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(30+90.0/375*Main_Screen_Width*i, 42, 45.0/375*Main_Screen_Width, 45.0/667*Main_Screen_Height)];
-//        imageView.image = [UIImage imageNamed:fourTopImageArray[i]];
-//        [goldenView addSubview:imageView];
+        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(30.0/375*mainW + 85.0/375*mainW*i, 40, 60.0/375*mainW, 60.0/667*mainH)];
+//        baseView.backgroundColor = [UIColor grayColor];
+        [goldenView addSubview:baseView];
         
-        UIView *topFourView = [[UIView alloc]initWithFrame:CGRectMake(30+90.0/375*Main_Screen_Width*i, 42, 60.0/375*Main_Screen_Width, 70.0/667*Main_Screen_Height)];
-        topFourView.backgroundColor = [UIColor clearColor];
-        [goldenView addSubview:topFourView];
+        UIImageView *imageViewJack = [[UIImageView alloc]initWithFrame:CGRectMake(10.0/375*mainW, 0, 40.0/375*mainW, 40.0/667*mainH)];
+        imageViewJack.image = [UIImage imageNamed:fourTopImageArray[i]];
+//        imageViewJack.backgroundColor = [UIColor redColor];
+        [baseView addSubview:imageViewJack];
         
-        UIImageView *topImageView = [[UIImageView alloc]initWithFrame:CGRectMake(7, 0, 45, 45)];
-        topImageView.image = [UIImage imageNamed:fourTopImageArray[i]];
-        [topFourView addSubview:topImageView];
+        UILabel *labelJack = [[UILabel alloc]initWithFrame:CGRectMake(-10, 50.0/667*mainH, 80.0/375*mainW, 30.0/667*mainH)];
+//        labelJack.backgroundColor = [UIColor greenColor];
+        labelJack.text = fourTitleArray[i];
+        labelJack.textColor = [UIColor whiteColor];
+        labelJack.font = [UIFont systemFontOfSize:16.0/375*mainW weight:16.0/375*mainW];
+        labelJack.textAlignment = NSTextAlignmentCenter;
+        [baseView addSubview:labelJack];
         
-        UILabel *topLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 65, 60, 20)];
-        topLabel.font = [UIFont systemFontOfSize:14];
-        topLabel.text = fourTitleArray[i];
-        topLabel.textColor = [UIColor whiteColor];
-        topLabel.textAlignment = NSTextAlignmentCenter;
-        [topFourView addSubview:topLabel];
-        
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 140)];
+
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 140.0/667*mainH)];
         button.tag = i + 100;
         [button addTarget:self action:@selector(fourButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [goldenView addSubview:button];
     }
     
     //添加爱车按钮
-    CGFloat addButtonHeight = 90;
+    CGFloat addButtonHeight = 90.0/667*mainH;
     
-    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, 155, Main_Screen_Width-30, 60)];
+    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, 155.0/667*mainH, Main_Screen_Width-30, 60.0/667*mainH)];
     whiteView.backgroundColor = [UIColor whiteColor];
     whiteView.clipsToBounds = YES;
     whiteView.layer.cornerRadius = 10;
     [jackHeaderView addSubview:whiteView];
     
-    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 30, 30)];
+    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15.0/667*mainH, 30, 30.0/667*mainH)];
     addImageView.clipsToBounds = YES;
     addImageView.layer.cornerRadius = 15;
     addImageView.image = [UIImage imageNamed:@"tianjiaaiche"];
     [whiteView addSubview:addImageView];
     
-    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 200, 20)];
+    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10.0/667*mainH, 200, 20.0/667*mainH)];
     _addCarInfoLabel.text = @"添加爱车享免费洗车";
     _addCarInfoLabel.font = [UIFont systemFontOfSize:15];
     [whiteView addSubview:_addCarInfoLabel];
     
-    _subAddCarLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 32, 200, 20)];
+    _subAddCarLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 32.0/667*mainH, 200, 20.0/667*mainH)];
     _subAddCarLabel.text = @"洗车、保养、换轮胎";
     _subAddCarLabel.textColor = [UIColor colorFromHex:@"#909090"];
     _subAddCarLabel.font = [UIFont systemFontOfSize:12];
@@ -1765,7 +1767,7 @@
     
     
     
-    UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140, Main_Screen_Width, addButtonHeight)];
+    UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140.0/667*mainH, Main_Screen_Width, addButtonHeight)];
     addCarButton.backgroundColor = [UIColor clearColor];
     [addCarButton addTarget:self action:@selector(addCarAction) forControlEvents:(UIControlEventTouchUpInside)];
     [jackHeaderView addSubview:addCarButton];
@@ -1773,7 +1775,7 @@
     //车辆提醒等4个按钮
     
     
-    UIImageView *minBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 140+addButtonHeight, Main_Screen_Width, 110)];
+    UIImageView *minBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 140.0/667*mainH+addButtonHeight, Main_Screen_Width, 110.0/667*mainH)];
     minBackImageView.image = [UIImage imageNamed:@"fourImage"];
     minBackImageView.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:minBackImageView];
@@ -1794,7 +1796,7 @@
 //        [jackHeaderView addSubview:label];
         
         
-        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 140+addButtonHeight, Main_Screen_Width/4, 110)];
+        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 140.0/667*mainH+addButtonHeight, Main_Screen_Width/4, 110.0/667*mainH)];
         minButton.tag = n + 200;
         minButton.backgroundColor = [UIColor clearColor];
         [minButton addTarget:self action:@selector(carReminFourAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -1803,26 +1805,26 @@
     
     //我是屌丝我要买卡
     
-    UIImageView *buyCardImageViwe = [[UIImageView alloc]initWithFrame:CGRectMake(15, 260+addButtonHeight, Main_Screen_Width-30, 70)];
+    UIImageView *buyCardImageViwe = [[UIImageView alloc]initWithFrame:CGRectMake(15, 260.0/667*mainH+addButtonHeight, Main_Screen_Width-30, 70.0/667*mainH)];
     buyCardImageViwe.image = [UIImage imageNamed:@"qugouka"];
     buyCardImageViwe.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:buyCardImageViwe];
     
     
-    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 250+addButtonHeight, Main_Screen_Width, 100)];
+    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 250.0/667*mainH+addButtonHeight, Main_Screen_Width, 100.0/667*mainH)];
     buyCardButton.backgroundColor = [UIColor clearColor];
 //    [buyCardButton setTitle:@"洗车卡购买入口" forState:(UIControlStateNormal)];
     [buyCardButton addTarget:self action:@selector(toBuyCard) forControlEvents:(UIControlEventTouchUpInside)];
     [jackHeaderView addSubview:buyCardButton];
     
     //8个模块
-    UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350+addButtonHeight, Main_Screen_Width, 200)];
+    UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350.0/667*mainH+addButtonHeight, Main_Screen_Width, 200.0/667*mainH)];
     eightBackImageView.image = [UIImage imageNamed:@"2627eight"];
     eightBackImageView.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:eightBackImageView];
     NSArray *carShitArray = @[@"汽车改装",@"汽车美容",@"汽车保险",@"二手车",@"汽车维修",@"汽车清洁",@"车品商城",@"汽车品牌"];
     for (int m = 0; m < carShitArray.count; m ++) {
-        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,350+addButtonHeight+ m/4*100, Main_Screen_Width/4, 100)];
+        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,350.0/667*mainH+addButtonHeight+ m/4*100, Main_Screen_Width/4, 100.0/667*mainH)];
 //        NSLog(@"aaaaaaaaaaaa%d",m/4);
         shitButton.tag = 300 + m;
         shitButton.backgroundColor = [UIColor clearColor];

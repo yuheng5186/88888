@@ -25,6 +25,13 @@
 @property(strong,nullable)UITextField *nameField;
 @property(strong,nullable)UITextField *plateNumField;
 
+//添加省市按钮
+@property(strong,nonatomic)UIView *popView;
+@property(strong,nonatomic)UIView *backView;
+@property(strong,nonatomic)NSArray *proArray;
+@property(strong,nonatomic)UIButton *button;
+@property(copy,nonatomic)NSString *sendButtonTitleString;       //传回button名字
+
 @end
 
 @implementation MoreInfoViewController
@@ -36,6 +43,19 @@
     [self.view addSubview:self.commitButton];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)                                                name:@"UITextFieldTextDidChangeNotification" object:self.plateNumField];
+    
+    
+    self.proArray = @[@"京",@"津",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"沪",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"渝",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新"];
+    self.sendButtonTitleString = @"沪";
+    
+    
+    self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46)];
+//    self.button.backgroundColor = [UIColor clearColor];
+    [self.button setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
+    self.button.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+    [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
     
 }
 
@@ -122,10 +142,17 @@
         botLabel.textColor = [UIColor whiteColor];
         [_mainView addSubview:botLabel];
         
-        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 220, 300, 46)];
+        UIView *botBackView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 220, 300, 46)];
+        botBackView.backgroundColor = [UIColor whiteColor];
+        botBackView.clipsToBounds = YES;
+        botBackView.layer.cornerRadius = 23;
+        [botBackView addSubview:self.button];
+        [_mainView addSubview:botBackView];
+        
+        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-132, 220, 264, 46)];
         _plateNumField.backgroundColor = [UIColor whiteColor];
-        _plateNumField.clipsToBounds = YES;
-        _plateNumField.layer.cornerRadius = 23;
+//        _plateNumField.clipsToBounds = YES;
+//        _plateNumField.layer.cornerRadius = 23;
         _plateNumField.font = [UIFont systemFontOfSize:18];
         [_mainView addSubview:_plateNumField];
         
@@ -193,6 +220,73 @@
     
     
 }
+
+///////////////////////////////////////////
+//点击省市
+-(void)buttonAction{
+    [self.view addSubview:self.backView];
+    [self.view addSubview:self.popView];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.backView.alpha = 0.7;
+        self.backView.hidden = NO;
+        self.popView.frame = CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+-(void)backActionJack{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.backView.alpha = 0;
+        self.popView.frame = CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 300);
+    } completion:^(BOOL finished) {
+        [self.backView removeFromSuperview];
+        [self.popView removeFromSuperview];
+    }];
+}
+
+-(void)chooseProAction:(UIButton *)sender{
+    self.sendButtonTitleString = self.proArray[sender.tag-100];
+    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+    [self backActionJack];
+}
+
+-(UIView *)popView{
+    if (!_popView) {
+        _popView = [[UIView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 300)];
+        _popView.backgroundColor = [UIColor whiteColor];
+        
+        for (int i = 0; i < self.proArray.count; i++) {
+            UIButton *provenButton = [[UIButton alloc]initWithFrame:CGRectMake(15+(i%5)*(71.0/375*Main_Screen_Width), 10+(i/5)*(35.0/667*Main_Screen_Height), (61.0/375*Main_Screen_Width), (30.0/667*Main_Screen_Height))];
+            provenButton.layer.borderWidth = 0.5;
+            [provenButton setTitle:self.proArray[i] forState:(UIControlStateNormal)];
+            provenButton.tag = 100+i;
+            [provenButton setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+            [provenButton addTarget:self action:@selector(chooseProAction:) forControlEvents:(UIControlEventTouchUpInside)];
+            [_popView addSubview:provenButton];
+        }
+    }
+    return _popView;
+}
+
+
+-(UIView *)backView{
+    if (!_backView) {
+        _backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _backView.backgroundColor = [UIColor blackColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backActionJack)];
+        _backView.userInteractionEnabled = YES;
+        [_backView addGestureRecognizer:tap];
+        _backView.alpha = 0;
+        _backView.hidden = YES;
+    }
+    return _backView;
+}
+///////////////////////////////////////////
+
+
+
+
 
 //点击别处结束编辑
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

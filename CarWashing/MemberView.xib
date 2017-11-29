@@ -57,8 +57,40 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHF-Li-SsL">
                     <rect key="frame" x="0.0" y="78" width="375" height="80"/>
                     <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="pkT-JK-if1">
+                            <rect key="frame" x="12" y="51" width="348" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等级特权" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-MX-1Jb">
+                                    <rect key="frame" x="0.0" y="0.0" width="69.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="升等级" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siE-Wz-lcJ">
+                                    <rect key="frame" x="104.5" y="0.0" width="52" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWu-le-ZYA">
+                                    <rect key="frame" x="191.5" y="0.0" width="69.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赚积分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSh-A6-V6x">
+                                    <rect key="frame" x="296" y="0.0" width="52" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20.5" id="4kG-ES-29J"/>
+                            </constraints>
+                        </stackView>
                         <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="huiyuandianjitiaozhuan" translatesAutoresizingMaskIntoConstraints="NO" id="4w4-6s-WBe">
-                            <rect key="frame" x="62" y="16" width="13" height="13"/>
+                            <rect key="frame" x="206" y="16" width="13" height="13"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="13" id="i8O-Vc-P2j"/>
                                 <constraint firstAttribute="height" constant="13" id="wDm-E5-gih"/>
@@ -71,57 +103,58 @@
                                 <constraint firstAttribute="width" constant="13" id="Nib-fr-HF6"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlI-cd-vcN">
-                            <rect key="frame" x="18" y="24" width="39" height="39"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="39" id="5dB-Lc-G5P"/>
-                                <constraint firstAttribute="width" constant="39" id="9Nf-KN-jqx"/>
-                            </constraints>
-                            <state key="normal" image="huiyuan_dengjitequan"/>
-                            <connections>
-                                <action selector="clickMemberButton:" destination="-1" eventType="touchUpInside" id="qEo-gA-GFF"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0O-fD-QVH">
-                            <rect key="frame" x="206" y="24" width="39" height="39"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="huiyuan_wodejifen">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="clickMemberScoreBtn:" destination="-1" eventType="touchUpInside" id="ntc-Lx-T7g"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-xF-kll">
-                            <rect key="frame" x="310" y="21" width="39" height="39"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="huiyuan_zhuanjifen">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="clickEarnScoreBtn:" destination="-1" eventType="touchUpInside" id="3E8-hY-y3G"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6y-hM-H7p">
-                            <rect key="frame" x="113" y="24" width="39" height="39"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="39" id="HIS-eM-DeY"/>
-                                <constraint firstAttribute="height" constant="39" id="MQu-vz-eWS"/>
-                            </constraints>
-                            <state key="normal" image="huiyuan_shengdengji">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="clickUpgradeBtn:" destination="-1" eventType="touchUpInside" id="EAQ-7f-MDI"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="Rq2-lR-EPx">
+                            <rect key="frame" x="19" y="0.0" width="336" height="39"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UlI-cd-vcN">
+                                    <rect key="frame" x="0.0" y="0.0" width="46.5" height="39"/>
+                                    <state key="normal" image="huiyuan_dengjitequan"/>
+                                    <connections>
+                                        <action selector="clickMemberButton:" destination="-1" eventType="touchUpInside" id="qEo-gA-GFF"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u0O-fD-QVH">
+                                    <rect key="frame" x="96.5" y="0.0" width="46.5" height="39"/>
+                                    <state key="normal" image="huiyuan_wodejifen">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickMemberScoreBtn:" destination="-1" eventType="touchUpInside" id="ntc-Lx-T7g"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Da5-xF-kll">
+                                    <rect key="frame" x="193" y="0.0" width="46.5" height="39"/>
+                                    <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="18"/>
+                                    <state key="normal" image="huiyuan_zhuanjifen">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickEarnScoreBtn:" destination="-1" eventType="touchUpInside" id="3E8-hY-y3G"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6y-hM-H7p">
+                                    <rect key="frame" x="289.5" y="0.0" width="46.5" height="39"/>
+                                    <state key="normal" image="huiyuan_shengdengji">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickUpgradeBtn:" destination="-1" eventType="touchUpInside" id="EAQ-7f-MDI"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Rq2-lR-EPx" secondAttribute="trailing" constant="20" id="1TR-da-zG6"/>
+                        <constraint firstItem="pkT-JK-if1" firstAttribute="leading" secondItem="gHF-Li-SsL" secondAttribute="leading" constant="12" id="8LM-Jf-cGQ"/>
                         <constraint firstItem="jgh-Pq-8Rg" firstAttribute="centerY" secondItem="gHF-Li-SsL" secondAttribute="centerY" constant="-17.5" id="E6p-UP-LgD"/>
-                        <constraint firstAttribute="bottom" secondItem="c6y-hM-H7p" secondAttribute="bottom" constant="17" id="Hj1-Ic-bac"/>
+                        <constraint firstAttribute="bottom" secondItem="pkT-JK-if1" secondAttribute="bottom" constant="8.5" id="MMI-Eh-x6T"/>
+                        <constraint firstAttribute="bottom" secondItem="Rq2-lR-EPx" secondAttribute="bottom" constant="41" id="N8A-1z-SSq"/>
+                        <constraint firstItem="Rq2-lR-EPx" firstAttribute="leading" secondItem="gHF-Li-SsL" secondAttribute="leading" constant="19" id="NAr-K9-zwf"/>
+                        <constraint firstAttribute="trailing" secondItem="pkT-JK-if1" secondAttribute="trailing" constant="15" id="c7n-0u-HtI"/>
                         <constraint firstAttribute="height" constant="80" id="dau-Ea-4iX"/>
-                        <constraint firstAttribute="bottom" secondItem="UlI-cd-vcN" secondAttribute="bottom" constant="17" id="wXF-gI-Dkq"/>
                     </constraints>
                 </view>
             </subviews>

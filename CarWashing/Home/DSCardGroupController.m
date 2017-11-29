@@ -134,7 +134,9 @@ static NSString *CyrechargeCell = @"CyrechargeCell";
 
 - (void) backButtonClick:(id)sender {
     
-    self.tabBarController.selectedIndex = 0;
+//    self.tabBarController.selectedIndex = 0;
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
     NSArray     *array  = self.navigationController.viewControllers;
     NSArray *a = [NSArray arrayWithObject:array[0]];

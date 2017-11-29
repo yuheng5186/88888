@@ -66,6 +66,8 @@
 
 #import "UselessViewController.h"
 
+#import "DSMyCarController.h"
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
     UIImageView     *logoImageView;
@@ -196,6 +198,16 @@
         [self headerRereshing];
     }];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
+    
+}
+-(void)editCarInformation:(NSNotification *)notification{
+    self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
+}
+
+- (void)dealloc{
+    //移除观察者
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"editCarIndorMation" object:nil];
 }
 
 
@@ -1713,10 +1725,9 @@
         [topFourView addSubview:topImageView];
         
         UILabel *topLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 65, 60, 20)];
-        topLabel.font = [UIFont systemFontOfSize:15];
+        topLabel.font = [UIFont systemFontOfSize:14];
         topLabel.text = fourTitleArray[i];
         topLabel.textColor = [UIColor whiteColor];
-        
         topLabel.textAlignment = NSTextAlignmentCenter;
         [topFourView addSubview:topLabel];
         
@@ -1807,7 +1818,7 @@
     //8个模块
     UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350+addButtonHeight, Main_Screen_Width, 200)];
     eightBackImageView.image = [UIImage imageNamed:@"2627eight"];
-    eightBackImageView.contentMode = UIViewContentModeScaleAspectFill;
+    eightBackImageView.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:eightBackImageView];
     NSArray *carShitArray = @[@"汽车改装",@"汽车美容",@"汽车保险",@"二手车",@"汽车维修",@"汽车清洁",@"车品商城",@"汽车品牌"];
     for (int m = 0; m < carShitArray.count; m ++) {
@@ -1900,19 +1911,25 @@
 //添加爱车获得洗车卡
 -(void)addCarAction{
     
-    if ([self.getCarCode isEqualToString:@"0"]) {
-        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
-        new.open=1;
-        new.fromHome = @"1";
-        new.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:new animated:YES];
-    }else{
-        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
-        new.open=1;
-        new.fromHome = @"1";
-        new.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:new animated:YES];
-    }
+    DSMyCarController *new = [[DSMyCarController alloc]init];
+    new.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:new animated:YES];
+    
+//    if ([self.getCarCode isEqualToString:@"0"]) {
+//        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
+//        new.open=1;
+//        new.fromHome = @"1";
+//        new.CyTYpe = @"编辑车辆信息";
+//        new.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:new animated:YES];
+//    }else{
+//        CYCarInsertViewController *new = [[CYCarInsertViewController alloc]init];
+//        new.open=1;
+//        new.fromHome = @"1";
+//        new.CyTYpe = @"编辑车辆信息";
+//        new.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:new animated:YES];
+//    }
     
     
 }

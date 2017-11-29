@@ -17,6 +17,9 @@
 #import "LCMD5Tool.h"
 #import "DSCardGroupController.h"
 
+#import <AlipaySDK/AlipaySDK.h>
+#import "DSCardGroupController.h"
+
 @interface PayPurchaseCardController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *payCardView;
@@ -26,6 +29,8 @@
 
 @property (nonatomic, strong) NSIndexPath *lastPath;
 @property (nonatomic, weak) BusinessPayCell *seleCell;
+
+@property(copy,nonatomic)NSString*payStyle;
 
 @end
 
@@ -68,9 +73,41 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
     NSArray *payImageNameArr = @[@"weixin",@"zhifubao"];
     self.payNameArray = payNameArray;
     self.payImageNameArr = payImageNameArr;
-    
+    self.payStyle = @"微信支付";
     [self setupUI];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
+    
+}
+
+#pragma mark-支付宝结果回调
+-(void)resultClickCancel{
+    [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+}
+-(void)resultClickSuccess{
+//    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
+    UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"购卡成功" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *pushAction = [UIAlertAction actionWithTitle:@"查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        DSCardGroupController *new = [[DSCardGroupController alloc]init];
+        new.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:new animated:YES];
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+    [successController addAction:pushAction];
+    [successController addAction:cancleAction];
+    [self presentViewController:successController animated:YES completion:nil];
+}
+-(void)resultClickfail{
+    [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+}
+
+- (void)dealloc{
+    //移除观察者
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"alipayresultCancel" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"alipayresultSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"alipayresultfail" object:nil];
 }
 
 #pragma mark-支付成功回调
@@ -261,7 +298,7 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
         return 2;
     }
     
-    return 1;
+    return 2;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -468,7 +505,15 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
             self.lastPath = indexPath;
             
         }
-    }
+        
+        //更换支付方式
+        if (indexPath.row==0) {
+            self.payStyle = @"微信支付";
+        }else if (indexPath.row==1){
+            self.payStyle = @"支付宝支付";
+        }
+        
+    }//支付方式选择结束
 }
 
 
@@ -488,60 +533,96 @@ static NSString *id_businessPaycell = @"id_businessPaycell";
 #pragma mark-购卡支付
 -(void)lijizhifu
 {
-    //卡编号ConfigCode
-    NSDictionary *mulDic = @{
-                             @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-                             @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
-                             };
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-      NSLog(@"%@",params);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
-        if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
-        {
-            NSDictionary *di = [NSDictionary dictionary];
-            di = [dict objectForKey:@"JsonData"];
-          
-            NSMutableString *stamp = [di objectForKey:@"timestamp"];
-            //调起微信支付
-            PayReq *req= [[PayReq alloc] init];
-            req.partnerId
-            = [di objectForKey:@"partnerid"];
-            req.prepayId
-            = [di objectForKey:@"prepayid"];
-            req.nonceStr
-            = [di objectForKey:@"noncestr"];
-            req.timeStamp
-            = stamp.intValue;
-            req.package
-            = [di objectForKey:@"packag"];
-            req.sign = [di objectForKey:@"sign"];
-            BOOL result = [WXApi sendReq:req];
+    if ([self.payStyle isEqualToString:@"微信支付"]) {
+        //卡编号ConfigCode
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        NSLog(@"%@",params);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"%@",dict);
+            if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
+            {
+                NSDictionary *di = [NSDictionary dictionary];
+                di = [dict objectForKey:@"JsonData"];
+                
+                NSMutableString *stamp = [di objectForKey:@"timestamp"];
+                //调起微信支付
+                PayReq *req= [[PayReq alloc] init];
+                req.partnerId
+                = [di objectForKey:@"partnerid"];
+                req.prepayId
+                = [di objectForKey:@"prepayid"];
+                req.nonceStr
+                = [di objectForKey:@"noncestr"];
+                req.timeStamp
+                = stamp.intValue;
+                req.package
+                = [di objectForKey:@"packag"];
+                req.sign = [di objectForKey:@"sign"];
+                BOOL result = [WXApi sendReq:req];
+                
+                NSLog(@"-=-=-=-=-%d", result);
+                //日志输出
+                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
+                                                                                                            objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
+                      );
+                
+            }
+            else
+            {
+                
+                [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+                
+            }
             
-            NSLog(@"-=-=-=-=-%d", result);
-            //日志输出
-            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[di
-                                                                                                        objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign
-                  );
             
-        }
-        else
-        {
-           
+            
+            
+        } fail:^(NSError *error) {
+            
             [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
+        }];
+        //@end 微信支付
+    }else if ([self.payStyle isEqualToString:@"支付宝支付"]){
+        NSLog(@"等待接入支付宝");
+        //卡编号ConfigCode
+        NSDictionary *mulDic = @{
+                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                 @"PayMethod":@(2),
+                                 @"ConfigCode":[NSString stringWithFormat:@"%ld",self.choosecard.ConfigCode]
+                                 };
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Payment/PurchasePayment",Khttp] success:^(NSDictionary *dict, BOOL success) {
+//            NSLog(@"---%@",dict);
             
-        }
-        
-        
-        
-        
-    } fail:^(NSError *error) {
-       
-        [self.view showInfo:@"信息获取失败,请检查网络" autoHidden:YES interval:2];
-    }];
+            NSString *appScheme = @"JinDing";
+            [[AlipaySDK defaultService] payOrder:[NSString stringWithFormat:@"%@",dict[@"JsonData"][@"ordercode"]] fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                NSLog(@"reslut = %@",resultDic);
+                /**        * 状态码        * 9000 订单支付成功        * 8000 正在处理中        * 4000 订单支付失败        * 6001 用户中途取消        * 6002 网络连接出错        */
+                //            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                ////                [self aliPayReslut];
+                //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"4000"]){
+                //                [self.view showInfo:@"订单支付失败" autoHidden:YES interval:2];
+                //
+                //            }else if ([resultDic[@"resultStatus"]isEqualToString:@"6001"]){
+                //                 [self.view showInfo:@"订单支付已取消" autoHidden:YES interval:2];
+                //            }
+            }];
+        } fail:^(NSError *error) {
+            NSLog(@"---错误%@",error);
+        }];
+    }//进入支付宝支付
+    
+    
 
 }
 @end

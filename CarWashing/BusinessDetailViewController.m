@@ -161,7 +161,6 @@ static NSString *businessCommentCell = @"businessCommentCell";
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreDetail",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             self.dic = [dict objectForKey:@"JsonData"];
@@ -574,21 +573,31 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 支付界面
 - (void)clickPayButton {
-    
-    BusinessPayController *payController = [[BusinessPayController alloc] init];
+    NSArray *JacktempArray = self.dic[@"MerSerList"];
+    if (JacktempArray.count == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"该商家暂无服务" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+        BusinessPayController *payController = [[BusinessPayController alloc] init];
+        
+        payController.SerMerChant = self.dic[@"MerName"];
+        payController.SerProject = lblCarType.text;
+        payController.Jprice = formerPriceLab.text;
+        payController.Xprice = lblPrice.text;
+        
+        payController.MCode = self.dic[@"MerCode"];
+        payController.SCode = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"];
+        
+        payController.OrderCode = @"";
+        
+        
+        [self.navigationController pushViewController:payController animated:YES];
+    }
 
-    payController.SerMerChant = self.dic[@"MerName"];
-    payController.SerProject = lblCarType.text;
-    payController.Jprice = formerPriceLab.text;
-    payController.Xprice = lblPrice.text;
     
-    payController.MCode = self.dic[@"MerCode"];
-    payController.SCode = [[self.dic[@"MerSerList"] objectAtIndex:self.lastPath.row] objectForKey:@"SerCode"];
-    
-    payController.OrderCode = @"";
-    
-    
-    [self.navigationController pushViewController:payController animated:YES];
+
 }
 
 

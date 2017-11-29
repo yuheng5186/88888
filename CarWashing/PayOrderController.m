@@ -27,6 +27,7 @@
 @property (nonatomic)NSInteger page;
 @property (nonatomic, strong) NSMutableArray *DelayPayDataArray;
 
+
 @end
 
 static NSString *id_delayPayCell = @"id_delayPayCell";

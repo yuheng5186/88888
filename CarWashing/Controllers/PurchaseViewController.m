@@ -158,7 +158,6 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@Card/GetCardConfigList",Khttp] success:^(NSDictionary *dict, BOOL success) {
         NSArray *tempArray = dict[@"JsonData"];
         
-        NSLog(@"卡数量%lu",(unsigned long)tempArray.count);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             NSArray *arr = [NSArray array];
@@ -235,7 +234,7 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     [pageFlowView stopTimer];
     
     UIPageControl *pageControl = [[UIPageControl alloc] init];
-    pageControl.numberOfPages = self.imageArray.count;
+    pageControl.numberOfPages = 0;
     pageControl.userInteractionEnabled = NO;
     pageControl.currentPage = 0;
     [pageControl setValue:[UIImage imageNamed:@"qw_gouka_xuanzhong"] forKey:@"currentPageImage"];
@@ -253,23 +252,24 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     
     introLabelOne = [[UILabel alloc] init];
     introLabelOne.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
-    introLabelOne.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    introLabelOne.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     introLabelOne.textAlignment = NSTextAlignmentCenter;
     introLabelOne.textColor = [UIColor colorFromHex:@"#999999"];
     [_middleview addSubview:introLabelOne];
     
     introLabelTwo = [[UILabel alloc] init];
     introLabelTwo.text =[NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
-    introLabelTwo.font = [UIFont systemFontOfSize:15*Main_Screen_Height/667];
+    introLabelTwo.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     introLabelTwo.textAlignment = NSTextAlignmentCenter;
     introLabelTwo.textColor = [UIColor colorFromHex:@"#999999"];
     [_middleview addSubview:introLabelTwo];
     
     introLabelThree = [[UILabel alloc] init];
-    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+//    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+    introLabelThree.text = @"有效期半年";
     introLabelThree.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
     introLabelThree.textAlignment = NSTextAlignmentCenter;
-    introLabelThree.textColor = [UIColor colorFromHex:@"#febb02"];
+    introLabelThree.textColor = [UIColor colorFromHex:@"#999999"];
     [_middleview addSubview:introLabelThree];
     
     UIButton *buyButton = [[UIButton alloc] init];
@@ -443,12 +443,12 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     titleNameLabel.left              = Main_Screen_Width*25/375;
     
     
-    NSString *jindingString        = @"金顶洗车";
-    UIFont *jindingFont            = [UIFont systemFontOfSize:10];
-    UILabel *jindingLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:jindingString font:jindingFont] font:jindingFont text:jindingString isCenter:NO];
-    jindingLabel.textColor         = [UIColor blackColor];
-    jindingLabel.bottom            = titleNameLabel.bottom;;
-    jindingLabel.left              = titleNameLabel.right+Main_Screen_Width*5/375;
+//    NSString *jindingString        = @"金顶洗车";
+//    UIFont *jindingFont            = [UIFont systemFontOfSize:10];
+//    UILabel *jindingLabel          = [UIUtil drawLabelInView:containImageView frame:[UIUtil textRect:jindingString font:jindingFont] font:jindingFont text:jindingString isCenter:NO];
+//    jindingLabel.textColor         = [UIColor blackColor];
+//    jindingLabel.bottom            = titleNameLabel.bottom;;
+//    jindingLabel.left              = titleNameLabel.right+Main_Screen_Width*5/375;
     
     
     NSString *priceString        = [NSString stringWithFormat:@"￥%@",card.CardPrice];
@@ -577,8 +577,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     functionLabel.text = card.CardName;
     introLabelOne.text = [NSString stringWithFormat:@"持卡洗车次数%ld次",card.CardCount];
     introLabelTwo.text =[NSString stringWithFormat:@"购卡获得%ld积分",card.Integralnum];
-    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
-    
+//    introLabelThree.text = [NSString stringWithFormat:@"￥%@",card.CardPrice];
+    introLabelThree.text = @"有效期半年";
     
 }
 

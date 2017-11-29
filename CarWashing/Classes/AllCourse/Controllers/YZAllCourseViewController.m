@@ -38,7 +38,7 @@ static NSString * const categoryDetailID = @"categoryDetailID";
     
 //    _MerChantCategory = [[NSMutableArray alloc] initWithObjects:@"全部门店",@"洗车服务",@"轮胎门店",@"保养门店",@"安装门店",@"改装门店",@"4s门店", nil];
     _MerChantCategory = [[NSMutableArray alloc] initWithObjects:@"洗车服务", nil];
-    _MerChantServiceCategory = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
+    _MerChantServiceCategory = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
     
     [self.categoryTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:categoryID];
     [self.categoryDetailTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:categoryDetailID];

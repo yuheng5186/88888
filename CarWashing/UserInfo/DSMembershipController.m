@@ -122,7 +122,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [self.containView addSubview:exchangeView];
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
-    exchangeLabel.text = @"精品兑换";
+    exchangeLabel.text = @"精品兑换12222";
     exchangeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
@@ -381,12 +381,12 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
-    WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
-    ticketVC.hidesBottomBarWhenPushed = YES;
-    ticketVC.card = newcard;
-    ticketVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
-    [self.navigationController pushViewController:ticketVC animated:YES];
+//    Card *newcard = (Card *)[_MembershipUserScoreArray objectAtIndex:indexPath.section];
+//    WashCarTicketController *ticketVC = [[WashCarTicketController alloc] init];
+//    ticketVC.hidesBottomBarWhenPushed = YES;
+//    ticketVC.card = newcard;
+//    ticketVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
+//    [self.navigationController pushViewController:ticketVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

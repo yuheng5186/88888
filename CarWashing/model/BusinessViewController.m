@@ -415,12 +415,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
    
    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
-   NSInteger index;
+    NSInteger index = 0;
    
    if ([array containsObject:[self.pramsDic objectForKey:@"1"]]) {
       
       index = [array indexOfObject:[self.pramsDic objectForKey:@"1"]];
-      
+       NSLog(@"----%ld",(long)index);
    }
    
    
@@ -446,11 +446,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
     }
     
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
+    //[NSString stringWithFormat:@"10%ld",index+1]
     NSDictionary *mulDic = @{
                              @"City":self.citystr,
                              @"Area":self.areastr,
                              @"ShopType":@1,
-                             @"ServiceCode":[NSString stringWithFormat:@"10%ld",index+1],
+                             @"ServiceCode":[NSString stringWithFormat:@"%ld",(long)index],
                              @"DefaultSort":DefaultSort,
                              @"Ym":[UdStorage getObjectforKey:@"Ym"],
                              @"Xm":[UdStorage getObjectforKey:@"Xm"],

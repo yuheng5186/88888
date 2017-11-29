@@ -340,9 +340,10 @@
     }
     
     if ([self.fromHome isEqualToString: @"1"]) {
-        DSMyCarController *new = [[DSMyCarController alloc]init];
-        new.homeString = @"1";
-        [self.navigationController pushViewController:new animated:YES];
+//        DSMyCarController *new = [[DSMyCarController alloc]init];
+//        new.homeString = @"1";
+
+        [self.navigationController popToRootViewControllerAnimated:YES];
         self.fromHome = @"0";
     }else{
         [self.navigationController popViewControllerAnimated:YES];

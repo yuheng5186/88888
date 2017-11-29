@@ -19,6 +19,8 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 
+#import "MemberRightCell.h"
+
 @interface DSMemberRightsController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView         *memberRightsView;
@@ -35,6 +37,7 @@
 @property (nonatomic, strong) NSMutableArray *CurrentMembershipprivilegesArr;
 @property (nonatomic, strong) NSString *area;
 
+@property(strong,nonatomic)UIView *hopeView;
 
 @end
 
@@ -44,7 +47,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 - (void)drawNavigation {
     
-    [self drawTitle:@"等级特权"];
+    [self drawTitle:@"会员特权"];
     
 }
 
@@ -68,7 +71,41 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     [self GetMembershipprivileges];
     
+    [self.view addSubview:self.hopeView];
+    
 }
+
+-(UIView*)hopeView{
+    if (!_hopeView) {
+        _hopeView = [[UIView alloc]initWithFrame:CGRectMake(0, 210, Main_Screen_Width, 250)];
+        _hopeView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 200, 20)];
+        titleLabel.text = @"精品专区";
+        titleLabel.font = [UIFont systemFontOfSize:15];
+        titleLabel.textColor = [UIColor darkGrayColor];
+        [_hopeView addSubview:titleLabel];
+        
+        UIView *grayView = [[UIView alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 1)];
+        grayView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+        [_hopeView addSubview:grayView];
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-35, 90, 70, 70)];
+        imageView.image = [UIImage imageNamed:@"jingpinzhuanqu"];
+        [_hopeView addSubview:imageView];
+        
+        UILabel *moreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 180, Main_Screen_Width, 20)];
+        moreLabel.text = @"更多优惠敬请关注";
+        moreLabel.textColor = [UIColor colorFromHex:@"#909090"];
+        moreLabel.textAlignment = NSTextAlignmentCenter;
+        [_hopeView addSubview:moreLabel];
+    }
+    return _hopeView;
+}
+
+
+
+
 - (void) createSubView {
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*130/667) color:[UIColor whiteColor]];
     upView.top                      = 0;
@@ -120,6 +157,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     memberRightsView.delegate = self;
     memberRightsView.dataSource = self;
     memberRightsView.rowHeight = 70*Main_Screen_Height/667;
+    [memberRightsView registerClass:[MemberRightCell class] forCellReuseIdentifier:@"JackRightCell"];
     
     //底部
     UIView *containView = [[UIView alloc] init];
@@ -345,6 +383,14 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MemberRightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JackRightCell" forIndexPath:indexPath];
+    return cell;
+    
+    
+    
+    
+    /*
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id_rightsCell];
@@ -397,6 +443,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     detailLabel.top       = titleLabel.bottom;
     detailLabel.left      = 70*Main_Screen_Height/667;
     return cell;
+     */
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -63,7 +63,8 @@
     
     if (!_fakeNavigation) {
         _fakeNavigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 186)];
-        _fakeNavigation.image = [UIImage imageNamed:@"cheliangtixingtu"];
+//        _fakeNavigation.image = [UIImage imageNamed:@"cheliangtixingtu"];
+        _fakeNavigation.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
         _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];

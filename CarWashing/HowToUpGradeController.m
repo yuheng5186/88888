@@ -79,7 +79,8 @@ static NSString *id_wayToUpCell = @"id_wayToUpCell";
     headContainView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:headContainView];
     UIImageView * headerImageView=[[UIImageView alloc]init];
-    headerImageView.image=[UIImage imageNamed:@"ijanbiantiao"];
+//    headerImageView.image=[UIImage imageNamed:@"ijanbiantiao"];
+    headContainView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [headContainView addSubview:headerImageView];
     
     UILabel *gradeLab = [[UILabel alloc] init];

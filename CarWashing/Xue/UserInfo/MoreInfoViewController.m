@@ -39,22 +39,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
+    self.sendButtonTitleString = @"沪";
+    self.proArray = @[@"京",@"津",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"沪",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"渝",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新"];
     [self.view addSubview:self.mainView];
     [self.view addSubview:self.commitButton];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)                                                name:@"UITextFieldTextDidChangeNotification" object:self.plateNumField];
     
     
-    self.proArray = @[@"京",@"津",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"沪",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"渝",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新"];
-    self.sendButtonTitleString = @"沪";
+
     
     
-    self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46)];
-//    self.button.backgroundColor = [UIColor clearColor];
-    [self.button setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
-    self.button.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
-    [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+    
+//    self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46)];
+//    [self.button setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
+//    self.button.titleLabel.font = [UIFont systemFontOfSize:16];
+//    [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+//    [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
     
     
 }
@@ -73,9 +74,9 @@
         // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
         if (!position)
         {
-            if (toBeString.length > 7)
+            if (toBeString.length > 6)
             {
-                textField.text = [toBeString substringToIndex:7];
+                textField.text = [toBeString substringToIndex:6];
             }
         }
         
@@ -83,16 +84,16 @@
     // 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况
     else
     {
-        if (toBeString.length > 7)
+        if (toBeString.length > 6)
         {
-            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:7];
+            NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:6];
             if (rangeIndex.length == 1)
             {
-                textField.text = [toBeString substringToIndex:7];
+                textField.text = [toBeString substringToIndex:6];
             }
             else
             {
-                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 7)];
+                NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, 6)];
                 textField.text = [toBeString substringWithRange:rangeRange];
             }
         }
@@ -146,10 +147,16 @@
         botBackView.backgroundColor = [UIColor whiteColor];
         botBackView.clipsToBounds = YES;
         botBackView.layer.cornerRadius = 23;
-        [botBackView addSubview:self.button];
         [_mainView addSubview:botBackView];
         
-        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-132, 220, 264, 46)];
+        self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46)];
+        self.button.backgroundColor = [UIColor whiteColor];
+        [self.button setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
+        [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [botBackView addSubview:self.button];
+        
+        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 221, 230, 44)];
         _plateNumField.backgroundColor = [UIColor whiteColor];
 //        _plateNumField.clipsToBounds = YES;
 //        _plateNumField.layer.cornerRadius = 23;
@@ -192,7 +199,7 @@
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"Name":self.nameField.text,
-                                 @"PlateNumber":self.plateNumField.text
+                                 @"PlateNumber":[NSString stringWithFormat:@"%@-%@",self.sendButtonTitleString,self.plateNumField.text]
                                  };
         
         NSDictionary *params = @{
@@ -224,6 +231,11 @@
 ///////////////////////////////////////////
 //点击省市
 -(void)buttonAction{
+    
+    //注销两个键盘
+    [self.nameField resignFirstResponder];
+    [self.plateNumField resignFirstResponder];
+    
     [self.view addSubview:self.backView];
     [self.view addSubview:self.popView];
     [UIView animateWithDuration:0.3 animations:^{

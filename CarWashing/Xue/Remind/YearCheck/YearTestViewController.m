@@ -71,7 +71,8 @@
     
     if (!_fakeNavigation) {
         _fakeNavigation = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 186)];
-        _fakeNavigation.image = [UIImage imageNamed:@"cheliangtixingtu"];
+        _fakeNavigation.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
+//        _fakeNavigation.image = [UIImage imageNamed:@"cheliangtixingtu"];
         _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
@@ -147,7 +148,7 @@
 //添加成功后的View
 -(UIView *)afterView{
     if (!_afterView) {
-        _afterView = [[UIView alloc]initWithFrame:CGRectMake(0, 66, Main_Screen_Width, Main_Screen_Height-66)];
+        _afterView = [[UIView alloc]initWithFrame:CGRectMake(0, 186, Main_Screen_Width, Main_Screen_Height-66)];
         _afterView.backgroundColor = [UIColor whiteColor];
         
 //        UIView *blueBase = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 120)];

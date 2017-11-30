@@ -778,13 +778,21 @@
                 NSDictionary *carModelDict = getDict[@"carModel"];
                 self.getCarCode = [NSString stringWithFormat:@"%@",carModelDict[@"CarCode"]];
                 self.PlateNumber = [NSString stringWithFormat:@"%@",carModelDict[@"PlateNumber"]];
+                //车辆品牌
+                NSString *carNameString = [NSString stringWithFormat:@"%@ %@",carModelDict[@"CarBrand"],carModelDict[@"CarType"]];
                 if ([self.getCarCode isEqualToString:@"0"]) {
                     //第一次什么都不用管
-                    self.addCarInfoLabel.text = @"第一次";
-                    self.subAddCarLabel.text = @"第一次";
+                    self.addCarInfoLabel.text = @"添加爱车享免费洗车";
+                    self.subAddCarLabel.text = @"洗车、保养、换轮胎";
                 }else{
                     self.addCarInfoLabel.text = @"点击进一步添加信息";
                     self.subAddCarLabel.text = [NSString stringWithFormat:@"%@",self.PlateNumber];
+                }
+                
+                if ([carNameString isEqualToString:@" "]) {
+                    self.addCarInfoLabel.text = @"点击进一步添加信息";
+                }else{
+                    self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@",carNameString];
                 }
                 
                 
@@ -1754,7 +1762,7 @@
     addImageView.image = [UIImage imageNamed:@"tianjiaaiche"];
     [whiteView addSubview:addImageView];
     
-    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10.0/667*mainH, 200, 20.0/667*mainH)];
+    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10.0/667*mainH, 250, 20.0/667*mainH)];
     _addCarInfoLabel.text = @"添加爱车享免费洗车";
     _addCarInfoLabel.font = [UIFont systemFontOfSize:15];
     [whiteView addSubview:_addCarInfoLabel];

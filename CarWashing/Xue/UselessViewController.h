@@ -10,4 +10,6 @@
 
 @interface UselessViewController : UIViewController
 
+//在上一页面获取到title
+@property(copy,nonatomic)NSString *getTitleString;
 @end

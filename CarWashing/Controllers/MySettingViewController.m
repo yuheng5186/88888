@@ -64,7 +64,7 @@
 @implementation MySettingViewController
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-64-49)];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-100)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         salerListView.backgroundColor = RGBAA(239, 239, 239, 1.0);
         _salerListView = salerListView;
@@ -72,6 +72,9 @@
         _headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
         _headerView.backgroundColor = RGBAA(239, 239, 239, 1.0);
         salerListView.tableHeaderView = _headerView;
+        
+        UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+        salerListView.tableFooterView = footerView;
         
         [self.view addSubview:salerListView];
         
@@ -151,7 +154,7 @@
     self.salerListView.estimatedSectionHeaderHeight = 0;
     self.salerListView.estimatedSectionFooterHeight = 0;
     self.salerListView.rowHeight = UITableViewAutomaticDimension;
-    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
     //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -446,6 +449,7 @@
 //    [self.navigationController pushViewController:memberRightsVC animated:YES];
     
     DSUserInfoController *userInfoController    = [[DSUserInfoController alloc]init];
+    userInfoController.getNameString = self.userNameLabel.text;
     userInfoController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userInfoController animated:YES];
     
@@ -892,6 +896,9 @@
     [self.salerListView reloadData];
     
 }
+
+
+
 
 -(void)noticeupdateUserName:(NSNotification *)sender{
     self.userNameLabel.text=[NSString stringWithFormat:@"%@",APPDELEGATE.currentUser.userName];

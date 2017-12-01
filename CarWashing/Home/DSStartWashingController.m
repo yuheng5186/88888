@@ -42,46 +42,50 @@
     NSLog(@"%@",a);
     NSLog(@"%ld",self.endstr);
     if (self.endstr<0) {
-    
-        self.tabBarController.selectedIndex = 0;
+
+//        self.tabBarController.selectedIndex = 0;
         [self.navigationController popToRootViewControllerAnimated:YES];
     }else{
         // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
-        
+
         NSArray * a = self.navigationController.viewControllers;
         NSLog(@"%@",a);
         NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
-        
+
         NSInteger VcCount = arrController.count;
-        
+
         //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
-        
+
         UIViewController *lastVC = arrController[VcCount - 1];
         if ([arrController[0] isKindOfClass:[DSScanController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
+            //第一次返回时为扫码界面
             self.tabBarController.selectedIndex = 0;
+//            [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
             // 返回到倒数第三个控制器
-            
+
             if([lastVC isKindOfClass:[HomeViewController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
-                
+
                 [self.navigationController popViewControllerAnimated:YES];
-                
+
             }
-            
+
             else
             {
-                
+                //第二次返回主页面(出现问题)
                 HomeViewController *earnVC = [[HomeViewController alloc]init];
-                
                 [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
                 self.navigationController.viewControllers = arrController;
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }
-    
+
     }
+    
 
 
 }
+
 - (void) dealloc
 {
     [self.timer invalidate];

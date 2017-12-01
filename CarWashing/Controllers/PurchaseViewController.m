@@ -107,7 +107,8 @@ static NSString *id_puchaseCard = @"purchaseCardCell";
     self.area = [UdStorage getObjectforKey:@"locationCity"]==nil?@"青岛市":[UdStorage getObjectforKey:@"locationCity"];
     UIView *upView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, 64) color:[UIColor colorFromHex:@"#febb02"]];
     UIImageView *imageView  = [[UIImageView alloc]initWithFrame:upView.frame];
-    imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+//    imageView.image     = [UIImage imageNamed:@"ijanbiantiao"];
+    imageView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [upView addSubview:imageView];
     
     upView.top                      = 0;

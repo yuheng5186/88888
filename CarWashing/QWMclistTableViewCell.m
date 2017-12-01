@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "HTTPDefine.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDAutoLayout.h>
 
 @implementation QWMclistTableViewCell
 {
@@ -46,13 +47,22 @@
 //    [self.McImageView addSubview:imageV1];
 //    self.McImagecheckView = imageV1;
     
-    UIImageView *assStoreImage = [[UIImageView alloc]initWithFrame:CGRectMake(112, 12, 38, 17)];
+    UIImageView *assStoreImage = [[UIImageView alloc]initWithFrame:CGRectMake(112.0/375*Main_Screen_Width, 12.0/677*Main_Screen_Height, 38.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
     assStoreImage.image = [UIImage imageNamed:@"vrenzheng"];
-    assStoreImage.contentMode = UIViewContentModeScaleAspectFill;
+    assStoreImage.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:assStoreImage];
     
-    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(150,10, 100, 10)];
+    CGFloat ass = 0.0;
+    if (Main_Screen_Width < 375) {
+        ass = 180.0;
+    }else{
+        ass = 160.0;
+    }
+    
+    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(ass/375*Main_Screen_Width,10.0/677*Main_Screen_Height, 100.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
     [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:16 * myDelegate.autoSizeScaleX]];
+    namelabel.centerY = assStoreImage.centerY;
+    namelabel.sd_layout.leftSpaceToView(assStoreImage, 10);
     namelabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     namelabel.text = @"金雷快修店";
     [self.contentView addSubview:namelabel];

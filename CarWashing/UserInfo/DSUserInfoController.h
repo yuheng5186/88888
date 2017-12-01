@@ -10,4 +10,7 @@
 
 @interface DSUserInfoController : BaseController
 
+//在“我的”根目录带过来的名字
+@property(copy,nonatomic)NSString *getNameString;
+
 @end

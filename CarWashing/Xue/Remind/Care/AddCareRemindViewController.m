@@ -204,45 +204,58 @@
 //    // 保存到本地
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在上传";
-    
-    //上传
-    NSDictionary *mulDic = @{
-                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
-                             @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"ReminderType":@(1),
-                             @"MaintenanceFrequency":[NSString stringWithFormat:@"%@",self.sendSerHowLongStr],
-                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting]
-                             };
-    
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    NSLog(@"参数是否在变%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.typeString] success:^(NSDictionary *dict, BOOL success) {
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"成功!";
-        [hud hide:YES afterDelay:0.5];
-        NSLog(@"上传结果%@",dict);
-        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"上传成功！");
-//            [self dismissViewControllerAnimated:YES completion:nil];
-            if ([self.whereString isEqualToString:@"1"]) {
-                CareRemindViewController *new = [[CareRemindViewController alloc]init];
-                [self.navigationController pushViewController:new animated:YES];
+    if (self.sendSerHowLongStr == NULL || self.dateMuSting == NULL) {
+        UIAlertController *nullController = [UIAlertController alertControllerWithTitle:nil message:@"请补全信息" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [nullController addAction:cancleAction];
+        [self presentViewController:nullController animated:YES completion:nil];
+    }else{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeDeterminate;
+        hud.labelText = @"正在上传";
+        
+        //上传
+        NSDictionary *mulDic = @{
+                                 @"Id":[NSString stringWithFormat:@"%@",self.getID],
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                 @"ReminderType":@(1),
+                                 @"MaintenanceFrequency":[NSString stringWithFormat:@"%@",self.sendSerHowLongStr],
+                                 @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting]
+                                 };
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        NSLog(@"参数是否在变%@",mulDic);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.typeString] success:^(NSDictionary *dict, BOOL success) {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"成功!";
+            [hud hide:YES afterDelay:0.5];
+            NSLog(@"上传结果%@",dict);
+            if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+                NSLog(@"上传成功！");
+                //            [self dismissViewControllerAnimated:YES completion:nil];
+                if ([self.whereString isEqualToString:@"1"]) {
+                    CareRemindViewController *new = [[CareRemindViewController alloc]init];
+                    [self.navigationController pushViewController:new animated:YES];
+                }else{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             }else{
-                [self dismissViewControllerAnimated:YES completion:nil];
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"提交失败";
+                [hud hide:YES afterDelay:0.5];
             }
-        }
-    } fail:^(NSError *error) {
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"失败!";
-        [hud hide:YES afterDelay:0.5];
-        NSLog(@"AF失败%@",error);
-    }];
+        } fail:^(NSError *error) {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"失败!";
+            [hud hide:YES afterDelay:0.5];
+            NSLog(@"AF失败%@",error);
+        }];
+    }
+    
+
     
 }
 

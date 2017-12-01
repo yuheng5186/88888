@@ -23,7 +23,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *LevelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *ScoreBtn;
+@property (weak, nonatomic) IBOutlet UILabel *fontOneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fontTwoLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *fontThreeView;
+@property (weak, nonatomic) IBOutlet UILabel *fontFourLabel;
 
 + (instancetype)memberView;
 

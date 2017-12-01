@@ -47,6 +47,10 @@
     
 //    self.contentView.backgroundColor    = [UIColor colorFromHex:@"#fefefe"];
     
+    /*之前的大小
+     140.0/375*Main_Screen_Width, Main_Screen_Height*85.0/667
+     Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667
+     */
     UIImageView *appImageView      = [UIUtil drawCustomImgViewInView:self.scrollView frame:CGRectMake(0, 0, Main_Screen_Width-Main_Screen_Width*40/375, Main_Screen_Height*200/667) imageName:@"bg_card"];
     appImageView.top               = Main_Screen_Height*20/667;
     appImageView.centerX           = Main_Screen_Width/2;

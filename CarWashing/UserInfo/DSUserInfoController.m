@@ -153,6 +153,7 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             cell.textLabel.text         = @"姓名";
+//            cell.detailTextLabel.text = self.getNameString;
             cell.detailTextLabel.text   = APPDELEGATE.currentUser.userName;
             
         }else if (indexPath.row == 1){

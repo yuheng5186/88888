@@ -232,45 +232,60 @@
         self.licenseNumTextField.text = self.placeHolderString;
     }
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在上传";
-    //上传
-    NSDictionary *mulDic = @{
-                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
-                             @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"ReminderType":@(2),
-                             @"QuasiDriveType":[NSString stringWithFormat:@"%@",self.licenseTypeString],
-                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
-                             @"IDNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text]
-                             };
-    NSLog(@"驾照类型------>%@",self.licenseTypeString);
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"驾照上传结果%@",dict);
-        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"驾照上传成功！");
-            if ([self.whereString isEqualToString:@"1"]) {
-                DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
-                [self.navigationController pushViewController:new animated:YES];
+    
+    
+    if ([self.licenseNumTextField.text isEqualToString:@"请输入证件号"] || [self.licenseTypeString isEqualToString:@"请选择"] || [self.dateMuSting isEqualToString:@"请选择"]) {
+        UIAlertController *nullController = [UIAlertController alertControllerWithTitle:nil message:@"请补全信息" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [nullController addAction:cancleAction];
+        [self presentViewController:nullController animated:YES completion:nil];
+    }else{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeDeterminate;
+        hud.labelText = @"正在上传";
+        //上传
+        NSDictionary *mulDic = @{
+                                 @"Id":[NSString stringWithFormat:@"%@",self.getID],
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                 @"ReminderType":@(2),
+                                 @"QuasiDriveType":[NSString stringWithFormat:@"%@",self.licenseTypeString],
+                                 @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                                 @"IDNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text]
+                                 };
+        //    NSLog(@"驾照类型------>%@",mulDic);
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"驾照上传结果%@",dict);
+            if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+                NSLog(@"驾照上传成功！");
+                if ([self.whereString isEqualToString:@"1"]) {
+                    DriverLicenseViewController *new = [[DriverLicenseViewController alloc]init];
+                    [self.navigationController pushViewController:new animated:YES];
+                }else{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"成功!";
+                [hud hide:YES afterDelay:0.5];
+                //             [self dismissViewControllerAnimated:YES completion:nil];
+                
             }else{
-                [self dismissViewControllerAnimated:YES completion:nil];
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"提交失败";
+                [hud hide:YES afterDelay:0.5];
             }
+        } fail:^(NSError *error) {
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"成功!";
+            hud.labelText = @"失败!";
             [hud hide:YES afterDelay:0.5];
-//             [self dismissViewControllerAnimated:YES completion:nil];
-            
-        }
-    } fail:^(NSError *error) {
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"失败!";
-        [hud hide:YES afterDelay:0.5];
-        NSLog(@"AF失败%@",error);
-    }];
+            NSLog(@"AF失败%@",error);
+        }];
+    }
+    
+    
     
     
 }

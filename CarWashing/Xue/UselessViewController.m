@@ -40,7 +40,7 @@
         _fakeNavigation.userInteractionEnabled = YES;
         
         UILabel *fakeTitle = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 26, 200, 30)];
-        fakeTitle.text = @"敬请期待";
+        fakeTitle.text = self.getTitleString;
         fakeTitle.font = [UIFont systemFontOfSize:18 weight:18];
         fakeTitle.textColor = [UIColor whiteColor];
         fakeTitle.textAlignment = NSTextAlignmentCenter;

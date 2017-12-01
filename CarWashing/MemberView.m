@@ -19,6 +19,10 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
+//    CGFloat fontNum = 0;
+//    if (Main_Screen_Width < 375) {
+//        
+//    }
     
     self.dg_viewAutoSizeToDevice = YES;
     

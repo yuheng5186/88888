@@ -32,6 +32,9 @@
 @property(strong,nonatomic)UIButton *button;
 @property(copy,nonatomic)NSString *sendButtonTitleString;       //传回button名字
 
+//键盘出现移动
+@property(strong,nonatomic)UIScrollView *baseJackView;
+
 @end
 
 @implementation MoreInfoViewController
@@ -39,10 +42,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
+    
+    [self.view addSubview:self.baseJackView];
+    
+    
     self.sendButtonTitleString = @"沪";
     self.proArray = @[@"京",@"津",@"冀",@"晋",@"蒙",@"辽",@"吉",@"黑",@"沪",@"苏",@"浙",@"皖",@"闽",@"赣",@"鲁",@"豫",@"鄂",@"湘",@"粤",@"桂",@"琼",@"渝",@"川",@"贵",@"云",@"藏",@"陕",@"甘",@"青",@"宁",@"新"];
-    [self.view addSubview:self.mainView];
-    [self.view addSubview:self.commitButton];
+    [self.baseJackView addSubview:self.mainView];
+    [self.baseJackView addSubview:self.commitButton];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldEditChanged:)                                                name:@"UITextFieldTextDidChangeNotification" object:self.plateNumField];
     
@@ -58,6 +65,14 @@
 //    [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
     
     
+}
+
+-(UIScrollView*)baseJackView{
+    if (!_baseJackView) {
+        _baseJackView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _baseJackView.contentSize = CGSizeMake(Main_Screen_Width, 800);
+    }
+    return _baseJackView;
 }
 
 -(void)textFieldEditChanged:(NSNotification *)obj
@@ -112,10 +127,10 @@
 
 -(UIView *)mainView{
     if (!_mainView) {
-        _mainView = [[UIView alloc]initWithFrame:CGRectMake(0, 95, Main_Screen_Width, 400)];
+        _mainView = [[UIView alloc]initWithFrame:CGRectMake(0, 95.0/667*Main_Screen_Height, Main_Screen_Width, 400.0/667*Main_Screen_Height)];
         
         //顶部提示
-        UILabel *toplabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
+        UILabel *toplabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30.0/667*Main_Screen_Height)];
         toplabel.text = @"完善个人信息即可获得洗车卡";
         toplabel.textAlignment = NSTextAlignmentCenter;
         toplabel.font = [UIFont systemFontOfSize:18 weight:18];
@@ -123,44 +138,50 @@
         [_mainView addSubview:toplabel];
         
         //姓名label
-        UILabel *midLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 60, Main_Screen_Width-60, 30)];
+        UILabel *midLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 60.0/667*Main_Screen_Height, Main_Screen_Width-60, 30.0/667*Main_Screen_Height)];
         midLabel.text = @"填写个人姓名";
-        midLabel.font = [UIFont systemFontOfSize:18 weight:18];
+        midLabel.font = [UIFont systemFontOfSize:18.0/667*Main_Screen_Height weight:18.0/667*Main_Screen_Height];
         midLabel.textColor = [UIColor whiteColor];
         [_mainView addSubview:midLabel];
         
-        _nameField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 100, 300, 46)];
+        UIView *topBackView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 100.0/667*Main_Screen_Height, 300, 46.0/667*Main_Screen_Height)];
+        topBackView.backgroundColor = [UIColor whiteColor];
+        topBackView.clipsToBounds = YES;
+        topBackView.layer.cornerRadius = 23.0/667*Main_Screen_Height;
+        [_mainView addSubview:topBackView];
+        
+        _nameField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-125, 101.0/667*Main_Screen_Height, 250, 44.0/667*Main_Screen_Height)];
+        _nameField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _nameField.backgroundColor = [UIColor whiteColor];
-        _nameField.clipsToBounds = YES;
-        _nameField.layer.cornerRadius = 23;
-        _nameField.font = [UIFont systemFontOfSize:18];
+        _nameField.font = [UIFont systemFontOfSize:18.0/667*Main_Screen_Height];
         [_mainView addSubview:_nameField];
         
         
-        UILabel *botLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 180, Main_Screen_Width-60, 30)];
+        UILabel *botLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, 180.0/667*Main_Screen_Height, Main_Screen_Width-60, 30.0/667*Main_Screen_Height)];
         botLabel.text = @"填写车牌号";
-        botLabel.font = [UIFont systemFontOfSize:18 weight:18];
+        botLabel.font = [UIFont systemFontOfSize:18.0/667*Main_Screen_Height weight:18.0/667*Main_Screen_Height];
         botLabel.textColor = [UIColor whiteColor];
         [_mainView addSubview:botLabel];
         
-        UIView *botBackView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 220, 300, 46)];
+        UIView *botBackView = [[UIView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-150, 220.0/667*Main_Screen_Height, 300, 46.0/667*Main_Screen_Height)];
         botBackView.backgroundColor = [UIColor whiteColor];
         botBackView.clipsToBounds = YES;
-        botBackView.layer.cornerRadius = 23;
+        botBackView.layer.cornerRadius = 23.0/667*Main_Screen_Height;
         [_mainView addSubview:botBackView];
         
-        self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46)];
+        self.button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 46, 46.0/667*Main_Screen_Height)];
         self.button.backgroundColor = [UIColor whiteColor];
         [self.button setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [self.button setTitle:self.sendButtonTitleString forState:(UIControlStateNormal)];
         [self.button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
         [botBackView addSubview:self.button];
         
-        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 221, 230, 44)];
+        _plateNumField = [[UITextField alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-100, 221.0/667*Main_Screen_Height, 230, 44.0/667*Main_Screen_Height)];
         _plateNumField.backgroundColor = [UIColor whiteColor];
 //        _plateNumField.clipsToBounds = YES;
 //        _plateNumField.layer.cornerRadius = 23;
-        _plateNumField.font = [UIFont systemFontOfSize:18];
+        _plateNumField.font = [UIFont systemFontOfSize:18.0/667*Main_Screen_Height];
+        _plateNumField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [_mainView addSubview:_plateNumField];
         
     }
@@ -211,6 +232,7 @@
             if ([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]]) {
                 //后台成功
                 NSLog(@"首次添加信息--后台成功");
+                APPDELEGATE.currentUser.userName = self.nameField.text;
                 MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
                 [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
             }

@@ -310,50 +310,69 @@
     
     
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeDeterminate;
-    hud.labelText = @"正在上传";
+
     
     if ([self.licenseNumTextField.text isEqualToString:@""]) {
         self.licenseNumTextField.text = self.placeholderString;
     }
-    //上传
-    NSDictionary *mulDic = @{
-                             @"Id":[NSString stringWithFormat:@"%@",self.getID],
-                             @"Account_Id":[UdStorage getObjectforKey:Userid],
-                             @"ReminderType":@(3),
-                             @"Province":[NSString stringWithFormat:@"%@",self.sendButtonTitleString],
-                             @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
-                             @"PlateNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text],
-                             @"CarBrand":[NSString stringWithFormat:@"%@",self.carMuSting],
-                             @"VehicleYears":[NSString stringWithFormat:@"%@",self.sendSerString]
-                             };
     
-    NSDictionary *params = @{
-                             @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
-                             @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
-                             };
-    NSLog(@"年检参数%@",mulDic);
-    [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"年检上传结果%@",dict);
-        if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
-            NSLog(@"年检上传成功！");
-            if ([self.whereString isEqualToString:@"1"]) {
-                YearTestViewController *new = [[YearTestViewController alloc]init];
-                [self.navigationController pushViewController:new animated:YES];
-            }else{
+    
+    if ([self.dateMuSting isEqualToString:@"请选择"] || [self.licenseNumTextField.text isEqualToString:@"请输入车牌号"] || [self.carMuSting isEqualToString:@"请选择"] || [self.sendSerString isEqualToString:@"请选择"]) {
+        UIAlertController *nullController = [UIAlertController alertControllerWithTitle:nil message:@"请补全信息" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [nullController addAction:cancleAction];
+        [self presentViewController:nullController animated:YES completion:nil];
+    }else{
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeDeterminate;
+        hud.labelText = @"正在上传";
+        
+        //上传
+        NSDictionary *mulDic = @{
+                                 @"Id":[NSString stringWithFormat:@"%@",self.getID],
+                                 @"Account_Id":[UdStorage getObjectforKey:Userid],
+                                 @"ReminderType":@(3),
+                                 @"Province":[NSString stringWithFormat:@"%@",self.sendButtonTitleString],
+                                 @"TimeDate":[NSString stringWithFormat:@"%@",self.dateMuSting],
+                                 @"PlateNumber":[NSString stringWithFormat:@"%@",self.licenseNumTextField.text],
+                                 @"CarBrand":[NSString stringWithFormat:@"%@",self.carMuSting],
+                                 @"VehicleYears":[NSString stringWithFormat:@"%@",self.sendSerString]
+                                 };
+        
+        NSDictionary *params = @{
+                                 @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
+                                 @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
+                                 };
+        NSLog(@"年检参数%@",mulDic);
+        [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@%@",Khttp,self.webTypeString] success:^(NSDictionary *dict, BOOL success) {
+            NSLog(@"年检上传结果%@",dict);
+            if ([dict[@"ResultCode"] isEqualToString:@"F000000"]) {
+                NSLog(@"年检上传成功！");
+                if ([self.whereString isEqualToString:@"1"]) {
+                    YearTestViewController *new = [[YearTestViewController alloc]init];
+                    [self.navigationController pushViewController:new animated:YES];
+                }else{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"成功!";
+                [hud hide:YES afterDelay:0.5];
                 [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"提交失败";
+                [hud hide:YES afterDelay:0.5];
             }
+        } fail:^(NSError *error) {
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"成功!";
+            hud.labelText = @"失败!";
             [hud hide:YES afterDelay:0.5];
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    } fail:^(NSError *error) {
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"失败!";
-        [hud hide:YES afterDelay:0.5];
-    }];
+        }];
+    }
+    
+    
+    
 
     
 }

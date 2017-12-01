@@ -64,7 +64,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     if (!_containView) {
         
-        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 216*Main_Screen_Height/667)];
+        UIView *containView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, 230*Main_Screen_Height/667)];
         _containView = containView;
         [self.view addSubview:_containView];
     }
@@ -111,7 +111,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     self.containView.backgroundColor = [UIColor whiteColor];
     
     memberShipView = [MemberView memberView];
-    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 120*Main_Screen_Height/667);
+    memberShipView.frame = CGRectMake(0, 64, Main_Screen_Width, 140*Main_Screen_Height/667);
     
     
     [self.containView addSubview:memberShipView];
@@ -122,13 +122,14 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     [self.containView addSubview:exchangeView];
     
     UILabel *exchangeLabel = [[UILabel alloc] init];
-    exchangeLabel.text = @"精品兑换12222";
+    exchangeLabel.text = @"精品兑换";
     exchangeLabel.font = [UIFont systemFontOfSize:16*Main_Screen_Height/667];
     exchangeLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     [exchangeView addSubview:exchangeLabel];
     
     UIView *separateView = [[UIView alloc] init];
-    separateView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
+    separateView.backgroundColor = [UIColor clearColor];
+//    separateView.backgroundColor = [UIColor colorFromHex:@"#fafafa"];
     [self.containView addSubview:separateView];
     
     UIView *lineView = [[UIView alloc] init];
@@ -149,12 +150,22 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     [self.exchangListView registerClass:[GoodsExchangeCell class] forCellReuseIdentifier:id_exchangeCell];
     
+    UIImageView *presentImage = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-35, 300.0/667*Main_Screen_Height, 70, 70)];
+    presentImage.image = [UIImage imageNamed:@"jingpinzhuanqu"];
+    presentImage.contentMode = UIViewContentModeScaleAspectFit;
+    [self.containView addSubview:presentImage];
+    
+    UILabel *comingLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 380.0/667*Main_Screen_Height, Main_Screen_Width, 30)];
+    comingLabel.text = @"敬请期待";
+    comingLabel.textColor = [UIColor grayColor];
+    comingLabel.textAlignment = NSTextAlignmentCenter;
+    [self.containView addSubview:comingLabel];
     //约束
     
     [memberShipView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView);
         make.left.right.equalTo(self.containView);
-        make.height.mas_equalTo(160*Main_Screen_Height/667);
+        make.height.mas_equalTo(175*Main_Screen_Height/667);
     }];
     
     [exchangeView mas_makeConstraints:^(MASConstraintMaker *make) {

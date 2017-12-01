@@ -219,10 +219,13 @@
     [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
 //    [self createNavTitleView];
     
-    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, Main_Screen_Width,Main_Screen_Height-60) style:UITableViewStyleGrouped];
+    self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, Main_Screen_Width,Main_Screen_Height-44) style:UITableViewStyleGrouped];
 //    self.tableView.top              = 0;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     //    self.tableView.scrollEnabled    = NO;
@@ -785,15 +788,17 @@
                     self.addCarInfoLabel.text = @"添加爱车享免费洗车";
                     self.subAddCarLabel.text = @"洗车、保养、换轮胎";
                 }else{
-                    self.addCarInfoLabel.text = @"点击进一步添加信息";
+                    //已经添加信息，判断是否选择车型
+                    if ([carNameString isEqualToString:@" "]) {
+                        //没选择车型
+                        self.addCarInfoLabel.text = @"点击进一步添加信息";
+                    }else{
+                        self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@",carNameString];
+                    }
+                    //车牌照每次自动添加
                     self.subAddCarLabel.text = [NSString stringWithFormat:@"%@",self.PlateNumber];
                 }
                 
-                if ([carNameString isEqualToString:@" "]) {
-                    self.addCarInfoLabel.text = @"点击进一步添加信息";
-                }else{
-                    self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@",carNameString];
-                }
                 
                 
 //                 [self createHeaderView];
@@ -859,7 +864,7 @@
 //    }
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
-            return Main_Screen_Height*150/667;
+            return Main_Screen_Height*180/667;
         }else{
             return 0.01;
             
@@ -869,7 +874,7 @@
             if (section==0) {
                 return Main_Screen_Height*110/667;
             }else if (section==self.newrc.recList.count-1){
-                return 40;
+                return 80;
             }
             else{
                 return 0.01;
@@ -915,7 +920,7 @@
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
             [imageview addGestureRecognizer:tap];
             
-            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*50/667)];
             footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
             footerview.textColor         = [UIColor colorFromHex:@"#999999"];
             footerview.textAlignment=NSTextAlignmentCenter;
@@ -1723,7 +1728,7 @@
     NSArray *fourTopImageArray = @[@"saoyisaoJ",@"kabaoJ",@"huiyuanJ",@"jifenJ"];
     for (int i = 0; i < fourTitleArray.count; i++) {
         
-        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(30.0/375*mainW + 85.0/375*mainW*i, 40, 60.0/375*mainW, 60.0/667*mainH)];
+        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(20.0/375*mainW + 92.0/375*mainW*i, 40.0/667*mainH, 60.0/375*mainW, 60.0/667*mainH)];
 //        baseView.backgroundColor = [UIColor grayColor];
         [goldenView addSubview:baseView];
         
@@ -1756,9 +1761,9 @@
     whiteView.layer.cornerRadius = 10;
     [jackHeaderView addSubview:whiteView];
     
-    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15.0/667*mainH, 30, 30.0/667*mainH)];
+    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15.0/667*mainH, 30.0/375*mainW, 30.0/667*mainH)];
     addImageView.clipsToBounds = YES;
-    addImageView.layer.cornerRadius = 15;
+    addImageView.layer.cornerRadius = 15.0/667*mainH;
     addImageView.image = [UIImage imageNamed:@"tianjiaaiche"];
     [whiteView addSubview:addImageView];
     
@@ -2088,25 +2093,36 @@
 
 //底部八个按钮动作
 -(void)eightButtonAction:(UIButton*)sender{
-    if (sender.tag == 300) {
-        NSLog(@"汽车改装");
-    }else if (sender.tag == 301){
-        NSLog(@"汽车美容");
-    }else if (sender.tag == 302){
-        NSLog(@"汽车保险");
-    }else if (sender.tag == 303){
-        NSLog(@"二手车");
-    }else if (sender.tag == 304){
-        NSLog(@"汽车维修");
-    }else if (sender.tag == 305){
-        NSLog(@"汽车情节");
-    }else if (sender.tag == 306){
-        NSLog(@"车品商城");
-    }else if (sender.tag == 307){
-        NSLog(@"汽车品牌");
-    }
+    
     UselessViewController *new = [[UselessViewController alloc]init];
     new.hidesBottomBarWhenPushed = YES;
+    
+    if (sender.tag == 300) {
+        NSLog(@"汽车改装");
+        new.getTitleString = @"汽车改装";
+    }else if (sender.tag == 301){
+        NSLog(@"汽车美容");
+        new.getTitleString = @"汽车美容";
+    }else if (sender.tag == 302){
+        NSLog(@"汽车保险");
+        new.getTitleString = @"汽车保险";
+    }else if (sender.tag == 303){
+        NSLog(@"二手车");
+        new.getTitleString = @"二手车";
+    }else if (sender.tag == 304){
+        NSLog(@"汽车维修");
+        new.getTitleString = @"汽车维修";
+    }else if (sender.tag == 305){
+        NSLog(@"汽车情节");
+        new.getTitleString = @"汽车清洁";
+    }else if (sender.tag == 306){
+        NSLog(@"车品商城");
+        new.getTitleString = @"车品商城";
+    }else if (sender.tag == 307){
+        NSLog(@"汽车品牌");
+        new.getTitleString = @"汽车品牌";
+    }
+
     [self.navigationController pushViewController:new animated:YES];
 }
 

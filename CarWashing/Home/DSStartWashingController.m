@@ -72,11 +72,13 @@
 
             else
             {
-                //第二次返回主页面(出现问题)
-                HomeViewController *earnVC = [[HomeViewController alloc]init];
-                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
-                self.navigationController.viewControllers = arrController;
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+//                //第二次返回主页面(出现问题)
+//                HomeViewController *earnVC = [[HomeViewController alloc]init];
+//                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
+//                self.navigationController.viewControllers = arrController;
+//                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }
 

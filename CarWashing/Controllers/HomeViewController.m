@@ -759,6 +759,7 @@
      @"http:192.168.2.152:8090/api/User/GetUserRecord"
      */
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
+        NSLog(@"12345%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
              self.GetUserRecordData = [[NSMutableArray alloc]init];
@@ -1879,6 +1880,7 @@
         
         if (intString > 0 && intString < 240) {
             
+            //正在洗车进入到这里
             DSStartWashingController *start = [[DSStartWashingController alloc]init];
             //        [UdStorage storageObject:dateString forKey:@"setTime"];
             
@@ -1896,8 +1898,6 @@
             
         }else {
             self.tabBarController.selectedIndex = 2;
-            //
-            //
             [self.navigationController popToRootViewControllerAnimated:YES];
             
             

@@ -150,7 +150,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     memberRightsView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     memberRightsView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:memberRightsView];
+//    [self.view addSubview:memberRightsView];
     
     
     

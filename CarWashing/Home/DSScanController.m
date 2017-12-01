@@ -149,6 +149,7 @@
 
 - (void)setupScanWindowView
 {
+    
     UIImageView *scanImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomakuang"]];
     scanImageView.width = Main_Screen_Width - 65*2*Main_Screen_Height/667;
     scanImageView.height = Main_Screen_Width - 65*2*Main_Screen_Height/667;
@@ -191,6 +192,7 @@
     self.inputLabel.textColor   = [UIColor whiteColor];
     self.inputLabel.top         = self.inputButton.bottom +Main_Screen_Height*10/667;
     self.inputLabel.centerX     = self.inputButton.centerX;
+    
 }
 - (void) inputButtonClcik:(UIButton *)sender {
     

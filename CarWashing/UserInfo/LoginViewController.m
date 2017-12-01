@@ -255,6 +255,7 @@
                     [UdStorage storageObject:APPDELEGATE.currentUser.usermemo forKey:@"Memo"];
                     [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
                     
+                    
                     //登录成功判断是否是第一次登陆
                     NSDictionary *getDict = dict[@"JsonData"];
                     NSString *tempString = [NSString stringWithFormat:@"%@",getDict[@"IsFirstLogin"]];

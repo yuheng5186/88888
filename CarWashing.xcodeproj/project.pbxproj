@@ -95,6 +95,7 @@
 		1826E9B01F9837470057B7AE /* CYSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9AF1F9837470057B7AE /* CYSlideViewController.m */; };
 		1826E9B31F9837620057B7AE /* CYCarRMListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9B21F9837620057B7AE /* CYCarRMListModel.m */; };
 		1826E9B61F9837750057B7AE /* CYChooseCarTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826E9B51F9837750057B7AE /* CYChooseCarTypeViewController.m */; };
+		183208B51FE3685C00B23120 /* CYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 183208B41FE3685C00B23120 /* CYAlertView.m */; };
 		18322AAF1F4AD1C7003ABB7B /* Carcircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AAE1F4AD1C7003ABB7B /* Carcircle.m */; };
 		18322AB31F4AD6DC003ABB7B /* MyCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB21F4AD6DC003ABB7B /* MyCar.m */; };
 		18322AB71F4C2226003ABB7B /* CarClubNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AB61F4C2226003ABB7B /* CarClubNews.m */; };
@@ -509,6 +510,8 @@
 		1826E9B21F9837620057B7AE /* CYCarRMListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYCarRMListModel.m; sourceTree = "<group>"; };
 		1826E9B41F9837750057B7AE /* CYChooseCarTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CYChooseCarTypeViewController.h; sourceTree = "<group>"; };
 		1826E9B51F9837750057B7AE /* CYChooseCarTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CYChooseCarTypeViewController.m; sourceTree = "<group>"; };
+		183208B31FE3685C00B23120 /* CYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYAlertView.h; sourceTree = "<group>"; };
+		183208B41FE3685C00B23120 /* CYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYAlertView.m; sourceTree = "<group>"; };
 		18322AAD1F4AD1C7003ABB7B /* Carcircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carcircle.h; sourceTree = "<group>"; };
 		18322AAE1F4AD1C7003ABB7B /* Carcircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Carcircle.m; sourceTree = "<group>"; };
 		18322AB11F4AD6DC003ABB7B /* MyCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCar.h; sourceTree = "<group>"; };
@@ -1388,6 +1391,15 @@
 			path = CYController;
 			sourceTree = "<group>";
 		};
+		183208B21FE3684500B23120 /* CYAlert */ = {
+			isa = PBXGroup;
+			children = (
+				183208B31FE3685C00B23120 /* CYAlertView.h */,
+				183208B41FE3685C00B23120 /* CYAlertView.m */,
+			);
+			path = CYAlert;
+			sourceTree = "<group>";
+		};
 		18322AAC1F4AD181003ABB7B /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,6 +1472,7 @@
 		1840E9EB1FC2ACC6001B2407 /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				183208B21FE3684500B23120 /* CYAlert */,
 				183A88F11FCD59CB00AAC960 /* MemberShipRight */,
 				18EA1ECD1FCBB6F500FBCEC1 /* UserInfo */,
 				1840E9EC1FC2AD4C001B2407 /* Remind */,
@@ -2650,6 +2663,7 @@
 				18E7028D1F5E3443007A9777 /* Order.m in Sources */,
 				50B26E6D1F301B60009B3B9F /* RechargeCell.m in Sources */,
 				50B26EC41F31A048009B3B9F /* CarTicketView.m in Sources */,
+				183208B51FE3685C00B23120 /* CYAlertView.m in Sources */,
 				5042E3521F33165600CD140F /* PGIndexBannerSubiew.m in Sources */,
 				18E7027B1F5537B3007A9777 /* Record.m in Sources */,
 				507FECF71F2AC8D7009CC505 /* BusinessPayController.m in Sources */,

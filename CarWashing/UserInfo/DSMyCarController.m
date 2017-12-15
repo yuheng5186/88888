@@ -368,13 +368,14 @@ static NSString * HeaderId = @"header";
     car = [_CarArray objectAtIndex:_Xuhao];
     
     
-    NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
-    [self.provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
+//    NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
+//    [self.provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
+    [self.provinceBtn setTitle:car.Province forState:(UIControlStateNormal)];
+    self.carNum.text = car.PlateNumber;
     
     
     
-    
-    self.carNum.text =  [car.PlateNumber substringFromIndex:1];
+//    self.carNum.text =  [car.PlateNumber substringFromIndex:1];
     self.carBrand.text = car.CarBrand;
     self.carBrandType.text = car.CarType;
     self.ChassisNum.text = car.ChassisNum;
@@ -488,8 +489,8 @@ static NSString * HeaderId = @"header";
             //            provinceLabel.font = [UIFont systemFontOfSize:14];
             UIButton *provinceBtn = [[UIButton alloc] init];
             _provinceBtn = provinceBtn;
-            NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
-            [provinceBtn setTitle:platenumbertype forState:UIControlStateNormal];
+//            NSString *platenumbertype=[car.PlateNumber substringToIndex:1];
+            [provinceBtn setTitle:car.Province forState:UIControlStateNormal];
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
             provinceBtn.titleLabel.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             //            [provinceBtn addTarget:self action:@selector(didClickProvinceBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -502,7 +503,8 @@ static NSString * HeaderId = @"header";
             UITextField *numTF = [[UITextField alloc] init];
             numTF.placeholder = @"请输入车牌号";
             
-            numTF.text = [car.PlateNumber substringFromIndex:1];
+//            numTF.text = [car.PlateNumber substringFromIndex:1];
+            numTF.text = car.PlateNumber;
             numTF.textColor = [UIColor colorFromHex:@"#b4b4b4"];
             numTF.font = [UIFont systemFontOfSize:14*Main_Screen_Height/667];
             numTF.delegate = self;

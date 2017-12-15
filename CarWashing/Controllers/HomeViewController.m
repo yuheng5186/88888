@@ -64,12 +64,13 @@
 
 //车友圈
 #import "RemindViewController.h"
-
 #import "CYCarInsertViewController.h"
-
 #import "UselessViewController.h"
-
 #import "DSMyCarController.h"
+
+//进入首页提醒
+#import "CYAlertView.h"
+#import "DSMemberRightsController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
@@ -105,6 +106,8 @@
 @property(strong,nonatomic)UILabel*addCarInfoLabel;
 @property(strong,nonatomic)UILabel*subAddCarLabel;
 @property(copy,nonatomic)NSString *PlateNumber;
+@property(copy,nonatomic)NSString *provinceString;
+@property (strong, nonatomic) CYAlertView * CYalerView;//进入首页提醒
 @end
 
 @implementation HomeViewController
@@ -195,14 +198,16 @@
     
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
-    [self hsUpdateApp];
+//    [self hsUpdateApp];
     [self headerRereshing];
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self headerRereshing];
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
-    
+    //首页的提示
+    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
+//    [self.view addSubview:self.CYalerView];
 }
 -(void)editCarInformation:(NSNotification *)notification{
     self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
@@ -781,6 +786,7 @@
                 NSDictionary *getDict = [dict objectForKey:@"JsonData"];
                 NSDictionary *carModelDict = getDict[@"carModel"];
                 self.getCarCode = [NSString stringWithFormat:@"%@",carModelDict[@"CarCode"]];
+                self.provinceString = [NSString stringWithFormat:@"%@",carModelDict[@"Province"]];
                 self.PlateNumber = [NSString stringWithFormat:@"%@",carModelDict[@"PlateNumber"]];
                 //车辆品牌
                 NSString *carNameString = [NSString stringWithFormat:@"%@ %@",carModelDict[@"CarBrand"],carModelDict[@"CarType"]];
@@ -797,7 +803,7 @@
                         self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@",carNameString];
                     }
                     //车牌照每次自动添加
-                    self.subAddCarLabel.text = [NSString stringWithFormat:@"%@",self.PlateNumber];
+                    self.subAddCarLabel.text = [NSString stringWithFormat:@"%@-%@",self.provinceString,self.PlateNumber];
                 }
                 
                 
@@ -2124,6 +2130,21 @@
     }
 
     [self.navigationController pushViewController:new animated:YES];
+}
+
+//首页提醒
+-(CYAlertView *)CYalerView
+{
+    if (_CYalerView==nil) {
+        _CYalerView = [[CYAlertView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        [_CYalerView showView];
+        [_CYalerView.cancelButton addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _CYalerView;
+}
+-(void)cancelClick
+{
+    [self.CYalerView removeFromSuperview];
 }
 
 

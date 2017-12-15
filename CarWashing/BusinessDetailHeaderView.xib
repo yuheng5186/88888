@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="150" text="上海金雷快修车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsy-uM-wV1">
-                    <rect key="frame" x="20" y="9" width="212" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="150" text="上海金雷快修车" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsy-uM-wV1">
+                    <rect key="frame" x="20" y="9" width="212" height="19.5"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="16" id="WeK-OF-sgZ"/>
+                        <constraint firstAttribute="height" priority="50" constant="16" id="WeK-OF-sgZ"/>
                         <constraint firstAttribute="width" constant="212" id="aZF-FK-VCR"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -91,13 +91,17 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美容店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHX-hz-M0q">
-                    <rect key="frame" x="245" y="9" width="40" height="16"/>
+                    <rect key="frame" x="237" y="11" width="60" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="1T8-Ra-bcW"/>
+                        <constraint firstAttribute="width" constant="60" id="c7w-nu-ZRO"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市浦东新区东三里桥路" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKm-rc-TZ2">
-                    <rect key="frame" x="20" y="32" width="160" height="13"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上海市浦东新区东三里桥路" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKm-rc-TZ2">
+                    <rect key="frame" x="20" y="35.5" width="160" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="HyW-ca-tML"/>
                     </constraints>
@@ -232,7 +236,7 @@
                 <constraint firstItem="9gs-hl-E62" firstAttribute="top" secondItem="hqC-N6-A4K" secondAttribute="bottom" constant="7" id="FSW-JX-Rc1"/>
                 <constraint firstItem="dQo-Dg-ZL9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HSe-WR-1I3"/>
                 <constraint firstItem="cHH-w0-I3I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HcA-mb-fTe"/>
-                <constraint firstItem="vJc-Cc-ARB" firstAttribute="top" secondItem="eKm-rc-TZ2" secondAttribute="bottom" constant="10" id="I3W-7x-gge"/>
+                <constraint firstItem="vJc-Cc-ARB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="JtK-7U-F3h"/>
                 <constraint firstItem="4Ae-uk-brs" firstAttribute="top" secondItem="dQo-Dg-ZL9" secondAttribute="bottom" constant="13" id="KWl-yk-GCt"/>
                 <constraint firstItem="SHw-Kf-GGd" firstAttribute="top" secondItem="dQo-Dg-ZL9" secondAttribute="bottom" id="LUn-Bz-Qmz"/>
                 <constraint firstItem="vJc-Cc-ARB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="O6c-gp-tbn"/>
@@ -249,7 +253,6 @@
                 <constraint firstAttribute="bottom" secondItem="SHw-Kf-GGd" secondAttribute="bottom" id="ad5-3M-mgz"/>
                 <constraint firstItem="vsy-uM-wV1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="bbJ-yr-vcn"/>
                 <constraint firstItem="m2S-Ew-y8U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cBj-Pj-P14"/>
-                <constraint firstItem="SHX-hz-M0q" firstAttribute="top" secondItem="vsy-uM-wV1" secondAttribute="top" id="clD-Vv-lxd"/>
                 <constraint firstItem="hqC-N6-A4K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="cqF-D3-2Nf"/>
                 <constraint firstAttribute="trailing" secondItem="SHw-Kf-GGd" secondAttribute="trailing" id="dn2-Ih-DpT"/>
                 <constraint firstItem="KeK-77-8ss" firstAttribute="leading" secondItem="vJc-Cc-ARB" secondAttribute="trailing" constant="7" id="eap-EX-FgK"/>
@@ -257,9 +260,9 @@
                 <constraint firstItem="iJw-Mx-rww" firstAttribute="top" secondItem="nTf-A9-UN4" secondAttribute="bottom" constant="16" id="fCC-ay-3Je"/>
                 <constraint firstItem="vsy-uM-wV1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="gvm-uF-i2b"/>
                 <constraint firstItem="IQA-RW-0Ij" firstAttribute="centerY" secondItem="KeK-77-8ss" secondAttribute="centerY" id="gyX-yk-v0a"/>
+                <constraint firstItem="SHX-hz-M0q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="hb8-wN-FoC"/>
                 <constraint firstItem="quV-0Z-T4d" firstAttribute="centerY" secondItem="iJw-Mx-rww" secondAttribute="centerY" id="jGO-jU-7FA"/>
                 <constraint firstAttribute="bottom" secondItem="quV-0Z-T4d" secondAttribute="bottom" constant="16.5" id="jLT-RF-TpX"/>
-                <constraint firstItem="m2S-Ew-y8U" firstAttribute="leading" secondItem="SHX-hz-M0q" secondAttribute="trailing" constant="5" id="ldD-3T-A8O"/>
                 <constraint firstItem="eKm-rc-TZ2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ltq-ga-HdD"/>
                 <constraint firstItem="quV-0Z-T4d" firstAttribute="top" secondItem="4Ae-uk-brs" secondAttribute="bottom" constant="15.5" id="mcN-OJ-e0O"/>
                 <constraint firstItem="4Ae-uk-brs" firstAttribute="centerY" secondItem="nTf-A9-UN4" secondAttribute="centerY" id="nzw-9q-LjB"/>
@@ -269,6 +272,7 @@
                 <constraint firstItem="nTf-A9-UN4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="trI-t9-Y6P"/>
                 <constraint firstItem="m2S-Ew-y8U" firstAttribute="leading" secondItem="puN-ZN-trN" secondAttribute="trailing" constant="20" id="xLQ-cb-xI2"/>
                 <constraint firstItem="puN-ZN-trN" firstAttribute="centerY" secondItem="IQA-RW-0Ij" secondAttribute="centerY" id="xr7-tx-56m"/>
+                <constraint firstItem="SHX-hz-M0q" firstAttribute="leading" secondItem="vsy-uM-wV1" secondAttribute="trailing" constant="5" id="zVk-ua-ms0"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

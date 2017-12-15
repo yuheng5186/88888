@@ -220,7 +220,8 @@
         NSDictionary *mulDic = @{
                                  @"Account_Id":[UdStorage getObjectforKey:Userid],
                                  @"Name":self.nameField.text,
-                                 @"PlateNumber":[NSString stringWithFormat:@"%@-%@",self.sendButtonTitleString,self.plateNumField.text]
+                                 @"PlateNumber":[NSString stringWithFormat:@"%@",self.plateNumField.text],
+                                 @"Province":[NSString stringWithFormat:@"%@",self.sendButtonTitleString]
                                  };
         
         NSDictionary *params = @{

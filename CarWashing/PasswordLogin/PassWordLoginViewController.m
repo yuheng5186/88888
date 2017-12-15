@@ -249,8 +249,8 @@
                 {
                     
                     //进入到完善个人信息的页面中
-                    MoreInfoViewController *moreInfo = [[MoreInfoViewController alloc]init];
-                    [self.navigationController pushViewController:moreInfo animated:YES];
+//                    MoreInfoViewController *moreInfo = [[MoreInfoViewController alloc]init];
+//                    [self.navigationController pushViewController:moreInfo animated:YES];
                     
                     
                     APPDELEGATE.currentUser = [User getInstanceByDic:[dict objectForKey:@"JsonData"]];
@@ -270,8 +270,21 @@
                     [UdStorage storageObject:APPDELEGATE.currentUser.usermemo forKey:@"Memo"];
                     [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
                     
-//                    MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-//                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+                    //登录成功判断是否是第一次登陆
+                    NSDictionary *getDict = dict[@"JsonData"];
+                    NSString *tempString = [NSString stringWithFormat:@"%@",getDict[@"IsFirstLogin"]];
+                    NSLog(@"%@",tempString);
+                    if ([tempString isEqualToString:@"0"]) {
+                        //首次登陆
+                        //进入到完善个人信息的页面中
+                        MoreInfoViewController *moreInfo = [[MoreInfoViewController alloc]init];
+                        [self.navigationController pushViewController:moreInfo animated:YES];
+                    }else{
+                        MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
+                        [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+                    }
+                    
+
                 }
                 else
                 {

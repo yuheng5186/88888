@@ -84,7 +84,7 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.view.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdate:) name:@"updatenamesuccess" object:nil];
@@ -242,25 +242,25 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
             NSUInteger num = [[NSString stringWithFormat:@"%@",_MembershipUserScore[@"Level_id"]] integerValue];
             
             if (num == 1) {
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putong"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putongJ"]];
 
             }else if (num == 2){
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"baiyin"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"baiyinJ"]];
 
             }else if (num == 3){
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"huangjin"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"huangjinJ"]];
                 
             }else if (num == 4){
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"bojin"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"bojinJ"]];
                 
             }else if (num == 5){
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"zuanshi"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"zuanshiJ"]];
                 
             }else if (num == 6){
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"heizuan"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"heizuanJ"]];
                 
             }else {
-                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putong"]];
+                [memberShipView.signLabel setImage:[UIImage imageNamed:@"putongJ"]];
                 
             }
             
@@ -296,15 +296,39 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
 #pragma mark - 点击赚积分
 - (IBAction)clickEarnScoreBtn:(UIButton *)sender {
     
+    ScoreDetailController *scoreVC = [[ScoreDetailController alloc] init];
+    scoreVC.hidesBottomBarWhenPushed = YES;
+    scoreVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
+    
+    [self.navigationController pushViewController:scoreVC animated:YES];
+    
+
+}
+
+#pragma mark - 我的积分
+- (IBAction)clickUpgradeBtn:(UIButton *)sender {
+    
     EarnScoreController *earnScoreVC    = [[EarnScoreController alloc] init];
     earnScoreVC.hidesBottomBarWhenPushed  = YES;
     earnScoreVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
     [self.navigationController pushViewController:earnScoreVC animated:YES];
+
+    
 }
 
-#pragma mark - 点击升级
-- (IBAction)clickUpgradeBtn:(UIButton *)sender {
+
+#pragma mark - 点击会员按钮
+- (IBAction)clickMemberButton:(UIButton *)sender {
     
+    DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
+    rightsController.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:rightsController animated:YES];
+    
+}
+
+#pragma mark - 升级
+- (IBAction)clickMemberScoreBtn:(UIButton *)sender {
     
     NSArray *arr2 = @[@"",@"普通会员",@"白银会员",@"黄金会员",@"铂金会员",@"钻石会员",@"黑钻会员"];
     
@@ -324,27 +348,8 @@ static NSString *id_exchangeCell = @"id_exchangeCell";
     
     [self.navigationController pushViewController:upGradeVC animated:YES];
     
-}
-
-
-#pragma mark - 点击会员按钮
-- (IBAction)clickMemberButton:(UIButton *)sender {
     
-    DSMemberRightsController *rightsController = [[DSMemberRightsController alloc] init];
-    rightsController.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:rightsController animated:YES];
-    
-}
-
-#pragma mark - 点击积分数值按钮
-- (IBAction)clickMemberScoreBtn:(UIButton *)sender {
-    
-    ScoreDetailController *scoreVC = [[ScoreDetailController alloc] init];
-    scoreVC.hidesBottomBarWhenPushed = YES;
-    scoreVC.CurrentScore = [NSString stringWithFormat:@"%@",_MembershipUserScore[@"UserScore"]];
-
-    [self.navigationController pushViewController:scoreVC animated:YES];
 }
 
 

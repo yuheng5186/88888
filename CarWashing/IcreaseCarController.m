@@ -163,7 +163,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
                 if (first==nil) {
                     [provinceBtn setTitle:@"沪" forState:UIControlStateNormal];
                 }else{
-                    [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+//                    [provinceBtn setTitle:[first substringToIndex:1] forState:UIControlStateNormal];
+                    [provinceBtn setTitle:self.mycar.Province forState:UIControlStateNormal];
                 }
             }
             [provinceBtn setTitleColor:[UIColor colorFromHex:@"#868686"] forState:UIControlStateNormal];
@@ -194,7 +195,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             else
             {
                 NSString *first = self.mycar.PlateNumber;
-                numTF1.text = [first substringFromIndex:1];
+//                numTF1.text = [first substringFromIndex:1];
+                numTF1.text = first;
                 if (first ==nil) {
                     numTF1.placeholder = @"请输入车牌号";
                 }
@@ -556,7 +558,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }];
             datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
             datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
-            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
+            datepicker.doneButtonColor = [UIColor orangeColor];//确定按钮的颜色
             [datepicker show];
             
         }
@@ -578,7 +580,7 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }];
             datepicker.dateLabelColor = [UIColor colorFromHex:@"#0161a1"];//年-月-日-时-分 颜色
             datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
-            datepicker.doneButtonColor = [UIColor colorFromHex:@"#0161a1"];//确定按钮的颜色
+            datepicker.doneButtonColor = [UIColor orangeColor];//确定按钮的颜色
             [datepicker show];
             
             //            QFDatePickerView *datePickerView = [[QFDatePickerView alloc]initDatePackerWithResponse:^(NSString *str) {
@@ -657,7 +659,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             NSDictionary *mulDic = @{
                                      @"CarBrand":_brandTF.text,
                                      @"CarType":_brandTypeTF.text,
-                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
+                                     @"PlateNumber":[NSString stringWithFormat:@"%@",_numTF.text],
+                                     @"Province":[NSString stringWithFormat:@"%@",_provinceBtn.titleLabel.text],
                                      @"ChassisNum":_text1.text,
                                      @"EngineNum":@"",
                                      @"Manufacture":lblstr,
@@ -834,21 +837,22 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             }
             NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
             NSLog(@"%@===%@==%@===%@",_brandTypeTF.text,_brandTF.text,self.lblData,_text2.text);
-            NSDictionary *mulDic = [[NSDictionary alloc]initWithObjectsAndKeys:[UdStorage getObjectforKey:@"Account_Id"],@"Account_Id",_brandTypeTF.text,@"CarType",[NSString stringWithFormat:@"%ld",self.mycar.CarCode],@"CarCode",@1,@"ModifyType",_brandTF.text,@"CarBrand",[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],@"PlateNumber",_text1.text,@"ChassisNum",@"",@"EngineNum",lblstr,@"Manufacture",self.lblData,@"DepartureTime",_text2.text,@"Mileage",nil];
-            //            NSDictionary *mulDic = @{
-            //                                     @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
-            //                                     @"CarType":_brandTypeTF.text,
-            //                                     @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
-            //                                     @"ModifyType":@1,
-            //                                     @"CarBrand":_brandTF.text,
-            //                                     @"PlateNumber":[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],
-            //                                     @"ChassisNum":_text1.text,
-            //                                     @"EngineNum":@"",
-            //                                     @"Manufacture":lblstr,
-            //                                     @"DepartureTime":self.lblData,
-            //                                     @"Mileage":_text2.text
-            //
-            //                                     };
+//            NSDictionary *mulDic = [[NSDictionary alloc]initWithObjectsAndKeys:[UdStorage getObjectforKey:@"Account_Id"],@"Account_Id",_brandTypeTF.text,@"CarType",[NSString stringWithFormat:@"%ld",self.mycar.CarCode],@"CarCode",@1,@"ModifyType",_brandTF.text,@"CarBrand",[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],@"PlateNumber",_text1.text,@"ChassisNum",@"",@"EngineNum",lblstr,@"Manufacture",self.lblData,@"DepartureTime",_text2.text,@"Mileage",nil];
+                        NSDictionary *mulDic = @{
+                                                 @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],
+                                                 @"CarType":_brandTypeTF.text,
+                                                 @"CarCode":[NSString stringWithFormat:@"%ld",self.mycar.CarCode],
+                                                 @"ModifyType":@1,
+                                                 @"CarBrand":_brandTF.text,
+                                                 @"PlateNumber":[NSString stringWithFormat:@"%@",_numTF.text],
+                                                 @"Province":[NSString stringWithFormat:@"%@",_provinceBtn.titleLabel.text],
+                                                 @"ChassisNum":_text1.text,
+                                                 @"EngineNum":@"",
+                                                 @"Manufacture":lblstr,
+                                                 @"DepartureTime":self.lblData,
+                                                 @"Mileage":_text2.text
+            
+                                                 };
             NSDictionary *params = @{
                                      @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                                      @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]

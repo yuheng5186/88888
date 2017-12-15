@@ -29,29 +29,29 @@
                                 <constraint firstAttribute="height" constant="52" id="daC-P2-AIB"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="putong" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-QE-czf">
-                            <rect key="frame" x="48" y="48" width="20" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="Dl9-rP-yup"/>
-                                <constraint firstAttribute="height" constant="20" id="kx5-QX-vhM"/>
-                            </constraints>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13000000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZU9-dr-hhs">
                             <rect key="frame" x="90" y="30" width="99" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M5i-Yg-In5">
+                            <rect key="frame" x="260" y="0.0" width="70" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="UpP-ht-SfN"/>
+                                <constraint firstAttribute="width" constant="70" id="Z7i-2E-4g6"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Vp3-OH-hEg" firstAttribute="leading" secondItem="YJW-xs-lvQ" secondAttribute="leading" constant="16" id="2Iy-md-7ql"/>
-                        <constraint firstItem="dxD-QE-czf" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="-20" id="D8Q-md-psh"/>
                         <constraint firstItem="Vp3-OH-hEg" firstAttribute="top" secondItem="YJW-xs-lvQ" secondAttribute="top" constant="13" id="DGT-g3-QNF"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="centerY" secondItem="Vp3-OH-hEg" secondAttribute="centerY" id="PIe-Xu-hCm"/>
                         <constraint firstItem="ZU9-dr-hhs" firstAttribute="leading" secondItem="Vp3-OH-hEg" secondAttribute="trailing" constant="22" id="WR5-Gr-WtN"/>
+                        <constraint firstItem="M5i-Yg-In5" firstAttribute="top" secondItem="YJW-xs-lvQ" secondAttribute="top" id="cPY-et-jzf"/>
                         <constraint firstAttribute="height" constant="78" id="fox-3C-7tM"/>
-                        <constraint firstItem="dxD-QE-czf" firstAttribute="top" secondItem="Vp3-OH-hEg" secondAttribute="bottom" constant="-17" id="on6-FN-xoT"/>
+                        <constraint firstAttribute="trailing" secondItem="M5i-Yg-In5" secondAttribute="trailing" constant="45" id="xrX-r7-YO8"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHF-Li-SsL">
@@ -185,7 +185,7 @@
                 <outlet property="fontTwoLabel" destination="siE-Wz-lcJ" id="PCD-vb-BfG"/>
                 <outlet property="increaseButton" destination="c6y-hM-H7p" id="ak3-a9-CO9"/>
                 <outlet property="phoneLabel" destination="ZU9-dr-hhs" id="z4B-mh-SZB"/>
-                <outlet property="signLabel" destination="dxD-QE-czf" id="hdO-SF-t1T"/>
+                <outlet property="signLabel" destination="M5i-Yg-In5" id="9hs-AY-u20"/>
                 <outlet property="topContainView" destination="YJW-xs-lvQ" id="Vwp-xf-uVx"/>
             </connections>
             <point key="canvasLocation" x="-426.5" y="-351"/>
@@ -198,6 +198,5 @@
         <image name="huiyuan_zhuanjifen" width="39" height="39"/>
         <image name="huiyuandianjitiaozhuan" width="13" height="13"/>
         <image name="huiyuantou" width="80" height="80"/>
-        <image name="putong" width="25" height="25"/>
     </resources>
 </document>

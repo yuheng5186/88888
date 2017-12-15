@@ -144,8 +144,11 @@
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
     [button setBackgroundImage:buttonImage forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(didSelectRouterAction) forControlEvents:UIControlEventTouchUpInside];
-    button.centerX = Main_Screen_Width/2;
-    button.centerY = 5;
+//    button.centerX = Main_Screen_Width/2;
+//    button.centerY = 5;
+    NSLog(@"---%f",self.tabBar.frame.origin.y);
+    button.center = CGPointMake(Main_Screen_Width/2, 5);
+//    [self.view addSubview:button];
     [self.tabBar addSubview:button];
 }
 - (void)didSelectRouterAction {

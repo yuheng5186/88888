@@ -96,7 +96,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     self.pramsDic = [[NSMutableDictionary alloc]init];
     NSArray *array1 = [[NSArray alloc] initWithObjects:[UdStorage getObjectforKey:@"City"],[UdStorage getObjectforKey:@"Quyu"], nil];
-    NSDictionary *dic = @{@"0":array1,@"1":@"车身外部清洗维护",@"2":@"默认排序"};
+    NSDictionary *dic = @{@"0":array1,@"1":@"全部",@"2":@"默认排序"};
     self.pramsDic  = [NSMutableDictionary dictionaryWithDictionary:dic];
     self.MerchantData = [[NSMutableArray alloc]init];
      self.page = 0;
@@ -337,7 +337,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     
     
     // 初始化标题
-    _titles = @[[UdStorage getObjectforKey:@"City"],@"车身外部清洗维护",@"默认排序"];
+    _titles = @[[UdStorage getObjectforKey:@"City"],@"全部",@"默认排序"];
     
 //    NSLog(@"%@",self.pramsDic);
     
@@ -413,14 +413,14 @@ static NSString *id_salerListCell = @"salerListViewCell";
         self.areastr = @"";
     }
    
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
     NSInteger index = 0;
    
    if ([array containsObject:[self.pramsDic objectForKey:@"1"]]) {
       
       index = [array indexOfObject:[self.pramsDic objectForKey:@"1"]];
-       NSLog(@"----%ld",(long)index);
+//       NSLog(@"----%ld",(long)index);
    }
    
    
@@ -462,10 +462,9 @@ static NSString *id_salerListCell = @"salerListViewCell";
                              @"JsonData" : [NSString stringWithFormat:@"%@",[AFNetworkingTool convertToJsonData:mulDic]],
                              @"Sign" : [NSString stringWithFormat:@"%@",[LCMD5Tool md5:[AFNetworkingTool convertToJsonData:mulDic]]]
                              };
-   NSLog(@"%@",params);
     
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@MerChant/GetStoreList",Khttp] success:^(NSDictionary *dict, BOOL success) {
-       NSLog(@"%@",dict);
+//       NSLog(@"%@",dict);
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             [self.MerchantData removeAllObjects];
@@ -503,7 +502,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 -(void)setDatamore
 {
    
-   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
+   NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"全部",@"车身外部清洗维护",@"车内清洁-5座轿车",@"车内清洁SUV或7座", nil];
    
    NSInteger index;
    

@@ -114,7 +114,7 @@
         CYCarRMListModel * carBrandmodel = self.DetailArray[indexPath.section];
         self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][indexPath.section][@"List"]];
         CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
-        NSDictionary *dict = @{@"CYCarname":a,@"CYCarType":[NSString stringWithFormat:@"%@ %@",carBrandmodel.Title,model.Title],@"CYType":@"1"};
+        NSDictionary *dict = @{@"CYCarname":a,@"CYCarType":[NSString stringWithFormat:@"%@",model.Title],@"CYType":@"1"};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"pop" object:nil userInfo:dict];
     }else{
         CYCarRMListModel * carBrandmodel = self.DetailArray[indexPath.section];
@@ -122,7 +122,7 @@
         CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
         NSDictionary *mulDic = @{
                                  @"CarBrand":a,
-                                 @"CarType":[NSString stringWithFormat:@"%@-%@",carBrandmodel.Title,model.Title],
+                                 @"CarType":[NSString stringWithFormat:@"%@",model.Title],
                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"]
                                  };
         NSLog(@"%@",mulDic);

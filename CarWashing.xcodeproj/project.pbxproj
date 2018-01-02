@@ -208,6 +208,7 @@
 		18B803901F1DA2A300B52432 /* CarWashingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8038F1F1DA2A300B52432 /* CarWashingTests.m */; };
 		18B8039B1F1DA2A300B52432 /* CarWashingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B8039A1F1DA2A300B52432 /* CarWashingUITests.m */; };
 		18D0EFF11F7F936100D9D37A /* CYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D0EFF01F7F936100D9D37A /* CYModel.m */; };
+		18D78E011FE3BD1A0049BB71 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D78E001FE3BD1A0049BB71 /* ScanViewController.m */; };
 		18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */; };
 		18D815851F79ECA800A1FA04 /* CYCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */; };
 		18D8158A1F79FFE300A1FA04 /* CYCardDeatilListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D815891F79FFE300A1FA04 /* CYCardDeatilListViewController.m */; };
@@ -218,6 +219,11 @@
 		18E7027B1F5537B3007A9777 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7027A1F5537B3007A9777 /* Record.m */; };
 		18E7028D1F5E3443007A9777 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E7028C1F5E3443007A9777 /* Order.m */; };
 		18E702931F614010007A9777 /* ScanCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E702921F614010007A9777 /* ScanCode.m */; };
+		18E9C2481FF611FD00F8F0D5 /* JackMerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E9C2461FF611FD00F8F0D5 /* JackMerListCell.m */; };
+		18E9C2491FF611FD00F8F0D5 /* JackMerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E9C2471FF611FD00F8F0D5 /* JackMerListCell.xib */; };
+		18E9C24D1FF624AB00F8F0D5 /* JackMerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E9C24C1FF624AB00F8F0D5 /* JackMerListModel.m */; };
+		18E9C2541FF637FB00F8F0D5 /* KMTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E9C2511FF637FB00F8F0D5 /* KMTag.m */; };
+		18E9C2551FF637FB00F8F0D5 /* KMTagListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E9C2531FF637FB00F8F0D5 /* KMTagListView.m */; };
 		18EA1E941FC7AF5900FBCEC1 /* UselessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EA1E931FC7AF5900FBCEC1 /* UselessViewController.m */; };
 		18EA1ED01FCBB71A00FBCEC1 /* MoreInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EA1ECF1FCBB71A00FBCEC1 /* MoreInfoViewController.m */; };
 		18EDACC71F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EDACC61F7B50C6008D59D7 /* ForgetPasswordLoginViewController.m */; };
@@ -727,6 +733,8 @@
 		18B8039C1F1DA2A300B52432 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D0EFEF1F7F936100D9D37A /* CYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYModel.h; sourceTree = "<group>"; };
 		18D0EFF01F7F936100D9D37A /* CYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYModel.m; sourceTree = "<group>"; };
+		18D78DFF1FE3BD190049BB71 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		18D78E001FE3BD1A0049BB71 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
 		18D815811F79ECA800A1FA04 /* CYCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCardTableViewCell.h; sourceTree = "<group>"; };
 		18D815821F79ECA800A1FA04 /* CYCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCardTableViewCell.m; sourceTree = "<group>"; };
 		18D815831F79ECA800A1FA04 /* CYCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -745,6 +753,15 @@
 		18E7028C1F5E3443007A9777 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		18E702911F614010007A9777 /* ScanCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCode.h; sourceTree = "<group>"; };
 		18E702921F614010007A9777 /* ScanCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCode.m; sourceTree = "<group>"; };
+		18E9C2451FF611FD00F8F0D5 /* JackMerListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JackMerListCell.h; sourceTree = "<group>"; };
+		18E9C2461FF611FD00F8F0D5 /* JackMerListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JackMerListCell.m; sourceTree = "<group>"; };
+		18E9C2471FF611FD00F8F0D5 /* JackMerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JackMerListCell.xib; sourceTree = "<group>"; };
+		18E9C24B1FF624AB00F8F0D5 /* JackMerListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JackMerListModel.h; sourceTree = "<group>"; };
+		18E9C24C1FF624AB00F8F0D5 /* JackMerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JackMerListModel.m; sourceTree = "<group>"; };
+		18E9C2501FF637FB00F8F0D5 /* KMTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTag.h; sourceTree = "<group>"; };
+		18E9C2511FF637FB00F8F0D5 /* KMTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMTag.m; sourceTree = "<group>"; };
+		18E9C2521FF637FB00F8F0D5 /* KMTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTagListView.h; sourceTree = "<group>"; };
+		18E9C2531FF637FB00F8F0D5 /* KMTagListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMTagListView.m; sourceTree = "<group>"; };
 		18EA1E921FC7AF5900FBCEC1 /* UselessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UselessViewController.h; sourceTree = "<group>"; };
 		18EA1E931FC7AF5900FBCEC1 /* UselessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UselessViewController.m; sourceTree = "<group>"; };
 		18EA1ECE1FCBB71A00FBCEC1 /* MoreInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreInfoViewController.h; sourceTree = "<group>"; };
@@ -1099,6 +1116,7 @@
 		181E91D71F1DDD830006511E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				18E9C24E1FF637E800F8F0D5 /* JackTag */,
 				046E41E51F72414100DF4866 /* HSUpdateApp.h */,
 				046E41E61F72414100DF4866 /* HSUpdateApp.m */,
 				04DB28DC1F6E184F009B4D9C /* WSDaePickerView */,
@@ -1472,6 +1490,7 @@
 		1840E9EB1FC2ACC6001B2407 /* Xue */ = {
 			isa = PBXGroup;
 			children = (
+				18D78DFE1FE3BCA50049BB71 /* JackWash */,
 				183208B21FE3684500B23120 /* CYAlert */,
 				183A88F11FCD59CB00AAC960 /* MemberShipRight */,
 				18EA1ECD1FCBB6F500FBCEC1 /* UserInfo */,
@@ -1858,6 +1877,15 @@
 			path = CarWashingUITests;
 			sourceTree = "<group>";
 		};
+		18D78DFE1FE3BCA50049BB71 /* JackWash */ = {
+			isa = PBXGroup;
+			children = (
+				18D78DFF1FE3BD190049BB71 /* ScanViewController.h */,
+				18D78E001FE3BD1A0049BB71 /* ScanViewController.m */,
+			);
+			path = JackWash;
+			sourceTree = "<group>";
+		};
 		18D815801F79EC3000A1FA04 /* CYView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1901,6 +1929,45 @@
 			path = Tool/KPIndicatorView;
 			sourceTree = "<group>";
 		};
+		18E9C2411FF6109F00F8F0D5 /* NewBusinessCell(重写cell) */ = {
+			isa = PBXGroup;
+			children = (
+				18E9C24A1FF6248400F8F0D5 /* JackMerListModel */,
+				18E9C2451FF611FD00F8F0D5 /* JackMerListCell.h */,
+				18E9C2461FF611FD00F8F0D5 /* JackMerListCell.m */,
+				18E9C2471FF611FD00F8F0D5 /* JackMerListCell.xib */,
+			);
+			path = "NewBusinessCell(重写cell)";
+			sourceTree = "<group>";
+		};
+		18E9C24A1FF6248400F8F0D5 /* JackMerListModel */ = {
+			isa = PBXGroup;
+			children = (
+				18E9C24B1FF624AB00F8F0D5 /* JackMerListModel.h */,
+				18E9C24C1FF624AB00F8F0D5 /* JackMerListModel.m */,
+			);
+			path = JackMerListModel;
+			sourceTree = "<group>";
+		};
+		18E9C24E1FF637E800F8F0D5 /* JackTag */ = {
+			isa = PBXGroup;
+			children = (
+				18E9C24F1FF637FB00F8F0D5 /* KMTagListView */,
+			);
+			path = JackTag;
+			sourceTree = "<group>";
+		};
+		18E9C24F1FF637FB00F8F0D5 /* KMTagListView */ = {
+			isa = PBXGroup;
+			children = (
+				18E9C2501FF637FB00F8F0D5 /* KMTag.h */,
+				18E9C2511FF637FB00F8F0D5 /* KMTag.m */,
+				18E9C2521FF637FB00F8F0D5 /* KMTagListView.h */,
+				18E9C2531FF637FB00F8F0D5 /* KMTagListView.m */,
+			);
+			path = KMTagListView;
+			sourceTree = "<group>";
+		};
 		18EA1ECD1FCBB6F500FBCEC1 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1939,6 +2006,7 @@
 		501671FE1F29781E00384186 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				18E9C2411FF6109F00F8F0D5 /* NewBusinessCell(重写cell) */,
 				1887A21E1F66E0870042B062 /* model */,
 				185833DB1F6E0D71004EA905 /* BusinessViewController.h */,
 				185833DC1F6E0D71004EA905 /* BusinessViewController.m */,
@@ -2361,6 +2429,7 @@
 				180E43291F414A7900013D2D /* PopHelpView.xib in Resources */,
 				188821511F6BD336002618F7 /* b6.gif in Resources */,
 				50E2EE871F1F4D3C00FAF130 /* YZSortCell.xib in Resources */,
+				18E9C2491FF611FD00F8F0D5 /* JackMerListCell.xib in Resources */,
 				50E2EE7F1F1F4D3C00FAF130 /* YZAllCourseViewController.xib in Resources */,
 				18E702771F5503BC007A9777 /* KPIndicatorView.xib in Resources */,
 				50B26EC61F31A0A7009B3B9F /* CarTicketView.xib in Resources */,
@@ -2539,6 +2608,7 @@
 				180E42F51F3AD4AE00013D2D /* PopupView.m in Sources */,
 				1853BA121F288D9800B98C7F /* DSChangeNameController.m in Sources */,
 				181E92BB1F1F36710006511E /* BaseController.m in Sources */,
+				18E9C24D1FF624AB00F8F0D5 /* JackMerListModel.m in Sources */,
 				181E932C1F20B0EB0006511E /* DSAdDetailController.m in Sources */,
 				501672131F297AD000384186 /* BusinessDetailHeaderView.m in Sources */,
 				50B26E681F301B29009B3B9F /* DiscountCell.m in Sources */,
@@ -2552,6 +2622,7 @@
 				181E92CA1F1F39CC0006511E /* BlackLoadingView.m in Sources */,
 				18B697AF1F21DAE7009FF73A /* DSCarClubController.m in Sources */,
 				50B26EC11F319D7F009B3B9F /* WashCarTicketController.m in Sources */,
+				18D78E011FE3BD1A0049BB71 /* ScanViewController.m in Sources */,
 				1853BA4A1F28A04100B98C7F /* JFCityViewController.m in Sources */,
 				1840E9FB1FC2ADE9001B2407 /* InsureModel.m in Sources */,
 				18A4B1B41F4AAB7800C64978 /* WayToUpGradeCell.m in Sources */,
@@ -2638,6 +2709,7 @@
 				180E43041F3B471100013D2D /* UIView+BFSToastInfo.m in Sources */,
 				04DB28E61F6E184F009B4D9C /* WSDatePickerView.m in Sources */,
 				1840E9FE1FC2ADE9001B2407 /* RemindMoel.m in Sources */,
+				18E9C2481FF611FD00F8F0D5 /* JackMerListCell.m in Sources */,
 				500C6BF51F3B5B13007D34A1 /* BusinessMapController.m in Sources */,
 				50B26EA01F30819D009B3B9F /* RechargeDetailController.m in Sources */,
 				181E92DB1F1F3BC60006511E /* PurchaseViewController.m in Sources */,
@@ -2695,6 +2767,7 @@
 				50CAA69E1F41A7D700138CEF /* GoodsExchangeCell.m in Sources */,
 				50B26E931F307AE5009B3B9F /* DiscountController.m in Sources */,
 				5097FE161F2F42F0002EF8F8 /* MyCarPortController.m in Sources */,
+				18E9C2541FF637FB00F8F0D5 /* KMTag.m in Sources */,
 				180E43211F3D836F00013D2D /* HYActivityView.m in Sources */,
 				041573A41F53C522004514E3 /* TFGridInputView.m in Sources */,
 				181E92FB1F2086ED0006511E /* DSServiceController.m in Sources */,
@@ -2718,6 +2791,7 @@
 				180E42E71F3AB37D00013D2D /* UIWindow+YzdHUD.m in Sources */,
 				185090441F4557E100795E0A /* TYAlertController.m in Sources */,
 				180E43241F3D836F00013D2D /* WeixinTimelineActivity.m in Sources */,
+				18E9C2551FF637FB00F8F0D5 /* KMTagListView.m in Sources */,
 				501672461F29DA6C00384186 /* MemberRegualrController.m in Sources */,
 				18D815841F79ECA800A1FA04 /* CYCardTableViewCell.m in Sources */,
 				18322AC01F4D950C003ABB7B /* Card.m in Sources */,

@@ -544,7 +544,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
 
 #pragma mark - 点击拨打客服
 - (void)didClickServiceBtn:(UIButton *)button {
-    [PhoneHelper dial: @"0532-58698831"];
+    [PhoneHelper dial: @"0532-83265836"];
 //    NSString *message = @"是否拨打商家电话";
 //    NSString *title = @"";
 //    [self showAlertWithTitle:title message:message];

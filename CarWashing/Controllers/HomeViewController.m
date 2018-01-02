@@ -72,6 +72,9 @@
 #import "CYAlertView.h"
 #import "DSMemberRightsController.h"
 
+//新的洗车
+#import "ScanViewController.h"
+
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
     UIImageView     *logoImageView;
@@ -139,9 +142,9 @@
 -(void)hsUpdateApp{
     __weak __typeof(&*self)weakSelf = self;
     [HSUpdateApp hs_updateWithAPPID:@"1291609168" block:^(NSString *currentVersion, NSString *storeVersion, NSString *openUrl, BOOL isUpdate) {
-        NSLog(@"--%@",storeVersion);
+        NSLog(@"App Store-%@",storeVersion);
         //版本内容
-        NSLog(@"---%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"releaseNotes"]);
+        NSLog(@"本地---%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"releaseNotes"]);
         if (isUpdate == YES) {
             [weakSelf showStoreVersion:storeVersion openUrl:openUrl];
         }
@@ -198,8 +201,9 @@
     
 //    self.locationManager = [[JFLocation alloc] init];
 //    _locationManager.delegate = self;
-//    [self hsUpdateApp];
+    [self hsUpdateApp];
     [self headerRereshing];
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self headerRereshing];
     }];
@@ -210,7 +214,7 @@
 //    [self.view addSubview:self.CYalerView];
 }
 -(void)editCarInformation:(NSNotification *)notification{
-    self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@-%@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
+    self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@ %@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
 }
 
 - (void)dealloc{
@@ -1202,7 +1206,6 @@
 
 
 - (void) downloadButtonClick:(id)sender {
-    
     DSDownloadController *downController     = [[DSDownloadController alloc]init];
     downController.hidesBottomBarWhenPushed  = YES;
     [self.navigationController pushViewController:downController animated:YES];
@@ -1268,9 +1271,8 @@
     
 }
 - (void) tapScanButtonClick:(id)sender {
+    
 //    self.tabBarController.selectedIndex = 2;
-//    
-//    
 //    [self.navigationController popToRootViewControllerAnimated:YES];
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
     NSString    *stringTime     = [defaults objectForKey:@"setTime"];
@@ -1314,11 +1316,8 @@
         
     }else {
         self.tabBarController.selectedIndex = 2;
-        //
-        //
-            [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
 
-        
     }
     
 //    DSScanQRCodeController *scanController      = [[DSScanQRCodeController alloc]init];
@@ -1860,36 +1859,87 @@
 -(void)fourButtonAction:(UIButton *)sender{
     if (sender.tag == 100) {
         //扫一扫
-//        NSLog(@"1");
+        
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        if (![defaults objectForKey:@"startTime"]) {
+//            ScanViewController *new = [[ScanViewController alloc]init];
+//            new.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:new animated:YES];
+//        }else{
+//            //获取点击按钮的时间来与之前保存的时间比较
+//            //之前保存的时间
+//            NSDate *startTime = [defaults objectForKey:@"startTime"];
+//            //获取当前时间
+//            NSDate *currtyDate = [NSDate date];
+//            // 日历对象（方便比较两个日期之间的差距）
+//            NSCalendar *calendar = [NSCalendar currentCalendar];
+//            NSDateComponents *comps = [calendar components:(NSCalendarUnitSecond) fromDate:startTime toDate:currtyDate options:(0)];
+//            //获取秒数的int值
+//            NSInteger getSecond = [comps second];
+//            //        NSLog(@"输出结果%ld",(long)getSecond);
+//            if (getSecond <= 240) {
+//                //洗车不到30秒,没有洗完的情况
+//                DSStartWashingController *wash = [[DSStartWashingController alloc]init];
+//
+//                wash.paynum=[UdStorage getObjectforKey:@"Jprice"];
+//                wash.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+//                wash.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+//                wash.CardType = [UdStorage getObjectforKey:@"CardType"];
+//                wash.CardName =[UdStorage getObjectforKey:@"CardName"];
+//                wash.second        = 240;
+//                wash.hidesBottomBarWhenPushed            = YES;
+//                wash.second                    = 240-(int)getSecond;
+//
+//                wash.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:wash animated:YES];
+//            }else{
+//                //已经洗完的情况
+//                //删除已经存在的洗车时间
+//                [defaults removeObjectForKey:@"startTime"];
+//                [defaults synchronize];
+//                ScanViewController *new = [[ScanViewController alloc]init];
+//                new.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:new animated:YES];
+//            }
+//        }//@end判断目前是否有开始洗车的时间
+//
+        
+        
+        
+        
+        
+        
+        
+        
         NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
         NSString    *stringTime     = [defaults objectForKey:@"setTime"];
-        
-        
+
+
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate *overdate = [dateFormatter dateFromString:stringTime];
         NSTimeZone *zone1 = [NSTimeZone systemTimeZone];
         NSInteger interva1 = [zone1 secondsFromGMTForDate: overdate];
         NSDate*endDate = [overdate dateByAddingTimeInterval: interva1];
-        
+
         //获取当前时间
         NSDate*date = [NSDate date];
         NSTimeZone*zone2 = [NSTimeZone systemTimeZone];
         NSInteger interva2 = [zone2 secondsFromGMTForDate: date];
         NSDate *currentDate = [date dateByAddingTimeInterval: interva2];
-        
+
         NSInteger intString;
         NSTimeInterval interval =[endDate timeIntervalSinceDate:currentDate];
         NSInteger gotime = round(interval);
         NSString *str2 = [[NSString stringWithFormat:@"%ld",(long)gotime] stringByReplacingOccurrencesOfString:@"-" withString:@""];
         intString = [str2 intValue];
-        
+
         if (intString > 0 && intString < 240) {
-            
+
             //正在洗车进入到这里
             DSStartWashingController *start = [[DSStartWashingController alloc]init];
             //        [UdStorage storageObject:dateString forKey:@"setTime"];
-            
+
             start.paynum=[UdStorage getObjectforKey:@"Jprice"];
             start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
             start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
@@ -1898,16 +1948,15 @@
             //        start.second        = 240;
             start.hidesBottomBarWhenPushed            = YES;
             start.second                    = 240-intString;
-            
+
             [self.navigationController pushViewController:start animated:YES];
             //        [_session stopRunning];
-            
+
         }else {
             self.tabBarController.selectedIndex = 2;
             [self.navigationController popToRootViewControllerAnimated:YES];
-            
-            
         }
+        
     }else if (sender.tag == 101){
         //卡包
 //        NSLog(@"2");

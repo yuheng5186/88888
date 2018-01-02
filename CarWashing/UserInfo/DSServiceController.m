@@ -147,7 +147,7 @@
 
 - (void)showAlertWithMessage:(NSString *)message{
     
-    [PhoneHelper dial: @"053258698831"];
+    [PhoneHelper dial: @"053283265836"];
 }
 
 

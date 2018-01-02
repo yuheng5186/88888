@@ -12,6 +12,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDAutoLayout.h>
 
+#define mainW [UIScreen mainScreen].bounds.size.width
+
 @implementation QWMclistTableViewCell
 {
     AppDelegate *myDelegate;
@@ -33,7 +35,7 @@
 -(void)setlayoutCell
 {
     myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     
     UIImageView *imageV =[[UIImageView alloc]initWithFrame:CGRectMake1(12,12,80,80)];
     imageV.opaque = YES;
@@ -59,7 +61,8 @@
         ass = 160.0;
     }
     
-    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(ass/375*Main_Screen_Width,10.0/677*Main_Screen_Height, 100.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
+    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(ass/375*Main_Screen_Width,10.0/677*Main_Screen_Height, 150.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
+    namelabel.backgroundColor = [UIColor redColor];
     [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:16 * myDelegate.autoSizeScaleX]];
     namelabel.centerY = assStoreImage.centerY;
     namelabel.sd_layout.leftSpaceToView(assStoreImage, 10);
@@ -71,12 +74,13 @@
     
    
     CGSize size = [namelabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
-    namelabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [namelabel sizeToFit];
+//    namelabel.lineBreakMode = NSLineBreakByWordWrapping;
+//    [namelabel sizeToFit];
     
     
-    
-    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(250,12, 108, 10)];
+    NSLog(@"%f",mainW);
+    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(Main_Screen_Width-88* myDelegate.autoSizeScaleX,14, 88.0/375*mainW, 10)];
+    catlabel.backgroundColor = [UIColor greenColor];
     [catlabel setFont:[UIFont fontWithName:@"Helvetica" size:12 * myDelegate.autoSizeScaleX]];
     catlabel.textColor = [UIColor colorFromHex:@"#868686"];
     catlabel.text = @"美容店";
@@ -113,7 +117,7 @@
     
     self.Mcrange.left=10*Main_Screen_Width/375;
     
-    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(250*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 108*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
+    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(250*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 88*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
     [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
     julilabel.textColor = [UIColor colorFromHex:@"#868686"];
     julilabel.text = @"1.25km";

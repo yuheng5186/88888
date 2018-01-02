@@ -25,8 +25,9 @@
 @interface DSUserInfoController ()<UITableViewDelegate,UITableViewDataSource,LKActionSheetDelegate,LKAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSString *sexString;
+@property (nonatomic, copy) NSString *sexString;
 @property (nonatomic, strong) UIImageView *userImageView;
+@property(copy,nonatomic)NSString *manOrWomanString;            //用来判断到底是男还是女
 
 @end
 
@@ -53,7 +54,14 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatenamesuccess" object:nil];
     [center addObserver:self selector:@selector(noticeupdateUserName:) name:@"updatephonesuccess" object:nil];
-    self.sexString = @"未填写";
+    self.manOrWomanString = [NSString stringWithFormat:@"%@",[UdStorage getObjectforKey:@"Sex"]];
+    if ([self.manOrWomanString isEqualToString:@"0"]) {
+        //男
+        self.sexString = @"男";
+    }else{
+        self.sexString = @"女";
+    }
+    
     [self createSubView];
 
 }
@@ -165,18 +173,22 @@
         }
         else if (indexPath.row == 2) {
             cell.textLabel.text         = @"性别";
-            if([APPDELEGATE.currentUser.userSex isKindOfClass:[NSNull null]])
-            {
-                cell.detailTextLabel.text   = self.sexString;
-            }
-            else if([APPDELEGATE.currentUser.userSex isEqual:@"0"])
+            NSLog(@"%@",APPDELEGATE.currentUser.userSex);
+            
+//            if([APPDELEGATE.currentUser.userSex isKindOfClass:[NSNull null]])
+//            {
+//                cell.detailTextLabel.text   = self.sexString;
+//            }
+            if([self.sexString isEqualToString:@"0"])
             {
                 cell.detailTextLabel.text   = @"男";
             }
             else
             {
+                //默认进入这里
                 cell.detailTextLabel.text   = @"女";
             }
+            cell.detailTextLabel.text = self.sexString;
             
         }else {
         

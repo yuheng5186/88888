@@ -77,7 +77,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 -(UIView*)hopeView{
     if (!_hopeView) {
-        _hopeView = [[UIView alloc]initWithFrame:CGRectMake(0, 210, Main_Screen_Width, 250)];
+        _hopeView = [[UIView alloc]initWithFrame:CGRectMake(0, 210, Main_Screen_Width, 450)];
         _hopeView.backgroundColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 200, 20)];

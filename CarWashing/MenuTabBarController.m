@@ -104,6 +104,7 @@
     businessTabItem.tag     = 2;
     businessVC.tabBarItem   = businessTabItem;
     
+    
     DSScanController *activityVC      = [[DSScanController alloc]init];
     UINavigationController *activityNav = [[UINavigationController alloc]initWithRootViewController:activityVC];
     activityNav.navigationController.navigationBarHidden = YES;

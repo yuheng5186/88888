@@ -106,7 +106,7 @@
     self.RMListArrayRow = [CYCarRMListModel mj_objectArrayWithKeyValuesArray:self.dicData[@"JsonData"][indexPath.section][@"List"]];
     CYCarRMListModel * model = self.RMListArrayRow[indexPath.row];
     NSLog(@"%@-%@",carBrandmodel.Title,model.Title);
-    NSDictionary *dict = @{@"color":[NSString stringWithFormat:@"%@-%@",carBrandmodel.Title,model.Title],@"CYType":@"1"};
+    NSDictionary *dict = @{@"color":[NSString stringWithFormat:@"%@",model.Title],@"CYType":@"1"};
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CYBack" object:nil userInfo:dict];
     [self.navigationController popViewControllerAnimated:YES];
 }

@@ -25,6 +25,9 @@
 #import "CoreLocation/CoreLocation.h"
 #import "UIScrollView+EmptyDataSet.h"//第三方空白页
 
+#import "JackMerListCell.h"     //重新整理的cell
+#import "JackMerListModel.h"
+
 
 @interface BusinessViewController ()<UITableViewDelegate, UITableViewDataSource,YZPullDownMenuDataSource,CLLocationManagerDelegate,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 {
@@ -47,6 +50,8 @@
 
 @property (nonatomic,strong) NSString *areastr;
 @property (nonatomic,strong) NSString *citystr;
+
+@property (nonatomic,strong) NSMutableArray *jackModelArray;
 @end
 
 static NSString *id_salerListCell = @"salerListViewCell";
@@ -90,6 +95,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.citystr=@" ";
     [self setSearchMenu];
     
+    //重写cell的显示模型
+    self.jackModelArray = [NSMutableArray array];
     
     
     
@@ -175,6 +182,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.dataSource = self;
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
+    [self.salerListView registerNib:[UINib nibWithNibName:@"JackMerListCell" bundle:nil] forCellReuseIdentifier:@"JackMerListCell"];
     self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -252,6 +260,8 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return 135;
+    /*
     NSArray *lab = [[[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerFlag"] componentsSeparatedByString:@","];
     if([[self.MerchantData objectAtIndex:indexPath.row]objectForKey:@"MerFlag"])
     {
@@ -271,10 +281,19 @@ static NSString *id_salerListCell = @"salerListViewCell";
     }
     else
         return 110*Main_Screen_Height/667;
-
+    */
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JackMerListModel *sendModel = self.jackModelArray[indexPath.row];
+    JackMerListCell *merListCell = [tableView dequeueReusableCellWithIdentifier:@"JackMerListCell" forIndexPath:indexPath];
+    [merListCell setModelValueWithJack:sendModel];
+    return merListCell;
+    
+    
+    
+    /*
+    //2017_12_29
     static NSString *CellIdentifier=@"Cell";
     [tableView registerClass:[QWMclistTableViewCell class] forCellReuseIdentifier:CellIdentifier];
     QWMclistTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -300,6 +319,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+     */
     
 }
 
@@ -468,13 +488,16 @@ static NSString *id_salerListCell = @"salerListViewCell";
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
             [self.MerchantData removeAllObjects];
+            [self.jackModelArray removeAllObjects];
             
+            //赋值给Jack模型数组
+            self.jackModelArray = (NSMutableArray*)[JackMerListModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)
             {
-//                [self.view showInfo:@"暂无更多数据" autoHidden:YES interval:2];
+                [self.view showInfo:@"暂无商家数据" autoHidden:YES interval:2];
                 [self.salerListView reloadData];
                 [self.salerListView.mj_header endRefreshing];
             }

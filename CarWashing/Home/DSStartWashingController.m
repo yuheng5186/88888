@@ -15,6 +15,7 @@
 #import "HomeViewController.h"
 #import "DSScanController.h"
 #import "DSInputCodeController.h"
+#import "MenuTabBarController.h"
 @interface DSStartWashingController ()<UIScrollViewDelegate>
 {
     SXScrPageView *cycleScroll;
@@ -38,51 +39,52 @@
 
 }
 - (void) backButtonClick:(id)sender {
-    NSArray * a = self.navigationController.viewControllers;
-    NSLog(@"%@",a);
-    NSLog(@"%ld",self.endstr);
-    if (self.endstr<0) {
-
-//        self.tabBarController.selectedIndex = 0;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{
-        // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
-
-        NSArray * a = self.navigationController.viewControllers;
-        NSLog(@"%@",a);
-        NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
-
-        NSInteger VcCount = arrController.count;
-
-        //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
-
-        UIViewController *lastVC = arrController[VcCount - 1];
-        if ([arrController[0] isKindOfClass:[DSScanController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
-            //第一次返回时为扫码界面
-            self.tabBarController.selectedIndex = 0;
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else{
-            // 返回到倒数第三个控制器
-
-            if([lastVC isKindOfClass:[HomeViewController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
-
-                [self.navigationController popViewControllerAnimated:YES];
-
-            }
-
-            else
-            {
-                
-                [self.navigationController popViewControllerAnimated:YES];
-//                //第二次返回主页面(出现问题)
-//                HomeViewController *earnVC = [[HomeViewController alloc]init];
-//                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
-//                self.navigationController.viewControllers = arrController;
-//                [self.navigationController popToRootViewControllerAnimated:YES];
-            }
-        }
-
-    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
+//    NSArray * a = self.navigationController.viewControllers;
+//    NSLog(@"%@",a);
+//    NSLog(@"%ld",self.endstr);
+//    if (self.endstr<0) {
+//
+////        self.tabBarController.selectedIndex = 0;
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }else{
+//        // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
+//
+//        NSArray * a = self.navigationController.viewControllers;
+//        NSLog(@"%@",a);
+//        NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
+//
+//        NSInteger VcCount = arrController.count;
+//
+//        //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
+//
+//        UIViewController *lastVC = arrController[VcCount - 1];
+//        if ([arrController[0] isKindOfClass:[DSScanController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
+//            //第一次返回时为扫码界面
+//            self.tabBarController.selectedIndex = 0;
+////            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }else{
+//            // 返回到倒数第三个控制器
+//
+//            if([lastVC isKindOfClass:[HomeViewController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
+//
+//                [self.navigationController popViewControllerAnimated:YES];
+//
+//            }
+//
+//            else
+//            {
+//
+//                [self.navigationController popViewControllerAnimated:YES];
+////                //第二次返回主页面(出现问题)
+////                HomeViewController *earnVC = [[HomeViewController alloc]init];
+////                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
+////                self.navigationController.viewControllers = arrController;
+////                [self.navigationController popToRootViewControllerAnimated:YES];
+//            }
+//        }
+//
+//    }
     
 
 
@@ -119,7 +121,9 @@
         self.timer = nil;
     }
   
-    self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+    //防止循环引用
+    __weak typeof(self) weakSelf = self;
+    self.timer = [NSTimer timerWithTimeInterval:1 target:weakSelf selector:@selector(onTimer) userInfo:nil repeats:YES];
     [self.timer fire];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 }
@@ -528,11 +532,29 @@
 //}
 
 - (void) adButtonClick:(id)sender {
-    self.tabBarController.selectedIndex = 3;
+    if ([self.upDownString isEqualToString:@"home"]) {
+        self.tabBarController.selectedIndex = 3;
+        NSArray *array  = self.navigationController.viewControllers;
+        NSArray *a = [NSArray arrayWithObject:array[0]];
+        self.navigationController.viewControllers = a;
+    }else if ([self.upDownString isEqualToString:@"down"]){
+        NSArray *array  = self.navigationController.viewControllers;
+        NSArray *a = [NSArray arrayWithObject:array[0]];
+        MenuTabBarController *menu = a[0];
+        menu.selectedIndex = 3;
+        [self.navigationController popViewControllerAnimated:NO];
+    }else{
+        self.tabBarController.selectedIndex = 3;
+        NSArray *array  = self.navigationController.viewControllers;
+        NSArray *a = [NSArray arrayWithObject:array[0]];
+        self.navigationController.viewControllers = a;
+    }
     
-    NSArray     *array  = self.navigationController.viewControllers;
-    NSArray *a = [NSArray arrayWithObject:array[0]];
-    self.navigationController.viewControllers = a;
+//    self.tabBarController.selectedIndex = 3;
+//
+//    NSArray     *array  = self.navigationController.viewControllers;
+//    NSArray *a = [NSArray arrayWithObject:array[0]];
+//    self.navigationController.viewControllers = a;
 }
 
 - (void) adPageButtonClick:(id)sender {

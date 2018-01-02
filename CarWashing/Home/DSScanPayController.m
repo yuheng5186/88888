@@ -582,13 +582,20 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     NSString *dateString        = [dateFormatter stringFromDate:date];
     [UdStorage storageObject:dateString forKey:@"setTime"];
     
+    //开始获取当前时间
+    NSDate *startWashDate = [NSDate date];
+    //本地化储存开始时间
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:startWashDate forKey:@"startTime"];
+    [defaults synchronize]; //保存变更
     
    
     start.paynum=[UdStorage getObjectforKey:@"Jprice"];
     start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
     start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
     start.CardType = [UdStorage getObjectforKey:@"CardType"];
-    start.CardName =[UdStorage getObjectforKey:@"CardName"];    start.second=240;
+    start.CardName =[UdStorage getObjectforKey:@"CardName"];
+    start.second=240;
     
     
     [self.navigationController pushViewController:start animated:YES];

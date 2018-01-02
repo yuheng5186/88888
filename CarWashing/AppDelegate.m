@@ -90,8 +90,8 @@
         
         
         MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-       
-        self.window.rootViewController  = menuTabBarController;
+       UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:menuTabBarController];
+        self.window.rootViewController  = nav;
         
     }
     

@@ -235,7 +235,8 @@
                 NSLog(@"首次添加信息--后台成功");
                 APPDELEGATE.currentUser.userName = self.nameField.text;
                 MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-                [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:menuTabBarController];
+                [AppDelegate sharedInstance].window.rootViewController  = nav;
             }
         } fail:^(NSError *error) {
             //af失败

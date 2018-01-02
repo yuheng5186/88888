@@ -23,6 +23,11 @@
 
 @implementation BaseController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 - (void)dealloc
 {
     //    [[NSNotificationCenter defaultCenter] removeObserver:self];

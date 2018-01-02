@@ -283,7 +283,8 @@
                     [UdStorage storageObject:APPDELEGATE.currentUser.useroccupation forKey:@"Occupation"];
                     
                     MenuTabBarController *menuTabBarController              = [[MenuTabBarController alloc] init];
-                    [AppDelegate sharedInstance].window.rootViewController  = menuTabBarController;
+                    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:menuTabBarController];
+                    [AppDelegate sharedInstance].window.rootViewController  = nav;
                 }
                 else
                 {

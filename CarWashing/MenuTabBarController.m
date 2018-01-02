@@ -18,6 +18,7 @@
 #import "DSScanController.h"
 #import "UdStorage.h"
 #import "DSStartWashingController.h"
+#import "ScanViewController.h"
 @interface MenuTabBarController ()
 
 @property (nonatomic, strong)     UIImageView *imageView;
@@ -29,12 +30,11 @@
 
 - (void) viewWillAppear: (BOOL) animated
 {
+    
     [super viewWillAppear:animated];
-    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     UIImage *centerImage = [UIImage imageNamed:@"xiche"];
-    
     [self addCenterButtonWithImage:centerImage highlightImage: nil];
-    
     
 }
 
@@ -139,6 +139,9 @@
 
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
 {
+
+    
+    
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     button.frame = CGRectMake(0.0, 0.0, 60, 60);
@@ -151,11 +154,53 @@
     button.center = CGPointMake(Main_Screen_Width/2, 5);
 //    [self.view addSubview:button];
     [self.tabBar addSubview:button];
+     
 }
 - (void)didSelectRouterAction {
     
-           self.selectedViewController = self.viewControllers[2];
-   
+//    self.selectedViewController = self.viewControllers[2];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"startTime"]) {
+        ScanViewController *new = [[ScanViewController alloc]init];
+        new.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:new animated:YES];
+    }else{
+        //获取点击按钮的时间来与之前保存的时间比较
+        //之前保存的时间
+        NSDate *startTime = [defaults objectForKey:@"startTime"];
+        //获取当前时间
+        NSDate *currtyDate = [NSDate date];
+        // 日历对象（方便比较两个日期之间的差距）
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *comps = [calendar components:(NSCalendarUnitSecond) fromDate:startTime toDate:currtyDate options:(0)];
+        //获取秒数的int值
+        NSInteger getSecond = [comps second];
+        //        NSLog(@"输出结果%ld",(long)getSecond);
+        if (getSecond <= 240) {
+            //洗车不到30秒,没有洗完的情况
+            DSStartWashingController *wash = [[DSStartWashingController alloc]init];
+            
+            wash.paynum=[UdStorage getObjectforKey:@"Jprice"];
+            wash.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+            wash.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+            wash.CardType = [UdStorage getObjectforKey:@"CardType"];
+            wash.CardName =[UdStorage getObjectforKey:@"CardName"];
+            wash.second        = 240;
+            wash.hidesBottomBarWhenPushed            = YES;
+            wash.second                    = 240-(int)getSecond;
+            wash.upDownString = @"down";
+            wash.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:wash animated:YES];
+        }else{
+            //已经洗完的情况
+            //删除已经存在的洗车时间
+            [defaults removeObjectForKey:@"startTime"];
+            [defaults synchronize];
+            ScanViewController *new = [[ScanViewController alloc]init];
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }
+    }//@end判断目前是否有开始洗车的时间
 }
 
 @end

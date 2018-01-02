@@ -139,6 +139,12 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+//    self.navigationController.navigationBar.hidden = YES;
+}
+
 -(void)hsUpdateApp{
     __weak __typeof(&*self)weakSelf = self;
     [HSUpdateApp hs_updateWithAPPID:@"1291609168" block:^(NSString *currentVersion, NSString *storeVersion, NSString *openUrl, BOOL isUpdate) {
@@ -181,7 +187,6 @@
     
     // Do any additional setup after loading the view.
 //    self.title = @"首页";
-    self.navigationController.navigationBar.hidden = YES;
     
     [UdStorage storageObject:@"青岛市" forKey:@"City"];
     [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
@@ -229,11 +234,11 @@
 //    [self createNavTitleView];
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, Main_Screen_Width,Main_Screen_Height-44) style:UITableViewStyleGrouped];
-//    self.tableView.top              = 0;
+    self.tableView.top              = NAVIGATIONBAR_HEIGHT;
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.estimatedRowHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
+//    self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
@@ -1272,8 +1277,11 @@
 }
 - (void) tapScanButtonClick:(id)sender {
     
-//    self.tabBarController.selectedIndex = 2;
-//    [self.navigationController popToRootViewControllerAnimated:YES];
+    ScanViewController *new = [[ScanViewController alloc]init];
+    [self.navigationController pushViewController:new animated:YES];
+    
+    /*
+    //2018-1-2重写相机
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
     NSString    *stringTime     = [defaults objectForKey:@"setTime"];
     
@@ -1319,18 +1327,8 @@
         [self.navigationController popToRootViewControllerAnimated:YES];
 
     }
+     */
     
-//    DSScanQRCodeController *scanController      = [[DSScanQRCodeController alloc]init];
-//    scanController.hidesBottomBarWhenPushed     = YES;
-//    [self.navigationController pushViewController:scanController animated:YES];
-    
-//    ScanController * vc = [[ScanController alloc] init];
-//    vc.returnScanBarCodeValue = ^(NSString * barCodeString){
-//        self.resultLabel.text = [NSString stringWithFormat:@"扫描结果:\n%@",barCodeString];
-//        NSLog(@"扫描结果的字符串======%@",barCodeString);
-//    };
-//    //    [self presentViewController:vc animated:YES completion:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) tapCardBagButtonClick:(id)sender {
     DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
@@ -1856,53 +1854,55 @@
 }
 
 //11.23Jack修改首页布局动作
+#pragma mark - 扫一扫什么的
 -(void)fourButtonAction:(UIButton *)sender{
     if (sender.tag == 100) {
         //扫一扫
         
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        if (![defaults objectForKey:@"startTime"]) {
-//            ScanViewController *new = [[ScanViewController alloc]init];
-//            new.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:new animated:YES];
-//        }else{
-//            //获取点击按钮的时间来与之前保存的时间比较
-//            //之前保存的时间
-//            NSDate *startTime = [defaults objectForKey:@"startTime"];
-//            //获取当前时间
-//            NSDate *currtyDate = [NSDate date];
-//            // 日历对象（方便比较两个日期之间的差距）
-//            NSCalendar *calendar = [NSCalendar currentCalendar];
-//            NSDateComponents *comps = [calendar components:(NSCalendarUnitSecond) fromDate:startTime toDate:currtyDate options:(0)];
-//            //获取秒数的int值
-//            NSInteger getSecond = [comps second];
-//            //        NSLog(@"输出结果%ld",(long)getSecond);
-//            if (getSecond <= 240) {
-//                //洗车不到30秒,没有洗完的情况
-//                DSStartWashingController *wash = [[DSStartWashingController alloc]init];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if (![defaults objectForKey:@"startTime"]) {
+            ScanViewController *new = [[ScanViewController alloc]init];
+            new.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:new animated:YES];
+        }else{
+            //获取点击按钮的时间来与之前保存的时间比较
+            //之前保存的时间
+            NSDate *startTime = [defaults objectForKey:@"startTime"];
+            //获取当前时间
+            NSDate *currtyDate = [NSDate date];
+            // 日历对象（方便比较两个日期之间的差距）
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *comps = [calendar components:(NSCalendarUnitSecond) fromDate:startTime toDate:currtyDate options:(0)];
+            //获取秒数的int值
+            NSInteger getSecond = [comps second];
+            //        NSLog(@"输出结果%ld",(long)getSecond);
+            if (getSecond <= 240) {
+                //洗车不到30秒,没有洗完的情况
+                DSStartWashingController *wash = [[DSStartWashingController alloc]init];
+
+                wash.paynum=[UdStorage getObjectforKey:@"Jprice"];
+                wash.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
+                wash.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
+                wash.CardType = [UdStorage getObjectforKey:@"CardType"];
+                wash.CardName =[UdStorage getObjectforKey:@"CardName"];
+                wash.upDownString = @"home";
+                wash.second        = 240;
+                wash.hidesBottomBarWhenPushed            = YES;
+                wash.second                    = 240-(int)getSecond;
+
+                wash.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:wash animated:YES];
+            }else{
+                //已经洗完的情况
+                //删除已经存在的洗车时间
+                [defaults removeObjectForKey:@"startTime"];
+                [defaults synchronize];
+                ScanViewController *new = [[ScanViewController alloc]init];
+                new.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:new animated:YES];
+            }
+        }//@end判断目前是否有开始洗车的时间
 //
-//                wash.paynum=[UdStorage getObjectforKey:@"Jprice"];
-//                wash.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
-//                wash.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
-//                wash.CardType = [UdStorage getObjectforKey:@"CardType"];
-//                wash.CardName =[UdStorage getObjectforKey:@"CardName"];
-//                wash.second        = 240;
-//                wash.hidesBottomBarWhenPushed            = YES;
-//                wash.second                    = 240-(int)getSecond;
-//
-//                wash.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:wash animated:YES];
-//            }else{
-//                //已经洗完的情况
-//                //删除已经存在的洗车时间
-//                [defaults removeObjectForKey:@"startTime"];
-//                [defaults synchronize];
-//                ScanViewController *new = [[ScanViewController alloc]init];
-//                new.hidesBottomBarWhenPushed = YES;
-//                [self.navigationController pushViewController:new animated:YES];
-//            }
-//        }//@end判断目前是否有开始洗车的时间
-//
         
         
         
@@ -1910,7 +1910,7 @@
         
         
         
-        
+        /*
         NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
         NSString    *stringTime     = [defaults objectForKey:@"setTime"];
 
@@ -1956,6 +1956,7 @@
             self.tabBarController.selectedIndex = 2;
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
+        */
         
     }else if (sender.tag == 101){
         //卡包

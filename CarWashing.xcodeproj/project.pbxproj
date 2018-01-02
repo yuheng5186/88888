@@ -166,6 +166,7 @@
 		1853BA4B1F28A04100B98C7F /* JFSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA441F28A04100B98C7F /* JFSearchView.m */; };
 		1853BA4E1F28A04C00B98C7F /* JFLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853BA4D1F28A04C00B98C7F /* JFLocation.m */; };
 		185833DD1F6E0D71004EA905 /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185833DC1F6E0D71004EA905 /* BusinessViewController.m */; };
+		1860CE871FFB2E8300602383 /* ScanModelJack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1860CE861FFB2E8300602383 /* ScanModelJack.m */; };
 		186E9C591F99D5ED00898016 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E9C581F99D5ED00898016 /* Helper.m */; };
 		1887A2241F66E0870042B062 /* QWMerComListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2211F66E0870042B062 /* QWMerComListModel.m */; };
 		1887A2251F66E0870042B062 /* QWMerchantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887A2231F66E0870042B062 /* QWMerchantModel.m */; };
@@ -655,6 +656,8 @@
 		1853BA4D1F28A04C00B98C7F /* JFLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JFLocation.m; path = JFCityViewController/Location/JFLocation.m; sourceTree = "<group>"; };
 		185833DB1F6E0D71004EA905 /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusinessViewController.h; path = model/BusinessViewController.h; sourceTree = "<group>"; };
 		185833DC1F6E0D71004EA905 /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusinessViewController.m; path = model/BusinessViewController.m; sourceTree = "<group>"; };
+		1860CE851FFB2E8300602383 /* ScanModelJack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanModelJack.h; sourceTree = "<group>"; };
+		1860CE861FFB2E8300602383 /* ScanModelJack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanModelJack.m; sourceTree = "<group>"; };
 		186E9C571F99D5ED00898016 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		186E9C581F99D5ED00898016 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		1887A2201F66E0870042B062 /* QWMerComListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QWMerComListModel.h; sourceTree = "<group>"; };
@@ -1703,6 +1706,15 @@
 			name = JFCityViewController;
 			sourceTree = "<group>";
 		};
+		1860CE841FFB2E5800602383 /* JackScanModel */ = {
+			isa = PBXGroup;
+			children = (
+				1860CE851FFB2E8300602383 /* ScanModelJack.h */,
+				1860CE861FFB2E8300602383 /* ScanModelJack.m */,
+			);
+			path = JackScanModel;
+			sourceTree = "<group>";
+		};
 		187CCBEF1F43F77E00FCDF1C /* CustomSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1880,6 +1892,7 @@
 		18D78DFE1FE3BCA50049BB71 /* JackWash */ = {
 			isa = PBXGroup;
 			children = (
+				1860CE841FFB2E5800602383 /* JackScanModel */,
 				18D78DFF1FE3BD190049BB71 /* ScanViewController.h */,
 				18D78E001FE3BD1A0049BB71 /* ScanViewController.m */,
 			);
@@ -2564,6 +2577,7 @@
 				185090461F4557E100795E0A /* TYAlertFadeAnimation.m in Sources */,
 				180E42E91F3AB37D00013D2D /* YzdHUDImageView.m in Sources */,
 				18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */,
+				1860CE871FFB2E8300602383 /* ScanModelJack.m in Sources */,
 				181E92EF1F2081840006511E /* DSMembershipController.m in Sources */,
 				5094A6251F3447CD00407808 /* BusinessEstimateCell.m in Sources */,
 				18B697A81F21D420009FF73A /* DSCardGroupController.m in Sources */,

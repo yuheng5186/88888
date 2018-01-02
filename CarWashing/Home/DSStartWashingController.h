@@ -18,5 +18,7 @@
 @property(nonatomic,copy)NSString *paynum;//积分数
 @property (nonatomic,assign) int second;
 
+@property(nonatomic,copy)NSString *upDownString;    //为了去购卡的广告
+
 
 @end

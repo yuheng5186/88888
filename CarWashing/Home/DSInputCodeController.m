@@ -236,22 +236,30 @@
                         payVC.IntegralNum = [NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum];
                         payVC.CardType = [NSString stringWithFormat:@"%ld",weakSelf.scan.CardType];
                         payVC.CardName = weakSelf.scan.CardName;
-                        
+                        //存下空的卡片名称和实际支付的金额
+                        [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+                        [UdStorage storageObject:[NSString stringWithFormat:@"¥%@",weakSelf.scan.Amt] forKey:@"realPayAmount"];
                         [weakSelf.navigationController pushViewController:payVC animated:YES];
                     }
                     else
                     {
                         
-                        NSDate*date                     = [NSDate date];
-                        NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-                        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//                        NSDate*date                     = [NSDate date];
+//                        NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+//                        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//
+//
+//                        NSString *dateString        = [dateFormatter stringFromDate:date];
+//                        NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+//                        [defaults setObject:dateString forKey:@"setTime"];
+//                        [defaults synchronize];
                         
-                        
-                        NSString *dateString        = [dateFormatter stringFromDate:date];
-                        NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-                        [defaults setObject:dateString forKey:@"setTime"];
-                        [defaults synchronize];
-                        NSLog(@"setTime ==== %@",[defaults objectForKey:@"setTime"]);
+                        //开始获取当前时间
+                        NSDate *startWashDate = [NSDate date];
+                        //本地化储存开始时间
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setObject:startWashDate forKey:@"startTime"];
+                        [defaults synchronize]; //保存变更
                         [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
                         [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
                         [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];

@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *adressLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *adressLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *starImageView;
 
@@ -40,7 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *naviLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *shopTypeLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *shopTypeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *img1;
 @property (weak, nonatomic) IBOutlet UIImageView *img2;
 

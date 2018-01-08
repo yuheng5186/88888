@@ -15,7 +15,8 @@
 @property(nonatomic,copy)NSString *CardType;//卡片类型
 @property(nonatomic,copy)NSString *CardName;//卡片名称
 @property(nonatomic,copy)NSString *IntegralNum;//积分数
-@property(nonatomic,copy)NSString *paynum;//积分数
+@property(nonatomic,copy)NSString *paynum;//价格
+@property(nonatomic,copy)NSString *payMethod;//支付方式
 @property (nonatomic,assign) int second;
 
 @property(nonatomic,copy)NSString *upDownString;    //为了去购卡的广告

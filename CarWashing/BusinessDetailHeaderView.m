@@ -46,7 +46,7 @@
 -(void)setMerchantModel:(QWMerchantModel *)merchantModel{
     _merchantModel=merchantModel;
     self.nameLabel.text = merchantModel.MerName;
-    self.adressLabel.text = merchantModel.MerAddress;
+//    self.adressLabel.text = merchantModel.MerAddress;
     [self.starImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%.2f",merchantModel.Score] substringToIndex:1]]]];
     self.scoreLabel.text = [NSString stringWithFormat:@"%.2f分",merchantModel.Score];
     self.adressLabel2.text = merchantModel.MerAddress;
@@ -74,7 +74,7 @@
     
     self.nameLabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     
-    self.adressLabel.textColor = [UIColor colorFromHex:@"#999999"];
+//    self.adressLabel.textColor = [UIColor colorFromHex:@"#999999"];
     
     self.scoreLabel.textColor = [UIColor colorFromHex:@"#dfdfdf"];
     
@@ -98,7 +98,7 @@
     
     self.naviLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
-    self.shopTypeLabel.textColor = [UIColor colorFromHex:@"#868686"];
+//    self.shopTypeLabel.textColor = [UIColor colorFromHex:@"#868686"];
     
     //收藏按钮
     [self.favoriteButton setImage:[UIImage imageNamed:@"shoucang1"] forState:UIControlStateNormal];

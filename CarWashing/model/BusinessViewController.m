@@ -64,8 +64,12 @@ static NSString *id_salerListCell = @"salerListViewCell";
         
         UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 + Main_Screen_Height*44/667, Main_Screen_Width, Main_Screen_Height-64 - Main_Screen_Height*44/667-49)];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        UIView *footVIewJack = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
+        footVIewJack.backgroundColor = [UIColor whiteColor];
+        salerListView.tableFooterView = footVIewJack;
         _salerListView = salerListView;
-
+        
         [self.view addSubview:salerListView];
         
     }
@@ -183,7 +187,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
     [self.salerListView registerNib:[UINib nibWithNibName:@"JackMerListCell" bundle:nil] forCellReuseIdentifier:@"JackMerListCell"];
-    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
    
@@ -325,7 +329,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //跳转商家详情
     BusinessDetailViewController *detailController = [[BusinessDetailViewController alloc] init];
     detailController.hidesBottomBarWhenPushed      = YES;
@@ -584,7 +588,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = @"无更多数据";
                 hud.minSize = CGSizeMake(132.f, 108.0f);
-                [hud hide:YES afterDelay:3];
+                [hud hide:YES afterDelay:2];
                 [self.salerListView.mj_footer endRefreshing];
                 self.page--;
             }

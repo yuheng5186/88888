@@ -385,14 +385,17 @@
                 ScanModelJack *scanModel = [ScanModelJack mj_objectWithKeyValues:tempDict];
                 if (scanModel.ScanCodeState == 1) {
                     //需要支付
-                    NSLog(@"需要支付");
                     DSScanPayController *payVC           = [[DSScanPayController alloc]init];
                     payVC.hidesBottomBarWhenPushed            = YES;
                     payVC.SerMerChant = [NSString stringWithFormat:@"%@",scanModel.DeviceName];
                     payVC.SerProject = [NSString stringWithFormat:@"%@",scanModel.ServiceItems];
                     payVC.Jprice = [NSString stringWithFormat:@"¥%.2f",scanModel.OriginalAmt];
+                    //花费实际价格
                     payVC.Xprice = [NSString stringWithFormat:@"¥%.2f",scanModel.Amt];
                     payVC.DeviceCode = [NSString stringWithFormat:@"%@",scanModel.DeviceCode];
+                    //存下空的卡片名称和实际支付的金额
+                    [UdStorage storageObject:scanModel.CardName forKey:@"CardName"];
+                    [UdStorage storageObject:[NSString stringWithFormat:@"¥%.2f",scanModel.Amt] forKey:@"realPayAmount"];
                     [weakSelf.navigationController pushViewController:payVC animated:YES];
                 }else{
                     //有卡，直接扣卡
@@ -403,22 +406,27 @@
                     [defaults setObject:startWashDate forKey:@"startTime"];
                     [defaults synchronize]; //保存变更
                     self.toGoString = @"";
-                    
-                    [UdStorage storageObject:[NSString stringWithFormat:@"￥%@",weakSelf.scan.OriginalAmt] forKey:@"Jprice"];
-                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.RemainCount] forKey:@"RemainCount"];
-                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.IntegralNum] forKey:@"IntegralNum"];
-                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",weakSelf.scan.CardType] forKey:@"CardType"];
-                    [UdStorage storageObject:weakSelf.scan.CardName forKey:@"CardName"];
+                    //原价
+                    [UdStorage storageObject:[NSString stringWithFormat:@"￥%.2f",scanModel.OriginalAmt] forKey:@"Jprice"];
+                    //剩余次数
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",(long)scanModel.RemainCount] forKey:@"RemainCount"];
+                    //积分数量
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",(long)scanModel.IntegralNum] forKey:@"IntegralNum"];
+                    //卡片类型
+                    [UdStorage storageObject:[NSString stringWithFormat:@"%ld",(long)scanModel.CardType] forKey:@"CardType"];
+                    //卡片名称（判断依据）
+                    [UdStorage storageObject:scanModel.CardName forKey:@"CardName"];
                     
                     DSStartWashingController *start = [[DSStartWashingController alloc]init];
-                    
+                    //测试
+                    start.CardName = [UdStorage getObjectforKey:@"CardName"];
                     start.hidesBottomBarWhenPushed            = YES;
                     
-                    start.RemainCount   = [NSString stringWithFormat:@"%ld",scanModel.RemainCount];
-                    start.IntegralNum   = [NSString stringWithFormat:@"%ld",scanModel.IntegralNum];
-                    start.CardType      = [NSString stringWithFormat:@"%ld",scanModel.CardType];
+                    start.RemainCount   = [NSString stringWithFormat:@"%ld",(long)scanModel.RemainCount];
+                    start.IntegralNum   = [NSString stringWithFormat:@"%ld",(long)scanModel.IntegralNum];
+                    start.CardType      = [NSString stringWithFormat:@"%ld",(long)scanModel.CardType];
                     start.CardName      = [NSString stringWithFormat:@"%@",scanModel.CardName];
-                    start.paynum=[NSString stringWithFormat:@"￥%f",scanModel.OriginalAmt];
+                    start.paynum=[NSString stringWithFormat:@"￥%f",scanModel.Amt];
                     start.second        = 240;
                     
                     

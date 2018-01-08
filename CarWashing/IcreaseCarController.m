@@ -817,6 +817,12 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             return;
         }
         
+        if (self.lblData == nil) {
+            [HUD hide:YES];
+            [self.view showInfo:@"请完善生产年份及上路时间" autoHidden:YES interval:1];
+            return;
+        }
+        
         else
         {
             if (_numTF.text.length<6) {//判断是否是6位
@@ -835,8 +841,8 @@ static NSString *id_carInfoCell = @"id_carInfoCell";
             if(_text2.text.length==0 ){
                 _text2.text=@"0";
             }
-            NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
-            NSLog(@"%@===%@==%@===%@",_brandTypeTF.text,_brandTF.text,self.lblData,_text2.text);
+//            NSLog(@"%@===%@==%@===%@",self.lblYear,lblstr,self.lblData,_text2.text);
+//            NSLog(@"%@===%@==%@===%@",_brandTypeTF.text,_brandTF.text,self.lblData,_text2.text);
 //            NSDictionary *mulDic = [[NSDictionary alloc]initWithObjectsAndKeys:[UdStorage getObjectforKey:@"Account_Id"],@"Account_Id",_brandTypeTF.text,@"CarType",[NSString stringWithFormat:@"%ld",self.mycar.CarCode],@"CarCode",@1,@"ModifyType",_brandTF.text,@"CarBrand",[NSString stringWithFormat:@"%@%@",_provinceBtn.titleLabel.text,_numTF.text],@"PlateNumber",_text1.text,@"ChassisNum",@"",@"EngineNum",lblstr,@"Manufacture",self.lblData,@"DepartureTime",_text2.text,@"Mileage",nil];
                         NSDictionary *mulDic = @{
                                                  @"Account_Id":[UdStorage getObjectforKey:@"Account_Id"],

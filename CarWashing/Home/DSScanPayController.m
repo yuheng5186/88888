@@ -54,26 +54,23 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     
     //self.view.backgroundColor = [UIColor lightGrayColor];
     
-    
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(goBack) name:@"paysuccess" object:nil];
-    
-    
-    
-    
-    
-    
     NSArray *payNameArray = @[@"微信支付",@"支付宝支付"];
     NSArray *payImageNameArr = @[@"weixin",@"zhifubao"];
     self.payNameArray = payNameArray;
     self.payImageNameArr = payImageNameArr;
     
     [self setupUI];
-    
-    
+    //微信
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(wechantBackSuccess) name:@"paysuccess" object:nil];
+    //支付宝
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickCancel) name:@"alipayresultCancel" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickSuccess) name:@"alipayresultSuccess" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resultClickfail) name:@"alipayresultfail" object:nil];
+}
+#pragma mark-微信结果回调
+-(void)wechantBackSuccess{
+    [self goBack:@"微信支付"];
 }
 
 #pragma mark-支付宝结果回调
@@ -84,7 +81,7 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
 //    [self.view showInfo:@"订单支付成功" autoHidden:YES interval:2];
     UIAlertController *successController = [UIAlertController alertControllerWithTitle:nil message:@"支付成功" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *pushAction = [UIAlertAction actionWithTitle:@"查看" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        [self goBack];
+        [self goBack:@"支付宝支付"];
     }];
     [successController addAction:pushAction];
     [self presentViewController:successController animated:YES completion:nil];
@@ -570,17 +567,17 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     // Dispose of any resources that can be recreated.
 }
 
--(void)goBack
+-(void)goBack:(NSString*)payWay
 {
     DSStartWashingController *start = [[DSStartWashingController alloc]init];
     
-    NSDate*date                     = [NSDate date];
-    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    
-    NSString *dateString        = [dateFormatter stringFromDate:date];
-    [UdStorage storageObject:dateString forKey:@"setTime"];
+//    NSDate*date                     = [NSDate date];
+//    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//
+//
+//    NSString *dateString        = [dateFormatter stringFromDate:date];
+//    [UdStorage storageObject:dateString forKey:@"setTime"];
     
     //开始获取当前时间
     NSDate *startWashDate = [NSDate date];
@@ -590,11 +587,14 @@ static NSString *id_paySelectCell = @"id_paySelectCell";
     [defaults synchronize]; //保存变更
     
    
-    start.paynum=[UdStorage getObjectforKey:@"Jprice"];
+    start.paynum=self.Xprice;
     start.RemainCount = [UdStorage getObjectforKey:@"RemainCount"];
     start.IntegralNum = [UdStorage getObjectforKey:@"IntegralNum"];
     start.CardType = [UdStorage getObjectforKey:@"CardType"];
     start.CardName =[UdStorage getObjectforKey:@"CardName"];
+    //保存微信还是支付宝支付
+    [UdStorage storageObject:payWay forKey:@"scanToPayWay"];
+    start.payMethod = payWay;
     start.second=240;
     
     

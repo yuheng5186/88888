@@ -10,7 +10,7 @@
 //加载图片
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "HTTPDefine.h"
-#import "KMTagListView.h"
+
 
 @implementation JackMerListCell
 
@@ -37,7 +37,7 @@
     self.DistanceLabelJackCell.text = [NSString stringWithFormat:@"%.1fkm",model.Distance];
     
     //右上角类别
-    self.MerTypeLableJackMerCell.text = [NSString stringWithFormat:@"洗车服务"];
+//    self.MerTypeLableJackMerCell.text = [NSString stringWithFormat:@"洗车服务"];
     
     //地址
     self.MerAdressLabelJackCell.text = [NSString stringWithFormat:@"%@",model.MerAddress];
@@ -61,13 +61,19 @@
 //    }
     
     //商家flag
+    self.MerFlagBase.backgroundColor = [UIColor whiteColor];
     NSArray *flagArray = [model.MerFlag componentsSeparatedByString:@","];
-    KMTagListView *tag = [[KMTagListView alloc]initWithFrame:CGRectMake(100, 92, Main_Screen_Width-100, 0)];
-    [tag setupSubViewsWithTitles:flagArray];
-    [self.contentView addSubview:tag];
-    CGRect rect = tag.frame;
-    rect.size.height = tag.contentSize.height+5;
-    tag.frame = rect;
+    if (tag == nil) {
+        tag = [[KMTagListView alloc]initWithFrame:CGRectMake(-15.0/375*Main_Screen_Width, 0, Main_Screen_Width-100, 0)];
+        tag.scrollEnabled = NO;
+        [tag setupSubViewsWithTitles:flagArray];
+        [self.MerFlagBase addSubview:tag];
+        CGRect rect = tag.frame;
+        rect.size.height = tag.contentSize.height+5;
+        rect.size.width = self.MerFlagBase.frame.size.width;
+        tag.frame = rect;
+    }
+
 }
 
 @end

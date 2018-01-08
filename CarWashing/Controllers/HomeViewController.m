@@ -243,6 +243,7 @@
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
     //    self.tableView.scrollEnabled    = NO;
+    
 //    self.tableView.tableFooterView  = [UIView new];
 //    self.tableView.tableHeaderView  = [UIView new];
     
@@ -962,12 +963,16 @@
             [backView addSubview:imageview];
             return backView;
         }else if (section==self.newrc.recList.count-1){
-            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+            UIView *baseFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 80)];
+            baseFooterView.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
+            
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
             footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
             footerview.textColor         = [UIColor colorFromHex:@"#999999"];
             footerview.textAlignment=NSTextAlignmentCenter;
             footerview.text=@"没有更多啦";
-            return footerview;
+            [baseFooterView addSubview:footerview];
+            return baseFooterView;
         }else{
             return [UILabel new];
         }
@@ -1886,10 +1891,13 @@
                 wash.CardType = [UdStorage getObjectforKey:@"CardType"];
                 wash.CardName =[UdStorage getObjectforKey:@"CardName"];
                 wash.upDownString = @"home";
-                wash.second        = 240;
                 wash.hidesBottomBarWhenPushed            = YES;
-                wash.second                    = 240-(int)getSecond;
-
+                wash.second = 240-(int)getSecond;
+                //通过微信或支付宝支付的情况
+                if ([wash.CardName isEqualToString:@""]) {
+                    wash.paynum = [UdStorage getObjectforKey:@"realPayAmount"];
+                    wash.payMethod = [UdStorage getObjectforKey:@"scanToPayWay"];
+                }
                 wash.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:wash animated:YES];
             }else{

@@ -247,10 +247,7 @@ static NSString *businessCommentCell = @"businessCommentCell";
     
     
     
-    if([self.dic[@"ShopType"] intValue] == 1)
-    {
-        headerView.shopTypeLabel.text = @"洗车服务";
-    }
+
     
     headerView.freeCheckLabel.hidden = YES;
     headerView.qualityLabel.hidden = YES;
@@ -378,19 +375,24 @@ static NSString *businessCommentCell = @"businessCommentCell";
     if([self.dic[@"MerSerList"] count] == 0)
     {
         lblPrice = [[UILabel alloc] init];
-        lblPrice.text = @"0";
+        lblPrice.text = @"¥0";
         lblPrice.font = [UIFont systemFontOfSize:18*Main_Screen_Height/667];
         lblPrice.textColor = [UIColor colorFromHex:@"#ff525a"];
         [payToolBar addSubview:lblPrice];
         
         formerPriceLab = [[UILabel alloc] init];
-        formerPriceLab.text = @"0";
+        formerPriceLab.text = @"¥0";
         formerPriceLab.textColor = [UIColor colorFromHex:@"#999999"];
         formerPriceLab.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         [payToolBar addSubview:formerPriceLab];
         
+        NSString *textStr = formerPriceLab.text;
+        NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:textStr attributes:attribtDic];
+        formerPriceLab.attributedText = attribtStr;
+        
         lblCarType = [[UILabel alloc] init];
-        lblCarType.text = @"";
+        lblCarType.text = @"该商户暂不提供服务";
         lblCarType.font = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
         lblCarType.textColor = [UIColor colorFromHex:@"#999999"];
         [payToolBar addSubview:lblCarType];

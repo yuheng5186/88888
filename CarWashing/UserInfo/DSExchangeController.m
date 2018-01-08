@@ -13,12 +13,14 @@
 #import "AFNetworkingTool.h"
 #import "MBProgressHUD.h"
 #import "UdStorage.h"
+#import "DSCardGroupController.h"
 
-@interface DSExchangeController ()
+@interface DSExchangeController ()<LKAlertViewDelegate>
 {
     UITextField *exchangeTF;
     NSString    * remindStr;
     NSString   * remindTitle;
+    NSInteger remindType;
 }
 
 @end
@@ -72,6 +74,7 @@
     
     remindStr = @"";
     remindTitle = @"";
+    remindType = 100;
     if(exchangeTF.text.length == 0)
     {
         [self.view showInfo:@"请输入激活码" autoHidden:YES interval:2];
@@ -99,8 +102,9 @@
                 }
                 else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
                 {
+                    remindType = 101;
                     remindTitle =@"恭喜你，激活成功";
-                    remindStr = [NSString stringWithFormat:@"蔷薇洗车%@一张，您的剩余激活次数%@次",dict[@"JsonData"][@"CardName"],dict[@"JsonData"][@"RemainTimes"]];
+                    remindStr = [NSString stringWithFormat:@"获得金顶洗车%@一张",dict[@"JsonData"][@"CardName"]];
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
                 {
@@ -131,6 +135,7 @@
                     }
                 }
                 LKAlertView *alartView      = [[LKAlertView alloc]initWithTitle:remindTitle message:remindStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@""];
+                alartView.tag = remindType;
                 [alartView show];
                 
             }
@@ -146,6 +151,14 @@
     }
     
     
+}
+
+- (void)alertView:(LKAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 101) {
+        DSCardGroupController *cardGroupController      = [[DSCardGroupController alloc]init];
+        cardGroupController.hidesBottomBarWhenPushed    = YES;
+        [self.navigationController pushViewController:cardGroupController animated:YES];
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

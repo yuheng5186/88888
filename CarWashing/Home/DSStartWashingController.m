@@ -40,54 +40,6 @@
 }
 - (void) backButtonClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
-//    NSArray * a = self.navigationController.viewControllers;
-//    NSLog(@"%@",a);
-//    NSLog(@"%ld",self.endstr);
-//    if (self.endstr<0) {
-//
-////        self.tabBarController.selectedIndex = 0;
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    }else{
-//        // push将控制器压到栈中，栈是先进后出；pop是出栈：即将控制器从栈中取出。
-//
-//        NSArray * a = self.navigationController.viewControllers;
-//        NSLog(@"%@",a);
-//        NSMutableArray *arrController = [NSMutableArray arrayWithArray:a];
-//
-//        NSInteger VcCount = arrController.count;
-//
-//        //最后一个vc是自己，(-2)是倒数第二个是上一个控制器。
-//
-//        UIViewController *lastVC = arrController[VcCount - 1];
-//        if ([arrController[0] isKindOfClass:[DSScanController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
-//            //第一次返回时为扫码界面
-//            self.tabBarController.selectedIndex = 0;
-////            [self.navigationController popToRootViewControllerAnimated:YES];
-//        }else{
-//            // 返回到倒数第三个控制器
-//
-//            if([lastVC isKindOfClass:[HomeViewController class]]||[arrController[1] isKindOfClass:[DSInputCodeController class]]) {
-//
-//                [self.navigationController popViewControllerAnimated:YES];
-//
-//            }
-//
-//            else
-//            {
-//
-//                [self.navigationController popViewControllerAnimated:YES];
-////                //第二次返回主页面(出现问题)
-////                HomeViewController *earnVC = [[HomeViewController alloc]init];
-////                [arrController replaceObjectAtIndex:(VcCount - 1) withObject:earnVC];
-////                self.navigationController.viewControllers = arrController;
-////                [self.navigationController popToRootViewControllerAnimated:YES];
-//            }
-//        }
-//
-//    }
-    
-
-
 }
 
 - (void) dealloc
@@ -154,11 +106,7 @@
         [alertController addAction:OKAction];
         
         [self presentViewController:alertController animated:YES completion:nil];
-         [self createSubView];
-//        DSCompleteWashingController     *completeVC     = [[DSCompleteWashingController alloc]init];
-//        completeVC.hidesBottomBarWhenPushed             = YES;
-//        [self.navigationController pushViewController:completeVC animated:YES];
-//        
+        [self createSubView];
         [self.timer invalidate];
     }else {
         
@@ -295,11 +243,11 @@
     modeLabel.top              = titleLabel.bottom+Main_Screen_Height*10/667;
     
     
-    
+    //顶部中间的10积分
     NSString   *scoreString     = [NSString stringWithFormat:@"%@积分",self.IntegralNum];
     UILabel *scoreLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667)];
     scoreLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
-    
+//    scoreLabel.backgroundColor = [UIColor greenColor];
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:scoreString];
     [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13*Main_Screen_Height/667] range:NSMakeRange([scoreString length]-2, 2)];
     [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:@"#4a4a4a"] range:NSMakeRange([scoreString length]-2, 2)];
@@ -369,8 +317,8 @@
         UILabel *washingLabel         = [UIUtil drawLabelInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:Font text:string isCenter:NO];
         washingLabel.text             = string;
         washingLabel.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
-        washingLabel.textAlignment    = NSTextAlignmentCenter;
-        washingLabel.left             = Main_Screen_Height*12/375;
+//        washingLabel.textAlignment    = NSTextAlignmentCenter;
+        washingLabel.left             = 20.0/375*Main_Screen_Width;
         washingLabel.top              = Main_Screen_Height*20/667;
       
         NSString   *timeStr     = self.CardName.length==0?@"微信支付":self.CardName;
@@ -379,8 +327,8 @@
         UILabel *timeStrLabel         = [UIUtil drawLabelInView:middleView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFont text:timeStr isCenter:NO];
         timeStrLabel.text             = timeStr;
         timeStrLabel.textColor        = [UIColor colorFromHex:@"#868686"];
-        timeStrLabel.textAlignment    = NSTextAlignmentCenter;
-        timeStrLabel.right            = Main_Screen_Width -Main_Screen_Width*12/375;
+        timeStrLabel.textAlignment    = NSTextAlignmentRight;
+        timeStrLabel.right            = Main_Screen_Width -20.0/375*Main_Screen_Width;;
         timeStrLabel.centerY          = washingLabel.centerY;
        
         UIView *downView                  = [UIUtil drawLineInView:self.contentView frame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*60/667) color:[UIColor whiteColor]];
@@ -392,8 +340,8 @@
             UILabel *washingLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:Fonts text:strings isCenter:NO];
             washingLabels.text             = strings;
             washingLabels.textColor        = [UIColor colorFromHex:@"#4a4a4a"];
-            washingLabels.textAlignment    = NSTextAlignmentCenter;
-            washingLabels.left             = Main_Screen_Height*12/375;
+//            washingLabels.textAlignment    = NSTextAlignmentCenter;
+            washingLabels.left             = 20.0/375*Main_Screen_Width;
             washingLabels.top              = Main_Screen_Height*14/667;
 //
         NSString   *timeStrs     =self.CardName.length==0?[NSString stringWithFormat:@"%@元",self.paynum]:[NSString stringWithFormat:@"剩余%@次",self.RemainCount];
@@ -401,25 +349,36 @@
             UILabel *washingCardLabel         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*100/375, Main_Screen_Height*20/667) font:cardFont text:timeStrs isCenter:NO];
             washingCardLabel.text             = timeStrs;
             washingCardLabel.textColor        = [UIColor colorFromHex:@"#ff525a"];
-            washingCardLabel.textAlignment    = NSTextAlignmentCenter;
-            washingCardLabel.right            = Main_Screen_Width -Main_Screen_Height*12/375;
+            washingCardLabel.textAlignment    = NSTextAlignmentRight;
+            washingCardLabel.right            = Main_Screen_Width -20.0/375*Main_Screen_Width;
             washingCardLabel.top              = Main_Screen_Height*14/667;
-        
-        
-        
-//         NSString   *timeStrc     = [NSString stringWithFormat:@"剩余%@次",self.RemainCount];
-//            UIFont     *timeStrFonts       = [UIFont systemFontOfSize:13*Main_Screen_Height/667];
-//            UILabel *timeStrLabels         = [UIUtil drawLabelInView:downView frame:CGRectMake(0, 0, Main_Screen_Width*80/375, Main_Screen_Height*20/667) font:timeStrFonts text:timeStrs isCenter:NO];
-//            timeStrLabels.text             = timeStrc;
-//            timeStrLabels.textColor        = [UIColor colorFromHex:@"#868686"];
-//            timeStrLabels.textAlignment    = NSTextAlignmentCenter;
-//            timeStrLabels.right            = washingLabels.right;
-//            timeStrLabels.top              = washingLabels.bottom+Main_Screen_Height*2/667;
+    
         self.stepsLabel.top=downView.bottom+10*Main_Screen_Height/667;
         cycleScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
         _ADScroll.top=self.stepsLabel.bottom+5*Main_Screen_Height/667;
 
-        
+        //没有卡支付的付款情况
+        if ([self.payMethod isEqualToString:@"微信支付"]) {
+            //支付方式
+            timeStr = @"微信支付";
+            timeStrLabel.text             = timeStr;
+            //支付金额
+            strings = @"支付金额";
+            washingLabels.text             = strings;
+            //付多少钱
+            timeStrs = [NSString stringWithFormat:@"%@元",self.paynum];
+            washingCardLabel.text             = timeStrs;
+        }else if ([self.payMethod isEqualToString:@"支付宝支付"]){
+            timeStr = @"支付宝支付";
+            timeStrLabel.text             = timeStr;
+            //支付金额
+            strings = @"支付金额";
+            washingLabels.text             = strings;
+            //付多少钱
+            timeStrs = [NSString stringWithFormat:@"%@元",self.paynum];
+            washingCardLabel.text             = timeStrs;
+        }
+
     }else{
         
         

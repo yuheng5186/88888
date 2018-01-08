@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "JackMerListModel.h"
-@interface JackMerListCell : UITableViewCell
+#import "KMTagListView.h"
+@interface JackMerListCell : UITableViewCell{
+    KMTagListView *tag;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *MerImageJackCell;
 @property (weak, nonatomic) IBOutlet UIImageView *MerTypeImageJackCell;
 @property (weak, nonatomic) IBOutlet UILabel *MerTitleLabelJackCell;
 @property (weak, nonatomic) IBOutlet UILabel *MerAdressLabelJackCell;
-@property (weak, nonatomic) IBOutlet UILabel *MerTypeLableJackMerCell;      //右上角
+//@property (weak, nonatomic) IBOutlet UILabel *MerTypeLableJackMerCell;      //右上角
 @property (weak, nonatomic) IBOutlet UILabel *DistanceLabelJackCell;
 @property (weak, nonatomic) IBOutlet UILabel *ScoreLabelMerCell;
 @property (weak, nonatomic) IBOutlet UILabel *SerNumLableMerCell;
+@property (weak, nonatomic) IBOutlet UIView *MerFlagBase;
 
 -(void)setModelValueWithJack:(JackMerListModel*)model;
 @end

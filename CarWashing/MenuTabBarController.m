@@ -189,6 +189,11 @@
             wash.hidesBottomBarWhenPushed            = YES;
             wash.second                    = 240-(int)getSecond;
             wash.upDownString = @"down";
+            //通过微信或支付宝支付的情况
+            if ([wash.CardName isEqualToString:@""]) {
+                wash.paynum = [UdStorage getObjectforKey:@"realPayAmount"];
+                wash.payMethod = [UdStorage getObjectforKey:@"scanToPayWay"];
+            }
             wash.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:wash animated:YES];
         }else{

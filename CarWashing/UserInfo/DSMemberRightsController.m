@@ -77,7 +77,8 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 -(UIView*)hopeView{
     if (!_hopeView) {
-        _hopeView = [[UIView alloc]initWithFrame:CGRectMake(0, 210, Main_Screen_Width, 450)];
+        _hopeView = [[UIView alloc]initWithFrame:CGRectMake(0, 210.0/375*Main_Screen_Width, Main_Screen_Width, 400.0/375*Main_Screen_Width)];
+        
         _hopeView.backgroundColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, 200, 20)];
@@ -244,7 +245,16 @@ static NSString *id_rightsCell = @"id_rightsCell";
             APPDELEGATE.currentUser.UserScore = [[NSString stringWithFormat:@"%@",_MembershipprivilegesDic[@"UserScore"]] integerValue];
             
             [UdStorage storageObject:[NSString stringWithFormat:@"%ld",APPDELEGATE.currentUser.UserScore] forKey:@"UserScore"];
-            
+            //判断有没有当前活动
+            if (self.CurrentMembershipprivilegesArr.count == 0) {
+                //当前等级没有活动
+                self.hopeView.hidden = NO;
+                memberRightsView.hidden = YES;
+            }else{
+                //有活动
+                self.hopeView.hidden = YES;
+                memberRightsView.hidden = NO;
+            }
         }
         else
         {
@@ -537,6 +547,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MemberRightsDetailController *VC = [[MemberRightsDetailController alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     if(indexPath.section == 0)

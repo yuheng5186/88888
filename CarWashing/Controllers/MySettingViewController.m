@@ -64,16 +64,19 @@
 @implementation MySettingViewController
 - (UITableView *)salerListView {
     if (nil == _salerListView) {
-        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-100)];
+        UITableView *salerListView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, Main_Screen_Width, Main_Screen_Height-100)style:UITableViewStylePlain];
         salerListView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        salerListView.backgroundColor = RGBAA(239, 239, 239, 1.0);
+        salerListView.backgroundColor = RGBAA(246, 246, 246, 1.0);
+//        salerListView.backgroundColor = [UIColor blueColor];
         _salerListView = salerListView;
         
         _headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
-        _headerView.backgroundColor = RGBAA(239, 239, 239, 1.0);
+        _headerView.backgroundColor = RGBAA(246, 246, 246, 1.0);
+//        _headerView.backgroundColor = [UIColor redColor];
         salerListView.tableHeaderView = _headerView;
         
         UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+        footerView.backgroundColor = RGBAA(246, 246, 246, 1.0);
         salerListView.tableFooterView = footerView;
         
         [self.view addSubview:salerListView];
@@ -626,6 +629,12 @@
 -(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10.f*Main_Screen_Height/667;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *secHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 10.f*Main_Screen_Height/667)];
+    secHeaderView.backgroundColor = RGBAA(246, 246, 246, 1.0);
+    return secHeaderView;
 }
 
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section

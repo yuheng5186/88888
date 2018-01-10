@@ -63,17 +63,48 @@
     //商家flag
     self.MerFlagBase.backgroundColor = [UIColor whiteColor];
     NSArray *flagArray = [model.MerFlag componentsSeparatedByString:@","];
-    if (tag == nil) {
-        tag = [[KMTagListView alloc]initWithFrame:CGRectMake(-15.0/375*Main_Screen_Width, 0, Main_Screen_Width-100, 0)];
-        tag.scrollEnabled = NO;
-        [tag setupSubViewsWithTitles:flagArray];
-        [self.MerFlagBase addSubview:tag];
-        CGRect rect = tag.frame;
-        rect.size.height = tag.contentSize.height+5;
-        rect.size.width = self.MerFlagBase.frame.size.width;
-        tag.frame = rect;
+    if (flagArray.count < 3) {
+        for (NSInteger i = 0; i < flagArray.count; i++) {
+            UILabel *flagLabel = [[UILabel alloc]initWithFrame:CGRectMake(0/375*Main_Screen_Width+(i%3)*75.0/375*Main_Screen_Width, 0/375*Main_Screen_Width, 70.0/375*Main_Screen_Width, 20.0/375*Main_Screen_Width)];
+            flagLabel.layer.borderWidth = 0.8;
+            flagLabel.layer.borderColor = [UIColor colorFromHex:@"#a8c4d7"].CGColor;
+            flagLabel.clipsToBounds = YES;
+            flagLabel.layer.cornerRadius = 5.0/375*Main_Screen_Width;
+            flagLabel.textAlignment = NSTextAlignmentCenter;
+            flagLabel.text = flagArray[i];
+            flagLabel.textColor = [UIColor colorFromHex:@"#a8c4d7"];
+            flagLabel.font = [UIFont systemFontOfSize:14];
+            [self.MerFlagBase addSubview:flagLabel];
+        }
+    }else{
+        for (NSInteger i = 0; i < 3; i++) {
+            UILabel *flagLabel = [[UILabel alloc]initWithFrame:CGRectMake(0/375*Main_Screen_Width+(i%3)*75.0/375*Main_Screen_Width, 0/375*Main_Screen_Width, 70.0/375*Main_Screen_Width, 20.0/375*Main_Screen_Width)];
+            flagLabel.layer.borderWidth = 0.8;
+            flagLabel.layer.borderColor = [UIColor colorFromHex:@"#a8c4d7"].CGColor;
+            flagLabel.clipsToBounds = YES;
+            flagLabel.layer.cornerRadius = 5.0/375*Main_Screen_Width;
+            flagLabel.textAlignment = NSTextAlignmentCenter;
+            flagLabel.text = flagArray[i];
+            flagLabel.textColor = [UIColor colorFromHex:@"#a8c4d7"];
+            flagLabel.font = [UIFont systemFontOfSize:14];
+            [self.MerFlagBase addSubview:flagLabel];
+        }
     }
 
+//    if (tag == nil) {
+//        tag = [[KMTagListView alloc]initWithFrame:CGRectMake(-15.0/375*Main_Screen_Width, 0, Main_Screen_Width-100, 0)];
+//        tag.scrollEnabled = NO;
+//        [tag setupSubViewsWithTitles:flagArray];
+//        [self.MerFlagBase addSubview:tag];
+//        CGRect rect = tag.frame;
+//        rect.size.height = tag.contentSize.height+5;
+//        rect.size.width = self.MerFlagBase.frame.size.width;
+//        tag.frame = rect;
+//    }
+
 }
+
+
+
 
 @end

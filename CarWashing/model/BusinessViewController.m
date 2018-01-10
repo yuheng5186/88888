@@ -102,9 +102,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     //重写cell的显示模型
     self.jackModelArray = [NSMutableArray array];
     
-    
-    
-    
     self.pramsDic = [[NSMutableDictionary alloc]init];
     NSArray *array1 = [[NSArray alloc] initWithObjects:[UdStorage getObjectforKey:@"City"],[UdStorage getObjectforKey:@"Quyu"], nil];
     NSDictionary *dic = @{@"0":array1,@"1":@"全部",@"2":@"默认排序"};
@@ -149,23 +146,10 @@ static NSString *id_salerListCell = @"salerListViewCell";
            NSLog(@"%@===%@",allValues.firstObject,[NSString stringWithFormat:@"%ld",(long)col]);
             [self.pramsDic setValue:allValues.firstObject forKey:[NSString stringWithFormat:@"%ld",(long)col]];
         }
-      
-       
         [self.salerListView.mj_header beginRefreshing];
 //        [self headerRereshing];
-        
-        
-        
     }];
-
-    
-    
     [self setupUI];
-    
-    
-    
-    
-
 }
 
 
@@ -186,7 +170,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
     self.salerListView.dataSource = self;
     self.salerListView.emptyDataSetSource=self;
     self.salerListView.emptyDataSetDelegate=self;
-    [self.salerListView registerNib:[UINib nibWithNibName:@"JackMerListCell" bundle:nil] forCellReuseIdentifier:@"JackMerListCell"];
+//    [self.salerListView registerNib:[UINib nibWithNibName:@"JackMerListCell" bundle:nil] forCellReuseIdentifier:@"JackMerListCell"];
 //    self.salerListView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     //去掉分割线
 //    self.salerListView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -222,32 +206,17 @@ static NSString *id_salerListCell = @"salerListViewCell";
 - (void)headerRereshing
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-     
-//
         self.page = 0 ;
         [self setData];
-        
     });
 }
 
 - (void)footerRereshing
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        
             self.page++;
             _otherArray = [NSMutableArray new];
             [self setDatamore];
-            
-        
-//
-//        
-//        
-//        
-//        // 刷新表格
-//        
-//        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        
     });
 }
 
@@ -290,7 +259,18 @@ static NSString *id_salerListCell = @"salerListViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JackMerListModel *sendModel = self.jackModelArray[indexPath.row];
-    JackMerListCell *merListCell = [tableView dequeueReusableCellWithIdentifier:@"JackMerListCell" forIndexPath:indexPath];
+//    JackMerListCell *merListCell = [tableView dequeueReusableCellWithIdentifier:@"JackMerListCell" forIndexPath:indexPath];
+    JackMerListCell *merListCell = [tableView cellForRowAtIndexPath:indexPath];
+    //解决xib复用数据混乱问题
+    if (nil == merListCell) {
+        merListCell= (JackMerListCell *)[[[NSBundle  mainBundle]  loadNibNamed:@"JackMerListCell" owner:self options:nil]  lastObject];
+    }else{
+        //删除cell的所有子视图
+        while ([merListCell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[merListCell.contentView.subviews lastObject] removeFromSuperview];
+        }
+    }
     [merListCell setModelValueWithJack:sendModel];
     return merListCell;
     
@@ -447,9 +427,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
 //       NSLog(@"----%ld",(long)index);
    }
    
-   
-   
-   
     NSString *DefaultSort;
     
     if([[self.pramsDic objectForKey:@"2"] isEqualToString:@"默认排序"])
@@ -468,7 +445,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
     {
         DefaultSort = @"4";
     }
-    
 //    [[self.pramsDic objectForKey:@"0"] objectAtIndex:0]
     //[NSString stringWithFormat:@"10%ld",index+1]
     NSDictionary *mulDic = @{
@@ -496,7 +472,6 @@ static NSString *id_salerListCell = @"salerListViewCell";
             
             //赋值给Jack模型数组
             self.jackModelArray = (NSMutableArray*)[JackMerListModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"]];
-            
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
             if(arr.count == 0)

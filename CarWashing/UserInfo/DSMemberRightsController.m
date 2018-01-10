@@ -51,7 +51,6 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -153,12 +152,9 @@ static NSString *id_rightsCell = @"id_rightsCell";
     memberRightsView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:memberRightsView];
     
-    
-    
     memberRightsView.delegate = self;
     memberRightsView.dataSource = self;
-    memberRightsView.rowHeight = 70*Main_Screen_Height/667;
-    [memberRightsView registerClass:[MemberRightCell class] forCellReuseIdentifier:@"JackRightCell"];
+    [memberRightsView registerNib:[UINib nibWithNibName:@"MemberRightCell" bundle:nil] forCellReuseIdentifier:@"JackRightCell"];
     
     //底部
     UIView *containView = [[UIView alloc] init];
@@ -395,11 +391,18 @@ static NSString *id_rightsCell = @"id_rightsCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MemberRightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JackRightCell" forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        //当前级别
+        NSDictionary *tempDict = _CurrentMembershipprivilegesArr[indexPath.row];
+        cell.titleMemberLabel.text = [NSString stringWithFormat:@"%@*%@",tempDict[@"CardName"],tempDict[@"CardQuantity"]];
+    }else{
+        //下一级别
+        NSDictionary *tempDict = _NextMembershipprivilegesArr[indexPath.row];
+        cell.titleMemberLabel.text = [NSString stringWithFormat:@"%@*%@",tempDict[@"CardName"],tempDict[@"CardQuantity"]];
+    }
+    
     return cell;
-    
-    
-    
-    
+
     /*
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id_rightsCell];
     
@@ -457,18 +460,10 @@ static NSString *id_rightsCell = @"id_rightsCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
+    return 60;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section==0) {
-        if (_CurrentMembershipprivilegesArr.count==0) {
-            return 70;
-        }else{
-            return 10*Main_Screen_Height/667;
-        }
-    }
-    
-    return 10*Main_Screen_Height/667;
+    return  0.1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
@@ -495,7 +490,7 @@ static NSString *id_rightsCell = @"id_rightsCell";
         detailLabel.font = [UIFont systemFontOfSize:Main_Screen_Height*14/667];
         detailLabel.text = @"暂无优惠";
         [footView addSubview:detailLabel];
-        return footView;
+        return nil;
     }
     return nil;
 }
@@ -520,11 +515,8 @@ static NSString *id_rightsCell = @"id_rightsCell";
     
     
     if (section == 0) {
-        
         infoLabel.text = @"  等级特权";
-        
     }else{
-        
         infoLabel.text = @"  升级后可获得特权";
     }
     

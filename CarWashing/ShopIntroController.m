@@ -65,7 +65,7 @@ static NSString *id_infoCell = @"id_infoCell";
     self.infoHeadView.addresslabel.text = self.dic[@"MerAddress"];
     if([self.dic[@"ShopType"] intValue] == 1)
     {
-        self.infoHeadView.typelabel.text = @"洗车服务";
+        self.infoHeadView.typelabel.text = @"";
     }
     
     

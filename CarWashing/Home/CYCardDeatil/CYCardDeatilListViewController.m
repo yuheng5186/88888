@@ -407,7 +407,7 @@ static NSString *id_rechargeCell = @"id_rechargeCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.row];
+    CardBag *card = (CardBag *)[_CardbagData objectAtIndex:indexPath.section];
     RechargeDetailController *rechargeDetailVC = [[RechargeDetailController alloc] init];
     rechargeDetailVC.hidesBottomBarWhenPushed = YES;
     rechargeDetailVC.card = card;

@@ -35,8 +35,7 @@
 -(void)setlayoutCell
 {
     myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    
+
     UIImageView *imageV =[[UIImageView alloc]initWithFrame:CGRectMake1(12,12,80,80)];
     imageV.opaque = YES;
 //    imageV.image = [UIImage imageNamed:@"aiche1"];

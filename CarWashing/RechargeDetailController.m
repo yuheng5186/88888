@@ -54,7 +54,6 @@
 
 - (void)setupUI {
     
-    
     self.washCarLabel.text = self.card.CardName;
     self.validityLabel.text = [NSString stringWithFormat:@"有效期至%@",self.card.ExpEndDates];
     self.timesLabel.text = [NSString stringWithFormat:@"免费洗车次数%ld次",self.card.CardCount];
@@ -74,7 +73,6 @@
     UIView *lineView3 = [[UIView alloc] init];
     lineView3.backgroundColor = [UIColor colorFromHex:@"#f0f0f0"];
     [self.containView addSubview:lineView3];
-    
     
     [self.washCarLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.containView).mas_offset(20*Main_Screen_Height/667);
@@ -148,7 +146,6 @@
         make.top.equalTo(self.noticeLabelFour.mas_bottom).mas_offset(15*Main_Screen_Height/667);
         make.right.equalTo(self.containView).mas_offset(-10*Main_Screen_Height/667);
     }];
-    
     
     [lineView3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.noticeLabelFive.mas_bottom).mas_offset(20*Main_Screen_Height/667);

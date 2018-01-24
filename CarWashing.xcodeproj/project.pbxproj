@@ -106,6 +106,9 @@
 		18322AC61F4FF077003ABB7B /* CardConfigGrade.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC51F4FF077003ABB7B /* CardConfigGrade.m */; };
 		18322AC91F501271003ABB7B /* Mylabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322AC81F501271003ABB7B /* Mylabel.m */; };
 		18322ACC1F502F9E003ABB7B /* DSCheckPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18322ACB1F502F9E003ABB7B /* DSCheckPhoneViewController.m */; };
+		1833D41F200DF5840034130F /* HomeAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1833D41D200DF5840034130F /* HomeAdCell.m */; };
+		1833D420200DF5840034130F /* HomeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1833D41E200DF5840034130F /* HomeAdCell.xib */; };
+		1833D425200DF6920034130F /* HomeAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1833D424200DF6920034130F /* HomeAdModel.m */; };
 		183997651F2586D300702071 /* ActivityListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183997631F2586D300702071 /* ActivityListCell.m */; };
 		183997661F2586D300702071 /* ActivityListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183997641F2586D300702071 /* ActivityListCell.xib */; };
 		1839979F1F25E69100702071 /* DSPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1839979E1F25E69100702071 /* DSPasswordController.m */; };
@@ -540,6 +543,11 @@
 		18322AC81F501271003ABB7B /* Mylabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mylabel.m; sourceTree = "<group>"; };
 		18322ACA1F502F9E003ABB7B /* DSCheckPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCheckPhoneViewController.h; sourceTree = "<group>"; };
 		18322ACB1F502F9E003ABB7B /* DSCheckPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCheckPhoneViewController.m; sourceTree = "<group>"; };
+		1833D41C200DF5840034130F /* HomeAdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeAdCell.h; sourceTree = "<group>"; };
+		1833D41D200DF5840034130F /* HomeAdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeAdCell.m; sourceTree = "<group>"; };
+		1833D41E200DF5840034130F /* HomeAdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAdCell.xib; sourceTree = "<group>"; };
+		1833D423200DF6920034130F /* HomeAdModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeAdModel.h; sourceTree = "<group>"; };
+		1833D424200DF6920034130F /* HomeAdModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeAdModel.m; sourceTree = "<group>"; };
 		183997621F2586D300702071 /* ActivityListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityListCell.h; path = Find/CustomCell/ActivityListCell.h; sourceTree = "<group>"; };
 		183997631F2586D300702071 /* ActivityListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityListCell.m; path = Find/CustomCell/ActivityListCell.m; sourceTree = "<group>"; };
 		183997641F2586D300702071 /* ActivityListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ActivityListCell.xib; path = Find/CustomCell/ActivityListCell.xib; sourceTree = "<group>"; };
@@ -1188,6 +1196,8 @@
 				501671FE1F29781E00384186 /* Business */,
 				181E92D01F1F3B180006511E /* HomeViewController.h */,
 				181E92D11F1F3B180006511E /* HomeViewController.m */,
+				1833D421200DF66A0034130F /* HomeAdModel */,
+				1833D41B200DF5270034130F /* HomeAdCell */,
 				181E92D61F1F3BAE0006511E /* FindViewController.h */,
 				181E92D71F1F3BAE0006511E /* FindViewController.m */,
 				181E92DC1F1F3BE40006511E /* MySettingViewController.h */,
@@ -1465,6 +1475,25 @@
 			);
 			name = model;
 			path = Find/model;
+			sourceTree = "<group>";
+		};
+		1833D41B200DF5270034130F /* HomeAdCell */ = {
+			isa = PBXGroup;
+			children = (
+				1833D41C200DF5840034130F /* HomeAdCell.h */,
+				1833D41D200DF5840034130F /* HomeAdCell.m */,
+				1833D41E200DF5840034130F /* HomeAdCell.xib */,
+			);
+			name = HomeAdCell;
+			sourceTree = "<group>";
+		};
+		1833D421200DF66A0034130F /* HomeAdModel */ = {
+			isa = PBXGroup;
+			children = (
+				1833D423200DF6920034130F /* HomeAdModel.h */,
+				1833D424200DF6920034130F /* HomeAdModel.m */,
+			);
+			name = HomeAdModel;
 			sourceTree = "<group>";
 		};
 		183997611F25868F00702071 /* CustomCell */ = {
@@ -2437,6 +2466,7 @@
 				50D30E7D1F2044C20086D3ED /* BusinessDetailHeaderView.xib in Resources */,
 				1853E535200600FE00B969F6 /* MemberRightCell.xib in Resources */,
 				50B26E6E1F301B60009B3B9F /* RechargeCell.xib in Resources */,
+				1833D420200DF5840034130F /* HomeAdCell.xib in Resources */,
 				1850902E1F45573F00795E0A /* ShareView.xib in Resources */,
 				5097FDFE1F2ECE2F002EF8F8 /* TicketCashView.xib in Resources */,
 				5094A63A1F346E7000407808 /* CancelPayCell.xib in Resources */,
@@ -2603,6 +2633,7 @@
 				50E2EE851F1F4D3C00FAF130 /* YZSortViewController.m in Sources */,
 				18B697A51F21A87F009FF73A /* DSScanController.m in Sources */,
 				18322ABD1F4D7D8B003ABB7B /* UILabel+StringFrame.m in Sources */,
+				1833D41F200DF5840034130F /* HomeAdCell.m in Sources */,
 				1853BA091F28674F00B98C7F /* LKAlertView.m in Sources */,
 				18A4B1B11F4AAB5200C64978 /* HowToUpGradeController.m in Sources */,
 				50E2EE841F1F4D3C00FAF130 /* YZMenuButton.m in Sources */,
@@ -2720,6 +2751,7 @@
 				50D30E811F20988A0086D3ED /* BusinessDetailCell.m in Sources */,
 				5071B4841F39D3CC009FFF67 /* MyCarInfosHeaderView.m in Sources */,
 				50B26EA61F315E9B009B3B9F /* AllOrderController.m in Sources */,
+				1833D425200DF6920034130F /* HomeAdModel.m in Sources */,
 				1840EA2B1FC2AEC6001B2407 /* OldDriverViewController.m in Sources */,
 				181E93071F208D560006511E /* DSRecommendController.m in Sources */,
 				1850904B1F4557E100795E0A /* UIView+TYAlertView.m in Sources */,

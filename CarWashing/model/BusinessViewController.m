@@ -68,6 +68,7 @@ static NSString *id_salerListCell = @"salerListViewCell";
         UIView *footVIewJack = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
         footVIewJack.backgroundColor = [UIColor whiteColor];
         salerListView.tableFooterView = footVIewJack;
+        salerListView.showsVerticalScrollIndicator = NO;
         _salerListView = salerListView;
         
         [self.view addSubview:salerListView];

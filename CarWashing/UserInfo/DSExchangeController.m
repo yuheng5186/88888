@@ -97,31 +97,18 @@
                 if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 3)
                 {
                     remindTitle =@"提示";
-                    remindStr = [NSString stringWithFormat:@"激活码不存在（请注意大小写）您的剩余激活次数%@次",dict[@"JsonData"][@"RemainTimes"]];
-                    //                    [self.view showInfo:@"对不起，该卡不存在" autoHidden:YES interval:2];
+                    remindStr = [NSString stringWithFormat:@"激活码不存在，还可以输错%@次",dict[@"JsonData"][@"RemainTimes"]];
                 }
                 else if([[[dict objectForKey:@"JsonData"] objectForKey:@"Activationstate"] integerValue] == 1)
                 {
                     remindType = 101;
                     remindTitle =@"恭喜你，激活成功";
-                    remindStr = [NSString stringWithFormat:@"获得金顶洗车%@一张",dict[@"JsonData"][@"CardName"]];
+                    remindStr = [NSString stringWithFormat:@"获得金顶洗车%@一张，请在“我的卡包”中查看",dict[@"JsonData"][@"CardName"]];
                 }
                 else if([[[dict objectForKey:@"JsonData"]objectForKey:@"Activationstate"] integerValue] == 2)
                 {
                     remindTitle =@"提示";
-                    remindStr = [NSString stringWithFormat:@"该码已被激活过 您的剩余激活次数%@次",dict[@"JsonData"][@"RemainTimes"]];
-                    //                    if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 1)
-                    //                    {
-                    //
-                    //                        [self.view showInfo:@"对不起，该卡已被激活" autoHidden:YES interval:2];
-                    //                    }
-                    //                    else if([[[dict objectForKey:@"JsonData"] objectForKey:@"CardUseState"] integerValue] == 2)
-                    //                    {
-                    //                        [self.view showInfo:@"对不起，该卡已被使用" autoHidden:YES interval:2];
-                    //                    }
-                    //                    else{
-                    //                        [self.view showInfo:@"对不起，该卡已失效" autoHidden:YES interval:2];
-                    //                    }
+                    remindStr = [NSString stringWithFormat:@"该卡已被激活，请重新输入"];
                 }
                 else
                 {

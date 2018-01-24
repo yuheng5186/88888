@@ -28,7 +28,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -48,38 +47,23 @@
 //    [self.McImageView addSubview:imageV1];
 //    self.McImagecheckView = imageV1;
     
-    UIImageView *assStoreImage = [[UIImageView alloc]initWithFrame:CGRectMake(112.0/375*Main_Screen_Width, 12.0/677*Main_Screen_Height, 38.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
-    assStoreImage.image = [UIImage imageNamed:@"vrenzheng"];
-    assStoreImage.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:assStoreImage];
+//    UIImageView *assStoreImage = [[UIImageView alloc]initWithFrame:CGRectMake(112.0/375*Main_Screen_Width, 12.0/677*Main_Screen_Height, 38.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
+//    assStoreImage.image = [UIImage imageNamed:@"vrenzheng"];
+//    assStoreImage.contentMode = UIViewContentModeScaleAspectFit;
+//    [self.contentView addSubview:assStoreImage];
     
-    CGFloat ass = 0.0;
-    if (Main_Screen_Width < 375) {
-        ass = 180.0;
-    }else{
-        ass = 160.0;
-    }
-    
-    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(ass/375*Main_Screen_Width,10.0/677*Main_Screen_Height, 150.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
-    namelabel.backgroundColor = [UIColor redColor];
+    UILabel *namelabel = [[UILabel alloc]initWithFrame:CGRectMake1(112.0/375*Main_Screen_Width,10.0/677*Main_Screen_Height, 190.0/375*Main_Screen_Width, 17.0/677*Main_Screen_Height)];
+//    namelabel.backgroundColor = [UIColor redColor];
     [namelabel setFont:[UIFont fontWithName:@"Helvetica" size:16 * myDelegate.autoSizeScaleX]];
-    namelabel.centerY = assStoreImage.centerY;
-    namelabel.sd_layout.leftSpaceToView(assStoreImage, 10);
     namelabel.textColor = [UIColor colorFromHex:@"#4a4a4a"];
     namelabel.text = @"金雷快修店";
     [self.contentView addSubview:namelabel];
     self.Mcname = namelabel;
     
-    
-   
     CGSize size = [namelabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
-//    namelabel.lineBreakMode = NSLineBreakByWordWrapping;
-//    [namelabel sizeToFit];
     
-    
-    NSLog(@"%f",mainW);
-    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(Main_Screen_Width-88* myDelegate.autoSizeScaleX,14, 88.0/375*mainW, 10)];
-    catlabel.backgroundColor = [UIColor greenColor];
+    UILabel *catlabel = [[UILabel alloc]initWithFrame:CGRectMake1(Main_Screen_Width-65* myDelegate.autoSizeScaleX,14, 50.0/375*mainW, 10)];
+//    catlabel.backgroundColor = [UIColor greenColor];
     [catlabel setFont:[UIFont fontWithName:@"Helvetica" size:12 * myDelegate.autoSizeScaleX]];
     catlabel.textColor = [UIColor colorFromHex:@"#868686"];
     catlabel.text = @"美容店";
@@ -90,23 +74,16 @@
     CGSize sizecatlabel = [catlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
     catlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    UILabel *addlabel = [[UILabel alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, 19* myDelegate.autoSizeScaleY+size.height, 200* myDelegate.autoSizeScaleX, 10* myDelegate.autoSizeScaleY)];
+    UILabel *addlabel = [[UILabel alloc]initWithFrame:CGRectMake(112 * myDelegate.autoSizeScaleX, 19* myDelegate.autoSizeScaleY+size.height, 190.0/375*Main_Screen_Width, 10* myDelegate.autoSizeScaleY)];
     [addlabel setFont:[UIFont fontWithName:@"Helvetica" size:13 * myDelegate.autoSizeScaleX]];
     addlabel.textColor = [UIColor colorFromHex:@"#999999"];
+//    addlabel.backgroundColor = [UIColor redColor];
     addlabel.text = @"上海市浦东新区金桥路金桥路";
-   
-    
     [self.contentView addSubview:addlabel];
-    
     self.Mcaddress = addlabel;
-    
-    
-    //在这里添加洗车次数
-    
-   
-    
+
     CGSize sizeaddlabel = [addlabel boundingRectWithSize:CGSizeMake(Main_Screen_Width,2000)];
-    addlabel.lineBreakMode = NSLineBreakByWordWrapping;
+//    addlabel.lineBreakMode = NSLineBreakByWordWrapping;
     
 //    UIImageView *imageV3 =[[UIImageView alloc]initWithFrame:CGRectMake(290 * myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY+sizecatlabel.height,10 * myDelegate.autoSizeScaleX,10 * myDelegate.autoSizeScaleY)];
 //    imageV3.opaque = YES;
@@ -116,7 +93,7 @@
     
     self.Mcrange.left=10*Main_Screen_Width/375;
     
-    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(250*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 88*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
+    UILabel *julilabel = [[UILabel alloc]initWithFrame:CGRectMake(Main_Screen_Width-70*myDelegate.autoSizeScaleX,21* myDelegate.autoSizeScaleY+sizecatlabel.height, 55*myDelegate.autoSizeScaleX, 10*myDelegate.autoSizeScaleY)];
     [julilabel setFont:[UIFont fontWithName:@"Helvetica" size:11 * myDelegate.autoSizeScaleX]];
     julilabel.textColor = [UIColor colorFromHex:@"#868686"];
     julilabel.text = @"1.25km";
@@ -143,7 +120,7 @@
 //    [self.contentView addSubview:imageV2];
 //    self.Mcxingji = imageV2;
     
-    UILabel *scorelabel = [[UILabel alloc]initWithFrame:CGRectMake(200 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height, 50* myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY)];
+    UILabel *scorelabel = [[UILabel alloc]initWithFrame:CGRectMake(200 * myDelegate.autoSizeScaleX, self.Mcaddress.frame.origin.y+sizeaddlabel.height, 60* myDelegate.autoSizeScaleX, 21* myDelegate.autoSizeScaleY)];
     [scorelabel setFont:[UIFont fontWithName:@"Helvetica" size:13 * myDelegate.autoSizeScaleX]];
     scorelabel.textColor = [UIColor colorFromHex:@"#999999"];
     scorelabel.text = @"4.0分";
@@ -232,7 +209,7 @@
         
         
         
-            self.Mcscore.text = [NSString stringWithFormat:@"%@分",[dic objectForKey:@"Score"]];
+    self.Mcscore.text = [NSString stringWithFormat:@"评分：%@分",[dic objectForKey:@"Score"]];
     
     //原来的商家✨
 //            [self.Mcxingji setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@xing",[[NSString stringWithFormat:@"%@",[dic objectForKey:@"Score"]] substringToIndex:1]]]];
@@ -256,10 +233,10 @@
             }
     
     //替换某一位置的字符
-    if (self.Mcaddress.text.length>=14) {
-        NSString *str4 = [self.Mcaddress.text  stringByReplacingCharactersInRange:NSMakeRange(14, self.Mcaddress.text.length-14) withString:@"..."];
-        self.Mcaddress.text=str4;
-    }
+//    if (self.Mcaddress.text.length>=14) {
+//        NSString *str4 = [self.Mcaddress.text  stringByReplacingCharactersInRange:NSMakeRange(14, self.Mcaddress.text.length-14) withString:@"..."];
+//        self.Mcaddress.text=str4;
+//    }
 }
 
 CG_INLINE CGRect

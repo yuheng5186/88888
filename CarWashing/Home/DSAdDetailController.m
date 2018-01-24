@@ -16,7 +16,6 @@
 @interface DSAdDetailController ()<UIWebViewDelegate,UIAlertViewDelegate>
 {
     enum WXScene scene;
-    
 }
 @property (nonatomic, strong) HYActivityView *activityView;
 @end
@@ -57,7 +56,7 @@
                 NSLog(@"%@",dict);
                 if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
                 {
-                    NSDictionary *dictnew=[dict objectForKey:@"JsonData"];
+//                    NSDictionary *dictnew=[dict objectForKey:@"JsonData"];
                     //创建发送对象实例
                     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc] init];
                     sendReq.bText = NO;//不使用文本信息
@@ -65,8 +64,8 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
-                    urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
+                    urlMessage.title = [NSString stringWithFormat:@"%@",self.jackShareTitle];//分享标题
+                    urlMessage.description = [NSString stringWithFormat:@"%@",self.jackShareContent];//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"denglu_icon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
@@ -118,8 +117,8 @@
                     
                     //创建分享内容对象
                     WXMediaMessage *urlMessage = [WXMediaMessage message];
-                    urlMessage.title = [[dict objectForKey:@"JsonData"] objectForKey:@"ShareTitle"];;//分享标题
-                    urlMessage.description =[[dict objectForKey:@"JsonData"] objectForKey:@"ShareContent"];;//分享描述
+                    urlMessage.title = [NSString stringWithFormat:@"%@",self.jackShareTitle];//分享标题
+                    urlMessage.description = [NSString stringWithFormat:@"%@",self.jackShareContent];//分享描述
                     [urlMessage setThumbImage:[UIImage imageNamed:@"denglu_icon"]];//分享图片,使用SDK的setThumbImage方法可压缩图片大小
                     
                     //创建多媒体对象
@@ -189,7 +188,7 @@
 
     [webView loadRequest:request];
     webView.backgroundColor         = [UIColor clearColor];
-    webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);
+//    webView.scrollView.contentInset = UIEdgeInsetsMake (0.0f, 0.0f, 80.0f, 0.0f);
     
 }
 

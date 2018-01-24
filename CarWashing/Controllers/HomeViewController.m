@@ -12,11 +12,9 @@
 #import "PurchaseViewController.h"
 #import "MenuTabBarController.h"
 #import "DSExchangeController.h"
-
 #import "JFLocation.h"
 #import "JFAreaDataManager.h"
 #import "JFCityViewController.h"
-
 #import "DSMembershipController.h"
 #import "DSMemberRightsController.h"
 #import "DSServiceController.h"
@@ -26,24 +24,18 @@
 #import "DSScanQRCodeController.h"
 #import "DSAddMerchantController.h"
 #import "ScoreDetailController.h"
-
-
 #import "DSConsumerDetailController.h"
 #import "DSUserRightDetailController.h"
 #import "DSCarWashingActivityController.h"
-
 #define KCURRENTCITYINFODEFAULTS [NSUserDefaults standardUserDefaults]
 #define mainW [UIScreen mainScreen].bounds.size.width
 #define mainH [UIScreen mainScreen].bounds.size.height
-
-
 #import "PopupView.h"
 #import "LewPopupViewAnimationDrop.h"
 #import "DSDownloadController.h"
 #import "DSShareGetMoneyController.h"
 #import "DSAddShopController.h"
 #import "DSSaleActivityController.h"
-
 #import "LCMD5Tool.h"
 #import "AFNetworkingTool.h"
 #import "HTTPDefine.h"
@@ -53,27 +45,25 @@
 #import "CoreLocation/CoreLocation.h"
 #import "MBProgressHUD.h"
 #import "DSStartWashingController.h"
-
 #import "HSUpdateApp.h"
-
 //车辆提醒
 #import "CareRemindViewController.h"
 #import "DriverLicenseViewController.h"
 #import "YearTestViewController.h"
 #import "InsurenceViewController.h"
-
 //车友圈
 #import "RemindViewController.h"
 #import "CYCarInsertViewController.h"
 #import "UselessViewController.h"
 #import "DSMyCarController.h"
-
 //进入首页提醒
 #import "CYAlertView.h"
 #import "DSMemberRightsController.h"
-
 //新的洗车
 #import "ScanViewController.h"
+//新的广告
+#import "HomeAdCell.h"
+#import "HomeAdModel.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate,UIScrollViewDelegate,GCCycleScrollViewDelegate>
 {
@@ -83,34 +73,29 @@
     UIView          *titleView;
     UIImageView *newManImageView;
     MBProgressHUD *HUD;
-
 }
-
-/** 选择的结果*/
 @property (strong, nonatomic) UILabel *resultLabel;
 @property (nonatomic, strong) UIButton  *locationButton;
-/** 城市定位管理器*/
-//@property (nonatomic, strong) JFLocation *locationManager;
-///** 城市数据管理器*/
-//@property (nonatomic, strong) JFAreaDataManager *manager;
-
 @property (nonatomic,strong) UITableView *tableView;
-
 @property (nonatomic,assign) NSInteger IsSign;
-
 @property (nonatomic, strong) NSMutableArray *GetUserRecordData;
-
 @property (strong, nonatomic) CLLocationManager* locationManager;
-
 @property (strong, nonatomic)NSString *LocCity;
 @property (strong, nonatomic)Record *newrc;
-
 @property(copy,nonatomic)NSString *getCarCode;
 @property(strong,nonatomic)UILabel*addCarInfoLabel;
 @property(strong,nonatomic)UILabel*subAddCarLabel;
 @property(copy,nonatomic)NSString *PlateNumber;
 @property(copy,nonatomic)NSString *provinceString;
-@property (strong, nonatomic) CYAlertView * CYalerView;//进入首页提醒
+@property (strong, nonatomic) CYAlertView * CYalerView;         //进入首页提醒
+@property(strong,nonatomic)NSMutableArray *AdArray;             //首页插入的广告
+
+@property(strong,nonatomic)UIView*adViewShit;                   //弹出的傻逼广告
+@property(strong,nonatomic)UIImageView *adImageView;            //动态调整广告内容
+@property(copy,nonatomic)NSString*adUrlString;                  //弹窗广告地址
+@property(copy,nonatomic)NSString*adShareUrlString;             //弹窗分享地址
+@property(copy,nonatomic)NSString*adShareTitleString;
+@property(copy,nonatomic)NSString*adShareTextString;
 @end
 
 @implementation HomeViewController
@@ -126,7 +111,6 @@
 - (void) drawContent {
     
     self.statusView.hidden      = NO;
-    
     self.navigationView.hidden  = NO;
     self.contentView.top        = 0;
     self.contentView.height     = self.view.height;
@@ -136,7 +120,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     //一句代码实现检测更新,很简单哦 （需要在viewDidAppear完成时，再调用改方法。不然在网速飞快的时候，会出现一个bug，就是当前控制器viewDidLoad调用的话，可能当前视图还没加载完毕就需要推出UIAlertAction）
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -158,8 +141,6 @@
 }
 
 
-
-
 -(void)showStoreVersion:(NSString *)storeVersion openUrl:(NSString *)openUrl{
     UIAlertController *alercConteoller = [UIAlertController alertControllerWithTitle:@"版本有更新" message:[NSString stringWithFormat:@"检测到新版本(%@),是否更新?",storeVersion] preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *actionYes = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -178,20 +159,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.LocCity=nil;
-//    [self startLocation];
-
+    [self startLocation];
+    self.AdArray = [NSMutableArray array];
    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(noticeupdateUserheadimg:) name:@"updateheadimgsuccess" object:nil];
     
-    
-    // Do any additional setup after loading the view.
-//    self.title = @"首页";
-    
     [UdStorage storageObject:@"青岛市" forKey:@"City"];
     [UdStorage storageObject:@"市南区" forKey:@"Quyu"];
-    [UdStorage storageObject:@"31.192272" forKey:@"Ym"];
-    [UdStorage storageObject:@"121.523387"  forKey:@"Xm"];
+    [UdStorage storageObject:@"36.07737" forKey:@"Ym"];
+    [UdStorage storageObject:@"120.402483"  forKey:@"Xm"];
 
     _IsSign = 0;
     
@@ -209,15 +186,78 @@
     [self hsUpdateApp];
     [self headerRereshing];
     self.tableView.showsVerticalScrollIndicator = NO;
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeAdCell" bundle:nil] forCellReuseIdentifier:@"HomeAdCell"];
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self headerRereshing];
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(editCarInformation:) name:@"editCarIndorMation" object:nil];
     //首页的提示
-    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
-//    [self.view addSubview:self.CYalerView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.adViewShit];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.CYalerView];
 }
+
+#pragma mark-----首页弹出广告
+-(UIView*)adViewShit{
+    if(!_adViewShit){
+        //最下边的view
+        _adViewShit = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
+        _adViewShit.hidden = YES;
+        _adViewShit.alpha = 0;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(shitAdFadeAction)];
+        
+        UIView *blackBaseView = [[UIView alloc]initWithFrame:_adViewShit.frame];
+        blackBaseView.backgroundColor = [UIColor blackColor];
+        [blackBaseView addGestureRecognizer:tap];
+        blackBaseView.userInteractionEnabled = YES;
+        blackBaseView.alpha = 0.7;
+        [_adViewShit addSubview:blackBaseView];
+        
+        UIButton *shitAdButton = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-23, 450, 46, 46)];
+        [shitAdButton setImage:[UIImage imageNamed:@"shandiao"] forState:(UIControlStateNormal)];
+        [shitAdButton addTarget:self action:@selector(shitAdFadeAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [_adViewShit addSubview:shitAdButton];
+        
+        UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(gotoWebVIewAction)];
+        _adImageView = [[UIImageView alloc]initWithFrame:CGRectMake(Main_Screen_Width/2-114, Main_Screen_Height/2-150, 228, 204)];
+        [_adImageView addGestureRecognizer:tapImage];
+        _adImageView.userInteractionEnabled = YES;
+        _adImageView.clipsToBounds = YES;
+        _adImageView.layer.cornerRadius = 10;
+        _adImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _adImageView.backgroundColor = [UIColor lightGrayColor];
+        [_adViewShit addSubview:_adImageView];
+        
+    }
+    return _adViewShit;
+}
+
+#pragma mark-----首页弹窗-点击广告改为动态
+-(void)gotoWebVIewAction{
+    if ([self.adUrlString isEqualToString:@""]) {
+        NSLog(@"没有网址！");
+        return;
+    }
+    [self.adViewShit removeFromSuperview];
+    
+    DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+    //webview显示的地址(下面的4个属性需要传入)
+    viewVC.urlstr=self.adUrlString;
+    //分享出去的链接
+    viewVC.shareurlstr=self.adShareUrlString;
+    viewVC.jackShareTitle = [NSString stringWithFormat:@"%@",self.adShareTitleString];
+    viewVC.jackShareContent = [NSString stringWithFormat:@"%@",self.adShareTextString];
+    
+    viewVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewVC animated:YES];
+
+}
+
+-(void)shitAdFadeAction{
+    [self.adViewShit removeFromSuperview];
+}
+
+
 -(void)editCarInformation:(NSNotification *)notification{
     self.addCarInfoLabel.text = [NSString stringWithFormat:@"%@ %@",notification.userInfo[@"CYCarname"],notification.userInfo[@"CYCarType"]] ;
 }
@@ -235,6 +275,7 @@
     
     self.tableView                  = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, Main_Screen_Width,Main_Screen_Height-44) style:UITableViewStyleGrouped];
     self.tableView.top              = NAVIGATIONBAR_HEIGHT;
+    
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
     self.tableView.estimatedRowHeight = 0;
@@ -242,32 +283,21 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor  = [UIColor colorFromHex:@"#f6f6f6"];
-    //    self.tableView.scrollEnabled    = NO;
-    
-//    self.tableView.tableFooterView  = [UIView new];
-//    self.tableView.tableHeaderView  = [UIView new];
-    
-//    self.tableView.bounces  = NO;
-    /*
-    self.tableView.estimatedRowHeight = 0;
-    self.tableView.estimatedSectionHeaderHeight = 0;
-    self.tableView.estimatedSectionFooterHeight = 0;
-     
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.contentInset     = UIEdgeInsetsMake(0, 0, 70, 0);
-     */
+    //最后没有更多了
+    UIView *noMoreView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 90.0/375*Main_Screen_Width)];
+    UILabel *noMoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 21.0/375*Main_Screen_Width)];
+    noMoreLabel.text = @"没有更多啦";
+    noMoreLabel.textColor = [UIColor colorFromHex:@"#999999"];
+    noMoreLabel.textAlignment = NSTextAlignmentCenter;
+    [noMoreView addSubview:noMoreLabel];
+    self.tableView.tableFooterView = noMoreView;
     [self.contentView addSubview:self.tableView];
     
-//     [self setupRefresh];
-//    [self createHeaderView];
-    
-//    [self createNavTitleView];
-    
-
 }
 -(void)goBack{
     [self setupRefresh];
 }
+
 -(void)setupRefresh
 {
     self.tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -520,9 +550,7 @@
     discountNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     discountNameLabel.centerX           = discountImageView.centerX;
     discountNameLabel.top               = discountImageView.bottom +Main_Screen_Height*12/667;
-    
-    
-    
+
     UIView *shareView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     shareView.centerX                   = downbackView.width*7/8;
     shareView.top                       = Main_Screen_Height*10/375;
@@ -555,7 +583,6 @@
     UIImageView *myCarImageView      = [UIUtil drawCustomImgViewInView:myCarView frame:CGRectMake(0, 0, myCarImage.size.width,myCarImage.size.height) imageName:@"qiche"];
     myCarImageView.left              = Main_Screen_Width*15/375;
     myCarImageView.top               = Main_Screen_Height*10/667;
-    
     
     NSString *myCarName              = @"我的爱车";
     UIFont *myCarNameFont            = [UIFont systemFontOfSize:Main_Screen_Height*12/667];
@@ -622,8 +649,6 @@
     shopNameLabel.centerX           = shopImageView.centerX;
     shopNameLabel.top               = shopImageView.bottom +Main_Screen_Height*12/667;
     
-    
-    
     UIView *carClubView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     carClubView.centerX                   = downbackView.width*3/8;
     carClubView.top                       = payView.bottom +Main_Screen_Height*0/375;
@@ -643,8 +668,6 @@
     CarClubNameLabel.centerX           = carClubImageView.centerX;
     CarClubNameLabel.top               = carClubImageView.bottom +Main_Screen_Height*12/667;
     
-    
-    
     UIView *serviceView                   = [UIUtil drawLineInView:downbackView frame:CGRectMake(0, 0, Main_Screen_Width*60/375, Main_Screen_Height*80/667) color:[UIColor clearColor]];
     serviceView.centerX                   = downbackView.width*7/8;
     serviceView.top                       = payView.bottom +Main_Screen_Height*0/375;
@@ -663,63 +686,14 @@
     serviceNameLabel.textColor         = [UIColor colorFromHex:@"#4a4a4a"];
     serviceNameLabel.centerX           = serviceImageView.centerX;
     serviceNameLabel.top               = serviceImageView.bottom +Main_Screen_Height*12/667;
-    
-//    newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
-//    newManImageView.centerX           = headerView.centerX;
-//    newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
-//    newManImageView.userInteractionEnabled=YES;
-//    newManImageView.contentMode=UIViewContentModeScaleAspectFill;
-//    newManImageView.image=[UIImage imageNamed:@"banka_banner"];
-//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-//    [newManImageView addGestureRecognizer:tap];
-//    downbackView.backgroundColor    = [UIColor redColor];
     downbackView.height   = serviceView.bottom;
-    
-    
-//    if (self.newrc.recList.count==0) {
-//        newManImageView      = [UIUtil drawCustomImgViewInView:self.tableView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"banka_banner"];
-//        newManImageView.centerX           = headerView.centerX;
-//        newManImageView.top               = serviceView.bottom+Main_Screen_Height*20/667;
-//        newManImageView.userInteractionEnabled=YES;
-//        newManImageView.contentMode=UIViewContentModeScaleAspectFill;
-//        newManImageView.image=[UIImage imageNamed:@"banka_banner"];
-//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-//        [newManImageView addGestureRecognizer:tap];
-//        headerView.height   = serviceNameLabel.bottom;
-//    }
-//    else{
-//        newManImageView.hidden=YES;
-//        newManImageView.frame=CGRectMake(0, 0, 0, 0);
-//    }
-    
-    
-//    UIImage *newManImage                 = [UIImage imageNamed:@"GO"];
-//    UIImageView *newManImageView      = [UIUtil drawCustomImgViewInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*75/667) imageName:@"GO"];
-//    newManImageView.centerX           = headerView.centerX;
-//    newManImageView.top               = carClubView.bottom;
-//
-////    UIImage *activityImage                 = [UIImage imageNamed:@"02"];
-//    UIImageView *activityImageView      = [UIUtil drawCustomImgViewInView:headerView frame:CGRectMake(0, 0, Main_Screen_Width,Main_Screen_Height*100/667) imageName:@"WechatIMG4"];
-//    activityImageView.centerX           = headerView.centerX;
-//    activityImageView.top               = newManImageView.bottom+Main_Screen_Height*0/667;
-    
     headerView.height   = downbackView.bottom;
-    
-
 
 }
 
 - (void)cycleScrollView:(GCCycleScrollView*)cycleScrollView didSelectItemAtRow:(NSInteger)row{
-    NSLog(@"dianji =%ld",(long)row);
-    //        活动类型1将参数【2个参数】拼接到Url（活动详情的后面）
-    //        ,类型2将参数【1个参数】拼接到Url（活动详情的后面）id
-    //        类型 3将参数【一个参数】拼接到InviteUrl(分享链接的后面)id
-//    1.2 获取一个随机数范围在：[10,100]，包括100，包括100
-//    2、  获取一个随机数范围在：[500,1000），包括500，包括1000
-    
-//    int y = (arc4random() % 11) + 10;
-//    int num = (arc4random() % 100);
-//    NSLog(@"%d==%d",num,y);
+    /*
+    //2017_0117暂时注释无用部分，没问题的话以后可以删除
     DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
 //    viewVC.urlstr=[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"Url"];
     NSInteger typetag=[[((NSDictionary *)self.newrc.adverList[row]) objectForKey:@"AactivityType"] integerValue];
@@ -749,8 +723,9 @@
     }
     viewVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewVC animated:YES];
-    
+     */
 }
+
 -(void)setData
 {
 //    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -774,10 +749,33 @@
      @"http:192.168.2.152:8090/api/User/GetUserRecord"
      */
     [AFNetworkingTool post:params andurl:[NSString stringWithFormat:@"%@User/GetUserRecord",Khttp] success:^(NSDictionary *dict, BOOL success) {
-        NSLog(@"12345%@",dict);
+        
         if([[dict objectForKey:@"ResultCode"] isEqualToString:[NSString stringWithFormat:@"%@",@"F000000"]])
         {
-             self.GetUserRecordData = [[NSMutableArray alloc]init];
+            
+            NSDictionary*jsonDict = dict[@"JsonData"];
+            NSDictionary*popupDict = jsonDict[@"popup"];
+            NSString *AdvertisImgString = popupDict[@"AdvertisImg"];
+            
+            if ([AdvertisImgString isEqualToString:@""]) {
+                self.adViewShit.alpha = 0;
+                self.adViewShit.hidden = YES;
+            }else{
+                //有图片
+                self.adViewShit.hidden = NO;
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.adViewShit.alpha = 1;
+                }];
+                
+                [self.adImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kHTTPImg,AdvertisImgString]]];
+                self.adUrlString = [NSString stringWithFormat:@"%@",popupDict[@"AdvertisUrl"]];
+                self.adShareUrlString = [NSString stringWithFormat:@"%@",popupDict[@"InviteUrl"]];
+                self.adShareTitleString = [NSString stringWithFormat:@"%@",popupDict[@"ShareTitle"]];
+                self.adShareTextString = [NSString stringWithFormat:@"%@",popupDict[@"ShareContent"]];
+            }
+            
+            self.AdArray = [HomeAdModel mj_objectArrayWithKeyValuesArray:dict[@"JsonData"][@"adverList"]];
+            self.GetUserRecordData = [[NSMutableArray alloc]init];
             
             NSArray *arr = [NSArray array];
             arr = [dict objectForKey:@"JsonData"];
@@ -788,7 +786,6 @@
             }
             else
             {
-
                 NSLog(@"首页数据%@",[dict objectForKey:@"JsonData"]);
                 self.newrc = [[Record alloc]initWithDictionary:[dict objectForKey:@"JsonData"] error:nil];
                 [self creatJackHeaderView];
@@ -816,11 +813,6 @@
                     self.subAddCarLabel.text = [NSString stringWithFormat:@"%@-%@",self.provinceString,self.PlateNumber];
                 }
                 
-                
-                
-//                 [self createHeaderView];
-                
-                
                 if (self.newrc.recList.count==0) {
                     newManImageView.hidden=NO;
                     newManImageView.frame=CGRectMake(0, 0, 0, 0);
@@ -841,6 +833,7 @@
         }
         else
         {
+            
             [HUD setHidden:YES];
             [self.view showInfo:@"数据请求失败,请检查定位" autoHidden:YES interval:2];
             [self.tableView.mj_header endRefreshing];
@@ -860,113 +853,82 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.newrc.recList count];
+    return self.newrc.recList.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return self.AdArray.count;
+    }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
-    return Main_Screen_Height*170/667;
+    if (indexPath.section == 0) {
+        return 195;
+    }
+    return Main_Screen_Width*170/375;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    if (section==self.newrc.recList.count-1) {
-//         return 40.1f;
-//    }else{
-//        return 0.01;
-//    }
-    if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
-        if (section==0) {
-            return Main_Screen_Height*180/667;
-        }else{
-            return 0.01;
-            
-        }
-    }else{
-       
-            if (section==0) {
-                return Main_Screen_Height*110/667;
-            }else if (section==self.newrc.recList.count-1){
-                return 80;
-            }
-            else{
-                return 0.01;
-                
-            }
-            
-               
-        
-    }
-   
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 10)];
+    return headView;
 }
+
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
-    
+    return 0.01;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//     if (section==self.newrc.recList.count-1) {
-//         
-//    UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 40)];
-//    footerview.textColor         = [UIColor colorFromHex:@"#999999"];
-//    footerview.textAlignment=NSTextAlignmentCenter;
-//    footerview.text=@"没有更多啦!";
-//    return footerview;
-//     }else{
-//
-//         return [UILabel new];
-//     
-//     }
-    
-   
-    
+    UIView *redFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, mainW, 10)];
+    return redFootView;
+    /*
     if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
         if (section==0) {
             UIView * backView=[[UIView alloc]init];
-            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
+            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*0/667)];
             lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
             [backView addSubview:lineview];
-            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
-            imageview.userInteractionEnabled=YES;
-            imageview.contentMode=UIViewContentModeScaleAspectFill;
-            imageview.image=[UIImage imageNamed:@"banka_banner"];
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-            [imageview addGestureRecognizer:tap];
+//            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+//            imageview.userInteractionEnabled=YES;
+//            imageview.contentMode=UIViewContentModeScaleAspectFill;
+//            imageview.backgroundColor = [UIColor redColor];
+//            imageview.image=[UIImage imageNamed:@"banka_banner"];
+//            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+//            [imageview addGestureRecognizer:tap];
             
-            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*100/667, Main_Screen_Width, Main_Screen_Height*50/667)];
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*0/667, Main_Screen_Width, Main_Screen_Height*50/667)];
             footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
             footerview.textColor         = [UIColor colorFromHex:@"#999999"];
             footerview.textAlignment=NSTextAlignmentCenter;
-            footerview.text=@"没有更多啦";
+            footerview.text=@"没有更多啦1";
             [backView addSubview:footerview];
-            [backView addSubview:imageview];
+//            [backView addSubview:imageview];
             return backView;
         }else{
             return [UILabel new];
         }
     }else{
-        if (section==0) {
+        if (section==1) {
             UIView * backView=[[UIView alloc]init];
-            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*30/667)];
+            UIView * lineview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height*0/667)];
             lineview.backgroundColor=[UIColor colorFromHex:@"#f6f6f6"];
             [backView addSubview:lineview];
-            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
-            imageview.userInteractionEnabled=YES;
-            imageview.contentMode=UIViewContentModeScaleAspectFill;
-            imageview.image=[UIImage imageNamed:@"banka_banner"];
-            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
-            [imageview addGestureRecognizer:tap];
-            [backView addSubview:imageview];
+//            UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0, Main_Screen_Height*30/667, Main_Screen_Width, Main_Screen_Height*60/667)];
+//            imageview.userInteractionEnabled=YES;
+//            imageview.contentMode=UIViewContentModeScaleAspectFill;
+//            imageview.backgroundColor = [UIColor redColor];
+//            imageview.image=[UIImage imageNamed:@"banka_banner"];
+//            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewOclick)];
+//            [imageview addGestureRecognizer:tap];
+//            [backView addSubview:imageview];
             return backView;
-        }else if (section==self.newrc.recList.count-1){
-            UIView *baseFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 80)];
+        }else if (section==self.newrc.recList.count){
+            UIView *baseFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
             baseFooterView.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
             
-            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 30)];
+            UILabel *footerview=[[UILabel alloc]initWithFrame:CGRectMake(0, 10, Main_Screen_Width, 30)];
             footerview.backgroundColor = [UIColor colorFromHex:@"#f6f6f6"];
             footerview.textColor         = [UIColor colorFromHex:@"#999999"];
             footerview.textAlignment=NSTextAlignmentCenter;
@@ -976,21 +938,48 @@
         }else{
             return [UILabel new];
         }
-        
     }
-   
-    
-
+     */
 }
--(void)imageviewOclick{
-    self.tabBarController.selectedIndex = 3;
-    
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
 
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
+    //    if (self.newrc.recList.count==0||self.newrc.recList.count<2) {
+    //        if (section==0) {
+    //            return Main_Screen_Height*(180-110)/667;
+    //        }else{
+    //            return 0.01;
+    //        }
+    //    }else{
+    //        if (section==0) {
+    //            return Main_Screen_Height*(110-110)/667;
+    //        }else if (section==self.newrc.recList.count-1){
+    //            return 80;
+    //        }else{
+    //            return 0.01;
+    //        }
+    //    }
+}
+
+-(void)imageviewOclick{
+    
+    self.tabBarController.selectedIndex = 3;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ////////////////////2018_01_16首页新增广告@start//////////////////////////
+    if (indexPath.section == 0) {
+        //加在最上面
+        HomeAdCell *adCell = [tableView dequeueReusableCellWithIdentifier:@"HomeAdCell" forIndexPath:indexPath];
+        HomeAdModel *sendModel = self.AdArray[indexPath.row];
+        [adCell setModelValue:sendModel];
+        adCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return adCell;
+    }
+    ////////////////////2018_01_16首页新增广告@end////////////////////////////
     
     static NSString *cellStatic = @"cellStatic";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellStatic];
@@ -1002,10 +991,7 @@
 
     if (self.newrc.recList.count>0)
     {
-        
-   
-    Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil];
-    NSLog(@"%@==%@",record,[self.newrc.recList objectAtIndex:indexPath.section]);
+    Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:(indexPath.section-1)] error:nil];
     NSString *imageString;
     NSString *titleString;
     NSString *vipString;
@@ -1017,7 +1003,6 @@
         imageString               = @"xiaofeijilu";
         titleString               = @"消费记录";
         vipString                 = @"";
-        
         
         if(record.ConsumptionType == 1)
         {
@@ -1039,11 +1024,6 @@
             contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
             remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
         }
-        
-        
-        
-        
-        
         getString                 = @"查看详情";
     }else if(record.ShowType == 3){
         imageString               = @"zensong";
@@ -1051,37 +1031,14 @@
         vipString                 = @"";
         contentShowString         = [NSString stringWithFormat:@"%@",record.MiddleDes];
         remindShowString          = record.ConsumerDescrip;
-        
-//        if(record.ConsumptionType == 1)
-//        {
-//            contentShowString         = [NSString stringWithFormat:@"￥%@",record.MiddleDes];
-//            remindShowString          = record.BottomDes;
-//        }
-//        else if(record.ConsumptionType == 2)
-//        {
-//            contentShowString         = record.MiddleDes;
-//            remindShowString          = [NSString stringWithFormat:@"剩余%@次免费洗车",record.BottomDes];
-//        }
-//        else if(record.ConsumptionType == 3)
-//        {
-//            contentShowString         = record.MiddleDes;
-//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
-//        }
-//        else if(record.ConsumptionType == 4)
-//        {
-//            contentShowString         = [NSString stringWithFormat:@"您购买%@",record.MiddleDes];
-//            remindShowString          = [NSString stringWithFormat:@"支付金额: %@元",record.BottomDes];
-//        }
         getString                 = @"查看详情";
     }else if(record.ShowType == 1){
-        
         imageString         = @"quanyi";
         titleString         = @"优惠活动";
         vipString           = @"zhuanxiang";
         contentShowString   = record.MiddleDes;
         remindShowString    = record.BottomDes;
         getString           = @"立即领取";
-//        vipString   = @"huiyuanzhuanxiang";
     }else if (record.ShowType == 4){
         imageString         = @"xiaoxitongzhi";
         titleString         = @"消息提醒";
@@ -1090,7 +1047,6 @@
         remindShowString    = record.BottomDes;
         getString           = @"立即查看";
     }
-    
     
     UIImageView  *recordimageView       = [UIUtil drawCustomImgViewInView:cell.contentView frame:CGRectMake(0, 0, Main_Screen_Width*30/375, Main_Screen_Height*30/667) imageName:imageString];
     recordimageView.left                = Main_Screen_Width*12/375;
@@ -1151,8 +1107,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    Recordinfo *record =[[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
+    if (indexPath.section == 0) {
+        HomeAdModel *sendModel = self.AdArray[indexPath.row];
+        DSAdDetailController *viewVC = [[DSAdDetailController alloc]init];
+        //webview显示的地址(下面的4个属性需要传入)
+        viewVC.urlstr = sendModel.Url;
+        //分享出去的链接
+        viewVC.shareurlstr = sendModel.InviteUrl;
+        viewVC.jackShareTitle = [NSString stringWithFormat:@"%@",sendModel.ShareTitle];
+        viewVC.jackShareContent = [NSString stringWithFormat:@"%@",sendModel.ShareContent];
+        viewVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewVC animated:YES];
+        return;
+    }
+    Recordinfo *record =[[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:(indexPath.section-1)] error:nil] ;
     
     if(record.ShowType == 1)//优惠活动
     {
@@ -1163,13 +1131,13 @@
     }
     
     else if(record.ShowType == 2){//消费记录
-        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
+        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:(indexPath.section-1)] error:nil] ;
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
         detaleController.record                         = record;
         [self.navigationController pushViewController:detaleController animated:YES];
     }else if(record.ShowType == 3){//活动赠送
-        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:indexPath.section] error:nil] ;
+        Recordinfo *record = [[Recordinfo alloc]initWithDictionary:(NSDictionary *)[self.newrc.recList objectAtIndex:(indexPath.section-1)] error:nil] ;
         DSConsumerDetailController *detaleController    = [[DSConsumerDetailController alloc]init];
         detaleController.hidesBottomBarWhenPushed       = YES;
         detaleController.titlename = @"活动赠送";
@@ -1210,8 +1178,7 @@
             [self.navigationController pushViewController:new animated:YES];
         }
     }//@end     车辆提醒
-    
-    
+
 }
 
 
@@ -1220,59 +1187,6 @@
     downController.hidesBottomBarWhenPushed  = YES;
     [self.navigationController pushViewController:downController animated:YES];
 }
-
-//- (void) locationButtonClick:(id)sender {
-//    
-//    JFCityViewController *cityViewController = [[JFCityViewController alloc] init];
-//    cityViewController.title = @"城市";
-//    __weak typeof(self) weakSelf = self;
-//    [cityViewController choseCityBlock:^(NSString *cityName) {
-//        
-//        [weakSelf.locationButton setTitle:cityName forState:UIControlStateNormal];
-//        
-//        weakSelf.resultLabel.text = cityName;
-//    }];
-//    
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:cityViewController];
-//    [self presentViewController:navigationController animated:YES completion:nil];
-//    
-//}
-//#pragma mark --- JFLocationDelegate
-
-////定位中...
-//- (void)locating {
-//    NSLog(@"定位中...");
-//}
-//
-////定位成功
-//- (void)currentLocation:(NSDictionary *)locationDictionary {
-//    NSString *city = [locationDictionary valueForKey:@"City"];
-//    if (![_resultLabel.text isEqualToString:city]) {
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您定位到%@，确定切换城市吗？",city] preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            _resultLabel.text = city;
-//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"locationCity"];
-//            [KCURRENTCITYINFODEFAULTS setObject:city forKey:@"currentCity"];
-//            [self.manager cityNumberWithCity:city cityNumber:^(NSString *cityNumber) {
-//                [KCURRENTCITYINFODEFAULTS setObject:cityNumber forKey:@"cityNumber"];
-//            }];
-//        }];
-//        [alertController addAction:cancelAction];
-//        [alertController addAction:okAction];
-//        [self presentViewController:alertController animated:YES completion:nil];
-//    }
-//}
-//
-///// 拒绝定位
-//- (void)refuseToUsePositioningSystem:(NSString *)message {
-//    NSLog(@"%@",message);
-//}
-
-///// 定位失败
-//- (void)locateFailure:(NSString *)message {
-//    NSLog(@"%@",message);
-//}
 
 - (void) tapPayButtonClick:(id)sender {
     DSExchangeController *exchangeVC        = [[DSExchangeController alloc]init];
@@ -1474,16 +1388,6 @@
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
 }
 - (void) tapMemberRightButtonClick:(id)sender {
 
@@ -1520,14 +1424,6 @@
 }
 - (void) tapCarClubButtonClick:(id)sender {
     
-//    XueCarFirendViewController *new = [[XueCarFirendViewController alloc]init];
-//    new.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:new animated:YES];
-    
-//    FindViewController *findController      = [[FindViewController alloc]init];
-//    findController.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:findController animated:YES];
-    
     RemindViewController *new = [[RemindViewController alloc]init];
     new.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:new animated:YES];
@@ -1547,35 +1443,8 @@
 
 }
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//
-//    
-////    NSLog(@"%f",self.tableView.contentOffset.y);
-//    if (scrollView.contentOffset.y <= 0) {
-//        scrollView.bounces = NO;
-//        
-//        NSLog(@"禁止下拉");
-//    }
-//    else
-//        if (scrollView.contentOffset.y >= 0){
-////            scrollView.bounces = YES;
-//            NSLog(@"允许上拉");
-//            
-//        }
-
-//    if（scrollView.contentOffset.y <= 0 ）{
-//        scrollView.contentOffset.y = 0
-//    }
-//    // 禁止上拉
-//    if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.bounds.size.height {
-//        scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.size.height
-//    }
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)startLocation{
@@ -1600,9 +1469,12 @@
         
         //2.提醒用户打开定位开关
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"无法进行定位" message:@"请检查您的设备是否开启定位功能" preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleCancel) handler:nil];
+        [alert addAction:yesAction];
+        [self presentViewController:alert animated:yesAction completion:nil];
     }
     
 }
@@ -1719,12 +1591,12 @@
 -(void)creatJackHeaderView{
     
     //整个headerView
-    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 655.0/667*mainH)];
+    UIView *jackHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 640.0/375*Main_Screen_Width)];
     jackHeaderView.backgroundColor = [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1];
     self.tableView.tableHeaderView = jackHeaderView;
     
     //第一部分(金色背景)
-    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140.0/667*mainH)];
+    UIView *goldenView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140.0/375*Main_Screen_Width)];
     goldenView.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [jackHeaderView addSubview:goldenView];
     
@@ -1737,16 +1609,16 @@
     NSArray *fourTopImageArray = @[@"saoyisaoJ",@"kabaoJ",@"huiyuanJ",@"jifenJ"];
     for (int i = 0; i < fourTitleArray.count; i++) {
         
-        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(20.0/375*mainW + 92.0/375*mainW*i, 40.0/667*mainH, 60.0/375*mainW, 60.0/667*mainH)];
+        UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(20.0/375*mainW + 92.0/375*mainW*i, 40.0/375*Main_Screen_Width, 60.0/375*mainW, 60.0/375*Main_Screen_Width)];
 //        baseView.backgroundColor = [UIColor grayColor];
         [goldenView addSubview:baseView];
         
-        UIImageView *imageViewJack = [[UIImageView alloc]initWithFrame:CGRectMake(10.0/375*mainW, 0, 40.0/375*mainW, 40.0/667*mainH)];
+        UIImageView *imageViewJack = [[UIImageView alloc]initWithFrame:CGRectMake(10.0/375*mainW, 0, 40.0/375*mainW, 40.0/375*Main_Screen_Width)];
         imageViewJack.image = [UIImage imageNamed:fourTopImageArray[i]];
 //        imageViewJack.backgroundColor = [UIColor redColor];
         [baseView addSubview:imageViewJack];
         
-        UILabel *labelJack = [[UILabel alloc]initWithFrame:CGRectMake(-10, 50.0/667*mainH, 80.0/375*mainW, 30.0/667*mainH)];
+        UILabel *labelJack = [[UILabel alloc]initWithFrame:CGRectMake(-10, 50.0/375*Main_Screen_Width, 80.0/375*mainW, 30.0/375*Main_Screen_Width)];
 //        labelJack.backgroundColor = [UIColor greenColor];
         labelJack.text = fourTitleArray[i];
         labelJack.textColor = [UIColor whiteColor];
@@ -1755,39 +1627,37 @@
         [baseView addSubview:labelJack];
         
 
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 140.0/667*mainH)];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(Main_Screen_Width/4*i, 0, Main_Screen_Width/4, 140.0/375*Main_Screen_Width)];
         button.tag = i + 100;
         [button addTarget:self action:@selector(fourButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [goldenView addSubview:button];
     }
     
     //添加爱车按钮
-    CGFloat addButtonHeight = 90.0/667*mainH;
+    CGFloat addButtonHeight = 90.0/375*Main_Screen_Width;
     
-    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, 155.0/667*mainH, Main_Screen_Width-30, 60.0/667*mainH)];
+    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(15, 155.0/375*Main_Screen_Width, Main_Screen_Width-30, 60.0/375*Main_Screen_Width)];
     whiteView.backgroundColor = [UIColor whiteColor];
     whiteView.clipsToBounds = YES;
     whiteView.layer.cornerRadius = 10;
     [jackHeaderView addSubview:whiteView];
     
-    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15.0/667*mainH, 30.0/375*mainW, 30.0/667*mainH)];
+    UIImageView *addImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15.0/375*Main_Screen_Width, 30.0/375*mainW, 30.0/375*Main_Screen_Width)];
     addImageView.clipsToBounds = YES;
-    addImageView.layer.cornerRadius = 15.0/667*mainH;
+    addImageView.layer.cornerRadius = 15.0/375*Main_Screen_Width;
     addImageView.image = [UIImage imageNamed:@"tianjiaaiche"];
     [whiteView addSubview:addImageView];
     
-    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10.0/667*mainH, 250, 20.0/667*mainH)];
+    _addCarInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 10.0/375*Main_Screen_Width, 250, 20.0/375*Main_Screen_Width)];
     _addCarInfoLabel.text = @"添加爱车享免费洗车";
     _addCarInfoLabel.font = [UIFont systemFontOfSize:15];
     [whiteView addSubview:_addCarInfoLabel];
     
-    _subAddCarLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 32.0/667*mainH, 200, 20.0/667*mainH)];
+    _subAddCarLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 32.0/375*Main_Screen_Width, 200, 20.0/375*Main_Screen_Width)];
     _subAddCarLabel.text = @"洗车、保养、换轮胎";
     _subAddCarLabel.textColor = [UIColor colorFromHex:@"#909090"];
     _subAddCarLabel.font = [UIFont systemFontOfSize:12];
     [whiteView addSubview:_subAddCarLabel];
-    
-    
     
     UIButton *addCarButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 140.0/667*mainH, Main_Screen_Width, addButtonHeight)];
     addCarButton.backgroundColor = [UIColor clearColor];
@@ -1795,30 +1665,13 @@
     [jackHeaderView addSubview:addCarButton];
     
     //车辆提醒等4个按钮
-    
-    
-    UIImageView *minBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 140.0/667*mainH+addButtonHeight, Main_Screen_Width, 110.0/667*mainH)];
+    UIImageView *minBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 140.0/375*Main_Screen_Width+addButtonHeight, Main_Screen_Width, 110.0/375*Main_Screen_Width)];
     minBackImageView.image = [UIImage imageNamed:@"fourImage"];
     minBackImageView.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:minBackImageView];
     NSArray *minTitleArray = @[@"shouye_cheliangtixing",@"jihuo",@"youhuihuodong",@"qiandao"];
-//    NSArray *titleArray = @[@"车辆提醒",@"激活卡券",@"优惠活动",@"每日签到"];
     for (int n = 0; n < minTitleArray.count; n ++) {
-        
-//        UIImageView *minImageView = [[UIImageView alloc]initWithFrame:CGRectMake(50+82 * n, 170+addButtonHeight, 25, 25)];
-//        minImageView.image = [UIImage imageNamed:minTitleArray[n]];
-//        minImageView.contentMode = UIViewContentModeScaleAspectFit;
-//        [jackHeaderView addSubview:minImageView];
-//
-//        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(25+n*(Main_Screen_Width-50)/4, 210+addButtonHeight, (Main_Screen_Width-50)/4, 30)];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.textColor = [UIColor colorFromHex:@"#909090"];
-//        label.font = [UIFont systemFontOfSize:13];
-//        label.text = titleArray[n];
-//        [jackHeaderView addSubview:label];
-        
-        
-        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 140.0/667*mainH+addButtonHeight, Main_Screen_Width/4, 110.0/667*mainH)];
+        UIButton *minButton = [[UIButton alloc]initWithFrame:CGRectMake(n*Main_Screen_Width/4, 140.0/375*Main_Screen_Width+addButtonHeight, Main_Screen_Width/4, 110.0/375*Main_Screen_Width)];
         minButton.tag = n + 200;
         minButton.backgroundColor = [UIColor clearColor];
         [minButton addTarget:self action:@selector(carReminFourAction:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -1827,26 +1680,26 @@
     
     //我是屌丝我要买卡
     
-    UIImageView *buyCardImageViwe = [[UIImageView alloc]initWithFrame:CGRectMake(15, 260.0/667*mainH+addButtonHeight, Main_Screen_Width-30, 70.0/667*mainH)];
+    UIImageView *buyCardImageViwe = [[UIImageView alloc]initWithFrame:CGRectMake(15, 260.0/375*Main_Screen_Width+addButtonHeight, Main_Screen_Width-30, 70.0/375*Main_Screen_Width)];
     buyCardImageViwe.image = [UIImage imageNamed:@"qugouka"];
     buyCardImageViwe.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:buyCardImageViwe];
     
     
-    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 250.0/667*mainH+addButtonHeight, Main_Screen_Width, 100.0/667*mainH)];
+    UIButton *buyCardButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 250.0/375*Main_Screen_Width+addButtonHeight, Main_Screen_Width, 100.0/375*Main_Screen_Width)];
     buyCardButton.backgroundColor = [UIColor clearColor];
 //    [buyCardButton setTitle:@"洗车卡购买入口" forState:(UIControlStateNormal)];
     [buyCardButton addTarget:self action:@selector(toBuyCard) forControlEvents:(UIControlEventTouchUpInside)];
     [jackHeaderView addSubview:buyCardButton];
     
     //8个模块
-    UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350.0/667*mainH+addButtonHeight, Main_Screen_Width, 200.0/667*mainH)];
+    UIImageView *eightBackImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 350.0/375*Main_Screen_Width+addButtonHeight, Main_Screen_Width, 200.0/375*Main_Screen_Width)];
     eightBackImageView.image = [UIImage imageNamed:@"2627eight"];
     eightBackImageView.contentMode = UIViewContentModeScaleAspectFit;
     [jackHeaderView addSubview:eightBackImageView];
     NSArray *carShitArray = @[@"汽车改装",@"汽车美容",@"汽车保险",@"二手车",@"汽车维修",@"汽车清洁",@"车品商城",@"汽车品牌"];
     for (int m = 0; m < carShitArray.count; m ++) {
-        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,350.0/667*mainH+addButtonHeight+ m/4*100, Main_Screen_Width/4, 100.0/667*mainH)];
+        UIButton *shitButton = [[UIButton alloc]initWithFrame:CGRectMake(m%4*Main_Screen_Width/4,350.0/375*Main_Screen_Width+addButtonHeight+ m/4*100, Main_Screen_Width/4, 100.0/375*Main_Screen_Width)];
 //        NSLog(@"aaaaaaaaaaaa%d",m/4);
         shitButton.tag = 300 + m;
         shitButton.backgroundColor = [UIColor clearColor];
@@ -1858,12 +1711,10 @@
     
 }
 
-//11.23Jack修改首页布局动作
-#pragma mark - 扫一扫什么的
+#pragma mark - 11.23Jack修改首页布局动作
 -(void)fourButtonAction:(UIButton *)sender{
     if (sender.tag == 100) {
         //扫一扫
-        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if (![defaults objectForKey:@"startTime"]) {
             ScanViewController *new = [[ScanViewController alloc]init];

@@ -175,13 +175,13 @@
 
 -(void)setUI{
     
-    UIImageView *buttonImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 250+66, Main_Screen_Width-24, 50)];
-    buttonImageView.image = [UIImage imageNamed:@"ijanbiantiao"];
-    [self.view addSubview:buttonImageView];
+//    UIImageView *buttonImageView = [[UIImageView alloc]initWithFrame:CGRectMake(12, 250+66, Main_Screen_Width-24, 50)];
+//    buttonImageView.image = [UIImage imageNamed:@"ijanbiantiao"];
+//    [self.view addSubview:buttonImageView];
     
     //保存按钮
     UIButton *saveButton = [[UIButton alloc]initWithFrame:CGRectMake(12, 250+66, Main_Screen_Width-24, 50)];
-    saveButton.backgroundColor = [UIColor clearColor];
+    saveButton.backgroundColor = [UIColor colorFromHex:@"ffca2a"];
     [saveButton setTitle:@"保存" forState:(UIControlStateNormal)];
     saveButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:18];
     saveButton.clipsToBounds = YES;

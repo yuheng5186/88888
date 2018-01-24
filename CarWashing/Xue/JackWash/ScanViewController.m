@@ -76,7 +76,7 @@
     //2.开始动画
     [self beginScanning];
     //动画相关
-    [self.view addSubview:self.JackScanImageView];
+//    [self.view addSubview:self.JackScanImageView];
     [self jackAction];
 }
 
@@ -178,8 +178,8 @@
     if (!_JackScanImageView) {
         _JackScanImageView = [[UIImageView alloc]init];
         _JackScanImageView.image = [UIImage imageNamed:@"saomiaozhong"];
-        _JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, 0.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
-        _JackScanImageView.centerX = Main_Screen_Width/2;
+        _JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, -250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
+        _JackScanImageView.centerX = 125.0/375*Main_Screen_Width;
         //        _JackScanImageView.top = self.scanImageView.top;
         
     }
@@ -190,16 +190,15 @@
     if ([self.animString isEqualToString:@"stop"]) {
         return;
     }else{
-        [UIView animateWithDuration:2 animations:^{
-            self.JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, 185.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
-            self.JackScanImageView.centerX = Main_Screen_Width/2;
+        [UIView animateWithDuration:3.0 animations:^{
+            self.JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, 40.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
+            self.JackScanImageView.centerX = 125.0/375*Main_Screen_Width;
         } completion:^(BOOL finished) {
-            self.JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, 0.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
-            self.JackScanImageView.centerX = Main_Screen_Width/2;
+            self.JackScanImageView.frame = CGRectMake(Main_Screen_Width/2, -250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width, 250.0/375*Main_Screen_Width);
+            self.JackScanImageView.centerX = 125.0/375*Main_Screen_Width;
             [self jackAction];
         }];
     }
-    
 }
 
 
@@ -213,8 +212,9 @@
     scanImageView.centerY = self.contentView.height/2-50*Main_Screen_Height/667;
     
     _scanNetImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"saomiaozhong"]];
-    
+    scanImageView.clipsToBounds = YES;
     [self.contentView addSubview:scanImageView];
+    [scanImageView addSubview:self.JackScanImageView];
     self.scanWindow = scanImageView;
     
     
